@@ -63,7 +63,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Medicine.cs" />
+    <Compile Include="Models\PrivateRoom.cs" />
+    <Compile Include="Models\Room.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
       <SubType>Code</SubType>
