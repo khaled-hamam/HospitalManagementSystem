@@ -9,7 +9,7 @@ namespace HospitalManagementSystem.Models
     class AppointmentPatient : Patient
     {
         // member variables
-        private List<Appointment> appointments { get; set; }
+        private List<Appointment> appointments;
         //constructors
         public AppointmentPatient() : base()
         {
@@ -20,6 +20,17 @@ namespace HospitalManagementSystem.Models
             appointments = new List<Appointment>();
         }
         // member methods
+        public void setAppointments(List<Appointment> la)
+        {
+            for(int i = 0; i < la.Count; i++)
+            {
+                appointments.Add(la[i]);
+            }
+        }
+        public List<Appointment> getAppointments()
+        {
+            return this.appointments;
+        }
         public void addAppointment(Appointment apm)
         {
             appointments.Add(apm);

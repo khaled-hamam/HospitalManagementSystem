@@ -9,9 +9,9 @@ namespace HospitalManagementSystem.Models
     class ResidentPatient : Patient
     {
         // member variables
-        private Room room { get; set; }
-        private List<Medicine> history { get; set; }
-        public int duration { get; set; }
+        private Room room;
+        private List<Medicine> history;
+        private int duration;
         //constructors
         public ResidentPatient() : base()
         {
@@ -26,6 +26,33 @@ namespace HospitalManagementSystem.Models
             this.history = new List<Medicine>();
         }
         // member methods
+        public void setRoom(Room room)
+        {
+            this.room = room;
+        }
+        public Room getRoom()
+        {
+            return this.room;
+        }
+        public void setHistory(List<Medicine> lm)
+        {
+            for(int i = 0; i < lm.Count; i++)
+            {
+                history.Add(lm[i]);
+            }
+        }
+        public List<Medicine> getHistory()
+        {
+            return this.history;
+        }
+        public void setDuration(int duration)
+        {
+            this.duration = duration;
+        }
+        public int getDuration()
+        {
+            return this.duration;
+        }
         public void addMedicine(Medicine M)
         {
             history.Add(M);

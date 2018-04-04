@@ -9,8 +9,8 @@ namespace HospitalManagementSystem.Models
     abstract class Patient : Person
     {
         // member variables
-        protected string diagnosis { get; set; }
-        protected List<Doctor> doctors { get; set; }
+        protected string diagnosis;
+        protected List<Doctor> doctors;
         // constructor
         public Patient() : base()
         {
@@ -24,6 +24,25 @@ namespace HospitalManagementSystem.Models
 
         }
         // member methods
+        public void setDiagnosis(string diagnosis)
+        {
+            this.diagnosis = diagnosis;
+        }
+        public string getDiagnosis()
+        {
+            return this.diagnosis;
+        }
+        public void setDoctors(List<Doctor> docs)
+        {
+            for(int i = 0; i < docs.Count; i++)
+            {
+                doctors.Add(docs[i]);
+            }
+        }
+        public List<Doctor> getDoctors()
+        {
+            return this.doctors;
+        }
         public void assignDoctor(Doctor doctor)
         {
             doctors.Add(doctor);
