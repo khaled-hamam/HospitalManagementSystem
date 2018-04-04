@@ -15,12 +15,12 @@ namespace HospitalManagementSystem.Models
         public Patient() : base()
         {
             this.diagnosis = "";
-            doctors = new List<Doctor>();
+            this.doctors = new List<Doctor>();
         }
-        public Patient(string id, string name, DateTime dt, string address, string diagnosis) : base(id, name, dt, address)
+        public Patient(string id, string name, DateTime birthDate, string address, string diagnosis) : base(id, name, birthDate, address)
         {
             this.diagnosis = diagnosis;
-            doctors = new List<Doctor>();
+            this.doctors = new List<Doctor>();
 
         }
         // member methods
@@ -34,10 +34,7 @@ namespace HospitalManagementSystem.Models
         }
         public void setDoctors(List<Doctor> docs)
         {
-            for(int i = 0; i < docs.Count; i++)
-            {
-                doctors.Add(docs[i]);
-            }
+            this.doctors = docs;
         }
         public List<Doctor> getDoctors()
         {
@@ -45,7 +42,7 @@ namespace HospitalManagementSystem.Models
         }
         public void assignDoctor(Doctor doctor)
         {
-            doctors.Add(doctor);
+            this.doctors.Add(doctor);
         }
         public void removeDoctor(string id)
         {
@@ -53,12 +50,12 @@ namespace HospitalManagementSystem.Models
             {
                 if (doctors[i].getId() == id)
                 {
-                    doctors.Remove(doctors[i]);
+                    this.doctors.Remove(doctors[i]);
                     return;
                 }
             }
         }
-        public abstract float getBill();
+        public abstract double getBill();
     }
 }
 

@@ -44,9 +44,9 @@ namespace HospitalManagementSystem.Models
         {
             return this.name;
         }
-        public void setBirthDate(DateTime dt)
+        public void setBirthDate(DateTime birthDate)
         {
-            this.birthDate = dt;
+            this.birthDate = birthDate;
         }
         public DateTime getBirthDate()
         {
@@ -60,12 +60,9 @@ namespace HospitalManagementSystem.Models
         {
             return this.Address;
         }
-
         public int getAge()
         {
             return 2018 - birthDate.Year;
         }
-
     }
-
 }

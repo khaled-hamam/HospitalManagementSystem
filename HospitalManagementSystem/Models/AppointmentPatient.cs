@@ -13,19 +13,16 @@ namespace HospitalManagementSystem.Models
         //constructors
         public AppointmentPatient() : base()
         {
-            appointments = new List<Appointment>();
+            this.appointments = new List<Appointment>();
         }
-        public AppointmentPatient(string id, string name, DateTime dt, string address, string diagnosis) : base(id, name, dt, address, diagnosis)
+        public AppointmentPatient(string id, string name, DateTime birthDate, string address, string diagnosis) : base(id, name, birthDate, address, diagnosis)
         {
-            appointments = new List<Appointment>();
+            this.appointments = new List<Appointment>();
         }
         // member methods
-        public void setAppointments(List<Appointment> la)
+        public void setAppointments(List<Appointment> listAppointment)
         {
-            for(int i = 0; i < la.Count; i++)
-            {
-                appointments.Add(la[i]);
-            }
+            this.appointments = listAppointment;
         }
         public List<Appointment> getAppointments()
         {
@@ -33,25 +30,25 @@ namespace HospitalManagementSystem.Models
         }
         public void addAppointment(Appointment apm)
         {
-            appointments.Add(apm);
+            this.appointments.Add(apm);
         }
         public void removeAppointment(string id)
         {
             for (int i = 0; i < appointments.Count; i++)
             {
-                if (appointments[i].id == id)
+                if (this.appointments[i].getId() == id)
                 {
-                    appointments.Remove(appointments[i]);
+                    this.appointments.Remove(appointments[i]);
                     return;
                 }
             }
         }
-        public override float getBill()
+        public override double getBill()
         {
             int duration = 0;
             for (int i = 0; i < appointments.Count; i++)
             {
-                duration += appointments[i].duration;
+                duration += this.appointments[i].getDuration();
             }
             float bill = duration + (float)(duration * 0.5);
             return bill;

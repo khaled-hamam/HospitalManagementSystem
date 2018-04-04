@@ -18,7 +18,7 @@ namespace HospitalManagementSystem.Models
             this.room = new Room();
             this.history = new List<Medicine>();
         }
-        public ResidentPatient(string id, string name, DateTime dt, string address, string diagnosis, Room room, int duration) : base(id, name, dt, address, diagnosis)
+        public ResidentPatient(string id, string name, DateTime birthDate, string address, string diagnosis, Room room, int duration) : base(id, name, dt, address, diagnosis)
         {
 
             this.room = room;
@@ -38,7 +38,7 @@ namespace HospitalManagementSystem.Models
         {
             for(int i = 0; i < lm.Count; i++)
             {
-                history.Add(lm[i]);
+                this.history.Add(lm[i]);
             }
         }
         public List<Medicine> getHistory()
@@ -55,11 +55,11 @@ namespace HospitalManagementSystem.Models
         }
         public void addMedicine(Medicine M)
         {
-            history.Add(M);
+            this.history.Add(M);
         }
-        public override float getBill()
+        public override double getBill()
         {
-            float bill = this.duration + (float)(this.duration * 0.5);
+            float bill = this.duration + (this.duration * room.getPrice());
             return bill;
         }
     }
