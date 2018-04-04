@@ -10,7 +10,7 @@ namespace HospitalManagementSystem.Models
     {
         private string id { get; set; }
         private Doctor doctor { get; set; }
-        private Patient patient { get; set; }
+        private AppointmentPatient patient { get; set; }
         private DateTime date { get; set; }
         private int duration { get; set; }
 
@@ -18,12 +18,12 @@ namespace HospitalManagementSystem.Models
         {
             this.id = Guid.NewGuid().ToString();
             this.doctor = new Doctor();
-            this.patient = new Patient();
+            this.patient = new AppointmentPatient();
             this.date = new DateTime();
             this.duration = 0;
         }
 
-        public Appointment(Doctor doctor, Patient patient, DateTime date, int duration)
+        public Appointment(Doctor doctor, AppointmentPatient patient, DateTime date, int duration)
         {
             this.id = Guid.NewGuid().ToString();
             this.doctor = doctor;
