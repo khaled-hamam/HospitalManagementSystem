@@ -34,12 +34,9 @@ namespace HospitalManagementSystem.Models
         {
             return this.room;
         }
-        public void setHistory(List<Medicine> lm)
+        public void setHistory(List<Medicine> historyList)
         {
-            for(int i = 0; i < lm.Count; i++)
-            {
-                this.history.Add(lm[i]);
-            }
+            this.history = historyList;
         }
         public List<Medicine> getHistory()
         {
