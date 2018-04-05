@@ -8,36 +8,40 @@ namespace HospitalManagementSystem.Models
 {
     class Doctor : Employee
     {
-        private bool isHead { get; set; }
-        private List<Patient> patients { get; set; }
-        private List<Appointment> appointments { get; set; }
+        private bool isHead;
+        private List<Patient> patients;
+        private List<Appointment> appointments;
+
+        public bool IsHead { get { return this.isHead; } set { this.isHead = value;} }
+        public List<Patient> Patients { get { return this.patients; } set { this.patients = value;} }
+        public List<Appointment> Appointments { get { return this.appointments; } set { this.appointments = value;} }
 
         public Doctor()
         {
-            this.isHead = false;
-            patients = new List<Patient>();
-            appointments = new List<Appointment>();
+            this.IsHead = false;
+            this.Patients = new List<Patient>();
+            this.Appointments = new List<Appointment>();
         }
 
         public Doctor(bool ishead, double salary, Department department) : base(salary, department)
         {
-            this.isHead = ishead;
-            patients = new List<Patient>();
-            appointments = new List<Appointment>();
+            this.IsHead = ishead;
+            this.Patients = new List<Patient>();
+            this.Appointments = new List<Appointment>();
         }
 
-        public void addPatient(patient)
+        public void addPatient(Patient patient)
         {
-            patients.Add(patient);
+            this.Patients.Add(patient);
         }
 
         public void removePatient(string id)
         {
             foreach (Patient patient in patients)
             {
-                if (patient.id == id)
+                if (patient.Id == id)
                 {
-                    patients.Remove(patient);
+                    this.Patients.Remove(patient);
                     break;
                 }
             }
@@ -45,18 +49,19 @@ namespace HospitalManagementSystem.Models
 
         public void addAppointment(Appointment appointment)
         {
-            appointments.Add(appointment);
+            this.Appointments.Add(appointment);
         }
 
         public void removeAppointment(string id)
         {
             foreach (Appointment appointment in appointments)
             {
-                if (appointment.id == id)
+                if (appointment.Id == id)
                 {
-                    appointments.Remove(appointment);
+                    this.Appointments.Remove(appointment);
                     break;
                 }
             }
         }
     }
+}

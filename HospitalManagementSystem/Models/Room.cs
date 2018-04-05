@@ -22,16 +22,17 @@ namespace HospitalManagementSystem.Models
         // constructors
         public Room()
         {
-            this._id = "";
-            this.capacity = 0;
-            this.price = 0;
-            this.patients = new List<Patient>();
-            this.nurses = new List<Nurse>();
+            this.Id = Guid.NewGuid().ToString();
+            this.Capacity = 0;
+            this.Price = 0;
+            this.Patients = new List<Patient>();
+            this.Nurses = new List<Nurse>();
         }
         public Room(int capacity, float price)
         {
-            this.capacity = capacity;
-            this.price = price;
+            this.Id = Guid.NewGuid().ToString();
+            this.Capacity = capacity;
+            this.Price = price;
         }
         public void addPatient(Patient patient)
         {
@@ -39,7 +40,7 @@ namespace HospitalManagementSystem.Models
         }
         public void removePatient(string patientID)
         {
-            for (int i=0; i<patients.Count; i++)
+            for (int i = 0; i < patients.Count; i++)
             {
                 if (patients[i].Id == patientID)
                 {
@@ -54,7 +55,7 @@ namespace HospitalManagementSystem.Models
         }
         public void removeNurse(string nurseID)
         {
-            for(int i=0; i<nurses.Count; i++)
+            for(int i = 0; i < nurses.Count; i++)
             {
                 if (nurses[i].Id == nurseID)
                 {
@@ -65,7 +66,7 @@ namespace HospitalManagementSystem.Models
         }
         public bool hasAvailableBed()
         {
-            return (capacity-patients.Count)>0;
+            return (capacity - patients.Count) > 0;
         }
 
     }

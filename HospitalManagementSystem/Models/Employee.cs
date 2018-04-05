@@ -8,32 +8,35 @@ namespace HospitalManagementSystem.Models
 {
     abstract class Employee:Person
     {
-        protected double salary { get; set; }
-        protected DateTime employmentDate { get; set; }
-        protected Department department { get; set; }
+        protected double salary;
+        protected DateTime employmentDate;
+        protected Department department;
+        public double Salary { get { return this.salary; } set { this.salary = value; } }
+        public DateTime EmploymentDate { get { return this.employmentDate; } set { this.employmentDate = value; } }
+        public Department Department { get { return this.department; } set { this.department = value; } }
 
         public Employee()
         {
-            this.salary = 0.0;
-            this.employmentDate = new DateTime();
-            this.department = new Department();
+            this.Salary = 0.0;
+            this.EmploymentDate = new DateTime();
+            this.Department = new Department();
         }
 
         public Employee(double salary, Department department)
         {
-            this.salary = salary;
-            this.employmentDate = new DateTime();
-            this.department = department;
+            this.Salary = salary;
+            this.EmploymentDate = new DateTime();
+            this.Department = department;
         }
 
         public void raiseSalary(int percent)
         {
-            this.salary += salary * percent / 100;
+            this.Salary += salary * percent / 100;
         }
 
         public void decrementSalary(int percent)
         {
-            this.salary -= salary * percent / 100;
+            this.Salary -= salary * percent / 100;
         }
 
     }

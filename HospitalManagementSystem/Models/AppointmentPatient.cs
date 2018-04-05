@@ -14,24 +14,24 @@ namespace HospitalManagementSystem.Models
         //constructors
         public AppointmentPatient() : base()
         {
-            this.appointments = new List<Appointment>();
+            this.Appointments = new List<Appointment>();
         }
-        public AppointmentPatient(string id, string name, DateTime birthDate, string address, string diagnosis) : base(id, name, birthDate, address, diagnosis)
+        public AppointmentPatient(string name, DateTime birthDate, string address, string diagnosis) : base( name, birthDate, address, diagnosis)
         {
-            this.appointments = new List<Appointment>();
+            this.Appointments = new List<Appointment>();
         }
         // member methods
-        public void addAppointment(Appointment apm)
+        public void addAppointment(Appointment appointment)
         {
-            this.appointments.Add(apm);
+            this.Appointments.Add(appointment);
         }
         public void removeAppointment(string id)
         {
             for (int i = 0; i < appointments.Count; i++)
             {
-                if (this.appointments[i].getId() == id)
+                if (this.Appointments[i].Id == id)
                 {
-                    this.appointments.Remove(appointments[i]);
+                    this.Appointments.Remove(appointments[i]);
                     return;
                 }
             }
@@ -41,7 +41,7 @@ namespace HospitalManagementSystem.Models
             int duration = 0;
             for (int i = 0; i < appointments.Count; i++)
             {
-                duration += this.appointments[i].getDuration();
+                duration += this.Appointments[i].Duration;
             }
             float bill = duration + (float)(duration * 0.5);
             return bill;

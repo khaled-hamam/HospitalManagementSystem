@@ -8,40 +8,40 @@ namespace HospitalManagementSystem.Models
 {
     class Appointment
     {
-        private string id { get; set; }
-        private Doctor doctor { get; set; }
-        private Patient patient { get; set; }
-        private DateTime date { get; set; }
-        private int duration { get; set; }
+        private string id;
+        private Doctor doctor;
+        private AppointmentPatient patient;
+        private DateTime date;
+        private int duration;
         // getters & setters
         public string Id { get { return this.id; } set { this.id = value; } }
         public Doctor Doctor { get { return this.doctor; } set { this.doctor = value; } }
-        public Patient Patient { get { return this.patient; } set { this.patient = value; } }
+        public AppointmentPatient Patient { get { return this.patient; } set { this.patient = value; } }
         public DateTime Date { get { return this.date; } set { this.date = value; } }
         public int Duration { get { return this.duration; } set { this.duration = value;} }
         // constructors
         public Appointment()
         {
-            this.id = Guid.NewGuid().ToString();
-            this.doctor = new Doctor();
-            this.patient = new Patient();
-            this.date = new DateTime();
-            this.duration = 0;
+            this.Id = Guid.NewGuid().ToString();
+            this.Doctor = new Doctor();
+            this.Patient = new AppointmentPatient();
+            this.Date = new DateTime();
+            this.Duration = 0;
         }
 
-        public Appointment(Doctor doctor, Patient patient, DateTime date, int duration)
+        public Appointment(Doctor doctor, AppointmentPatient patient, DateTime date, int duration)
         {
-            this.id = Guid.NewGuid().ToString();
-            this.doctor = doctor;
-            this.patient = patient;
-            this.date = date;
-            this.duration = duration;
+            this.Id = Guid.NewGuid().ToString();
+            this.Doctor = doctor;
+            this.Patient = patient;
+            this.Date = date;
+            this.Duration = duration;
         }
 
         public void cancel()
         {
-            this.doctor.removeAppointment(this.id);
-            this.patient.removeAppointment(this.id);
+            this.Doctor.removeAppointment(this.Id);
+            this.Patient.removeAppointment(this.Id);
         }
     }
 }

@@ -28,15 +28,15 @@ namespace HospitalManagementSystem.Models
         // constructors
         public Person()
         {
-            this._id = "";
-            this.name = "";
+            this.Id = Guid.NewGuid().ToString();
+            this.Name = "";
             this.Address = "";
         }
-        public Person(string _id, string name, DateTime birthDate, string Address)
+        public Person(string name, DateTime birthDate, string Address)
         {
-            this._id = _id;
-            this.name = name;
-            this.birthDate = birthDate;
+            this.Id = Guid.NewGuid().ToString();
+            this.Name = name;
+            this.BirthDate = birthDate;
             this.Address = Address;
         }
     }

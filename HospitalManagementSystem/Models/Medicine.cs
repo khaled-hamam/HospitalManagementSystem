@@ -20,18 +20,18 @@ namespace HospitalManagementSystem.Models
         // constructors
         public Medicine()
         {
-            this.id = Guid.NewGuid().ToString();
-            this.name = "";
-            this.startingDate = new DateTime();
-            this.startingDate = new DateTime();
+            this.Id = Guid.NewGuid().ToString();
+            this.Name = "";
+            this.StartingDate = new DateTime();
+            this.StartingDate = new DateTime();
         }
 
         public Medicine(string name, DateTime startingDate, DateTime endingDate)
         {
-            this.id = Guid.NewGuid().ToString();
-            this.name = name;
-            this.startingDate = startingDate;
-            this.endingDate = endingDate;
+            this.Id = Guid.NewGuid().ToString();
+            this.Name = name;
+            this.StartingDate = startingDate;
+            this.EndingDate = endingDate;
         }
     }
 }

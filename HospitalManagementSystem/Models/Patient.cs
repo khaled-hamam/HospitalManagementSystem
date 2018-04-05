@@ -16,25 +16,24 @@ namespace HospitalManagementSystem.Models
         // constructor
         public Patient() : base()
         {
-            this.diagnosis = "";
-            this.doctors = new List<Doctor>();
+            this.Diagnosis = "";
+            this.Doctors = new List<Doctor>();
         }
-        public Patient(string id, string name, DateTime birthDate, string address, string diagnosis) : base(id, name, birthDate, address)
+        public Patient( string name, DateTime birthDate, string address, string diagnosis) : base(name, birthDate, address)
         {
-            this.diagnosis = diagnosis;
-            this.doctors = new List<Doctor>();
-
+            this.Diagnosis = diagnosis;
+            this.Doctors = new List<Doctor>();
         }
         // member methods
         public void assignDoctor(Doctor doctor)
         {
-            this.doctors.Add(doctor);
+            this.Doctors.Add(doctor);
         }
         public void removeDoctor(string id)
         {
             for (int i = 0; i < doctors.Count; i++)
             {
-                if (doctors[i].getId() == id)
+                if (doctors[i].Id == id)
                 {
                     this.doctors.Remove(doctors[i]);
                     return;
