@@ -9,30 +9,33 @@ namespace HospitalManagementSystem.Models
     class ResidentPatient : Patient
     {
         // member variables
-        private Room room { get; set; }
-        private List<Medicine> history { get; set; }
-        public int duration { get; set; }
+        private Room room;
+        private List<Medicine> history;
+        private int duration;
+        public Room Room { get { return this.room;} set { this.room = value;} }
+        public List<Medicine> History { get { return this.history; } set { this.history = value;} }
+        public int Duration { get { return this.duration;} set { this.duration = value;} }
         //constructors
         public ResidentPatient() : base()
         {
-            this.room = new Room();
-            this.history = new List<Medicine>();
+            this.Room = new Room();
+            this.History = new List<Medicine>();
         }
-        public ResidentPatient(string id, string name, DateTime dt, string address, string diagnosis, Room room, int duration) : base(id, name, dt, address, diagnosis)
+        public ResidentPatient(string name, DateTime birthDate, string address, string diagnosis, Room room, int duration) : base(name, birthDate, address, diagnosis)
         {
 
-            this.room = room;
-            this.duration = duration;
-            this.history = new List<Medicine>();
+            this.Room = room;
+            this.Duration = duration;
+            this.History = new List<Medicine>();
         }
         // member methods
-        public void addMedicine(Medicine M)
+        public void addMedicine(Medicine medicine)
         {
-            history.Add(M);
+            this.history.Add(medicine);
         }
-        public override float getBill()
+        public override double getBill()
         {
-            float bill = this.duration + (float)(this.duration * 0.5);
+            float bill = this.duration + (this.duration * Room.Price);
             return bill;
         }
     }

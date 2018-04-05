@@ -8,24 +8,31 @@ namespace HospitalManagementSystem.Models
 {
     class Room
     {
-        protected string _id { set; get; }
-        protected List<Patient> patients { set; get; }
-        protected List<Nurse> nurses { set; get; }
-        protected int capacity { set; get; }
-        protected float price { set; get; }
-
+        protected string _id;
+        protected List<Patient> patients;
+        protected List<Nurse> nurses;
+        protected int capacity;
+        protected float price;
+        // getters & setters
+        public string Id { get { return this._id; } set { this._id = value; } }
+        public List<Patient> Patients { get { return this.patients; } set { this.patients = value; } }
+        public List<Nurse> Nurses { get { return this.nurses; } set { this.nurses = value; } }
+        public int Capacity { get { return this.capacity; } set { this.capacity = value; } }
+        public float Price { get { return this.price; } set { this.price = value; } }
+        // constructors
         public Room()
         {
-            this._id = "";
-            this.capacity = 0;
-            this.price = 0;
-            this.patients = new List<Patient>();
-            this.nurses = new List<Nurse>();
+            this.Id = Guid.NewGuid().ToString();
+            this.Capacity = 0;
+            this.Price = 0;
+            this.Patients = new List<Patient>();
+            this.Nurses = new List<Nurse>();
         }
         public Room(int capacity, float price)
         {
-            this.capacity = capacity;
-            this.price = price;
+            this.Id = Guid.NewGuid().ToString();
+            this.Capacity = capacity;
+            this.Price = price;
         }
         public void addPatient(Patient patient)
         {
@@ -33,9 +40,9 @@ namespace HospitalManagementSystem.Models
         }
         public void removePatient(string patientID)
         {
-            for (int i=0; i<patients.Count; i++)
+            for (int i = 0; i < patients.Count; i++)
             {
-                if (patients[i]._id == patientID)
+                if (patients[i].Id == patientID)
                 {
                     patients.Remove(patients[i]);
                     return;
@@ -48,9 +55,9 @@ namespace HospitalManagementSystem.Models
         }
         public void removeNurse(string nurseID)
         {
-            for(int i=0; i<nurses.Count; i++)
+            for(int i = 0; i < nurses.Count; i++)
             {
-                if (nurses[i]._id == nurseID)
+                if (nurses[i].Id == nurseID)
                 {
                     nurses.Remove(nurses[i]);
                     return;
@@ -59,7 +66,7 @@ namespace HospitalManagementSystem.Models
         }
         public bool hasAvailableBed()
         {
-            return (capacity-patients.Count)>0;
+            return (capacity - patients.Count) > 0;
         }
 
     }

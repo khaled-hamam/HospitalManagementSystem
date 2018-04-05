@@ -11,17 +11,20 @@ namespace HospitalManagementSystem.Models
         private List<Room> rooms;
         private List<Patient> patients;
         private Department department;
+        public List<Room> Rooms { get { return this.rooms; } set { this.rooms = value; } }
+        public List<Patient> Patients { get { return this.patients; } set { this.patients = value; } }
+        public Department Department { get { return this.department; } set { this.department = value; } }
 
         public void addRoom(Room room)
         {
-            rooms.Add(room);
+            this.Rooms.Add(room);
         }
 
         public void removeRoom(string id)
         {
             foreach (Room room in rooms)
             {
-                if (room._id == id)
+                if (room.Id == id)
                 {
                     rooms.Remove(room);
                     break;
@@ -38,7 +41,7 @@ namespace HospitalManagementSystem.Models
         {
             foreach (Patient patient in patients)
             {
-                if (patient._id == id)
+                if (patient.Id == id)
                 {
                     patients.Remove(patient);
                     break;

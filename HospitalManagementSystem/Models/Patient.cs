@@ -9,37 +9,38 @@ namespace HospitalManagementSystem.Models
     abstract class Patient : Person
     {
         // member variables
-        protected string diagnosis { get; set; }
-        protected List<Doctor> doctors { get; set; }
+        protected string diagnosis;
+        protected List<Doctor> doctors;
+        public string Diagnosis { get { return this.diagnosis; } set { this.diagnosis = value; } }
+        public List<Doctor> Doctors { get { return this.doctors; } set { this.doctors = value; } }
         // constructor
         public Patient() : base()
         {
-            this.diagnosis = "";
-            doctors = new List<Doctor>();
+            this.Diagnosis = "";
+            this.Doctors = new List<Doctor>();
         }
-        public Patient(string id, string name, DateTime dt, string address, string diagnosis) : base(id, name, dt, address)
+        public Patient( string name, DateTime birthDate, string address, string diagnosis) : base(name, birthDate, address)
         {
-            this.diagnosis = diagnosis;
-            doctors = new List<Doctor>();
-
+            this.Diagnosis = diagnosis;
+            this.Doctors = new List<Doctor>();
         }
         // member methods
         public void assignDoctor(Doctor doctor)
         {
-            doctors.Add(doctor);
+            this.Doctors.Add(doctor);
         }
         public void removeDoctor(string id)
         {
             for (int i = 0; i < doctors.Count; i++)
             {
-                if (doctors[i].getId() == id)
+                if (doctors[i].Id == id)
                 {
-                    doctors.Remove(doctors[i]);
+                    this.doctors.Remove(doctors[i]);
                     return;
                 }
             }
         }
-        public abstract float getBill();
+        public abstract double getBill();
     }
 }
 
