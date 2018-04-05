@@ -18,6 +18,13 @@ namespace HospitalManagementSystem.Models
         public string Id { get { return this._id; } set { this._id = value; } }
         public DateTime BirthDate { get { return this.birthDate; } set { this.birthDate = value; } }
         public string Address { get { return this.address; } set { this.address = value; } }
+        public int Year { get; }
+        public int Age {
+            get
+            {
+                return Year - (this.birthDate.Year); 
+            }
+        }
         // constructors
         public Person()
         {
@@ -31,11 +38,6 @@ namespace HospitalManagementSystem.Models
             this.name = name;
             this.birthDate = birthDate;
             this.Address = Address;
-        }
-        // member methods
-        public int getAge()
-        {
-            return 2018 - birthDate.Year;
         }
     }
 }
