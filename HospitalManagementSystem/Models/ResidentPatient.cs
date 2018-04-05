@@ -12,13 +12,16 @@ namespace HospitalManagementSystem.Models
         private Room room;
         private List<Medicine> history;
         private int duration;
+        public Room Room { get { return this.room; } set { this.room = value; } }
+        public List<Medicine> History { get { return this.history; } set { this.history = value; } }
+        public int Duration { get { return this.duration; } set { this.duration = value; } }
         //constructors
         public ResidentPatient() : base()
         {
             this.room = new Room();
             this.history = new List<Medicine>();
         }
-        public ResidentPatient(string id, string name, DateTime birthDate, string address, string diagnosis, Room room, int duration) : base(id, name, dt, address, diagnosis)
+        public ResidentPatient(string id, string name, DateTime birthDate, string address, string diagnosis, Room room, int duration) : base(id, name, birthDate, address, diagnosis)
         {
 
             this.room = room;
@@ -26,37 +29,13 @@ namespace HospitalManagementSystem.Models
             this.history = new List<Medicine>();
         }
         // member methods
-        public void setRoom(Room room)
-        {
-            this.room = room;
-        }
-        public Room getRoom()
-        {
-            return this.room;
-        }
-        public void setHistory(List<Medicine> historyList)
-        {
-            this.history = historyList;
-        }
-        public List<Medicine> getHistory()
-        {
-            return this.history;
-        }
-        public void setDuration(int duration)
-        {
-            this.duration = duration;
-        }
-        public int getDuration()
-        {
-            return this.duration;
-        }
         public void addMedicine(Medicine M)
         {
             this.history.Add(M);
         }
         public override double getBill()
         {
-            float bill = this.duration + (this.duration * room.getPrice());
+            float bill = this.duration + (this.duration * room.Price);
             return bill;
         }
     }

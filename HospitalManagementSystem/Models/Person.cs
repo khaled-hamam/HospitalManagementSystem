@@ -12,7 +12,12 @@ namespace HospitalManagementSystem.Models
         protected string _id;
         protected string name;
         protected DateTime birthDate;
-        protected string Address;
+        protected string address;
+
+        public string Name{ get{ return this.name;} set { this.name = value;}}
+        public string Id { get { return this._id; } set { this._id = value; } }
+        public DateTime BirthDate { get { return this.birthDate; } set { this.birthDate = value; } }
+        public string Address { get { return this.address; } set { this.address = value; } }
         // constructors
         public Person()
         {
@@ -28,38 +33,6 @@ namespace HospitalManagementSystem.Models
             this.Address = Address;
         }
         // member methods
-        public void setId(string id)
-        {
-            this._id = id;
-        }
-        public string getId()
-        {
-            return this._id;
-        }
-        public void setName(string name)
-        {
-            this.name = name;
-        }
-        public string getName()
-        {
-            return this.name;
-        }
-        public void setBirthDate(DateTime birthDate)
-        {
-            this.birthDate = birthDate;
-        }
-        public DateTime getBirthDate()
-        {
-            return this.birthDate;
-        }
-        public void setAddres(string ad)
-        {
-            this.Address=ad;
-        }
-        public string getAddress()
-        {
-            return this.Address;
-        }
         public int getAge()
         {
             return 2018 - birthDate.Year;

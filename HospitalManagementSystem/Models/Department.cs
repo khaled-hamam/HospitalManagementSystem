@@ -8,16 +8,22 @@ namespace HospitalManagementSystem.Models
 {
     class Department
     {
-        private string name { set; get; }
-        private string headID { set; get; } 
-        private List<Doctors> doctors { set; get; }
-        private List<Nurse> nurses { set; get; }
-        private List<Patient> patients { set; get; }
-
+        private string name;
+        private string headId;
+        private List<Doctors> doctors;
+        private List<Nurse> nurse;
+        private List<Patient> patients;
+        // getters & setters
+        public string Name { get { return this.name; } set { this.name = value; } }
+        public string HeadId { get { return this.headId; } set { this.headId = value; } }
+        public List<Doctors> Doctors { get { return this.doctors; } set { this.doctors = value; } }
+        public List<Nurse> Nurse { get { return this.nurse; } set { this.nurse = value; } }
+        public List<Patient> Patients { get { return this.patients; } set { this.patients = value; } }
+        // constructors
         public Department()
         {
             this.name = "";
-            this.headID = "";
+            this.headId = "";
             this.doctors = new List<Doctors>();
             this.nurses = new List<Nurse>();
             this.patients = new List<Patient>();
@@ -45,7 +51,7 @@ namespace HospitalManagementSystem.Models
         {
             for (int i = 0; i < nurses.Count; i++)
             {
-                if (nurses[i]._id == nurseID)
+                if (nurses[i].Id == nurseID)
                 {
                     nurses.Remove(nurses[i]);
                     return;
@@ -60,7 +66,7 @@ namespace HospitalManagementSystem.Models
         {
             for (int i = 0; i < patients.Count; i++)
             {
-                if (patients[i]._id == patientID)
+                if (patients[i].Id == patientID)
                 {
                     patients.Remove(patients[i]);
                     return;

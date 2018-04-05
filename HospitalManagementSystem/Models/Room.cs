@@ -8,12 +8,18 @@ namespace HospitalManagementSystem.Models
 {
     class Room
     {
-        protected string _id { set; get; }
-        protected List<Patient> patients { set; get; }
-        protected List<Nurse> nurses { set; get; }
-        protected int capacity { set; get; }
-        protected float price { set; get; }
-
+        protected string _id;
+        protected List<Patient> patients;
+        protected List<Nurse> nurses;
+        protected int capacity;
+        protected float price;
+        // getters & setters
+        public string Id { get { return this._id; } set { this._id = value; } }
+        public List<Patient> Patients { get { return this.patients; } set { this.patients = value; } }
+        public List<Nurse> Nurses { get { return this.nurses; } set { this.nurses = value; } }
+        public int Capacity { get { return this.capacity; } set { this.capacity = value; } }
+        public float Price { get { return this.price; } set { this.price = value; } }
+        // constructors
         public Room()
         {
             this._id = "";
@@ -35,7 +41,7 @@ namespace HospitalManagementSystem.Models
         {
             for (int i=0; i<patients.Count; i++)
             {
-                if (patients[i]._id == patientID)
+                if (patients[i].Id == patientID)
                 {
                     patients.Remove(patients[i]);
                     return;
@@ -50,7 +56,7 @@ namespace HospitalManagementSystem.Models
         {
             for(int i=0; i<nurses.Count; i++)
             {
-                if (nurses[i]._id == nurseID)
+                if (nurses[i].Id == nurseID)
                 {
                     nurses.Remove(nurses[i]);
                     return;

@@ -11,6 +11,8 @@ namespace HospitalManagementSystem.Models
         // member variables
         protected string diagnosis;
         protected List<Doctor> doctors;
+        public string Diagnosis { get { return this.diagnosis; } set { this.diagnosis = value; } }
+        public List<Doctor> Doctors { get { return this.doctors; } set { this.doctors = value; } }
         // constructor
         public Patient() : base()
         {
@@ -24,22 +26,6 @@ namespace HospitalManagementSystem.Models
 
         }
         // member methods
-        public void setDiagnosis(string diagnosis)
-        {
-            this.diagnosis = diagnosis;
-        }
-        public string getDiagnosis()
-        {
-            return this.diagnosis;
-        }
-        public void setDoctors(List<Doctor> docs)
-        {
-            this.doctors = docs;
-        }
-        public List<Doctor> getDoctors()
-        {
-            return this.doctors;
-        }
         public void assignDoctor(Doctor doctor)
         {
             this.doctors.Add(doctor);

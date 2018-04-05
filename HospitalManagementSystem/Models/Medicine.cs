@@ -8,10 +8,16 @@ namespace HospitalManagementSystem.Models
 {
     class Medicine
     {
-        private string id { get; set; }
-        private string name { get; set; }
-        private DateTime startingDate { get; set; }
-        private DateTime endingDate { get; set; }
+        private string id;
+        private string name;
+        private DateTime startingDate;
+        private DateTime endingDate;
+        // getters & setters
+        public string Id { get { return this.id; } set { this.id = value; } }
+        public string Name { get { return this.name; } set { this.name = value; } }
+        public DateTime StartingDate { get { return this.startingDate; } set { this.startingDate = value; } }
+        public DateTime EndingDate { get { return this.endingDate; } set { this.endingDate = value; } }
+        // constructors
         public Medicine()
         {
             this.id = Guid.NewGuid().ToString();

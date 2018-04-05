@@ -10,6 +10,7 @@ namespace HospitalManagementSystem.Models
     {
         // member variables
         private List<Appointment> appointments;
+        public List<Appointment> Appointments { get { return this.appointments; } set { this.appointments = value; } }
         //constructors
         public AppointmentPatient() : base()
         {
@@ -20,14 +21,6 @@ namespace HospitalManagementSystem.Models
             this.appointments = new List<Appointment>();
         }
         // member methods
-        public void setAppointments(List<Appointment> listAppointment)
-        {
-            this.appointments = listAppointment;
-        }
-        public List<Appointment> getAppointments()
-        {
-            return this.appointments;
-        }
         public void addAppointment(Appointment apm)
         {
             this.appointments.Add(apm);
