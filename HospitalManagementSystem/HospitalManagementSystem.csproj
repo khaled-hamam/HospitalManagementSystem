@@ -73,6 +73,7 @@
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Hospital.cs" />
     <Compile Include="Models\Medicine.cs" />
     <Compile Include="Models\Nurse.cs" />
     <Compile Include="Models\Patient.cs" />
