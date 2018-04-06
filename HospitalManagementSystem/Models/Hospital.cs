@@ -6,21 +6,24 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.Models
 {
-    class Hospital
+    public static class Hospital
     {
-        private List<Employee> employees;
-        private List<Patient> patients;
-        private List<Appointment> appointments;
-        private List<Medicine> medicines;
+        private static List<Employee> employees;
+        private static List<Patient> patients;
+        private static List<Appointment> appointments;
+        private static List<Medicine> medicines;
         // setters & getters
-        public List<Employee> Employees { get { return this.employees; } set { this.employees = value; } }
-        public List<Patient> Patients { get { return this.patients; } set { this.patients = value; } }
-        public List<Appointment> Appointments { get { return this.appointments; } set { this.appointments = value; } }
-        public List<Medicine> Medicines { get { return this.medicines; } set { this.medicines = value; } }
+        static List<Employee> Employees { get { return employees; } }
+        static List<Patient> Patients { get { return patients; } }
+        static List<Appointment> Appointments { get { return appointments; } }
+        static List<Medicine> Medicines { get { return medicines; } }
         // constructors
-        public Hospital()
+        static Hospital()
         {
-
+            employees = new List<Employee>();
+            patients = new List<Patient>();
+            appointments = new List<Appointment>();
+            medicines = new List<Medicine>();
         }
 
     }
