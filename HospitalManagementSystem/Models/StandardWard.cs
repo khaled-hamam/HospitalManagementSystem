@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.Models
 {
-    class PrivateRoom : Room
+    class StandardWard : Room
     {
         //Constructors
-        public PrivateRoom(int capacity, double price) : base(capacity ,price)
+        public StandardWard(int capacity, double price) : base(capacity, price)
         {
 
         }

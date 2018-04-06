@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\AppointmentPatient.cs" />
+    <Compile Include="Models\SemiPrivateRoom.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Models\PrivateRoom.cs" />
     <Compile Include="Models\ResidentPatient.cs" />
     <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\StandardWard.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
       <SubType>Code</SubType>
