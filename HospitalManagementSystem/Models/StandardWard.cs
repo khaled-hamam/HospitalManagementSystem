@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.Models
 {
-    class PrivateRoom : Room
+    class StandardWard : Room
     {
-        const int privateCapacity = 1;
-        const double privatePrice = 100;
-        public PrivateRoom() : base(privateCapacity, privatePrice)
+        const int standardCapacity = 6;
+        const double standardPrice = 15;
+        public StandardWard() : base(standardCapacity, standardPrice)
         {
         }
     }
-
 }
