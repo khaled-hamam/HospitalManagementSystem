@@ -11,19 +11,23 @@ namespace HospitalManagementSystem.Models
         private static List<Employee> employees;
         private static List<Patient> patients;
         private static List<Appointment> appointments;
-        private static List<Medicine> medicines;
+        private static List<Department> departments;
+        private static List<Room> rooms;
         // setters & getters
         static List<Employee> Employees { get { return employees; } }
         static List<Patient> Patients { get { return patients; } }
         static List<Appointment> Appointments { get { return appointments; } }
-        static List<Medicine> Medicines { get { return medicines; } }
+        static List<Department> Departments { get { return departments; } }
+        static List<Room> Rooms { get { return rooms; } }
+
         // constructors
         static Hospital()
         {
             employees = new List<Employee>();
             patients = new List<Patient>();
             appointments = new List<Appointment>();
-            medicines = new List<Medicine>();
+            departments = new List<Department>();
+            rooms = new List<Room>();
         }
 
     }
