@@ -4,10 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalManagementSystem.Views"
+        xmlns:viewmodels="clr-namespace:HospitalManagementSystem.ViewModels"
+        xmlns:views="clr-namespace:HospitalManagementSystem.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Hospital Management System" Height="600" Width="800">
-    
+    <Window.Resources>
+        <DataTemplate x:Name="PatientsView" DataType="{x:Type viewmodels:PatientsViewModel}">
+            <views:PatientsView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="DepartmentsView" DataType="{x:Type viewmodels:DepartmentsViewModel}">
+            <views:DepartmentsView DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -32,22 +41,28 @@
         <DockPanel Name="SideMenu" Background="#001a1a" Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" >
             <StackPanel>
                 <ListView x:Name="ListViewMenu" Foreground="#00cccc" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListViewItem x:Name="DepartmentButton" Height="60">
+                    <ListViewItem x:Name="DepartmentButton" Height="60" Selected="DepartmentButton_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Departments" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="PatientsButton" Height="60">
+                    <ListViewItem x:Name="PatientsButton" Height="60" Selected="PatientsButton_Selected">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="AccountMultiple" Height="25" Width="25" Margin="10"/>
+                            <materialDesign:PackIcon Kind="AccountBox" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Patients" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="CalendarClock" Height="25" Width="25" Margin="10"/>
+                            <materialDesign:PackIcon Kind="CalendarClock" Height="25" Width="20" Margin="10"/>
                             <TextBlock Text="Appointments" VerticalAlignment="Center"  Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AccountMultiple" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Employees" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">
@@ -59,5 +74,6 @@
                 </ListView>
             </StackPanel>
         </DockPanel>
+        <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
     </Grid>
 </Window>

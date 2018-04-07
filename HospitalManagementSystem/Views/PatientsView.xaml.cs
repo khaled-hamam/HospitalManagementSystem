@@ -1,5 +1,4 @@
-﻿using HospitalManagementSystem.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,23 +16,13 @@ using System.Windows.Shapes;
 namespace HospitalManagementSystem.Views
 {
     /// <summary>
-    /// Interaction logic for Home.xaml
+    /// Interaction logic for PatientsView.xaml
     /// </summary>
-    public partial class Home : Window
+    public partial class PatientsView : UserControl
     {
-        public Home()
+        public PatientsView()
         {
             InitializeComponent();
-        }
-
-        private void DepartmentButton_Selected(object sender, RoutedEventArgs e)
-        {
-            DataContext = new DepartmentsViewModel();
-        }
-
-        private void PatientsButton_Selected(object sender, RoutedEventArgs e)
-        {
-            DataContext = new PatientsViewModel();
         }
     }
 }
