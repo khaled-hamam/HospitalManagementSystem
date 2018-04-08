@@ -8,9 +8,8 @@ namespace HospitalManagementSystem.Models
 {
     class StandardWard : Room
     {
-        const int standardCapacity = 6;
-        const double standardPrice = 15;
-        public StandardWard() : base(standardCapacity, standardPrice)
+       
+        public StandardWard() : base(4, 25)
         {
         }
     }

@@ -8,9 +8,8 @@ namespace HospitalManagementSystem.Models
 {
     class PrivateRoom : Room
     {
-        const int privateCapacity = 1;
-        const double privatePrice = 100;
-        public PrivateRoom() : base(privateCapacity, privatePrice)
+       
+        public PrivateRoom() : base(1, 100)
         {
         }
     }
