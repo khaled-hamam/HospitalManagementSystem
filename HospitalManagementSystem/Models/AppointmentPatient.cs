@@ -9,39 +9,33 @@ namespace HospitalManagementSystem.Models
     class AppointmentPatient : Patient
     {
         // member variables
-        private List<Appointment> appointments;
-        public List<Appointment> Appointments { get { return this.appointments; } set { this.appointments = value; } }
+        private Dictionary<string, Appointment> appointments;
+        public Dictionary<string, Appointment> Appointments { get { return this.appointments; } set { this.appointments = value; } }
         //constructors
         public AppointmentPatient() : base()
         {
-            this.Appointments = new List<Appointment>();
+            this.Appointments = new Dictionary<string, Appointment>();
         }
         public AppointmentPatient(string name, DateTime birthDate, string address, string diagnosis) : base( name, birthDate, address, diagnosis)
         {
-            this.Appointments = new List<Appointment>();
+            this.Appointments = new Dictionary<string, Appointment>();
         }
         // member methods
-        public void addAppointment(Appointment appointment)
+        public void addAppointment(string id, Appointment appointment)
         {
-            this.Appointments.Add(appointment);
+            this.Appointments.Add(id, appointment);
         }
         public void removeAppointment(string id)
         {
-            for (int i = 0; i < appointments.Count; i++)
-            {
-                if (this.Appointments[i].Id == id)
-                {
-                    this.Appointments.Remove(appointments[i]);
-                    return;
-                }
-            }
+            this.Appointments.Remove(id);
         }
         public override double getBill()
         {
             int duration = 0;
             for (int i = 0; i < appointments.Count; i++)
             {
-                duration += this.Appointments[i].Duration;
+                string j = i.ToString();
+                duration += this.Appointments[j].Duration;
             }
             float bill = duration + (float)(duration * 0.5);
             return bill;
