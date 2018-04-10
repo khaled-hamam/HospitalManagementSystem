@@ -31,49 +31,34 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <DockPanel Name="Logo" Background="#001a1a" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" >
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" >
-                <materialDesign:PackIcon Kind="Hospital" Height="25" Width="25" Margin="10" Foreground="#00cccc"/>
-                <TextBlock Text="HMS" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Foreground="#00cccc"/>
-            </StackPanel>
+        <DockPanel Name="LogoPanel" Background="{StaticResource AccentColor}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1">
+            <TextBlock Text="Hospital" VerticalAlignment="Center" FontFamily="Arial" HorizontalAlignment="Center" FontSize="20" FontWeight="SemiBold" Foreground="White"/>
         </DockPanel>
-        <DockPanel Name="SideMenu" Background="#001a1a" Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" >
-            <StackPanel>
-                <ListView x:Name="ListViewMenu" Foreground="#00cccc" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListViewItem x:Name="DepartmentButton" Height="60" Selected="DepartmentButton_Selected">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Departments" VerticalAlignment="Center" Margin="20 10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem x:Name="PatientsButton" Height="60" Selected="PatientsButton_Selected">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="AccountBox" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Patients" VerticalAlignment="Center" Margin="20 10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="CalendarClock" Height="25" Width="20" Margin="10"/>
-                            <TextBlock Text="Appointments" VerticalAlignment="Center"  Margin="20 10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="AccountMultiple" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Employees" VerticalAlignment="Center"  Margin="20 10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Door" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Rooms" VerticalAlignment="Center"  Margin="20 10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                </ListView>
-            </StackPanel>
+        <DockPanel Name="SideMenu" Background="{StaticResource PrimaryColor}" Grid.Row="1" Grid.Column="0" Grid.RowSpan="9">
+            <ListView x:Name="ListViewMenu" Margin="0 20 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListViewItem x:Name="DepartmentButton" Style="{StaticResource NavButton}" Selected="DepartmentButton_Selected">
+                    <TextBlock Text="Departments"/>
+                </ListViewItem>
+                <ListViewItem x:Name="PatientsButton" Style="{StaticResource NavButton}" Selected="PatientsButton_Selected">
+                    <TextBlock Text="Patients"/>
+                </ListViewItem>
+                <ListViewItem Style="{StaticResource NavButton}">
+                    <TextBlock Text="Appointments"/>
+                </ListViewItem>
+                <ListViewItem Style="{StaticResource NavButton}">
+                    <TextBlock Text="Employees"/>
+                </ListViewItem>
+                <ListViewItem Style="{StaticResource NavButton}">
+                    <TextBlock Text="Rooms"/>
+                </ListViewItem>
+            </ListView>
         </DockPanel>
-        <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
+        <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="10" Content="{Binding}"/>
     </Grid>
 </Window>
