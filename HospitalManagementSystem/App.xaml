@@ -5,6 +5,41 @@
              StartupUri="Views/Home.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <!-- App Colors -->
+            <SolidColorBrush x:Key="PrimaryColor" Color="#34495e" />
+            <SolidColorBrush x:Key="AccentColor" Color="#2d6dd5" />
+            <SolidColorBrush x:Key="DarkText" Color="#0e263e" />
+            <SolidColorBrush x:Key="LightText" Color="#a6b4ba" />
+            <SolidColorBrush x:Key="SelectedButton" Color="#233342" />
+            <SolidColorBrush x:Key="GreyBG" Color="#ecf0f1" />
+            
+            <!-- Component Styles -->
+            <Style x:Key="NavButton" TargetType="{x:Type ListViewItem}">
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Margin" Value="0 0 0 10" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontWeight" Value="Medium" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontFamily" Value="Arial" />
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="False">
+                        <Setter Property="FontWeight" Value="Thin"/>
+                        <Setter Property="Foreground" Value="{StaticResource LightText}"/>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="0" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="0" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+            <!-- Meterial Design Theme -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
