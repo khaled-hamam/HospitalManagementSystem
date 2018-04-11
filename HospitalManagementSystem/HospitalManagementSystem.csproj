@@ -60,6 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\SemiPrivateRoom.cs" />
+    <Compile Include="Models\StandardWard.cs" />
     <Compile Include="ViewModels\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\PatientsViewModel.cs" />
@@ -94,6 +96,7 @@
     </Compile>
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\AppointmentPatient.cs" />
+    <Compile Include="Models\SemiPrivateRoom.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -105,9 +108,13 @@
     <Compile Include="Models\PrivateRoom.cs" />
     <Compile Include="Models\ResidentPatient.cs" />
     <Compile Include="Models\Room.cs" />
+<<<<<<< HEAD
     <Compile Include="Views\DepartmentsView.xaml.cs">
       <DependentUpon>DepartmentsView.xaml</DependentUpon>
     </Compile>
+=======
+    <Compile Include="Models\StandardWard.cs" />
+>>>>>>> d5c92c539e7ad80cf7499b6767ee114c2d4869fc
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
       <SubType>Code</SubType>

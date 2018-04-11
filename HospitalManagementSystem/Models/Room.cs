@@ -12,13 +12,13 @@ namespace HospitalManagementSystem.Models
         protected List<Patient> patients;
         protected List<Nurse> nurses;
         protected int capacity;
-        protected float price;
+        protected double price;
         // getters & setters
         public string Id { get { return this._id; } set { this._id = value; } }
         public List<Patient> Patients { get { return this.patients; } set { this.patients = value; } }
         public List<Nurse> Nurses { get { return this.nurses; } set { this.nurses = value; } }
         public int Capacity { get { return this.capacity; } set { this.capacity = value; } }
-        public float Price { get { return this.price; } set { this.price = value; } }
+        public double Price { get { return this.price; } set { this.price = value; } }
         // constructors
         public Room()
         {
@@ -28,7 +28,7 @@ namespace HospitalManagementSystem.Models
             this.Patients = new List<Patient>();
             this.Nurses = new List<Nurse>();
         }
-        public Room(int capacity, float price)
+        public Room(int capacity, double price)
         {
             this.Id = Guid.NewGuid().ToString();
             this.Capacity = capacity;
