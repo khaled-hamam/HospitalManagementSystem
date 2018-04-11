@@ -56,6 +56,17 @@
                 </Style.Triggers>
             </Style>
 
+            <Style x:Key="InfoTitle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontFamily" Value="Arial" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Foreground" Value="{StaticResource LightText}" />
+            </Style>
+
+            <Style x:Key="InfoValue" BasedOn="{StaticResource InfoTitle}" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{StaticResource DarkText}" />
+            </Style>
+            
             <!-- Meterial Design Theme -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />

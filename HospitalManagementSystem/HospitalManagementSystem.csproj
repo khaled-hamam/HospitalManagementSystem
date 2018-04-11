@@ -62,9 +62,16 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\PatientsViewModel.cs" />
+    <Compile Include="Views\Components\EmployeeCard.xaml.cs">
+      <DependentUpon>EmployeeCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PatientsView.xaml.cs">
       <DependentUpon>PatientsView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Components\EmployeeCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DepartmentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
