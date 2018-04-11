@@ -61,9 +61,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\DepartmentsViewModel.cs" />
+    <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\PatientsViewModel.cs" />
     <Compile Include="Views\Components\EmployeeCard.xaml.cs">
       <DependentUpon>EmployeeCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeesView.xaml.cs">
+      <DependentUpon>EmployeesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PatientsView.xaml.cs">
       <DependentUpon>PatientsView.xaml</DependentUpon>
@@ -73,6 +77,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DepartmentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

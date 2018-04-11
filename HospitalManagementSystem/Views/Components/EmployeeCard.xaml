@@ -10,7 +10,13 @@
              d:DesignHeight="100" d:DesignWidth="410">
     <Grid>
 
-        <materialDesign:Card HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Height="90" Width="400" Padding="5" Foreground="{StaticResource DarkText}">
+        <materialDesign:Card 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Background="White" 
+            Height="90" Width="400" Padding="5" 
+            Foreground="{StaticResource DarkText}"
+            materialDesign:ShadowAssist.ShadowDepth="Depth1">
             <StackPanel>
                 <TextBlock Name="employeeName" FontSize="24" FontWeight="Bold">Khaled Mohamed</TextBlock>
                 <Grid Margin="0 5">

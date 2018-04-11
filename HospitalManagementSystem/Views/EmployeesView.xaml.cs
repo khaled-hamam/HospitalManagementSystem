@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HospitalManagementSystem.Views.Components
+namespace HospitalManagementSystem.Views
 {
     /// <summary>
-    /// Interaction logic for EmployeeCard.xaml
+    /// Interaction logic for EmployeesView.xaml
     /// </summary>
-    public partial class EmployeeCard : UserControl
+    public partial class EmployeesView : UserControl
     {
-        public EmployeeCard()
+        public EmployeesView()
         {
             InitializeComponent();
         }

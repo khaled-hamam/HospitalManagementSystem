@@ -9,6 +9,9 @@
         mc:Ignorable="d"
         Title="Hospital Management System" Height="600" Width="800">
     <Window.Resources>
+        <DataTemplate x:Name="EmployeesView" DataType="{x:Type viewmodels:EmployeesViewModel}">
+            <views:EmployeesView DataContext="{Binding}"/>
+        </DataTemplate>
         <DataTemplate x:Name="PatientsView" DataType="{x:Type viewmodels:PatientsViewModel}">
             <views:PatientsView DataContext="{Binding}"/>
         </DataTemplate>
@@ -50,7 +53,7 @@
                 <ListViewItem Style="{StaticResource NavButton}">
                     Appointments
                 </ListViewItem>
-                <ListViewItem Style="{StaticResource NavButton}">
+                <ListViewItem Style="{StaticResource NavButton}" MouseUp="navigateToEmployees">
                     Employees
                 </ListViewItem>
                 <ListViewItem Style="{StaticResource NavButton}">

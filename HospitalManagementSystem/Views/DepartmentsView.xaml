@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagementSystem.Views"
+             xmlns:Components="clr-namespace:HospitalManagementSystem.Views.Components"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Background="DarkGray">
-            
+             d:DesignHeight="540" d:DesignWidth="640">
+    <Grid Background="{StaticResource GreyBG}">
+        
     </Grid>
 </UserControl>
