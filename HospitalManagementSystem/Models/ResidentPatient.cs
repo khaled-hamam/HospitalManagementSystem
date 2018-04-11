@@ -35,7 +35,7 @@ namespace HospitalManagementSystem.Models
         }
         public override double getBill()
         {
-            float bill = this.duration + (this.duration * Room.Price);
+            double bill = this.duration + (this.duration * Room.Price);
             return bill;
         }
     }
