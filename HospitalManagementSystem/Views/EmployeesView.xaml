@@ -43,15 +43,7 @@
             </StackPanel>
         </Grid>
         <ScrollViewer Grid.Row="1" Grid.RowSpan="9">
-            <WrapPanel Name="employeeList" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                <Components:EmployeeCard />
-                <Components:EmployeeCard />
-                <Components:EmployeeCard />
-                <Components:EmployeeCard />
-                <Components:EmployeeCard />
-                <Components:EmployeeCard />
-                <Components:EmployeeCard />
-            </WrapPanel>
+            <WrapPanel Name="employeeList" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0" />
         </ScrollViewer>
         <Button
             Grid.Row="1"
@@ -62,7 +54,8 @@
             BorderThickness="0"
             BorderBrush="Transparent"
             materialDesign:ShadowAssist.ShadowDepth="Depth1"
-            Style="{StaticResource MaterialDesignFloatingActionButton}">
+            Style="{StaticResource MaterialDesignFloatingActionButton}"
+            Click="addEmployee">
             <materialDesign:PackIcon Kind="Plus" Width="40" Height="25"/>
         </Button>
     </Grid>
