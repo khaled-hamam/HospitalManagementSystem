@@ -24,6 +24,7 @@ namespace HospitalManagementSystem.Views
         public Home()
         {
             InitializeComponent();
+            DataContext = new EmployeesViewModel();
         }
 
         private void DepartmentButton_Selected(object sender, MouseButtonEventArgs e)
