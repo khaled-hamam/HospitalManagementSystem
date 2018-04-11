@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:HospitalManagementSystem"
              StartupUri="Views/Home.xaml">
     <Application.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary 
+            xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf">
             <!-- App Colors -->
             <SolidColorBrush x:Key="PrimaryColor" Color="#34495e" />
             <SolidColorBrush x:Key="AccentColor" Color="#2d6dd5" />
@@ -12,11 +13,12 @@
             <SolidColorBrush x:Key="LightText" Color="#a6b4ba" />
             <SolidColorBrush x:Key="SelectedButton" Color="#233342" />
             <SolidColorBrush x:Key="GreyBG" Color="#ecf0f1" />
-            
+
             <!-- Component Styles -->
-            <Style x:Key="NavButton" TargetType="{x:Type ListViewItem}">
-                <Setter Property="Height" Value="30" />
-                <Setter Property="Margin" Value="0 0 0 10" />
+            <Style x:Key="NavButton" BasedOn="{StaticResource MaterialDesignListBoxItem}" TargetType="{x:Type ListViewItem}">
+                <Setter Property="Height" Value="35" />
+                <Setter Property="Margin" Value="0 5" />
+                <Setter Property="Padding" Value="0" />
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Foreground" Value="White" />
@@ -29,23 +31,41 @@
                         <Setter Property="Foreground" Value="{StaticResource LightText}"/>
                     </Trigger>
                     <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Background" Value="{StaticResource SelectedButton}" />
                         <Setter Property="BorderThickness" Value="0" />
                     </Trigger>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="Transparent" />
                         <Setter Property="BorderThickness" Value="0" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            
+
+            <Style x:Key="SettingsButton" BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}" TargetType="{x:Type Button}">
+                <Setter Property="Foreground" Value="{StaticResource LightText}" />
+                <Setter Property="Margin" Value="0 20" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Background" Value="Transparent" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
             <!-- Meterial Design Theme -->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

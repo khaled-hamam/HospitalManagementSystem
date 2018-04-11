@@ -26,7 +26,7 @@ namespace HospitalManagementSystem.Views
             InitializeComponent();
         }
 
-        private void DepartmentButton_Selected(object sender, RoutedEventArgs e)
+        private void DepartmentButton_Selected(object sender, MouseButtonEventArgs e)
         {
             DataContext = new DepartmentsViewModel();
         }
