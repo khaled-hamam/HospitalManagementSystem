@@ -33,20 +33,20 @@
         </DockPanel>
         <DockPanel Name="SideMenu" LastChildFill="False" Background="{StaticResource PrimaryColor}" Grid.Row="1" Grid.Column="0" Grid.RowSpan="9">
             <ListView x:Name="ListViewMenu" DockPanel.Dock="Top" Margin="0 15 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListViewItem Style="{StaticResource NavButton}" IsSelected="True" MouseUp="navigateToEmployees">
+                    Employees
+                </ListViewItem>
                 <ListViewItem x:Name="DepartmentButton" Style="{StaticResource NavButton}" MouseUp="DepartmentButton_Selected">
                     Departments
+                </ListViewItem>
+                <ListViewItem Style="{StaticResource NavButton}">
+                    Rooms
                 </ListViewItem>
                 <ListViewItem x:Name="PatientsButton" Style="{StaticResource NavButton}" Selected="PatientsButton_Selected">
                     Patients
                 </ListViewItem>
                 <ListViewItem Style="{StaticResource NavButton}">
                     Appointments
-                </ListViewItem>
-                <ListViewItem Style="{StaticResource NavButton}" MouseUp="navigateToEmployees">
-                    Employees
-                </ListViewItem>
-                <ListViewItem Style="{StaticResource NavButton}">
-                    Rooms
                 </ListViewItem>
             </ListView>
 
