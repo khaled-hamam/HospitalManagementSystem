@@ -10,68 +10,47 @@ namespace HospitalManagementSystem.Models
     {
         private string name;
         private string headId;
-        private List<Doctor> doctors;
-        private List<Nurse> nurse;
-        private List<Patient> patients;
+        private Dictionary<string, Doctor> doctors;
+        private Dictionary<string, Nurse> nurse;
+        private Dictionary<string, Patient> patients;
         // getters & setters
         public string Name { get { return this.name; } set { this.name = value; } }
         public string HeadId { get { return this.headId; } set { this.headId = value; } }
-        public List<Doctor> Doctors { get { return this.doctors; } set { this.doctors = value; } }
-        public List<Nurse> Nurse { get { return this.nurse; } set { this.nurse = value; } }
-        public List<Patient> Patients { get { return this.patients; } set { this.patients = value; } }
+        public Dictionary<string, Doctor> Doctors { get { return this.doctors; } set { this.doctors = value; } }
+        public Dictionary<string, Nurse> Nurse { get { return this.nurse; } set { this.nurse = value; } }
+        public Dictionary<string, Patient> Patients { get { return this.patients; } set { this.patients = value; } }
         // constructors
         public Department()
         {
             this.Name = "";
             this.HeadId = "";
-            this.Doctors = new List<Doctor>();
-            this.Nurse = new List<Nurse>();
-            this.Patients = new List<Patient>();
+            this.Doctors = new Dictionary<string, Doctor>();
+            this.Nurse = new Dictionary<string, Nurse>();
+            this.Patients = new Dictionary<string, Patient>();
         }
-        public void addDoctor(Doctor doctor)
+        public void addDoctor(string id,Doctor doctor)
         {
-            this.Doctors.Add(doctor);
+            this.Doctors.Add(id, doctor);
         }
         public void removeDoctor(string doctorID)
         {
-            for(int i=0; i<doctors.Count; i++)
-            {
-                if (this.Doctors[i].Id == doctorID)
-                {
-                    this.Doctors.Remove(doctors[i]);
-                    return;
-                }
-            }
+            this.Doctors.Remove(doctorID);
         }
-        public void addNurse(Nurse nurse)
+        public void addNurse(string id, Nurse nurse)
         {
-            this.Nurse.Add(nurse);
+            this.Nurse.Add(id, nurse);
         }
         public void removeNurse(string nurseID)
         {
-            for (int i = 0; i < nurse.Count; i++)
-            {
-                if (this.Nurse[i].Id == nurseID)
-                {
-                    this.Nurse.Remove(nurse[i]);
-                    return;
-                }
-            }
+            this.Nurse.Remove(nurseID);
         }
-        public void addPatient(Patient patient)
+        public void addPatient(string id, Patient patient)
         {
-            this.Patients.Add(patient);
+            this.Patients.Add(id,patient);
         }
         public void removePatient(string patientID)
         {
-            for (int i = 0; i < patients.Count; i++)
-            {
-                if (this.Patients[i].Id == patientID)
-                {
-                    this.Patients.Remove(patients[i]);
-                    return;
-                }
-            }
+            this.Patients.Remove(patientID);
         }
            
 

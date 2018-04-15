@@ -24,5 +24,9 @@ namespace HospitalManagementSystem.Views
         {
             InitializeComponent();
         }
+        private void addDepartment(object sender, RoutedEventArgs e)
+        {
+           
+        }
     }
 }

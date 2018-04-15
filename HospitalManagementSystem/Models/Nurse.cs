@@ -8,45 +8,31 @@ namespace HospitalManagementSystem.Models
 {
     class Nurse : Employee
     {
-        private List<Room> rooms;
-        private List<Patient> patients;
+        private Dictionary<string, Room> rooms;
+        private Dictionary<string, Patient> patients;
         private Department department;
-        public List<Room> Rooms { get { return this.rooms; } set { this.rooms = value; } }
-        public List<Patient> Patients { get { return this.patients; } set { this.patients = value; } }
+        public Dictionary<string, Room> Rooms { get { return this.rooms; } set { this.rooms = value; } }
+        public Dictionary<string, Patient> Patients { get { return this.patients; } set { this.patients = value; } }
         public Department Department { get { return this.department; } set { this.department = value; } }
 
-        public void addRoom(Room room)
+        public void addRoom(string id, Room room)
         {
-            this.Rooms.Add(room);
+            this.Rooms.Add(id, room);
         }
 
         public void removeRoom(string id)
         {
-            foreach (Room room in rooms)
-            {
-                if (room.Id == id)
-                {
-                    rooms.Remove(room);
-                    break;
-                }
-            }
+            this.Rooms.Remove(id);
         }
 
-        public void addPatient(Patient patient)
+        public void addPatient(string id, Patient patient)
         {
-            patients.Add(patient);
+            this.Patients.Add(id, patient);
         }
 
         public void removePatient(string id)
         {
-            foreach (Patient patient in patients)
-            {
-                if (patient.Id == id)
-                {
-                    patients.Remove(patient);
-                    break;
-                }
-            }
+            this.Patients.Remove(id);
         }
     }
 }
