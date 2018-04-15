@@ -19,7 +19,7 @@
             Foreground="{StaticResource DarkText}"
             materialDesign:ShadowAssist.ShadowDepth="Depth1">
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Name="Department" FontSize="24" FontWeight="Bold">Doctors</TextBlock>
+                <TextBlock Text="{Binding Name}" FontSize="24" FontWeight="Bold"/>
                 <Grid Margin="0 5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -29,12 +29,12 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Column="0">
-                        <TextBlock Style="{StaticResource InfoTitle}">EmployeesNumber</TextBlock>
-                        <TextBlock Name="EmployeesNumber" Style="{StaticResource InfoValue}"> 7</TextBlock>
+                        <TextBlock Style="{StaticResource InfoTitle}">Employees Number</TextBlock>
+                        <TextBlock Text="{Binding EmployeesNumber}" Style="{StaticResource InfoValue}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
-                        <TextBlock Style="{StaticResource InfoTitle}">PatientsNumber</TextBlock>
-                        <TextBlock Name="PatientsNumber" Style="{StaticResource InfoValue}"> 5</TextBlock>
+                        <TextBlock Style="{StaticResource InfoTitle}">Patients Number</TextBlock>
+                        <TextBlock Text="{Binding PatientsNumber}" Style="{StaticResource InfoValue}"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>

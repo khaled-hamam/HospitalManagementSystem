@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.ViewModels
 {
-    class DepartmentCardViewModel
+    public class DepartmentCardViewModel
     {
+        public String Name { get; set; }
+        public int EmployeesNumber { get; set; }
+        public int PatientsNumber { get; set; }
     }
 }

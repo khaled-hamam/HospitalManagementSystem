@@ -42,6 +42,22 @@
                 </Button>
             </StackPanel>
         </Grid>
+
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Departments}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Components:DepartmentCard />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+
         <Button
             Grid.Row="1"
             HorizontalAlignment="Right"
