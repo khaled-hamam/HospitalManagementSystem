@@ -9,12 +9,14 @@ namespace HospitalManagementSystem.Models
     class Room
     {
         protected string _id;
+        protected string roomNumber;
         protected Dictionary<string, Patient> patients;
         protected Dictionary<string, Nurse> nurses;
         protected int capacity;
         protected double price;
         // getters & setters
         public string Id { get { return this._id; } set { this._id = value; } }
+        public string RoomNumber { get { return this.roomNumber; } set { this.roomNumber = value; } }
         public Dictionary<string, Patient> Patients { get { return this.patients; } set { this.patients = value; } }
         public  Dictionary<string,Nurse> Nurses { get { return this.nurses; } set { this.nurses = value; } }
         public int Capacity { get { return this.capacity; } set { this.capacity = value; } }

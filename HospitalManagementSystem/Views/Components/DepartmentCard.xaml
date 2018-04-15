@@ -1,0 +1,44 @@
+﻿ <UserControl
+        x:Class="HospitalManagementSystem.Views.Components.DepartmentCard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HospitalManagementSystem.Views.Components"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             mc:Ignorable="d"
+             Margin="10"
+             d:DesignHeight="100" d:DesignWidth="410">
+    <Grid>
+
+        <materialDesign:Card 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Background="White" 
+            Height="90" Width="400" Padding="5"
+            Foreground="{StaticResource DarkText}"
+            materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Name="Department" FontSize="24" FontWeight="Bold">Doctors</TextBlock>
+                <Grid Margin="0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Style="{StaticResource InfoTitle}">EmployeesNumber</TextBlock>
+                        <TextBlock Name="EmployeesNumber" Style="{StaticResource InfoValue}"> 7</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Style="{StaticResource InfoTitle}">PatientsNumber</TextBlock>
+                        <TextBlock Name="PatientsNumber" Style="{StaticResource InfoValue}"> 5</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </materialDesign:Card>
+
+    </Grid>
+    </UserControl>

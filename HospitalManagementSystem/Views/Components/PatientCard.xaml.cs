@@ -10,23 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HospitalManagementSystem.Views
+namespace HospitalManagementSystem.Views.Components
 {
     /// <summary>
-    /// Interaction logic for DepartmentsView.xaml
+    /// Interaction logic for PatientCard.xaml
     /// </summary>
-    public partial class DepartmentsView : UserControl
+    public partial class PatientCard : UserControl
     {
-        public DepartmentsView()
+        public PatientCard()
         {
             InitializeComponent();
-        }
-        private void addDepartment(object sender, RoutedEventArgs e)
-        {
-           
         }
     }
 }
