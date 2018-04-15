@@ -5,10 +5,55 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagementSystem.Views"
              xmlns:Components="clr-namespace:HospitalManagementSystem.Views.Components"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="640">
     <Grid Background="{StaticResource GreyBG}">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="20 0 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Margin="8 0 0 0" 
+                         materialDesign:HintAssist.Hint="Type to search" 
+                         materialDesign:HintAssist.HintOpacity="0.4"
+                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
+                         BorderThickness="0"
+                         MinWidth="200" VerticalAlignment="Center"
+                         Foreground="{StaticResource DarkText}"/>
+                <Button Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="1">
+                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                </Button>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" Margin="0 0 20 0">
+                <TextBlock Foreground="{StaticResource LightText}" Margin="0 0 10 0" VerticalAlignment="Center">Filter</TextBlock>
+                <Button Style="{DynamicResource MaterialDesignToolButton}" Padding="0">
+                    <materialDesign:PackIcon Kind="FilterVariant" Foreground="{StaticResource LightText}"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Button
+            Grid.Row="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="0 0 35 20"
+            Background="{StaticResource PrimaryColor}"
+            BorderThickness="0"
+            BorderBrush="Transparent"
+            materialDesign:ShadowAssist.ShadowDepth="Depth1"
+            Style="{StaticResource MaterialDesignFloatingActionButton}"
+            Click="addDepartment">
+            <materialDesign:PackIcon Kind="Plus" Width="40" Height="25"/>
+        </Button>
     </Grid>
 </UserControl>
