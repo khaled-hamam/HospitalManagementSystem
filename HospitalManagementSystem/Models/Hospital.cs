@@ -1,34 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.Models
 {
-    public static class Hospital
+    class Hospital
     {
-        private static Dictionary<string, Employee> employees;
-        private static Dictionary<string, Patient> patients;
-        private static Dictionary<string, Appointment> appointments;
-        private static Dictionary<string, Department> departments;
-        private static Dictionary<string, Room> rooms;
-        // setters & getters
-        static Dictionary<string, Employee> Employees { get { return employees; } }
-        static Dictionary<string, Patient> Patients { get { return patients; } }
-        static Dictionary<string, Appointment> Appointments { get { return appointments; } }
-        static Dictionary<string, Department> Departments { get { return departments; } }
-        static Dictionary<string, Room> Rooms { get { return rooms; } }
+        private static ObservableCollection<Employee> employees;
+        private static ObservableCollection<Patient> patients;
+        private static ObservableCollection<Appointment> appointments;
+        private static ObservableCollection<Department> departments;
+        private static ObservableCollection<Room> rooms;
 
-        // constructors
-        static Hospital()
+        public static ObservableCollection<Employee> Employees { get { return employees; } }
+        public static ObservableCollection<Patient> Patients { get { return patients; } }
+        public static ObservableCollection<Appointment> Appointments { get { return appointments; } }
+        public static ObservableCollection<Department> Departments { get { return departments; } }
+        public static ObservableCollection<Room> Rooms { get { return rooms; } }
+
+        public Hospital()
         {
-            employees = new Dictionary<string, Employee>();
-            patients = new Dictionary<string, Patient>();
-            appointments = new Dictionary<string, Appointment>();
-            departments = new Dictionary<string, Department>();
-            rooms = new Dictionary<string, Room>();
+            employees = new ObservableCollection<Employee>();
+            patients = new ObservableCollection<Patient>();
+            appointments = new ObservableCollection<Appointment>();
+            departments = new ObservableCollection<Department>();
+            rooms = new ObservableCollection<Room>();
         }
-
     }
 }

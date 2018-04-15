@@ -23,18 +23,29 @@ namespace HospitalManagementSystem.Views
     /// </summary>
     public partial class EmployeesView : UserControl
     {
-        private List<Employee> employees;
-        private List<EmployeeCardViewModel> mvs;
+        public EmployeesViewModel ViewModel { get; set; }
 
         public EmployeesView()
         {
+            ViewModel = new EmployeesViewModel();
+            DataContext = ViewModel;
             InitializeComponent();
         }
 
-        private void addEmployee(object sender, RoutedEventArgs e)
+        public void addEmployee(object sender, RoutedEventArgs e)
         {
-            var employeeCard = new EmployeeCard { DataContext = new EmployeeCardViewModel() };
-            employeeList.Children.Add(employeeCard);
+            // TODO: Openning a Message Box with Add
+            // TODO: Add to Hospital Class
+            // TODO: Update DB
+            ViewModel.Employees.Add(
+                new EmployeeCardViewModel
+                {
+                    Name = "Name",
+                    Role = "Role",
+                    Department = "Department",
+                    Salary = "3000.00$"
+                }    
+            );
         }
     }
 }

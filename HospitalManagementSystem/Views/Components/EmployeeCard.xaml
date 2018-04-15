@@ -18,7 +18,7 @@
             Foreground="{StaticResource DarkText}"
             materialDesign:ShadowAssist.ShadowDepth="Depth1">
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Name="employeeName" FontSize="24" FontWeight="Bold">Khaled</TextBlock>
+                <TextBlock Text="{Binding Name}" FontSize="24" FontWeight="Bold"/>
                 <Grid Margin="0 5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -30,15 +30,15 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Column="0">
                         <TextBlock Style="{StaticResource InfoTitle}">Role</TextBlock>
-                        <TextBlock Name="employeeRole" Style="{StaticResource InfoValue}">Doctor</TextBlock>
+                        <TextBlock Text="{Binding Role}" Style="{StaticResource InfoValue}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
                         <TextBlock Style="{StaticResource InfoTitle}">Department</TextBlock>
-                        <TextBlock Name="employeeDepartment" Style="{StaticResource InfoValue}">Orthopeadics</TextBlock>
+                        <TextBlock Text="{Binding Department}" Style="{StaticResource InfoValue}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2">
                         <TextBlock Style="{StaticResource InfoTitle}">Salary</TextBlock>
-                        <TextBlock Name="employeeSalary" Style="{StaticResource InfoValue}">4500.00$</TextBlock>
+                        <TextBlock Text="{Binding Salary}" Style="{StaticResource InfoValue}"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>
