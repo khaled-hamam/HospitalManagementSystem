@@ -1,6 +1,7 @@
 ﻿using HospitalManagementSystem.Models;
 using HospitalManagementSystem.ViewModels;
 using HospitalManagementSystem.Views.Components;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,9 @@ namespace HospitalManagementSystem.Views
                     Salary = "3000.00$"
                 }    
             );
+
+            // Closing the Dialog
+            DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
         }
     }
 }
