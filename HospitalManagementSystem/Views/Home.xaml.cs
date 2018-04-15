@@ -24,11 +24,17 @@ namespace HospitalManagementSystem.Views
         public Home()
         {
             InitializeComponent();
+            DataContext = new EmployeesViewModel();
         }
 
-        private void DepartmentButton_Selected(object sender, RoutedEventArgs e)
+        private void DepartmentButton_Selected(object sender, MouseButtonEventArgs e)
         {
             DataContext = new DepartmentsViewModel();
+        }
+
+        private void navigateToEmployees(object sender, MouseButtonEventArgs e)
+        {
+            DataContext = new EmployeesViewModel();
         }
 
         private void PatientsButton_Selected(object sender, RoutedEventArgs e)
