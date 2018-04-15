@@ -1,34 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.Models
 {
-    public static class Hospital
+    class Hospital
     {
-        private static List<Employee> employees;
-        private static List<Patient> patients;
-        private static List<Appointment> appointments;
-        private static List<Department> departments;
-        private static List<Room> rooms;
-        // setters & getters
-        static List<Employee> Employees { get { return employees; } }
-        static List<Patient> Patients { get { return patients; } }
-        static List<Appointment> Appointments { get { return appointments; } }
-        static List<Department> Departments { get { return departments; } }
-        static List<Room> Rooms { get { return rooms; } }
+        private static ObservableCollection<Employee> employees;
+        private static ObservableCollection<Patient> patients;
+        private static ObservableCollection<Appointment> appointments;
+        private static ObservableCollection<Department> departments;
+        private static ObservableCollection<Room> rooms;
 
-        // constructors
-        static Hospital()
+        public static ObservableCollection<Employee> Employees { get { return employees; } }
+        public static ObservableCollection<Patient> Patients { get { return patients; } }
+        public static ObservableCollection<Appointment> Appointments { get { return appointments; } }
+        public static ObservableCollection<Department> Departments { get { return departments; } }
+        public static ObservableCollection<Room> Rooms { get { return rooms; } }
+
+        public Hospital()
         {
-            employees = new List<Employee>();
-            patients = new List<Patient>();
-            appointments = new List<Appointment>();
-            departments = new List<Department>();
-            rooms = new List<Room>();
+            employees = new ObservableCollection<Employee>();
+            patients = new ObservableCollection<Patient>();
+            appointments = new ObservableCollection<Appointment>();
+            departments = new ObservableCollection<Department>();
+            rooms = new ObservableCollection<Room>();
         }
-
     }
 }
