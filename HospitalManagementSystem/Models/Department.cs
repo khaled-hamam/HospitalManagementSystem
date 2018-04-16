@@ -8,13 +8,14 @@ namespace HospitalManagementSystem.Models
 {
     class Department
     {
-        private String ID;
+        private String id;
         private String name;
         private String headID;
         private Dictionary<string, Doctor> doctors;
         private Dictionary<string, Nurse> nurse;
         private Dictionary<string, Patient> patients;
 
+        public String ID { get { return this.id; } set { this.id = value; } }
         public String Name { get { return this.name; } set { this.name = value; } }
         public String HeadID { get { return this.headID; } set { this.headID = value; } }
         public Dictionary<String, Doctor> Doctors { get { return this.doctors; } set { this.doctors = value; } }
