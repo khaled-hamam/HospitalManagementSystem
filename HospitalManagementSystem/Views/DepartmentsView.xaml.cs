@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HospitalManagementSystem.ViewModels;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,13 +21,28 @@ namespace HospitalManagementSystem.Views
     /// </summary>
     public partial class DepartmentsView : UserControl
     {
+        public DepartmentsViewModel ViewModel { get; set; }
+
         public DepartmentsView()
         {
+            ViewModel = new DepartmentsViewModel();
+            DataContext = ViewModel;
             InitializeComponent();
         }
-        private void addDepartment(object sender, RoutedEventArgs e)
+
+        public void addDepartment(object sender, RoutedEventArgs e)
         {
-           
+            // TODO: Openning a Message Box with Add
+            // TODO: Add to Hospital Class
+            // TODO: Update DB
+            ViewModel.Departments.Add(
+                new DepartmentCardViewModel
+                {
+                    Name = "Name",
+                    EmployeesNumber = 1,
+                    PatientsNumber = 2
+                }
+            );
         }
     }
 }
