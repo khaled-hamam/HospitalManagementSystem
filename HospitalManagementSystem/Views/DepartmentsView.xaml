@@ -45,7 +45,7 @@
         </Grid>
 
         <ScrollViewer Grid.Row="1">
-            <materialDesign:DialogHost Name="addEmployeeDialaog"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <materialDesign:DialogHost Name="addDepartmentDialaog"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
@@ -74,15 +74,15 @@
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding Employees}">
+                    <ItemsControl ItemsSource="{Binding Departments}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Components:EmployeeCard />
+                                <Components:DepartmentCard />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel Name="employeeList" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0" />
+                                <WrapPanel Name="DepartmentList" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
