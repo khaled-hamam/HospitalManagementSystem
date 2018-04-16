@@ -17,7 +17,7 @@ namespace HospitalManagementSystem.Models
 
         public void addRoom(Room room)
         {
-            this.Rooms.Add(room.Id, room);
+            this.Rooms.Add(room.ID, room);
         }
 
         public void removeRoom(String id)
@@ -27,7 +27,7 @@ namespace HospitalManagementSystem.Models
 
         public void addPatient(Patient patient)
         {
-            this.Patients.Add(patient.Id, patient);
+            this.Patients.Add(patient.ID, patient);
         }
 
         public void removePatient(String id)

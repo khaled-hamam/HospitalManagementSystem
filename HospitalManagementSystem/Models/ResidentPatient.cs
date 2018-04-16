@@ -31,7 +31,7 @@ namespace HospitalManagementSystem.Models
         // member methods
         public void addMedicine(Medicine medicine)
         {
-            this.history.Add(medicine.Id,medicine);
+            this.history.Add(medicine.ID,medicine);
         }
         public override double getBill()
         {

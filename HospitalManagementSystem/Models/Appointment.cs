@@ -14,7 +14,7 @@ namespace HospitalManagementSystem.Models
         private DateTime date;
         private int duration;
         // getters & setters
-        public String Id { get { return this.id; } set { this.id = value; } }
+        public String ID { get { return this.id; } set { this.id = value; } }
         public Doctor Doctor { get { return this.doctor; } set { this.doctor = value; } }
         public AppointmentPatient Patient { get { return this.patient; } set { this.patient = value; } }
         public DateTime Date { get { return this.date; } set { this.date = value; } }
@@ -22,7 +22,7 @@ namespace HospitalManagementSystem.Models
         // constructors
         public Appointment()
         {
-            this.Id = Guid.NewGuid().ToString();
+            this.ID = Guid.NewGuid().ToString();
             this.Doctor = new Doctor();
             this.Patient = new AppointmentPatient();
             this.Date = new DateTime();
@@ -31,7 +31,7 @@ namespace HospitalManagementSystem.Models
 
         public Appointment(Doctor doctor, AppointmentPatient patient, DateTime date, int duration)
         {
-            this.Id = Guid.NewGuid().ToString();
+            this.ID = Guid.NewGuid().ToString();
             this.Doctor = doctor;
             this.Patient = patient;
             this.Date = date;
@@ -40,8 +40,8 @@ namespace HospitalManagementSystem.Models
 
         public void cancel()
         {
-            this.Doctor.removeAppointment(this.Id);
-            this.Patient.removeAppointment(this.Id);
+            this.Doctor.removeAppointment(this.ID);
+            this.Patient.removeAppointment(this.ID);
         }
     }
 }

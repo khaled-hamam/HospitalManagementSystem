@@ -32,7 +32,7 @@ namespace HospitalManagementSystem.Models
 
         public void addPatient(Patient patient)
         {
-            this.Patients.Add(patient.Id, patient);
+            this.Patients.Add(patient.ID, patient);
         }
 
         public void removePatient(String id)
@@ -42,7 +42,7 @@ namespace HospitalManagementSystem.Models
 
         public void addAppointment(Appointment appointment)
         {
-            this.Appointments.Add(appointment.Id, appointment);
+            this.Appointments.Add(appointment.ID, appointment);
         }
 
         public void removeAppointment(String id)

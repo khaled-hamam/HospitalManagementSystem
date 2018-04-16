@@ -27,7 +27,7 @@ namespace HospitalManagementSystem.Models
         // member methods
         public void assignDoctor(Doctor doctor)
         {
-            this.Doctors.Add(doctor.Id,doctor);
+            this.Doctors.Add(doctor.ID,doctor);
         }
         public void removeDoctor(String id)
         {
