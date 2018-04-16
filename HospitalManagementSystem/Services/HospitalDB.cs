@@ -249,7 +249,7 @@ namespace HospitalManagementSystem.Services
             }
             catch
             {
-                Console.WriteLine("Error Occured Fetching Nurses.");
+                Console.WriteLine("Error Occured Fetching Medicine.");
             }
             finally
             {
