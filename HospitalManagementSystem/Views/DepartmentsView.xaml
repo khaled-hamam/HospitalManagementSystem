@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:HospitalManagementSystem.Views"
              xmlns:Components="clr-namespace:HospitalManagementSystem.Views.Components"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="640">
     <Grid Background="{StaticResource GreyBG}">
@@ -44,32 +45,60 @@
         </Grid>
 
         <ScrollViewer Grid.Row="1">
-            <ItemsControl ItemsSource="{Binding Departments}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Components:DepartmentCard />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+            <materialDesign:DialogHost Name="addEmployeeDialaog"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel>
+                        <StackPanel Margin="16">
+                            <!-- CONTENT -->
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsDefault="True"
+                                    Margin="0 8 8 0"
+                                    Click="addDepartment">
+                                <Button.CommandParameter>
+                                    <system:Boolean>True</system:Boolean>
+                                </Button.CommandParameter>
+                                ADD
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsCancel="True"
+                                        Margin="0 8 0 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    <system:Boolean>False</system:Boolean>
+                                </Button.CommandParameter>
+                                CANCEL
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+                <Grid>
+                    <ItemsControl ItemsSource="{Binding Employees}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Components:EmployeeCard />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Name="employeeList" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <Button 
+                        Margin="0 0 35 20"
+                        Background="{StaticResource PrimaryColor}"
+                        BorderThickness="0"
+                        BorderBrush="Transparent"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"                              
+                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <materialDesign:PackIcon Kind="Plus" />
+                    </Button>
+                </Grid>
+            </materialDesign:DialogHost>
         </ScrollViewer>
-
-        <Button
-            Grid.Row="1"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Margin="0 0 35 20"
-            Background="{StaticResource PrimaryColor}"
-            BorderThickness="0"
-            BorderBrush="Transparent"
-            materialDesign:ShadowAssist.ShadowDepth="Depth1"
-            Style="{StaticResource MaterialDesignFloatingActionButton}"
-            Click="addDepartment">
-            <materialDesign:PackIcon Kind="Plus" Width="40" Height="25"/>
-        </Button>
     </Grid>
 </UserControl>
