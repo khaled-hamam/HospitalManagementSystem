@@ -21,6 +21,9 @@
         <DataTemplate x:Name="AppointmentsView" DataType="{x:Type viewmodels:AppointmentsViewModel}">
             <views:AppointmentsView DataContext="{Binding}"/>
         </DataTemplate>
+        <DataTemplate x:Name="RoomsView" DataType="{x:Type viewmodels:RoomsViewModel}">
+            <views:RoomsView DataContext="{Binding}"/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -42,7 +45,7 @@
                 <ListViewItem x:Name="DepartmentButton" Style="{StaticResource NavButton}" MouseUp="navigateToDepartments">
                     Departments
                 </ListViewItem>
-                <ListViewItem Style="{StaticResource NavButton}">
+                <ListViewItem Style="{StaticResource NavButton}" MouseUp="navigateToRooms">
                     Rooms
                 </ListViewItem>
                 <ListViewItem x:Name="PatientsButton" Style="{StaticResource NavButton}" Selected="navigateToPatients">

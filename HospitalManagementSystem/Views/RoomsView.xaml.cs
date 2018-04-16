@@ -1,6 +1,7 @@
-﻿using System;
+﻿using HospitalManagementSystem.ViewModels;
+using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
-using HospitalManagementSystem.ViewModels;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,39 +14,39 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
 
 namespace HospitalManagementSystem.Views
 {
     /// <summary>
-    /// Interaction logic for DepartmentsView.xaml
+    /// Interaction logic for RoomsView.xaml
     /// </summary>
-    public partial class DepartmentsView : UserControl
+    public partial class RoomsView : UserControl
     {
-        public DepartmentsViewModel ViewModel { get; set; }
+        public RoomsViewModel ViewModel { get; set; }
 
-        public DepartmentsView()
+        public RoomsView()
         {
-            ViewModel = new DepartmentsViewModel();
+            ViewModel = new RoomsViewModel();
             DataContext = ViewModel;
             InitializeComponent();
         }
 
-        public void addDepartment(object sender, RoutedEventArgs e)
+        public void addRoom(object sender, RoutedEventArgs e)
         {
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-            ViewModel.Departments.Add(
-                new DepartmentCardViewModel
+            ViewModel.Rooms.Add(
+                new RoomCardViewModel
                 {
-                    Name = "Name",
-                    EmployeesNumber = 1,
-                    PatientsNumber = 2
+                    RoomNumber  = "RoomNumber",
+                    Type = "Type",
+                    Capacity = "Capcaity",
                 }
             );
+
             // Closing the Dialog
-            DialogHost.CloseDialogCommand.Execute(addDepartmentDialaog, null);
+            DialogHost.CloseDialogCommand.Execute(addRoomDialaog, null);
         }
     }
 }

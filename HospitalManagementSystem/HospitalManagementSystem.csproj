@@ -73,6 +73,8 @@
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\PatientCardViewModel.cs" />
     <Compile Include="ViewModels\PatientsViewModel.cs" />
+    <Compile Include="ViewModels\RoomCardViewModel.cs" />
+    <Compile Include="ViewModels\RoomsViewModel.cs" />
     <Compile Include="Views\AppointmentsView.xaml.cs">
       <DependentUpon>AppointmentsView.xaml</DependentUpon>
     </Compile>
@@ -84,6 +86,12 @@
     </Compile>
     <Compile Include="Views\Components\PatientCard.xaml.cs">
       <DependentUpon>PatientCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\RoomCard.xaml.cs">
+      <DependentUpon>RoomCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RoomsView.xaml.cs">
+      <DependentUpon>RoomsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeesView.xaml.cs">
       <DependentUpon>EmployeesView.xaml</DependentUpon>
@@ -104,6 +112,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\PatientCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\RoomCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RoomsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

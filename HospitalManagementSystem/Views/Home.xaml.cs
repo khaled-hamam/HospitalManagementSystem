@@ -40,9 +40,15 @@ namespace HospitalManagementSystem.Views
         {
             DataContext = new PatientsViewModel();
         }
+
         private void navigateToAppointments(object sender, RoutedEventArgs e)
         {   
             DataContext = new AppointmentsViewModel();
+        }
+
+        private void navigateToRooms(object sender, RoutedEventArgs e)
+        {
+            DataContext = new RoomsViewModel();
         }
     }
 }
