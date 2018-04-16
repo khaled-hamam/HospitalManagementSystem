@@ -58,7 +58,7 @@
                                 <Button.CommandParameter>
                                     <system:Boolean>True</system:Boolean>
                                 </Button.CommandParameter>
-                                ACCEPT
+                                ADD
                             </Button>
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                         IsCancel="True"
