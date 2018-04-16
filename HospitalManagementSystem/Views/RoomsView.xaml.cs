@@ -18,30 +18,35 @@ using System.Windows.Shapes;
 namespace HospitalManagementSystem.Views
 {
     /// <summary>
-    /// Interaction logic for PatientsView.xaml
+    /// Interaction logic for RoomsView.xaml
     /// </summary>
-    public partial class PatientsView : UserControl
+    public partial class RoomsView : UserControl
     {
-        public PatientsViewModel ViewModel { get; set; }
+        public RoomsViewModel ViewModel { get; set; }
 
-        public PatientsView()
+        public RoomsView()
         {
-            ViewModel = new PatientsViewModel();
+            ViewModel = new RoomsViewModel();
             DataContext = ViewModel;
             InitializeComponent();
         }
-        public void addPatient(object sender, RoutedEventArgs e)
+
+        public void addRoom(object sender, RoutedEventArgs e)
         {
-            ViewModel.Patients.Add(
-                new PatientCardViewModel
+            // TODO: Openning a Message Box with Add
+            // TODO: Add to Hospital Class
+            // TODO: Update DB
+            ViewModel.Rooms.Add(
+                new RoomCardViewModel
                 {
-                    Name = "Name",
-                    Type = "resident",
-                    ShortDiagnosis = "fever2"
+                    RoomNumber  = "RoomNumber",
+                    Type = "Type",
+                    Capacity = "Capcaity",
                 }
             );
+
             // Closing the Dialog
-            DialogHost.CloseDialogCommand.Execute(addPatientDialaog, null);
+            DialogHost.CloseDialogCommand.Execute(addRoomDialaog, null);
         }
     }
 }

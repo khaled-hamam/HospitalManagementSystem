@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 
 namespace HospitalManagementSystem.Views
 {
@@ -43,6 +44,8 @@ namespace HospitalManagementSystem.Views
                     PatientsNumber = 2
                 }
             );
+            // Closing the Dialog
+            DialogHost.CloseDialogCommand.Execute(addDepartmentDialaog, null);
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="HospitalManagementSystem.Views.PatientsView"
+﻿<UserControl x:Class="HospitalManagementSystem.Views.RoomsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagementSystem.Views"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:Components="clr-namespace:HospitalManagementSystem.Views.Components"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="640">
@@ -44,7 +44,7 @@
             </StackPanel>
         </Grid>
         <ScrollViewer Grid.Row="1">
-            <materialDesign:DialogHost Name="addPatientDialaog"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <materialDesign:DialogHost Name="addRoomDialaog"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
@@ -54,7 +54,7 @@
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"
-                                    Click="addPatient">
+                                    Click="addRoom">
                                 <Button.CommandParameter>
                                     <system:Boolean>True</system:Boolean>
                                 </Button.CommandParameter>
@@ -73,15 +73,15 @@
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding Patients}">
+                    <ItemsControl ItemsSource="{Binding Rooms}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Components:PatientCard />
+                                <Components:RoomCard />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel Name="patientList" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0" />
+                                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -93,7 +93,7 @@
                         materialDesign:ShadowAssist.ShadowDepth="Depth1"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                              
                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                        VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right" >
                         <materialDesign:PackIcon Kind="Plus" />
                     </Button>
                 </Grid>
