@@ -8,47 +8,50 @@ namespace HospitalManagementSystem.Models
 {
     class Department
     {
-        private string name;
-        private string headId;
-        private Dictionary<string, Doctor> doctors;
-        private Dictionary<string, Nurse> nurse;
-        private Dictionary<string, Patient> patients;
-        // getters & setters
-        public string Name { get { return this.name; } set { this.name = value; } }
-        public string HeadId { get { return this.headId; } set { this.headId = value; } }
-        public Dictionary<string, Doctor> Doctors { get { return this.doctors; } set { this.doctors = value; } }
-        public Dictionary<string, Nurse> Nurse { get { return this.nurse; } set { this.nurse = value; } }
-        public Dictionary<string, Patient> Patients { get { return this.patients; } set { this.patients = value; } }
-        // constructors
+        private String name;
+        private String id;
+        private String headId;
+        private Dictionary<String, Doctor> doctors;
+        private Dictionary<String, Nurse> nurse;
+        private Dictionary<String, Patient> patients;
+
+        public String Name { get { return this.name; } set { this.name = value; } }
+        public String ID { get { return this.id; } set { this.id = value; } }
+        public String HeadId { get { return this.headId; } set { this.headId = value; } }
+        public Dictionary<String, Doctor> Doctors { get { return this.doctors; } set { this.doctors = value; } }
+        public Dictionary<String, Nurse> Nurse { get { return this.nurse; } set { this.nurse = value; } }
+        public Dictionary<String, Patient> Patients { get { return this.patients; } set { this.patients = value; } }
+
         public Department()
         {
+            this.ID = Guid.NewGuid().ToString();
             this.Name = "";
             this.HeadId = "";
-            this.Doctors = new Dictionary<string, Doctor>();
-            this.Nurse = new Dictionary<string, Nurse>();
-            this.Patients = new Dictionary<string, Patient>();
+            this.Doctors = new Dictionary<String, Doctor>();
+            this.Nurse = new Dictionary<String, Nurse>();
+            this.Patients = new Dictionary<String, Patient>();
         }
-        public void addDoctor(string id,Doctor doctor)
+        public void addDoctor(String id,Doctor doctor)
         {
             this.Doctors.Add(id, doctor);
         }
-        public void removeDoctor(string doctorID)
+        public void removeDoctor(String doctorID)
         {
             this.Doctors.Remove(doctorID);
         }
-        public void addNurse(string id, Nurse nurse)
+        public void addNurse(String id, Nurse nurse)
         {
             this.Nurse.Add(id, nurse);
         }
-        public void removeNurse(string nurseID)
+        public void removeNurse(String nurseID)
         {
             this.Nurse.Remove(nurseID);
         }
-        public void addPatient(string id, Patient patient)
+        public void addPatient(String id, Patient patient)
         {
             this.Patients.Add(id,patient);
         }
-        public void removePatient(string patientID)
+        public void removePatient(String patientID)
         {
             this.Patients.Remove(patientID);
         }
