@@ -27,7 +27,7 @@ namespace HospitalManagementSystem.Views
             DataContext = new EmployeesViewModel();
         }
 
-        private void DepartmentButton_Selected(object sender, MouseButtonEventArgs e)
+        private void navigateToDepartments(object sender, MouseButtonEventArgs e)
         {
             DataContext = new DepartmentsViewModel();
         }
@@ -36,10 +36,13 @@ namespace HospitalManagementSystem.Views
         {
             DataContext = new EmployeesViewModel();
         }
-
-        private void PatientsButton_Selected(object sender, RoutedEventArgs e)
+        private void navigateToPatients(object sender, RoutedEventArgs e)
         {
-            DataContext = new PatientsViewModel();
+            DataContext = new PatientViewModel();
+        }
+        private void navigateToAppointments(object sender, RoutedEventArgs e)
+        {   
+            DataContext = new AppointmentsViewModel();
         }
     }
 }

@@ -12,11 +12,14 @@
         <DataTemplate x:Name="EmployeesView" DataType="{x:Type viewmodels:EmployeesViewModel}">
             <views:EmployeesView DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="PatientsView" DataType="{x:Type viewmodels:PatientsViewModel}">
+        <DataTemplate x:Name="PatientsView" DataType="{x:Type viewmodels:PatientViewModel}">
             <views:PatientsView DataContext="{Binding}"/>
         </DataTemplate>
         <DataTemplate x:Name="DepartmentsView" DataType="{x:Type viewmodels:DepartmentsViewModel}">
             <views:DepartmentsView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="AppointmentsView" DataType="{x:Type viewmodels:AppointmentsViewModel}">
+            <views:AppointmentsView DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -36,16 +39,16 @@
                 <ListViewItem Style="{StaticResource NavButton}" IsSelected="True" MouseUp="navigateToEmployees">
                     Employees
                 </ListViewItem>
-                <ListViewItem x:Name="DepartmentButton" Style="{StaticResource NavButton}" MouseUp="DepartmentButton_Selected">
+                <ListViewItem x:Name="DepartmentButton" Style="{StaticResource NavButton}" MouseUp="navigateToDepartments">
                     Departments
                 </ListViewItem>
                 <ListViewItem Style="{StaticResource NavButton}">
                     Rooms
                 </ListViewItem>
-                <ListViewItem x:Name="PatientsButton" Style="{StaticResource NavButton}" Selected="PatientsButton_Selected">
+                <ListViewItem x:Name="PatientsButton" Style="{StaticResource NavButton}" Selected="navigateToPatients">
                     Patients
                 </ListViewItem>
-                <ListViewItem Style="{StaticResource NavButton}">
+                <ListViewItem x:Name="AppointmentsButton" Style="{StaticResource NavButton}" Selected="navigateToAppointments">
                     Appointments
                 </ListViewItem>
             </ListView>
