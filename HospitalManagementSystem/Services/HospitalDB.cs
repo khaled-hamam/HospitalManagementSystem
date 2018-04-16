@@ -187,6 +187,44 @@ namespace HospitalManagementSystem.Services
             return employees;
         }
 
+        public static List<ResidentPatient> FetchResidentPatients()
+        {
+            List<ResidentPatient> patients = new List<ResidentPatient>();
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = "SELECT * FROM residentPatients";
+                MySqlCommand command = new MySqlCommand(query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    patients.Add(new ResidentPatient
+                    {
+                        ID = reader.GetString("patient_id"),
+                        Name = reader.GetString("name"),
+                        // TODO: add BirthDate
+                        Address = reader.GetString("address"),
+                        Diagnosis = reader.GetString("diagnosis"),
+                        // TODO: add Room
+                        // TODO: add Department
+                        Duration = reader.GetInt32("duration")
+                    });
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Resident Patients.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return patients;
+        }
+
         public static List<Medicine> FetchMedicine()
         {
             MySqlConnection con = InitConnection();
@@ -220,6 +258,5 @@ namespace HospitalManagementSystem.Services
 
             return medicine;
         }
- 
     }
 }
