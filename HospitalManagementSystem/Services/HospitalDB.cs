@@ -58,7 +58,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = "SELECT * FROM department";
+                String query = "SELECT * FROM room";
                 MySqlCommand command = new MySqlCommand(query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
@@ -94,5 +94,132 @@ namespace HospitalManagementSystem.Services
 
             return rooms;
         }
+
+        public static List<Doctor> FetchDoctors()
+        {
+            MySqlConnection con = InitConnection();
+            List<Doctor> doctors = new List<Doctor>();
+            try
+            {
+                con.Open();
+                String query = "SELECT * FROM doctor";
+                MySqlCommand command = new MySqlCommand(query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    doctors.Add(new Doctor
+                    {
+                        ID = reader.GetString("doctor_id"),
+                        Name = reader.GetString("name"),
+                        // TODO: add BirthDate
+                        Address = reader.GetString("address"),
+                        // TODO: add EmploymentDate
+                        // TODO: add Department
+                        Salary = reader.GetFloat("salary"),
+                        IsHead = reader.GetBoolean("is_head")
+                    });
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Doctors.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return doctors;
+        }
+
+        public static List<Nurse> FetchNurses()
+        {
+            MySqlConnection con = InitConnection();
+            List<Nurse> nurses = new List<Nurse>();
+            try
+            {
+                con.Open();
+                String query = "SELECT * FROM nurse";
+                MySqlCommand command = new MySqlCommand(query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    nurses.Add(new Nurse
+                    {
+                        ID = reader.GetString("nurse_id"),
+                        Name = reader.GetString("name"),
+                        // TODO: add BirthDate
+                        Address = reader.GetString("address"),
+                        // TODO: add EmploymentDate
+                        // TODO: add Department
+                        Salary = reader.GetFloat("salary")
+                    });
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Nurses.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return nurses;
+        }
+
+        public static Dictionary<String, Employee> FetchEmployees()
+        {
+            Dictionary<String, Employee> employees = new Dictionary<string, Employee>();
+
+            List<Doctor> doctors = FetchDoctors();
+            foreach (Doctor doctor in doctors)
+            {
+                employees.Add(doctor.ID, doctor);
+            }
+
+            List<Nurse> nurses = FetchNurses();
+            foreach (Nurse nurse in nurses)
+            {
+                employees.Add(nurse.ID, nurse);
+            }
+
+            return employees;
+        }
+
+        public static List<Medicine> FetchMedicine()
+        {
+            MySqlConnection con = InitConnection();
+            List<Medicine> medicine = new List<Medicine>();
+            try
+            {
+                con.Open();
+                String query = "SELECT * from medicine";
+                MySqlCommand command = new MySqlCommand(query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    medicine.Add(new Medicine
+                    {
+                        ID = reader.GetString("medicine_id"),
+                        Name = reader.GetString("name"),
+                        // TODO: add Starting Date
+                        // TODO: add Ending Date
+                        // TODO: add Patient
+                    });
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Nurses.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return medicine;
+        }
+ 
     }
 }
