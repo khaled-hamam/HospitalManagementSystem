@@ -303,5 +303,40 @@ namespace HospitalManagementSystem.Services
 
             return medicine;
         }
+
+        public static List<Appointment> FetchAppointments()
+        {
+            List<Appointment> appointments = new List<Appointment>();
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = "SELECT * FROM patient join appointment USING(patient_id)";
+                MySqlCommand command = new MySqlCommand(query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    appointments.Add(new Appointment
+                    {
+                        ID = reader.GetString("appointment_id"),
+                        // TODO: add Date
+                        // TODO: add Patient
+                        // TODO: add Doctor
+                        Duration = reader.GetInt32("duration")
+                    });
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Appointments.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return appointments;
+        }
     }
 }
