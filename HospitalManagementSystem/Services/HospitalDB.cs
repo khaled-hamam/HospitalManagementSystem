@@ -225,6 +225,51 @@ namespace HospitalManagementSystem.Services
             return patients;
         }
 
+        public static List<AppointmentPatient> FetchAppointmentPatients()
+        {
+            List<AppointmentPatient> patients = new List<AppointmentPatient>();
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = "SELECT * FROM patient join appointment USING(patient_id)";
+                MySqlCommand command = new MySqlCommand(query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    patients.Add(new AppointmentPatient
+                    {
+                        ID = reader.GetString("patient_id"),
+                        Name = reader.GetString("name"),
+                        // TODO: add BirthDate
+                        Address = reader.GetString("address"),
+                        Diagnosis = reader.GetString("diagnosis"),
+                        // TODO: add Appointment
+                    });
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Appointment Patients.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return patients;
+        }
+
+        public static List<Patient> FetchPatients()
+        {
+            List<Patient> patients = new List<Patient>();
+            patients.AddRange(FetchResidentPatients());
+            patients.AddRange(FetchAppointmentPatients());
+
+            return patients;
+        }
+
         public static List<Medicine> FetchMedicine()
         {
             MySqlConnection con = InitConnection();
