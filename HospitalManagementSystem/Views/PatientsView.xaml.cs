@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HospitalManagementSystem.ViewModels;
+using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +22,26 @@ namespace HospitalManagementSystem.Views
     /// </summary>
     public partial class PatientsView : UserControl
     {
+        public PatientsViewModel ViewModel { get; set; }
+
         public PatientsView()
         {
+            ViewModel = new PatientsViewModel();
+            DataContext = ViewModel;
             InitializeComponent();
         }
-        private void addPatient(object sender, RoutedEventArgs e)
+        public void addPatient(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.Patients.Add(
+                new PatientCardViewModel
+                {
+                    Name = "Name",
+                    Type = "resident",
+                    ShortDiagnosis = "fever2"
+                }
+            );
+            // Closing the Dialog
+            DialogHost.CloseDialogCommand.Execute(addPatientDialaog, null);
         }
     }
 }
