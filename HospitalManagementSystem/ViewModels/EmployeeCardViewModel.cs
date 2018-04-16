@@ -1,13 +1,8 @@
-﻿using HospitalManagementSystem.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace HospitalManagementSystem.ViewModels
 {
-    public class EmployeeCardViewModel
+    public class EmployeeCardViewModel : BaseViewModel
     {
         public String Name { get; set; }
         public String Role { get; set; }
