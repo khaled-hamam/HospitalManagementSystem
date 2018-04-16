@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.ViewModels
 {
-    public class PatientViewModel : BaseViewModel
+    public class PatientsViewModel : BaseViewModel
     {
         public ObservableCollection<PatientCardViewModel> Patients { get; set; }
-
-        public PatientViewModel()
+        public PatientsViewModel()
         {
             Patients = new ObservableCollection<PatientCardViewModel>();
             foreach (Patient patient in Hospital.Patients)

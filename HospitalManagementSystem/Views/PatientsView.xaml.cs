@@ -22,11 +22,11 @@ namespace HospitalManagementSystem.Views
     /// </summary>
     public partial class PatientsView : UserControl
     {
-        public PatientViewModel ViewModel { get; set; }
+        public PatientsViewModel ViewModel { get; set; }
 
         public PatientsView()
         {
-            ViewModel = new PatientViewModel();
+            ViewModel = new PatientsViewModel();
             DataContext = ViewModel;
             InitializeComponent();
         }

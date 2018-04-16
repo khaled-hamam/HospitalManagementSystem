@@ -12,7 +12,7 @@
         <DataTemplate x:Name="EmployeesView" DataType="{x:Type viewmodels:EmployeesViewModel}">
             <views:EmployeesView DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="PatientsView" DataType="{x:Type viewmodels:PatientViewModel}">
+        <DataTemplate x:Name="PatientsView" DataType="{x:Type viewmodels:PatientsViewModel}">
             <views:PatientsView DataContext="{Binding}"/>
         </DataTemplate>
         <DataTemplate x:Name="DepartmentsView" DataType="{x:Type viewmodels:DepartmentsViewModel}">
