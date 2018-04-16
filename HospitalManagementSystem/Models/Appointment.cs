@@ -8,13 +8,13 @@ namespace HospitalManagementSystem.Models
 {
     class Appointment
     {
-        private string id;
+        private String id;
         private Doctor doctor;
         private AppointmentPatient patient;
         private DateTime date;
         private int duration;
         // getters & setters
-        public string Id { get { return this.id; } set { this.id = value; } }
+        public String Id { get { return this.id; } set { this.id = value; } }
         public Doctor Doctor { get { return this.doctor; } set { this.doctor = value; } }
         public AppointmentPatient Patient { get { return this.patient; } set { this.patient = value; } }
         public DateTime Date { get { return this.date; } set { this.date = value; } }

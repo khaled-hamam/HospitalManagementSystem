@@ -9,43 +9,43 @@ namespace HospitalManagementSystem.Models
     class Doctor : Employee
     {
         private bool isHead;
-        private Dictionary<string, Patient> patients;
-        private Dictionary<string, Appointment> appointments;
+        private Dictionary<String, Patient> patients;
+        private Dictionary<String, Appointment> appointments;
 
         public bool IsHead { get { return this.isHead; } set { this.isHead = value;} }
-        public Dictionary<string, Patient> Patients { get { return this.patients; } set { this.patients = value;} }
-        public Dictionary<string, Appointment> Appointments { get { return this.appointments; } set { this.appointments = value;} }
+        public Dictionary<String, Patient> Patients { get { return this.patients; } set { this.patients = value;} }
+        public Dictionary<String, Appointment> Appointments { get { return this.appointments; } set { this.appointments = value;} }
 
         public Doctor()
         {
             this.IsHead = false;
-            this.Patients = new Dictionary<string, Patient>();
-            this.Appointments = new Dictionary<string, Appointment>();
+            this.Patients = new Dictionary<String, Patient>();
+            this.Appointments = new Dictionary<String, Appointment>();
         }
 
         public Doctor(bool ishead, double salary, Department department) : base(salary, department)
         {
             this.IsHead = ishead;
-            this.Patients = new Dictionary<string, Patient>();
-            this.Appointments = new Dictionary<string, Appointment>();
+            this.Patients = new Dictionary<String, Patient>();
+            this.Appointments = new Dictionary<String, Appointment>();
         }
 
-        public void addPatient(string id, Patient patient)
+        public void addPatient(Patient patient)
         {
-            this.Patients.Add(id, patient);
+            this.Patients.Add(patient.Id, patient);
         }
 
-        public void removePatient(string id)
+        public void removePatient(String id)
         {
             this.Patients.Remove(id);
         }
 
-        public void addAppointment(string id, Appointment appointment)
+        public void addAppointment(Appointment appointment)
         {
-            this.Appointments.Add(id, appointment);
+            this.Appointments.Add(appointment.Id, appointment);
         }
 
-        public void removeAppointment(string id)
+        public void removeAppointment(String id)
         {
             this.Appointments.Remove(id);
         }

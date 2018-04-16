@@ -9,23 +9,23 @@ namespace HospitalManagementSystem.Models
     class AppointmentPatient : Patient
     {
         // member variables
-        private Dictionary<string, Appointment> appointments;
-        public Dictionary<string, Appointment> Appointments { get { return this.appointments; } set { this.appointments = value; } }
+        private Dictionary<String, Appointment> appointments;
+        public Dictionary<String, Appointment> Appointments { get { return this.appointments; } set { this.appointments = value; } }
         //constructors
         public AppointmentPatient() : base()
         {
-            this.Appointments = new Dictionary<string, Appointment>();
+            this.Appointments = new Dictionary<String, Appointment>();
         }
-        public AppointmentPatient(string name, DateTime birthDate, string address, string diagnosis) : base( name, birthDate, address, diagnosis)
+        public AppointmentPatient(String name, DateTime birthDate, String address, String diagnosis) : base( name, birthDate, address, diagnosis)
         {
-            this.Appointments = new Dictionary<string, Appointment>();
+            this.Appointments = new Dictionary<String, Appointment>();
         }
         // member methods
-        public void addAppointment(string id, Appointment appointment)
+        public void addAppointment( Appointment appointment)
         {
-            this.Appointments.Add(id, appointment);
+            this.Appointments.Add(appointment.Id, appointment);
         }
-        public void removeAppointment(string id)
+        public void removeAppointment(String id)
         {
             this.Appointments.Remove(id);
         }
@@ -34,7 +34,7 @@ namespace HospitalManagementSystem.Models
             int duration = 0;
             for (int i = 0; i < appointments.Count; i++)
             {
-                string j = i.ToString();
+                String j = i.ToString();
                 duration += this.Appointments[j].Duration;
             }
             float bill = duration + (float)(duration * 0.5);

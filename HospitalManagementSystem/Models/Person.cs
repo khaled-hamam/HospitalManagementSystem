@@ -9,15 +9,15 @@ namespace HospitalManagementSystem.Models
    abstract class Person
     {
         // member variables
-        protected string _id;
-        protected string name;
+        protected String _id;
+        protected String name;
         protected DateTime birthDate;
-        protected string address;
+        protected String address;
 
-        public string Name{ get{ return this.name;} set { this.name = value;}}
-        public string Id { get { return this._id; } set { this._id = value; } }
+        public String Name { get{ return this.name;} set { this.name = value;}}
+        public String Id { get { return this._id; } set { this._id = value; } }
         public DateTime BirthDate { get { return this.birthDate; } set { this.birthDate = value; } }
-        public string Address { get { return this.address; } set { this.address = value; } }
+        public String Address { get { return this.address; } set { this.address = value; } }
         public int Year { get; }
         public int Age {
             get
@@ -32,7 +32,7 @@ namespace HospitalManagementSystem.Models
             this.Name = "";
             this.Address = "";
         }
-        public Person(string name, DateTime birthDate, string Address)
+        public Person(String name, DateTime birthDate, String Address)
         {
             this.Id = Guid.NewGuid().ToString();
             this.Name = name;
