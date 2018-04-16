@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HospitalManagementSystem.Models;
+using System.Collections.ObjectModel;
 
 namespace HospitalManagementSystem.ViewModels
 {
-    class AppointmentsViewModel : BaseViewModel
+    public class AppointmentsViewModel : BaseViewModel
     {
+        public ObservableCollection<AppointmentCardViewModel> Appointments { get; set; }
+
+        public AppointmentsViewModel()
+        {
+            Appointments = new ObservableCollection<AppointmentCardViewModel>();
+            foreach (Appointment appointment in Hospital.Appointments)
+            {
+                Appointments.Add(
+                    new AppointmentCardViewModel
+                    {
+                        PatientName = appointment.Patient.Name,
+                        DoctorName = appointment.Doctor.Name,
+                        Duration = appointment.Duration.ToString(),
+                        AppointmentDate = appointment.Date.ToString()
+                    }
+                );
+            }
+        }
     }
 }
