@@ -65,6 +65,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\AppointmentCardViewModel.cs" />
     <Compile Include="ViewModels\AppointmentsViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DepartmentCardViewModel.cs" />
@@ -77,6 +78,9 @@
     <Compile Include="ViewModels\RoomsViewModel.cs" />
     <Compile Include="Views\AppointmentsView.xaml.cs">
       <DependentUpon>AppointmentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\AppointmentCard.xaml.cs">
+      <DependentUpon>AppointmentCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\DepartmentCard.xaml.cs">
       <DependentUpon>DepartmentCard.xaml</DependentUpon>
@@ -100,6 +104,10 @@
       <DependentUpon>PatientsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AppointmentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\AppointmentCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

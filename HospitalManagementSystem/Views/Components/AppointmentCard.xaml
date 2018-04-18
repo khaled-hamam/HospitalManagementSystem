@@ -1,0 +1,47 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HospitalManagementSystem.Views.Components"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             x:Class="HospitalManagementSystem.Views.Components.AppointmentCard"
+             mc:Ignorable="d"
+             Margin="10"
+             d:DesignHeight="100" d:DesignWidth="410">
+    <Grid>
+        <materialDesign:Card
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Background="White" 
+            Height="90" Width="400" Padding="5"
+            Foreground="{StaticResource DarkText}"
+            materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="{Binding AppointmentDate}" FontSize="20" FontWeight="Bold">Appointment Date</TextBlock>
+                <Grid Margin="0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Style="{StaticResource InfoTitle}">Patient Name</TextBlock>
+                        <TextBlock Text="{Binding PatientName}" Style="{StaticResource InfoValue}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Style="{StaticResource InfoTitle}">Doctor Name</TextBlock>
+                        <TextBlock Text="{Binding DoctorName}" Style="{StaticResource InfoValue}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Style="{StaticResource InfoTitle}">Duration</TextBlock>
+                        <TextBlock Text="{Binding Duration}" Style="{StaticResource InfoValue}"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
