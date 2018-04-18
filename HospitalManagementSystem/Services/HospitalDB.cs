@@ -18,10 +18,10 @@ namespace HospitalManagementSystem.Services
             return new MySqlConnection(connectionString);
         }
 
-        public static Dictionary<String, Department> FetchDepartments()
+        public static List<Department> FetchDepartments()
         {
             MySqlConnection con = InitConnection();
-            Dictionary<String, Department> departments = new Dictionary<String, Department>();
+            List<Department> departments = new List<Department>();
             try
             {
                 con.Open();
@@ -30,7 +30,7 @@ namespace HospitalManagementSystem.Services
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    departments.Add(reader.GetString("department_id"), 
+                    departments.Add(
                         new Department
                         {
                             ID = reader.GetString("department_id"),
@@ -51,10 +51,10 @@ namespace HospitalManagementSystem.Services
             return departments;
         }
 
-        public static Dictionary<String, Room> FetchRooms()
+        public static List<Room> FetchRooms()
         {
             MySqlConnection con = InitConnection();
-            Dictionary<String, Room> rooms = new Dictionary<String, Room>();
+            List<Room> rooms = new List<Room>();
             try
             {
                 con.Open();
@@ -80,7 +80,7 @@ namespace HospitalManagementSystem.Services
                             break;
                     }
 
-                    rooms.Add(newRoom.ID, newRoom);
+                    rooms.Add(newRoom);
                 }
             }
             catch
@@ -168,21 +168,11 @@ namespace HospitalManagementSystem.Services
             return nurses;
         }
 
-        public static Dictionary<String, Employee> FetchEmployees()
+        public static List<Employee> FetchEmployees()
         {
-            Dictionary<String, Employee> employees = new Dictionary<string, Employee>();
-
-            List<Doctor> doctors = FetchDoctors();
-            foreach (Doctor doctor in doctors)
-            {
-                employees.Add(doctor.ID, doctor);
-            }
-
-            List<Nurse> nurses = FetchNurses();
-            foreach (Nurse nurse in nurses)
-            {
-                employees.Add(nurse.ID, nurse);
-            }
+            List<Employee> employees = new List<Employee>();
+            employees.AddRange(FetchDoctors());
+            employees.AddRange(FetchNurses());
 
             return employees;
         }
