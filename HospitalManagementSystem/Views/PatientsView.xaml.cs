@@ -32,16 +32,23 @@ namespace HospitalManagementSystem.Views
         }
         public void addPatient(object sender, RoutedEventArgs e)
         {
-            ViewModel.Patients.Add(
-                new PatientCardViewModel
-                {
-                    Name = "Name",
-                    Type = "resident",
-                    ShortDiagnosis = "fever2"
-                }
-            );
-            // Closing the Dialog
-            DialogHost.CloseDialogCommand.Execute(addPatientDialaog, null);
+            if (ViewModel.Validate())
+            {
+                ViewModel.Patients.Add(
+                    new PatientCardViewModel
+                    {
+                        Name = "Name",
+                        Type = "resident",
+                        ShortDiagnosis = "fever2"
+                    }
+                );
+                // Closing the Dialog
+                DialogHost.CloseDialogCommand.Execute(addPatientDialaog, null);
+            }
+            else
+            {
+                MessageBox.Show("error");
+            }
         }
     }
 }

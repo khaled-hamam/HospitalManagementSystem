@@ -49,9 +49,10 @@
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
-                            <!-- CONTENT -->
+                            <TextBox  materialDesign:HintAssist.Hint="Department Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="DepartmentNameTextBox" />
+                            <TextBox materialDesign:HintAssist.Hint="Department Head ID"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="DepartmentHeadIDTextBox" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"

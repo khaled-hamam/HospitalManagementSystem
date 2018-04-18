@@ -48,10 +48,10 @@
                 <ListViewItem Style="{StaticResource NavButton}" MouseUp="navigateToRooms">
                     Rooms
                 </ListViewItem>
-                <ListViewItem x:Name="PatientsButton" Style="{StaticResource NavButton}" Selected="navigateToPatients">
+                <ListViewItem x:Name="PatientsButton" Style="{StaticResource NavButton}" MouseUp="navigateToPatients">
                     Patients
                 </ListViewItem>
-                <ListViewItem x:Name="AppointmentsButton" Style="{StaticResource NavButton}" Selected="navigateToAppointments">
+                <ListViewItem x:Name="AppointmentsButton" Style="{StaticResource NavButton}" MouseUp="navigateToAppointments">
                     Appointments
                 </ListViewItem>
             </ListView>
