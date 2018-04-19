@@ -17,6 +17,7 @@ namespace HospitalManagementSystem.Views
             ViewModel = new AppointmentsViewModel();
             DataContext = ViewModel;
             InitializeComponent();
+            AppointmentDatePicker.BlackoutDates.AddDatesInPast();
         }
 
         public void addAppointment(object sender, RoutedEventArgs e)
@@ -24,18 +25,24 @@ namespace HospitalManagementSystem.Views
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-            ViewModel.Appointments.Add(
-                new AppointmentCardViewModel
-                {
-                    PatientName = "Patient Name",
-                    DoctorName = "Doctor Name",
-                    Duration = "00:30",
-                    AppointmentDate = "Appointment Date"
-                }
-            );
-
-            // Closing the Dialog
-            DialogHost.CloseDialogCommand.Execute(addAppointmentDialaog, null);
+            if (ViewModel.Validate() && AppointmentTimePicker.SelectedTime != null && AppointmentDatePicker.SelectedDate !=null)
+            {
+                ViewModel.Appointments.Add(
+                    new AppointmentCardViewModel
+                    {
+                        PatientName = "Patient Name",
+                        DoctorName = "Doctor Name",
+                        Duration = "00:30",
+                        AppointmentDate = "Appointment Date"
+                    }
+                );
+                // Closing the Dialog
+                DialogHost.CloseDialogCommand.Execute(addAppointmentDialaog, null);
+            }
+            else
+            {
+                MessageBox.Show("Input Not Valid");
+            }
         }
     }
 }
