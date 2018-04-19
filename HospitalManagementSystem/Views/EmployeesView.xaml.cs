@@ -38,7 +38,7 @@ namespace HospitalManagementSystem.Views
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-            if(ViewModel.ValidateName())
+            if(ViewModel.ValidateName() && EmployeeBirthDatePicker.SelectedDate.ToString() != "")
                 {
                     ViewModel.Employees.Add(
                         new EmployeeCardViewModel
