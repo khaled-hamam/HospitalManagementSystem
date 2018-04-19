@@ -11,12 +11,18 @@ namespace HospitalManagementSystem.ViewModels
 {
     public class PatientsViewModel : BaseViewModel
     {
-        public string PatientNameTextBox { get; set; }
+        public String PatientNameTextBox { get; set; }
+        public String PatientAddressTextBox { get; set; }
         public ObservableCollection<PatientCardViewModel> Patients { get; set; }
-        public bool Validate()
+        public bool ValidateName()
         {
             PatientNameTextBox = (PatientNameTextBox != null)? PatientNameTextBox.Trim() : "";
             return !(PatientNameTextBox == "");
+        }
+        public bool ValidateAddress()
+        {
+            PatientAddressTextBox = (PatientAddressTextBox != null) ? PatientAddressTextBox.Trim() : "";
+            return !(PatientAddressTextBox == "");
         }
         public PatientsViewModel()
         {

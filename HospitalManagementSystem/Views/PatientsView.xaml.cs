@@ -32,7 +32,7 @@ namespace HospitalManagementSystem.Views
         }
         public void addPatient(object sender, RoutedEventArgs e)
         {
-            if (ViewModel.Validate())
+            if (ViewModel.ValidateName() && ViewModel.ValidateAddress() && PatientBirthDatetDatePicker.SelectedDate.ToString() != "")
             {
                 ViewModel.Patients.Add(
                     new PatientCardViewModel
@@ -44,10 +44,8 @@ namespace HospitalManagementSystem.Views
                 );
                 // Closing the Dialog
                 DialogHost.CloseDialogCommand.Execute(addPatientDialaog, null);
-            }
-            else
-            {
-                MessageBox.Show("error");
+            } else {
+                MessageBox.Show("Invalid Entry");
             }
         }
     }

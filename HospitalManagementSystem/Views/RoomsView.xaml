@@ -48,7 +48,7 @@
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
-                            <ComboBox  materialDesign:HintAssist.Hint="Room Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomtTypeComboBox" >
+                            <ComboBox Text="{Binding RoomtTypeComboBox }" materialDesign:HintAssist.Hint="Room Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomtTypeComboBox" >
                                 <ComboBoxItem>Private</ComboBoxItem>
                                 <ComboBoxItem>Semi Private</ComboBoxItem>
                                 <ComboBoxItem>Standard Ward</ComboBoxItem>

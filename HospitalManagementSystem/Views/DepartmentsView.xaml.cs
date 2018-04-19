@@ -36,16 +36,21 @@ namespace HospitalManagementSystem.Views
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-            ViewModel.Departments.Add(
-                new DepartmentCardViewModel
-                {
-                    Name = "Name",
-                    EmployeesNumber = 1,
-                    PatientsNumber = 2
-                }
-            );
-            // Closing the Dialog
-            DialogHost.CloseDialogCommand.Execute(addDepartmentDialaog, null);
+            if (ViewModel.ValidateNameTextBox() && ViewModel.ValidateHeadIDTextBox())
+            {
+                ViewModel.Departments.Add(
+                    new DepartmentCardViewModel
+                    {
+                        Name = "Name",
+                        EmployeesNumber = 1,
+                        PatientsNumber = 2
+                    }
+                );
+                // Closing the Dialog
+                DialogHost.CloseDialogCommand.Execute(addDepartmentDialaog, null);
+            } else {
+                MessageBox.Show("Invalid Entry");
+            }
         }
     }
 }
