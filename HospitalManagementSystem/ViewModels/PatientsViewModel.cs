@@ -14,7 +14,7 @@ namespace HospitalManagementSystem.ViewModels
         public PatientsViewModel()
         {
             Patients = new ObservableCollection<PatientCardViewModel>();
-            foreach (Patient patient in Hospital.Patients)
+            foreach (Patient patient in Hospital.Patients.Values)
             {
                 Patients.Add(
                     new PatientCardViewModel

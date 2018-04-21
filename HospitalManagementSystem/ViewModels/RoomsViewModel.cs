@@ -11,7 +11,7 @@ namespace HospitalManagementSystem.ViewModels
         public RoomsViewModel()
         {
             Rooms = new ObservableCollection<RoomCardViewModel>();
-            foreach (Room room in Hospital.Rooms)
+            foreach (Room room in Hospital.Rooms.Values)
             {
                 String type;
                 if (room.GetType() == typeof(PrivateRoom))

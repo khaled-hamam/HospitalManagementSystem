@@ -39,7 +39,7 @@ namespace HospitalManagementSystem.Views
             ViewModel.Rooms.Add(
                 new RoomCardViewModel
                 {
-                    RoomNumber  = "RoomNumber",
+                    RoomNumber  = 0,
                     Type = "Type",
                     Capacity = "Capcaity",
                 }

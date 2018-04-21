@@ -9,7 +9,7 @@ namespace HospitalManagementSystem.ViewModels
         public DepartmentsViewModel()
         {
             Departments = new ObservableCollection<DepartmentCardViewModel>();
-            foreach(Department department in  Hospital.Departments)
+            foreach(Department department in Hospital.Departments.Values)
             {
                 Departments.Add(
                     new DepartmentCardViewModel
@@ -18,7 +18,7 @@ namespace HospitalManagementSystem.ViewModels
                         EmployeesNumber= department.Nurse.Count+department.Doctors.Count,
                         PatientsNumber = department.Patients.Count                 
                     }
-                    );
+                );
             }
         }
     }

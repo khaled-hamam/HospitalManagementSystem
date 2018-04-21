@@ -31,25 +31,25 @@ namespace HospitalManagementSystem.Models
             this.Nurse = new Dictionary<String, Nurse>();
             this.Patients = new Dictionary<String, Patient>();
         }
-        public void addDoctor(String id,Doctor doctor)
+        public void addDoctor(Doctor doctor)
         {
-            this.Doctors.Add(id, doctor);
+            this.Doctors.Add(doctor.ID, doctor);
         }
         public void removeDoctor(String doctorID)
         {
             this.Doctors.Remove(doctorID);
         }
-        public void addNurse(String id, Nurse nurse)
+        public void addNurse(Nurse nurse)
         {
-            this.Nurse.Add(id, nurse);
+            this.Nurse.Add(nurse.ID, nurse);
         }
         public void removeNurse(String nurseID)
         {
             this.Nurse.Remove(nurseID);
         }
-        public void addPatient(String id, Patient patient)
+        public void addPatient(Patient patient)
         {
-            this.Patients.Add(id,patient);
+            this.Patients.Add(patient.ID,patient);
         }
         public void removePatient(String patientID)
         {
