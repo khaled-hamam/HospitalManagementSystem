@@ -49,9 +49,14 @@ namespace HospitalManagementSystem.Models
             List<Doctor> doctorList = HospitalDB.FetchDoctors();
             foreach (Doctor doctor in doctorList)
             {
+                // Fetching Doctor's Department
                 String departmentID = HospitalDB.FetchEmployeeDepartment(doctor.ID);
+
+                // Assigning Doctor to his Department
                 doctor.Department = Departments[departmentID];
                 Departments[departmentID].addDoctor(doctor);
+
+                // Checking if the Doctor is the Department's Head
                 if (doctor.IsHead)
                     Departments[departmentID].HeadID = doctor.ID;
 
@@ -61,10 +66,17 @@ namespace HospitalManagementSystem.Models
             List<Nurse> nurseList = HospitalDB.FetchNurses();
             foreach (Nurse nurse in nurseList)
             {
+                // Fetching Nurse's Department
                 String departmentID = HospitalDB.FetchEmployeeDepartment(nurse.ID);
-                List<String> roomsID = HospitalDB.FetchNurseRooms(nurse.ID);
+
+                // Assigning Nurse to her Department
                 nurse.Department = Departments[departmentID];
                 Departments[departmentID].addNurse(nurse);
+
+                // Fetching Nurse's Rooms
+                List<String> roomsID = HospitalDB.FetchNurseRooms(nurse.ID);
+
+                // Assigning Nurses to their Rooms
                 foreach (String roomID in roomsID)
                 {
                     nurse.addRoom(Rooms[roomID]);
@@ -82,15 +94,36 @@ namespace HospitalManagementSystem.Models
             {
                 if (patient.GetType() == typeof(ResidentPatient))
                 {
-                    // Room
+                    ResidentPatient residentPatient = (ResidentPatient)patient;
+                    // Fetching Patient's Room from Database
+                    String roomID = HospitalDB.FetchPatientRoom(residentPatient.ID);
+                    Rooms[roomID].addPatient(residentPatient);
+                    residentPatient.Room = Rooms[roomID];
 
-                    // Nurses
-                }
-                else if (patient.GetType() == typeof(AppointmentPatient))
+                    // Assigning Patients to Nurses in the Same Room
+                    foreach (Nurse nurse in Rooms[roomID].Nurses.Values)
+                    {
+                        nurse.addPatient(residentPatient);
+                    }
+
+                    // Fetching Patient's Medicine from Database
+                    List<Medicine> medicineList = HospitalDB.FetchMedicine(residentPatient.ID);
+                    foreach (Medicine medicine in medicineList)
+                    {
+                        residentPatient.addMedicine(new Medicine {
+                            ID = medicine.ID,
+                            Name = medicine.Name,
+                            StartingDate = medicine.StartingDate,
+                            EndingDate = medicine.EndingDate
+                        });
+                    }
+
+                    Patients.Add(residentPatient.ID, residentPatient);
+                } else
                 {
-                    // Appointment
+                    Patients.Add(patient.ID, patient);
                 }
-                Patients.Add(patient.ID, patient);
+
             }
         }
     }

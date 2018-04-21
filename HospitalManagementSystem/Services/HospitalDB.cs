@@ -266,13 +266,13 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"SELECT department_id FROM person_department WHERE person_id =";
+                String query = $"SELECT room_id from resident_patient WHERE patient_id = {patientID}";
                 MySqlCommand command = new MySqlCommand(query, con);
                 roomID = (String)command.ExecuteScalar();
             }
             catch
             {
-                Console.WriteLine("Error Occured Fetching Department.");
+                Console.WriteLine("Error Occured Fetching Patient Room.");
             }
             finally
             {
@@ -352,6 +352,39 @@ namespace HospitalManagementSystem.Services
             catch
             {
                 Console.WriteLine("Error Occured Fetching Medicine.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return medicine;
+        }
+
+        public static List<Medicine> FetchMedicine(String patientID)
+        {
+            MySqlConnection con = InitConnection();
+            List<Medicine> medicine = new List<Medicine>();
+            try
+            {
+                con.Open();
+                String query = $"SELECT * from medicine WHERE patient_id = {patientID}";
+                MySqlCommand command = new MySqlCommand(query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    medicine.Add(new Medicine
+                    {
+                        ID = reader.GetString("medicine_id"),
+                        Name = reader.GetString("name"),
+                        // TODO: add Starting Date
+                        // TODO: add Ending Date
+                    });
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Patient Medicine.");
             }
             finally
             {
