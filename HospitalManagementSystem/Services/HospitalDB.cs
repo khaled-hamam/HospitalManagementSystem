@@ -64,21 +64,15 @@ namespace HospitalManagementSystem.Services
                 while (reader.Read())
                 {
                     String room_id = reader.GetString("room_id");
-                    int capacity = reader.GetInt16("capacity");
-                    float price = reader.GetFloat("price");
+                    int number = reader.GetInt32("room_number");
+                    String type = reader.GetString("type");
                     Room newRoom = null;
-                    switch (capacity)
-                    {
-                        case 1:
-                            newRoom = new PrivateRoom { ID = room_id, Capacity = capacity, Price = price };
-                            break;
-                        case 2:
-                            newRoom = new SemiPrivateRoom { ID = room_id, Capacity = capacity, Price = price };
-                            break;
-                        case 4:
-                            newRoom = new StandardWard { ID = room_id, Capacity = capacity, Price = price };
-                            break;
-                    }
+                    if (type == typeof(PrivateRoom).ToString())
+                            newRoom = new PrivateRoom { ID = room_id, RoomNumber = number };
+                    else if (type == typeof(SemiPrivateRoom).ToString())
+                            newRoom = new SemiPrivateRoom { ID = room_id, RoomNumber = number };
+                    else if (type == typeof(StandardWard).ToString())
+                            newRoom = new StandardWard { ID = room_id, RoomNumber = number };
 
                     rooms.Add(newRoom);
                 }
@@ -177,6 +171,56 @@ namespace HospitalManagementSystem.Services
             return employees;
         }
 
+        public static String FetchEmployeeDepartment(String personID)
+        {
+            MySqlConnection con = InitConnection();
+            String departmentID = "";
+            try
+            {
+                con.Open();
+                String query = $"SELECT department_id FROM person_department WHERE person_id = {personID}";
+                MySqlCommand command = new MySqlCommand(query, con);
+                departmentID = (String) command.ExecuteScalar();
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Department.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return departmentID;
+        }
+
+        public static List<String> FetchNurseRooms(String nurseID)
+        {
+            List<String> rooms = new List<String>();
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"SELECT room_id FROM nurse_room WHERE nurse_id = {nurseID}";
+                MySqlCommand command = new MySqlCommand(query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                while(reader.Read())
+                {
+                    rooms.Add(reader.GetString("room_id"));
+                } 
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Department.");
+            }
+            finally
+            {
+                con.Close();
+            }
+            return rooms;
+        }
+
         public static List<ResidentPatient> FetchResidentPatients()
         {
             List<ResidentPatient> patients = new List<ResidentPatient>();
@@ -213,6 +257,29 @@ namespace HospitalManagementSystem.Services
             }
 
             return patients;
+        }
+
+        public static String FetchPatientRoom(String patientID)
+        {
+            MySqlConnection con = InitConnection();
+            String roomID = "";
+            try
+            {
+                con.Open();
+                String query = $"SELECT department_id FROM person_department WHERE person_id =";
+                MySqlCommand command = new MySqlCommand(query, con);
+                roomID = (String)command.ExecuteScalar();
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Department.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return roomID;
         }
 
         public static List<AppointmentPatient> FetchAppointmentPatients()
