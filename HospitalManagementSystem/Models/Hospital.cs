@@ -29,11 +29,13 @@ namespace HospitalManagementSystem.Models
 
         public async void InitializeData()
         {
-            InitializeDepartments();
-            InitializeRooms();
-            InitializeEmployees();
-            InitializePatients();
-            InitializeAppointments();
+            await Task.Run(() => {
+                InitializeDepartments();
+                InitializeRooms();
+                InitializeEmployees();
+                InitializePatients();
+                InitializeAppointments();
+            });
         }
 
         public void InitializeDepartments()
