@@ -105,10 +105,9 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("doctor_id"),
                         Name = reader.GetString("name"),
-                        // TODO: add BirthDate
+                        BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
-                        // TODO: add EmploymentDate
-                        // TODO: add Department
+                        EmploymentDate = reader.GetDateTime("employment_date"),
                         Salary = reader.GetFloat("salary"),
                         IsHead = reader.GetBoolean("is_head")
                     });
@@ -142,10 +141,9 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("nurse_id"),
                         Name = reader.GetString("name"),
-                        // TODO: add BirthDate
+                        BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
-                        // TODO: add EmploymentDate
-                        // TODO: add Department
+                        EmploymentDate = reader.GetDateTime("employment_date"),
                         Salary = reader.GetFloat("salary")
                     });
                 }
@@ -238,11 +236,9 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("patient_id"),
                         Name = reader.GetString("name"),
-                        // TODO: add BirthDate
+                        BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
                         Diagnosis = reader.GetString("diagnosis"),
-                        // TODO: add Room
-                        // TODO: add Department
                         Duration = reader.GetInt32("duration")
                     });
                 }
@@ -299,10 +295,9 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("patient_id"),
                         Name = reader.GetString("name"),
-                        // TODO: add BirthDate
+                        BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
                         Diagnosis = reader.GetString("diagnosis"),
-                        // TODO: add Appointment
                     });
                 }
             }
@@ -343,9 +338,8 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("medicine_id"),
                         Name = reader.GetString("name"),
-                        // TODO: add Starting Date
-                        // TODO: add Ending Date
-                        // TODO: add Patient
+                        StartingDate = reader.GetDateTime("starting_date"),
+                        EndingDate = reader.GetDateTime("ending_date")
                     });
                 }
             }
@@ -377,8 +371,8 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("medicine_id"),
                         Name = reader.GetString("name"),
-                        // TODO: add Starting Date
-                        // TODO: add Ending Date
+                        StartingDate = reader.GetDateTime("starting_date"),
+                        EndingDate = reader.GetDateTime("ending_date")
                     });
                 }
             }
@@ -410,9 +404,7 @@ namespace HospitalManagementSystem.Services
                     appointments.Add(new Appointment
                     {
                         ID = reader.GetString("appointment_id"),
-                        // TODO: add Date
-                        // TODO: add Patient
-                        // TODO: add Doctor
+                        Date = reader.GetDateTime("date"),
                         Duration = reader.GetInt32("duration")
                     });
                 }
