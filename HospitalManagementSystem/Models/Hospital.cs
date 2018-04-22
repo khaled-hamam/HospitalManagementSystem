@@ -18,12 +18,22 @@ namespace HospitalManagementSystem.Models
 
         public Hospital()
         {
-            Console.WriteLine(typeof(PrivateRoom).ToString());
             Employees = new Dictionary<String, Employee>();
             Patients = new Dictionary<String, Patient>();
             Appointments = new Dictionary<String, Appointment>();
             Departments = new Dictionary<String, Department>();
             Rooms = new Dictionary<String, Room>();
+
+            InitializeData();
+        }
+
+        public async void InitializeData()
+        {
+            InitializeDepartments();
+            InitializeRooms();
+            InitializeEmployees();
+            InitializePatients();
+            InitializeAppointments();
         }
 
         public void InitializeDepartments()
@@ -92,38 +102,59 @@ namespace HospitalManagementSystem.Models
             List<Patient> patientList = HospitalDB.FetchPatients();
             foreach (Patient patient in patientList)
             {
+                // Assigning Patient's Doctors
+                List<String> doctorsIDs = HospitalDB.FetchPatientDoctors(patient.ID);
+                foreach (String doctorID in doctorsIDs)
+                {
+                    patient.assignDoctor((Doctor)Employees[doctorID]);
+                    ((Doctor)Employees[doctorID]).addPatient(patient);
+                }
+
                 if (patient.GetType() == typeof(ResidentPatient))
                 {
-                    ResidentPatient residentPatient = (ResidentPatient)patient;
                     // Fetching Patient's Room from Database
-                    String roomID = HospitalDB.FetchPatientRoom(residentPatient.ID);
-                    Rooms[roomID].addPatient(residentPatient);
-                    residentPatient.Room = Rooms[roomID];
+                    String roomID = HospitalDB.FetchPatientRoom(patient.ID);
+                    Rooms[roomID].addPatient(patient);
+                    ((ResidentPatient)patient).Room = Rooms[roomID];
 
                     // Assigning Patients to Nurses in the Same Room
                     foreach (Nurse nurse in Rooms[roomID].Nurses.Values)
                     {
-                        nurse.addPatient(residentPatient);
+                        nurse.addPatient(patient);
                     }
 
                     // Fetching Patient's Medicine from Database
-                    List<Medicine> medicineList = HospitalDB.FetchMedicine(residentPatient.ID);
+                    List<Medicine> medicineList = HospitalDB.FetchMedicine(patient.ID);
                     foreach (Medicine medicine in medicineList)
                     {
-                        residentPatient.addMedicine(new Medicine {
+                        ((ResidentPatient)patient).addMedicine(new Medicine
+                        {
                             ID = medicine.ID,
                             Name = medicine.Name,
                             StartingDate = medicine.StartingDate,
                             EndingDate = medicine.EndingDate
                         });
                     }
-
-                    Patients.Add(residentPatient.ID, residentPatient);
-                } else
-                {
-                    Patients.Add(patient.ID, patient);
                 }
 
+                Patients.Add(patient.ID, patient);
+            }
+        }
+
+        public void InitializeAppointments()
+        {
+            List<Appointment> appointmentList = HospitalDB.FetchAppointments();
+            foreach (Appointment appointment in appointmentList)
+            {
+                // Fetching Appointment Patient
+                String patientID = HospitalDB.FetchAppointmentPatient(appointment.ID);
+                appointment.Patient = (AppointmentPatient)Patients[patientID];
+
+                // Fetching Appointment Doctor
+                String doctorID = HospitalDB.FetchAppointmentDoctor(appointment.ID);
+                appointment.Doctor = (Doctor)Employees[doctorID];
+
+                Appointments.Add(appointment.ID, appointment);
             }
         }
     }

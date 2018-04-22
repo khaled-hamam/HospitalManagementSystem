@@ -18,6 +18,7 @@ namespace HospitalManagementSystem.Services
             return new MySqlConnection(connectionString);
         }
 
+        #region Fetching Operations
         public static List<Department> FetchDepartments()
         {
             MySqlConnection con = InitConnection();
@@ -105,9 +106,9 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("doctor_id"),
                         Name = reader.GetString("name"),
-                        BirthDate = reader.GetDateTime("birth_date"),
+                        // BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
-                        EmploymentDate = reader.GetDateTime("employment_date"),
+                        // EmploymentDate = reader.GetDateTime("employment_date"),
                         Salary = reader.GetFloat("salary"),
                         IsHead = reader.GetBoolean("is_head")
                     });
@@ -141,9 +142,9 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("nurse_id"),
                         Name = reader.GetString("name"),
-                        BirthDate = reader.GetDateTime("birth_date"),
+                        // BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
-                        EmploymentDate = reader.GetDateTime("employment_date"),
+                        // EmploymentDate = reader.GetDateTime("employment_date"),
                         Salary = reader.GetFloat("salary")
                     });
                 }
@@ -236,7 +237,7 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("patient_id"),
                         Name = reader.GetString("name"),
-                        BirthDate = reader.GetDateTime("birth_date"),
+                        // BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
                         Diagnosis = reader.GetString("diagnosis"),
                         Duration = reader.GetInt32("duration")
@@ -295,7 +296,7 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("patient_id"),
                         Name = reader.GetString("name"),
-                        BirthDate = reader.GetDateTime("birth_date"),
+                        // BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
                         Diagnosis = reader.GetString("diagnosis"),
                     });
@@ -338,8 +339,8 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("medicine_id"),
                         Name = reader.GetString("name"),
-                        StartingDate = reader.GetDateTime("starting_date"),
-                        EndingDate = reader.GetDateTime("ending_date")
+                        // StartingDate = reader.GetDateTime("starting_date"),
+                        // EndingDate = reader.GetDateTime("ending_date")
                     });
                 }
             }
@@ -371,8 +372,8 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("medicine_id"),
                         Name = reader.GetString("name"),
-                        StartingDate = reader.GetDateTime("starting_date"),
-                        EndingDate = reader.GetDateTime("ending_date")
+                        // StartingDate = reader.GetDateTime("starting_date"),
+                        // EndingDate = reader.GetDateTime("ending_date")
                     });
                 }
             }
@@ -404,7 +405,7 @@ namespace HospitalManagementSystem.Services
                     appointments.Add(new Appointment
                     {
                         ID = reader.GetString("appointment_id"),
-                        Date = reader.GetDateTime("date"),
+                        // Date = reader.GetDateTime("date"),
                         Duration = reader.GetInt32("duration")
                     });
                 }
@@ -420,5 +421,80 @@ namespace HospitalManagementSystem.Services
 
             return appointments;
         }
+
+        public static String FetchAppointmentDoctor(String appointmentID)
+        {
+            MySqlConnection con = InitConnection();
+            String doctorID = "";
+            try
+            {
+                con.Open();
+                String query = $"SELECT doctor_id from appointment WHERE appointment_id = {appointmentID}";
+                MySqlCommand command = new MySqlCommand(query, con);
+                doctorID = (String)command.ExecuteScalar();
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Appointment Doctor.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return doctorID;
+        }
+
+        public static String FetchAppointmentPatient(String appointmentID)
+        {
+            MySqlConnection con = InitConnection();
+            String patientID = "";
+            try
+            {
+                con.Open();
+                String query = $"SELECT patient_id from appointment WHERE appointment_id = {appointmentID}";
+                MySqlCommand command = new MySqlCommand(query, con);
+                patientID = (String)command.ExecuteScalar();
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Appointment Doctor.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return patientID;
+        }
+
+        public static List<String> FetchPatientDoctors(String patientID)
+        {
+            MySqlConnection con = InitConnection();
+            List<String> doctorsID = new List<String>();
+
+            try
+            {
+                con.Open();
+                String query = $"SELECT doctor_id from doctor_patient WHERE patient_id = {patientID}";
+                MySqlCommand command = new MySqlCommand(query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    doctorsID.Add(reader.GetString("doctor_id"));
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Patient Doctors.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return doctorsID;
+        }
+        #endregion
     }
 }
