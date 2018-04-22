@@ -15,6 +15,13 @@ namespace HospitalManagementSystem.Models
         public Dictionary<String, Patient> Patients { get { return this.patients; } set { this.patients = value; } }
         public Department Department { get { return this.department; } set { this.department = value; } }
 
+        public Nurse()
+        {
+            Rooms = new Dictionary<String, Room>();
+            Patients = new Dictionary<String, Patient>();
+            Department = new Department();
+        }
+
         public void addRoom(Room room)
         {
             this.Rooms.Add(room.ID, room);

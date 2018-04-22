@@ -21,6 +21,7 @@ namespace HospitalManagementSystem.Models
         public  Dictionary<String, Nurse> Nurses { get { return this.nurses; } set { this.nurses = value; } }
         public int Capacity { get { return this.capacity; } set { this.capacity = value; } }
         public double Price { get { return this.price; } set { this.price = value; } }
+
         // constructors
         public Room()
         {
@@ -30,12 +31,16 @@ namespace HospitalManagementSystem.Models
             this.Patients = new Dictionary<String, Patient>();
             this.Nurses = new Dictionary<String, Nurse>();
         }
+
         public Room(int capacity, double price)
         {
             this.ID = Guid.NewGuid().ToString();
             this.Capacity = capacity;
             this.Price = price;
+            this.Patients = new Dictionary<String, Patient>();
+            this.Nurses = new Dictionary<String, Nurse>();
         }
+
         public void addPatient(Patient patient)
         {
             this.Patients.Add(patient.ID, patient);
