@@ -572,7 +572,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"INSERT INTO nurse VALUES('{patient.ID}', '{patient.Name}', " +
+                String query = $"INSERT INTO patient VALUES('{patient.ID}', '{patient.Name}', " +
                     $"'{patient.BirthDate}', '{patient.Address}', '{patient.Diagnosis}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -589,6 +589,26 @@ namespace HospitalManagementSystem.Services
             }
         }
 
+        public async static void InsertRoom(Room room)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO room VALUES('{room.ID}', {room.RoomNumber}, '{room.GetType()}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Room.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
     }
 }
