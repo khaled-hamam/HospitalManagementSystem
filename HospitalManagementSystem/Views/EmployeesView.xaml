@@ -48,14 +48,27 @@
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
-                            <TextBox Text="{Binding EmployeeNameTextBox}" materialDesign:HintAssist.Hint="Employee Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="EmployeeNameTextBox" />
+                            <TextBox Text="{Binding EmployeeNameTextBox}"  materialDesign:HintAssist.Hint="Employee Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="EmployeeNameTextBox" />
                             <TextBox Text="{Binding EmployeeAddressTextBox}" materialDesign:HintAssist.Hint="Employee Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeAddressTextBox" />
-                            <DatePicker materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeBirthDatePicker" />
+                            <DatePicker Text="{Binding EmployeeDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeBirthDatePicker" />
                             <TextBox Text="{Binding EmployeeSalaryTextBox}" materialDesign:HintAssist.Hint="Employee salary"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeSalaryTextBox" />
-                            <ComboBox Text="{Binding EmployeeDepartment}"  materialDesign:HintAssist.Hint="Employee Department"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmpoloyeeDepartmentTextBox" >
-                                <ComboBoxItem> test </ComboBoxItem>
-                            </ComboBox>
-                            <ComboBox Text="{Binding EmployeeRole}" materialDesign:HintAssist.Hint="Employee Role"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmpoloyeeRoleTextBox" >
+                            <ComboBox 
+                                materialDesign:HintAssist.Hint="Employee Department"  
+                                SelectedItem="{Binding EmployeeDepartment}"
+                                IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                Margin="0 8 0 0" 
+                                HorizontalAlignment="Left"  
+                                Width="200" 
+                                x:Name="EmployeeDepartmentComboBox" />
+                            <ComboBox 
+                                Text="{Binding EmployeeRole}" 
+                                materialDesign:HintAssist.Hint="Employee Role"  
+                                IsEditable="True"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                Margin="0 8 0 0" 
+                                HorizontalAlignment="Left" 
+                                Width="200" 
+                                x:Name="EmpoloyeeRoleComboBox" >
                                 <ComboBoxItem>Doctor</ComboBoxItem>
                                 <ComboBoxItem>Nurse</ComboBoxItem>
                             </ComboBox>

@@ -3,7 +3,9 @@ using HospitalManagementSystem.ViewModels;
 using HospitalManagementSystem.Views.Components;
 using MaterialDesignThemes.Wpf;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +33,9 @@ namespace HospitalManagementSystem.Views
             ViewModel = new EmployeesViewModel();
             DataContext = ViewModel;
             InitializeComponent();
+            EmployeeDepartmentComboBox.DisplayMemberPath = "Value";
+            EmployeeDepartmentComboBox.SelectedValuePath = "Key";
+            EmployeeDepartmentComboBox.ItemsSource = ViewModel.ComboBoxItems;
         }
 
         public void addEmployee(object sender, RoutedEventArgs e)
@@ -38,17 +43,12 @@ namespace HospitalManagementSystem.Views
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-            if(ViewModel.ValidateName() && EmployeeBirthDatePicker.SelectedDate.ToString() != "")
-                {
-                    ViewModel.Employees.Add(
-                        new EmployeeCardViewModel
-                        {
-                            Name = "Name",
-                            Role = "Role",
-                            Department = "Department",
-                            Salary = "3000.00$"
-                        }    
-                 );
+
+            Console.WriteLine(EmployeeDepartmentComboBox.SelectedValue);
+            ViewModel.addEmployee();
+            if (ViewModel.ValidateName() )
+            {
+                ViewModel.addEmployee();
 
             // Closing the Dialog
             DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
