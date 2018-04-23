@@ -91,6 +91,7 @@
     <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="ViewModels\PatientCardViewModel.cs" />
     <Compile Include="ViewModels\PatientsViewModel.cs" />
+    <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\RoomCardViewModel.cs" />
     <Compile Include="ViewModels\RoomsViewModel.cs" />
     <Compile Include="Views\AppointmentsView.xaml.cs">

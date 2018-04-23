@@ -32,7 +32,7 @@
                          BorderThickness="0"
                          MinWidth="200" VerticalAlignment="Center"
                          Foreground="{StaticResource DarkText}"/>
-                <Button Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="1">
+                <Button Style="{DynamicResource MaterialDesignToolButton}" Command="{Binding SearchAction}" Grid.Column="1">
                     <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                 </Button>
             </Grid>
