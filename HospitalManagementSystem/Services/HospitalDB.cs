@@ -632,6 +632,27 @@ namespace HospitalManagementSystem.Services
             }
         }
 
+        public async static void InsertMedicine(Medicine medicine, Patient patient)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO medicine VALUES('{medicine.ID}', '{medicine.Name}', " +
+                    $"'{medicine.StartingDate}', '{medicine.EndingDate}', '{patient.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Medicine.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
     }
 }
