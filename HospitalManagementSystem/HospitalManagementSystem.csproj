@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ComboBoxPairs.cs" />
     <Compile Include="Services\Credentials.cs" />
     <Compile Include="Services\HospitalDB.cs" />
     <Compile Include="ViewModels\AppointmentCardViewModel.cs" />
