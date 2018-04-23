@@ -49,8 +49,15 @@
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
-                            <TextBox  materialDesign:HintAssist.Hint="Department Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="DepartmentNameTextBox" />
-                            <TextBox materialDesign:HintAssist.Hint="Department Head ID"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="DepartmentHeadIDTextBox" />
+                            <TextBox  Text="{Binding DepartmentName}" materialDesign:HintAssist.Hint="Department Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="DepartmentNameTextBox" />
+                            <ComboBox materialDesign:HintAssist.Hint="Department Head "  
+                                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                                     Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" 
+                                     x:Name="DepartmentHeadComboBox" 
+                                     IsEditable="True" 
+                                    SelectedItem="{Binding EmployeeHead}"
+                                     
+                                     />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
