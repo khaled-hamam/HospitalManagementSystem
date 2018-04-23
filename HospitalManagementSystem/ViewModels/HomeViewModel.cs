@@ -1,16 +1,11 @@
 ﻿using HospitalManagementSystem.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
         private BaseViewModel previousContent;
-        public BaseViewModel PreviousContent { get { return previousContent;  } set { previousContent = value; Console.WriteLine("&& " + value.ToString()); }  }
         private BaseViewModel content;
         public BaseViewModel Content
         {
@@ -23,6 +18,7 @@ namespace HospitalManagementSystem.ViewModels
                 }
                 else
                 {
+                    previousContent = content;
                     content = value;
                 }
             }
@@ -38,12 +34,12 @@ namespace HospitalManagementSystem.ViewModels
 
                 if (value == true)
                 {
-                    PreviousContent = Content;
+                    previousContent = Content;
                     content = new LoadingViewModel();
                 }
                 else
                 {
-                    Content = PreviousContent;
+                    Content = previousContent;
                 }
             }
         }
@@ -59,5 +55,9 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.InitializeData();
         }
 
+        public void GoBack()
+        {
+            Content = previousContent;
+        }
     }
 }
