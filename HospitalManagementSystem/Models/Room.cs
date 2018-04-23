@@ -9,18 +9,19 @@ namespace HospitalManagementSystem.Models
     class Room
     {
         protected String id;
-        protected String roomNumber;
+        protected int roomNumber;
         protected Dictionary<String, Patient> patients;
         protected Dictionary<String, Nurse> nurses;
         protected int capacity;
         protected double price;
-        // getters & setters
+
         public String ID { get { return this.id; } set { this.id = value; } }
-        public String RoomNumber { get { return this.roomNumber; } set { this.roomNumber = value; } }
+        public int RoomNumber { get { return this.roomNumber; } set { this.roomNumber = value; } }
         public Dictionary<String, Patient> Patients { get { return this.patients; } set { this.patients = value; } }
         public  Dictionary<String, Nurse> Nurses { get { return this.nurses; } set { this.nurses = value; } }
         public int Capacity { get { return this.capacity; } set { this.capacity = value; } }
         public double Price { get { return this.price; } set { this.price = value; } }
+
         // constructors
         public Room()
         {
@@ -30,12 +31,16 @@ namespace HospitalManagementSystem.Models
             this.Patients = new Dictionary<String, Patient>();
             this.Nurses = new Dictionary<String, Nurse>();
         }
+
         public Room(int capacity, double price)
         {
             this.ID = Guid.NewGuid().ToString();
             this.Capacity = capacity;
             this.Price = price;
+            this.Patients = new Dictionary<String, Patient>();
+            this.Nurses = new Dictionary<String, Nurse>();
         }
+
         public void addPatient(Patient patient)
         {
             this.Patients.Add(patient.ID, patient);

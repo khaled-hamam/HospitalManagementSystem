@@ -10,10 +10,14 @@ namespace HospitalManagementSystem.Models
     {
         private Dictionary<String, Room> rooms;
         private Dictionary<String, Patient> patients;
-        private Department department;
         public Dictionary<String, Room> Rooms { get { return this.rooms; } set { this.rooms = value; } }
         public Dictionary<String, Patient> Patients { get { return this.patients; } set { this.patients = value; } }
-        public Department Department { get { return this.department; } set { this.department = value; } }
+
+        public Nurse()
+        {
+            Rooms = new Dictionary<String, Room>();
+            Patients = new Dictionary<String, Patient>();
+        }
 
         public void addRoom(Room room)
         {

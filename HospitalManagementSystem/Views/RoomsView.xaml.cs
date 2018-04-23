@@ -36,23 +36,17 @@ namespace HospitalManagementSystem.Views
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-            if (ViewModel.ValidateRoomtType())
-            {
-                ViewModel.Rooms.Add(
-                    new RoomCardViewModel
-                    {
-                        RoomNumber = "RoomNumber",
-                        Type = "Type",
-                        Capacity = "Capcaity",
-                    }
-                );
+            ViewModel.Rooms.Add(
+                new RoomCardViewModel
+                {
+                    RoomNumber  = 0,
+                    Type = "Type",
+                    Capacity = "Capcaity",
+                }
+            );
 
-                // Closing the Dialog
-                DialogHost.CloseDialogCommand.Execute(addRoomDialaog, null);
-            } else {
-                MessageBox.Show("Invalid Entry");
-            }
-
+            // Closing the Dialog
+            DialogHost.CloseDialogCommand.Execute(addRoomDialaog, null);
         }
     }
 }

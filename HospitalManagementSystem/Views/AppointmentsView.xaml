@@ -48,7 +48,33 @@
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
-                            <!-- CONTENT -->
+                            <TextBox   Text="{Binding PatientNameTextBox}"
+                                materialDesign:HintAssist.Hint="Patient Name"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" 
+                                x:Name="PatientNameTextBox" />
+                            <TextBox  Text="{Binding DoctorNameTextBox}"
+                                materialDesign:HintAssist.Hint="Doctor Name"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                                Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" 
+                                x:Name="DoctorNameTextBox" />
+                            <DatePicker Text="{Binding AppointmentDatePicker}"
+                                materialDesign:HintAssist.Hint="Appointment Date"  
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                                Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" 
+                                x:Name="AppointmentDatePicker" />
+                            <materialDesign:TimePicker 
+                                Text="{Binding AppointmentTimePicker}"
+                                materialDesign:HintAssist.Hint="Appointment Time"  
+                                Style="{StaticResource MaterialDesignFloatingHintTimePicker}" 
+                                Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200"
+                                x:Name="AppointmentTimePicker">
+                            </materialDesign:TimePicker>
+                            <TextBox   Text="{Binding AppointmentDuration}"
+                                materialDesign:HintAssist.Hint="Appointment Duration"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" 
+                                x:Name="AppointmentDuration" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -58,7 +84,7 @@
                                 <Button.CommandParameter>
                                     <system:Boolean>True</system:Boolean>
                                 </Button.CommandParameter>
-                                ADD
+                                SUBMIT
                             </Button>
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                         IsCancel="True"

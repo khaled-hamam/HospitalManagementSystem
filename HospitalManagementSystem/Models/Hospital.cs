@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HospitalManagementSystem.Services;
+using HospitalManagementSystem.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,25 +11,154 @@ namespace HospitalManagementSystem.Models
 {
     class Hospital
     {
-        private static ObservableCollection<Employee> employees;
-        private static ObservableCollection<Patient> patients;
-        private static ObservableCollection<Appointment> appointments;
-        private static ObservableCollection<Department> departments;
-        private static ObservableCollection<Room> rooms;
-
-        public static ObservableCollection<Employee> Employees { get { return employees; } }
-        public static ObservableCollection<Patient> Patients { get { return patients; } }
-        public static ObservableCollection<Appointment> Appointments { get { return appointments; } }
-        public static ObservableCollection<Department> Departments { get { return departments; } }
-        public static ObservableCollection<Room> Rooms { get { return rooms; } }
+        public static Dictionary<String, Employee> Employees { get; private set; }
+        public static Dictionary<String, Patient> Patients { get; private set; }
+        public static Dictionary<String, Appointment> Appointments { get; private set; }
+        public static Dictionary<String, Department> Departments { get; private set; }
+        public static Dictionary<String, Room> Rooms { get; private set; }
 
         public Hospital()
         {
-            employees = new ObservableCollection<Employee>();
-            patients = new ObservableCollection<Patient>();
-            appointments = new ObservableCollection<Appointment>();
-            departments = new ObservableCollection<Department>();
-            rooms = new ObservableCollection<Room>();
+            Employees = new Dictionary<String, Employee>();
+            Patients = new Dictionary<String, Patient>();
+            Appointments = new Dictionary<String, Appointment>();
+            Departments = new Dictionary<String, Department>();
+            Rooms = new Dictionary<String, Room>();
+        }
+
+        public static async void InitializeData()
+        {
+            Home.ViewModel.IsLoading = true;
+            await Task.Run(() => {
+                InitializeDepartments();
+                InitializeRooms();
+                InitializeEmployees();
+                InitializePatients();
+                InitializeAppointments();
+            });
+            Home.ViewModel.IsLoading = false;
+        }
+
+        public static void InitializeDepartments()
+        {
+            List<Department> departmentList = HospitalDB.FetchDepartments();
+            foreach (Department department in departmentList)
+            {
+                Departments.Add(department.ID, department);
+            }
+        }
+
+        public static void InitializeRooms()
+        {
+            List<Room> roomList = HospitalDB.FetchRooms();
+            foreach (Room room in roomList)
+            {
+                Rooms.Add(room.ID, room);
+            }
+        }
+
+        public static void InitializeEmployees()
+        {
+            List<Doctor> doctorList = HospitalDB.FetchDoctors();
+            foreach (Doctor doctor in doctorList)
+            {
+                // Fetching Doctor's Department
+                String departmentID = HospitalDB.FetchPersoneDepartment(doctor.ID);
+
+                // Assigning Doctor to his Department
+                doctor.Department = Departments[departmentID];
+                Departments[departmentID].addDoctor(doctor);
+
+                // Checking if the Doctor is the Department's Head
+                if (doctor.IsHead)
+                    Departments[departmentID].HeadID = doctor.ID;
+
+                Employees.Add(doctor.ID, doctor);
+            }
+
+            List<Nurse> nurseList = HospitalDB.FetchNurses();
+            foreach (Nurse nurse in nurseList)
+            {
+                // Fetching Nurse's Department
+                String departmentID = HospitalDB.FetchPersoneDepartment(nurse.ID);
+
+                // Assigning Nurse to her Department
+                nurse.Department = Departments[departmentID];
+                Departments[departmentID].addNurse(nurse);
+
+                // Fetching Nurse's Rooms
+                List<String> roomsID = HospitalDB.FetchNurseRooms(nurse.ID);
+
+                // Assigning Nurses to their Rooms
+                foreach (String roomID in roomsID)
+                {
+                    nurse.addRoom(Rooms[roomID]);
+                    Rooms[roomID].addNurse(nurse);
+                }
+
+                Employees.Add(nurse.ID, nurse);
+            }
+        }
+
+        public static void InitializePatients()
+        {
+            List<Patient> patientList = HospitalDB.FetchPatients();
+            foreach (Patient patient in patientList)
+            {
+                // Assigning Patient's Doctors
+                List<String> doctorsIDs = HospitalDB.FetchPatientDoctors(patient.ID);
+                foreach (String doctorID in doctorsIDs)
+                {
+                    patient.assignDoctor((Doctor)Employees[doctorID]);
+                    ((Doctor)Employees[doctorID]).addPatient(patient);
+                }
+
+                if (patient.GetType() == typeof(ResidentPatient))
+                {
+                    // Fetching Patient's Room from Database
+                    String roomID = HospitalDB.FetchPatientRoom(patient.ID);
+                    Rooms[roomID].addPatient(patient);
+                    ((ResidentPatient)patient).Room = Rooms[roomID];
+
+                    // Assigning Patients to Nurses in the Same Room
+                    foreach (Nurse nurse in Rooms[roomID].Nurses.Values)
+                    {
+                        nurse.addPatient(patient);
+                    }
+
+                    // Fetching Patient's Medicine from Database
+                    List<Medicine> medicineList = HospitalDB.FetchMedicine(patient.ID);
+                    foreach (Medicine medicine in medicineList)
+                    {
+                        ((ResidentPatient)patient).addMedicine(new Medicine
+                        {
+                            ID = medicine.ID,
+                            Name = medicine.Name,
+                            StartingDate = medicine.StartingDate,
+                            EndingDate = medicine.EndingDate
+                        });
+                    }
+                }
+
+                Patients.Add(patient.ID, patient);
+            }
+        }
+
+        public static void InitializeAppointments()
+        {
+            List<Appointment> appointmentList = HospitalDB.FetchAppointments();
+            foreach (Appointment appointment in appointmentList)
+            {
+                // Fetching Appointment Patient
+                String patientID = HospitalDB.FetchAppointmentPatient(appointment.ID);
+                appointment.Patient = (AppointmentPatient)Patients[patientID];
+
+                // Fetching Appointment Doctor
+                String doctorID = HospitalDB.FetchAppointmentDoctor(appointment.ID);
+                appointment.Doctor = (Doctor)Employees[doctorID];
+
+                Appointments.Add(appointment.ID, appointment);
+            }
         }
     }
 }

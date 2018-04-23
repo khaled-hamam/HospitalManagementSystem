@@ -27,13 +27,13 @@ namespace HospitalManagementSystem.ViewModels
         public PatientsViewModel()
         {
             Patients = new ObservableCollection<PatientCardViewModel>();
-            foreach (Patient patient in Hospital.Patients)
+            foreach (Patient patient in Hospital.Patients.Values)
             {
                 Patients.Add(
                     new PatientCardViewModel
                     {
                         Name = patient.Name,
-                        Type = (patient.GetType() == typeof(Patient)) ? "Resident" : "Appointment",
+                        Type = (patient.GetType() == typeof(ResidentPatient)) ? "Resident" : "Appointment",
                         ShortDiagnosis = patient.Diagnosis
                     }
                 );

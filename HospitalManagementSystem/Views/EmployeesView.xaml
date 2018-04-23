@@ -32,7 +32,7 @@
                          BorderThickness="0"
                          MinWidth="200" VerticalAlignment="Center"
                          Foreground="{StaticResource DarkText}"/>
-                <Button Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="1">
+                <Button Style="{DynamicResource MaterialDesignToolButton}" Command="{Binding SearchAction}" Grid.Column="1">
                     <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                 </Button>
             </Grid>
@@ -48,14 +48,14 @@
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
-                            <TextBox  materialDesign:HintAssist.Hint="Employee Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="EmployeeNameTextBox" />
-                            <TextBox materialDesign:HintAssist.Hint="Employee Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeAddressTextBox" />
-                            <DatePicker materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeBirthDateTextBox" />
-                            <TextBox materialDesign:HintAssist.Hint="Employee salary"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeSalaryTextBox" />
-                            <ComboBox materialDesign:HintAssist.Hint="Employee Department"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmpoloyeeDepartmentTextBox" >
-                                <ComboBoxItem> <!-- items--> </ComboBoxItem>
+                            <TextBox Text="{Binding EmployeeNameTextBox}" materialDesign:HintAssist.Hint="Employee Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="EmployeeNameTextBox" />
+                            <TextBox Text="{Binding EmployeeAddressTextBox}" materialDesign:HintAssist.Hint="Employee Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeAddressTextBox" />
+                            <DatePicker materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeBirthDatePicker" />
+                            <TextBox Text="{Binding EmployeeSalaryTextBox}" materialDesign:HintAssist.Hint="Employee salary"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeSalaryTextBox" />
+                            <ComboBox Text="{Binding EmployeeDepartment}"  materialDesign:HintAssist.Hint="Employee Department"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmpoloyeeDepartmentTextBox" >
+                                <ComboBoxItem> test </ComboBoxItem>
                             </ComboBox>
-                            <ComboBox materialDesign:HintAssist.Hint="Employee Role"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmpoloyeeRoleTextBox" >
+                            <ComboBox Text="{Binding EmployeeRole}" materialDesign:HintAssist.Hint="Employee Role"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmpoloyeeRoleTextBox" >
                                 <ComboBoxItem>Doctor</ComboBoxItem>
                                 <ComboBoxItem>Nurse</ComboBoxItem>
                             </ComboBox>

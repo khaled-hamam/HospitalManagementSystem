@@ -38,18 +38,26 @@ namespace HospitalManagementSystem.Views
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-            ViewModel.Employees.Add(
-                new EmployeeCardViewModel
+            if(ViewModel.ValidateName() && EmployeeBirthDatePicker.SelectedDate.ToString() != "")
                 {
-                    Name = "Name",
-                    Role = "Role",
-                    Department = "Department",
-                    Salary = "3000.00$"
-                }    
-            );
+                    ViewModel.Employees.Add(
+                        new EmployeeCardViewModel
+                        {
+                            Name = "Name",
+                            Role = "Role",
+                            Department = "Department",
+                            Salary = "3000.00$"
+                        }    
+                 );
 
             // Closing the Dialog
             DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
+
+            }
+            else
+            {
+                MessageBox.Show("INVALID ENTRY");
+            }
         }
     }
 }

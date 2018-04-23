@@ -12,10 +12,11 @@ namespace HospitalManagementSystem.Models
         private Room room;
         private Dictionary<String, Medicine> history;
         private int duration;
+
         public Room Room { get { return this.room;} set { this.room = value;} }
         public Dictionary<String, Medicine> History { get { return this.history; } set { this.history = value;} }
         public int Duration { get { return this.duration;} set { this.duration = value;} }
-        //constructors
+
         public ResidentPatient() : base()
         {
             this.Room = new Room();
