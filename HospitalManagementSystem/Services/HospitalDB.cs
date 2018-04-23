@@ -609,6 +609,29 @@ namespace HospitalManagementSystem.Services
                 con.Close();
             }
         }
+
+        public async static void InsertAppointment(Appointment appointment)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO appointment VALUES('{appointment.ID}', '{appointment.Patient.ID}', " +
+                    $"'{appointment.Doctor.ID}', '{appointment.Date}', {appointment.Duration}";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Appointment.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
     }
 }
