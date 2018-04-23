@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagementSystem.Views"
-            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:Components="clr-namespace:HospitalManagementSystem.Views.Components"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="640">
@@ -42,22 +43,48 @@
                 </Button>
             </StackPanel>
         </Grid>
-
         <ScrollViewer Grid.Row="1">
-            <materialDesign:DialogHost Name="addEmployeeDialaog"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <materialDesign:DialogHost Name="addAppointmentDialaog"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
-                            <!-- CONTENT -->
+                            <TextBox   Text="{Binding PatientNameTextBox}"
+                                materialDesign:HintAssist.Hint="Patient Name"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" 
+                                x:Name="PatientNameTextBox" />
+                            <TextBox  Text="{Binding DoctorNameTextBox}"
+                                materialDesign:HintAssist.Hint="Doctor Name"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                                Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" 
+                                x:Name="DoctorNameTextBox" />
+                            <DatePicker Text="{Binding AppointmentDatePicker}"
+                                materialDesign:HintAssist.Hint="Appointment Date"  
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                                Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" 
+                                x:Name="AppointmentDatePicker" />
+                            <materialDesign:TimePicker 
+                                Text="{Binding AppointmentTimePicker}"
+                                materialDesign:HintAssist.Hint="Appointment Time"  
+                                Style="{StaticResource MaterialDesignFloatingHintTimePicker}" 
+                                Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200"
+                                x:Name="AppointmentTimePicker">
+                            </materialDesign:TimePicker>
+                            <TextBox   Text="{Binding AppointmentDuration}"
+                                materialDesign:HintAssist.Hint="Appointment Duration"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" 
+                                x:Name="AppointmentDuration" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
-                                    Margin="0 8 8 0" >
+                                    Margin="0 8 8 0"
+                                    Click="addAppointment">
                                 <Button.CommandParameter>
                                     <system:Boolean>True</system:Boolean>
                                 </Button.CommandParameter>
-                                ADD
+                                SUBMIT
                             </Button>
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                         IsCancel="True"
@@ -72,15 +99,15 @@
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding Employees}">
+                    <ItemsControl ItemsSource="{Binding Appointments}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <!--Component here-->
+                                <Components:AppointmentCard />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel Name="employeeList" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0" />
+                                <WrapPanel Name="AppointmentList" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -100,4 +127,3 @@
         </ScrollViewer>
     </Grid>
 </UserControl>
-
