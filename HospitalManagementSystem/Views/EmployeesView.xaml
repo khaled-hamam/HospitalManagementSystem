@@ -26,12 +26,17 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0" Margin="8 0 0 0" 
-                         materialDesign:HintAssist.Hint="Type to search" 
+                         materialDesign:HintAssist.Hint="Type to search"
+                         Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                          materialDesign:HintAssist.HintOpacity="0.4"
                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
                          BorderThickness="0"
                          MinWidth="200" VerticalAlignment="Center"
-                         Foreground="{StaticResource DarkText}"/>
+                         Foreground="{StaticResource DarkText}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding SearchAction}" Key="Return" />
+                    </TextBox.InputBindings>
+                </TextBox>
                 <Button Style="{DynamicResource MaterialDesignToolButton}" Command="{Binding SearchAction}" Grid.Column="1">
                     <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                 </Button>
@@ -83,7 +88,7 @@
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding Employees}">
+                    <ItemsControl ItemsSource="{Binding FilteredEmployees}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Components:EmployeeCard />
