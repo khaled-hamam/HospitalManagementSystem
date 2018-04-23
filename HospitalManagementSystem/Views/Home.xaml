@@ -27,6 +27,9 @@
         <DataTemplate x:Name="LoadingView" DataType="{x:Type viewmodels:LoadingViewModel}">
             <views:LoadingView DataContext="{Binding Content}"/>
         </DataTemplate>
+        <DataTemplate x:Name="EmployeeDetails" DataType="{x:Type viewmodels:EmployeeDetailsVeiwModel}">
+            <views:EmployeeDetailsVeiw DataContext="{Binding Content}"/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

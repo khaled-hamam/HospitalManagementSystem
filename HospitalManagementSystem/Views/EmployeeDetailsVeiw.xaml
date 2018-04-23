@@ -1,23 +1,109 @@
 ﻿<UserControl x:Class="HospitalManagementSystem.Views.EmployeeDetailsVeiw"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagementSystem.Views"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="540" d:DesignWidth="640">
     <Grid Background="{StaticResource GreyBG}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="160" />
+            <ColumnDefinition Width="320" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="KARIM ELSAYED" Foreground="{StaticResource PrimaryColor}" Grid.Row="0" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="10" FontWeight="SemiBold" />
+        <StackPanel Grid.Column="0" Grid.Row="0" >
+            <TextBlock Text="Karim Elsayed" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="24" FontWeight="SemiBold" Margin="15 10 0 0" />
+            <TextBlock Text="Doctor" Foreground="{StaticResource LightText}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="18" FontWeight="SemiBold" Margin="15 0 0 0" />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="70" BorderThickness="0" Background="{StaticResource PrimaryColor}" FontFamily="Arial" FontSize="13" HorizontalAlignment="Center" Margin="10 12 30 0">Edit</Button>
+            <Button  materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="70" BorderThickness="0" Background="{StaticResource PrimaryColor}" FontFamily="Arial" FontSize="13" Margin="10 12 30 0">Delete</Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" >
+            <TextBlock Text="Address" Foreground="{StaticResource LightText}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 15 0 0" />
+            <TextBlock Text="Karim Address" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 5 0 0" />
+        </StackPanel>
+        <StackPanel  Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="BirthDate" Foreground="{StaticResource LightText}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 15 0 0" />
+            <TextBlock Text="18/3/1998" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 5 0 0" />
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="2">
+            <TextBlock Text="Department" Foreground="{StaticResource LightText}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 15 0 0" />
+            <TextBlock Text="orthohaga (head)" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 5 0 0" />
+        </StackPanel>
+        <StackPanel  Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="Employment Date" Foreground="{StaticResource LightText}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 15 0 0" />
+            <TextBlock Text="18/3/1998" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 5 0 0" />
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="3">
+            <TextBlock Text="Salary" Foreground="{StaticResource LightText}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 15 0 0" />
+            <TextBlock Text="3000 $" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 5 0 0" />
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="4">
+            <materialDesign:DialogHost  HorizontalAlignment="Center" VerticalAlignment="Center">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel Margin="16">
+                        <TextBlock>Add a new fruit.</TextBlock>
+                        <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="FruitTextBox" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsDefault="True"
+                                    Margin="0 8 8 0"
+                                    Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    <system:Boolean>True</system:Boolean>
+                                </Button.CommandParameter>
+                                ACCEPT
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsCancel="True"
+                                    Margin="0 8 8 0"
+                                    Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    <system:Boolean>False</system:Boolean>
+                                </Button.CommandParameter>
+                                CANCEL
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+                <Border BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}" MinWidth="256" MinHeight="256" ClipToBounds="True">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ListBox x:Name="FruitListBox">
+                            <ListBoxItem>Apple</ListBoxItem>
+                            <ListBoxItem>Banana</ListBoxItem>
+                            <ListBoxItem>Pear</ListBoxItem>
+                        </ListBox>
+                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                            <TextBlock Margin="16">Fruit Bowl</TextBlock>
+                        </materialDesign:ColorZone>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                Grid.Row="0" Margin="0 0 28 -20">
+                           <Viewbox Width="22" Height="22">
+                               <Canvas Width="24" Height="24">
+                                   <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
+                               </Canvas>
+                           </Viewbox>
+                        </Button>
+                    </Grid>
+                </Border>
+            </materialDesign:DialogHost>
+        </StackPanel>
     </Grid>
+
 </UserControl>
