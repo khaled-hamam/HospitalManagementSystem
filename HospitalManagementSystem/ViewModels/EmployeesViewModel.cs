@@ -30,7 +30,6 @@ namespace HospitalManagementSystem.ViewModels
         public ComboBoxPairs EmployeeDepartment { get; set; }
         public String EmployeeRole { get; set; }
         public DateTime EmployeeDatePicker { get; set; }
-        public ObservableCollection<EmployeeCardViewModel> Employees { get; set; }
 
         public List<ComboBoxPairs> ComboBoxItems;
 
