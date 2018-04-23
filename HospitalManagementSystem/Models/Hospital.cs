@@ -1,4 +1,5 @@
 ﻿using HospitalManagementSystem.Services;
+using HospitalManagementSystem.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,12 +24,11 @@ namespace HospitalManagementSystem.Models
             Appointments = new Dictionary<String, Appointment>();
             Departments = new Dictionary<String, Department>();
             Rooms = new Dictionary<String, Room>();
-
-            InitializeData();
         }
 
-        public async void InitializeData()
+        public static async void InitializeData()
         {
+            Home.ViewModel.IsLoading = true;
             await Task.Run(() => {
                 InitializeDepartments();
                 InitializeRooms();
@@ -36,9 +36,10 @@ namespace HospitalManagementSystem.Models
                 InitializePatients();
                 InitializeAppointments();
             });
+            Home.ViewModel.IsLoading = false;
         }
 
-        public void InitializeDepartments()
+        public static void InitializeDepartments()
         {
             List<Department> departmentList = HospitalDB.FetchDepartments();
             foreach (Department department in departmentList)
@@ -47,7 +48,7 @@ namespace HospitalManagementSystem.Models
             }
         }
 
-        public void InitializeRooms()
+        public static void InitializeRooms()
         {
             List<Room> roomList = HospitalDB.FetchRooms();
             foreach (Room room in roomList)
@@ -56,7 +57,7 @@ namespace HospitalManagementSystem.Models
             }
         }
 
-        public void InitializeEmployees()
+        public static void InitializeEmployees()
         {
             List<Doctor> doctorList = HospitalDB.FetchDoctors();
             foreach (Doctor doctor in doctorList)
@@ -99,7 +100,7 @@ namespace HospitalManagementSystem.Models
             }
         }
 
-        public void InitializePatients()
+        public static void InitializePatients()
         {
             List<Patient> patientList = HospitalDB.FetchPatients();
             foreach (Patient patient in patientList)
@@ -143,7 +144,7 @@ namespace HospitalManagementSystem.Models
             }
         }
 
-        public void InitializeAppointments()
+        public static void InitializeAppointments()
         {
             List<Appointment> appointmentList = HospitalDB.FetchAppointments();
             foreach (Appointment appointment in appointmentList)

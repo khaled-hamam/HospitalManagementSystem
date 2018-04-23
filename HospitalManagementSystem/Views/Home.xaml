@@ -10,19 +10,22 @@
         Title="Hospital Management System" Height="600" Width="800">
     <Window.Resources>
         <DataTemplate x:Name="EmployeesView" DataType="{x:Type viewmodels:EmployeesViewModel}">
-            <views:EmployeesView DataContext="{Binding}"/>
+            <views:EmployeesView DataContext="{Binding Content}"/>
         </DataTemplate>
         <DataTemplate x:Name="PatientsView" DataType="{x:Type viewmodels:PatientsViewModel}">
-            <views:PatientsView DataContext="{Binding}"/>
+            <views:PatientsView DataContext="{Binding Content}"/>
         </DataTemplate>
         <DataTemplate x:Name="DepartmentsView" DataType="{x:Type viewmodels:DepartmentsViewModel}">
-            <views:DepartmentsView DataContext="{Binding}"/>
+            <views:DepartmentsView DataContext="{Binding Content}"/>
         </DataTemplate>
         <DataTemplate x:Name="AppointmentsView" DataType="{x:Type viewmodels:AppointmentsViewModel}">
-            <views:AppointmentsView DataContext="{Binding}"/>
+            <views:AppointmentsView DataContext="{Binding Content}"/>
         </DataTemplate>
         <DataTemplate x:Name="RoomsView" DataType="{x:Type viewmodels:RoomsViewModel}">
-            <views:RoomsView DataContext="{Binding}"/>
+            <views:RoomsView DataContext="{Binding Content}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="LoadingView" DataType="{x:Type viewmodels:LoadingViewModel}">
+            <views:LoadingView DataContext="{Binding Content}"/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -60,6 +63,6 @@
                 <materialDesign:PackIcon Kind="Settings" Height="25" Width="25" />
             </Button>
         </DockPanel>
-        <ContentControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="10" Content="{Binding}"/>
+        <ContentControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="10" Content="{Binding Content}"/>
     </Grid>
 </Window>

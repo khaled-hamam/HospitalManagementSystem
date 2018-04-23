@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="HospitalManagementSystem.Views.LoadingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HospitalManagementSystem.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="540" d:DesignWidth="640">
+    <Grid Background="{StaticResource GreyBG}">
+        <TextBlock Text="{Binding LoadingDataText}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 50 0 0" Foreground="{StaticResource LightText}"/>
+        <ProgressBar
+            Style="{StaticResource MaterialDesignCircularProgressBar}"
+            x:Name="DeterminateCircularProgress" 
+            IsIndeterminate="True" />
+    </Grid>
+</UserControl>

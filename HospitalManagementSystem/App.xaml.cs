@@ -14,9 +14,6 @@ namespace HospitalManagementSystem
     /// </summary>
     public partial class App : Application
     {
-        public App()
-        {
-            Hospital hospital = new Hospital();
-        }
+        Hospital hospital = new Hospital();
     }
 }
