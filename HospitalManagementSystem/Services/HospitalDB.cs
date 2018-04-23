@@ -564,6 +564,31 @@ namespace HospitalManagementSystem.Services
                 con.Close();
             }
         }
+
+        public async static void InsertPatient(Patient patient)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO nurse VALUES('{patient.ID}', '{patient.Name}', " +
+                    $"'{patient.BirthDate}', '{patient.Address}', '{patient.Diagnosis}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+
+                // TODO: inserting Special data if (Resident / Appointment)
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Patient.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
     }
 }
