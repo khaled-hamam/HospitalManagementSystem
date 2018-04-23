@@ -496,5 +496,28 @@ namespace HospitalManagementSystem.Services
             return doctorsID;
         }
         #endregion
+
+        #region Inserting Operations
+        public async static void InsertDepartment(Department department)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO department VALUES({department.ID}', '{department.Name}')";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Department.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        #endregion
     }
 }
