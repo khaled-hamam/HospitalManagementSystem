@@ -63,7 +63,7 @@ namespace HospitalManagementSystem.Models
             foreach (Doctor doctor in doctorList)
             {
                 // Fetching Doctor's Department
-                String departmentID = HospitalDB.FetchEmployeeDepartment(doctor.ID);
+                String departmentID = HospitalDB.FetchPersoneDepartment(doctor.ID);
 
                 // Assigning Doctor to his Department
                 doctor.Department = Departments[departmentID];
@@ -80,7 +80,7 @@ namespace HospitalManagementSystem.Models
             foreach (Nurse nurse in nurseList)
             {
                 // Fetching Nurse's Department
-                String departmentID = HospitalDB.FetchEmployeeDepartment(nurse.ID);
+                String departmentID = HospitalDB.FetchPersoneDepartment(nurse.ID);
 
                 // Assigning Nurse to her Department
                 nurse.Department = Departments[departmentID];
