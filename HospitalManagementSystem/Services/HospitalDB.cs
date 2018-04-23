@@ -106,9 +106,9 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("doctor_id"),
                         Name = reader.GetString("name"),
-                        // BirthDate = reader.GetDateTime("birth_date"),
+                        BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
-                        // EmploymentDate = reader.GetDateTime("employment_date"),
+                        EmploymentDate = reader.GetDateTime("employment_date"),
                         Salary = reader.GetFloat("salary"),
                         IsHead = reader.GetBoolean("is_head")
                     });
@@ -142,9 +142,9 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("nurse_id"),
                         Name = reader.GetString("name"),
-                        // BirthDate = reader.GetDateTime("birth_date"),
+                        BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
-                        // EmploymentDate = reader.GetDateTime("employment_date"),
+                        EmploymentDate = reader.GetDateTime("employment_date"),
                         Salary = reader.GetFloat("salary")
                     });
                 }
@@ -170,14 +170,14 @@ namespace HospitalManagementSystem.Services
             return employees;
         }
 
-        public static String FetchEmployeeDepartment(String personID)
+        public static String FetchPersoneDepartment(String personID)
         {
             MySqlConnection con = InitConnection();
             String departmentID = "";
             try
             {
                 con.Open();
-                String query = $"SELECT department_id FROM person_department WHERE person_id = {personID}";
+                String query = $"SELECT department_id FROM person_department WHERE person_id = '{personID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 departmentID = (String) command.ExecuteScalar();
             }
@@ -237,7 +237,7 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("patient_id"),
                         Name = reader.GetString("name"),
-                        // BirthDate = reader.GetDateTime("birth_date"),
+                        BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
                         Diagnosis = reader.GetString("diagnosis"),
                         Duration = reader.GetInt32("duration")
@@ -296,7 +296,7 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("patient_id"),
                         Name = reader.GetString("name"),
-                        // BirthDate = reader.GetDateTime("birth_date"),
+                        BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
                         Diagnosis = reader.GetString("diagnosis"),
                     });
@@ -339,8 +339,8 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("medicine_id"),
                         Name = reader.GetString("name"),
-                        // StartingDate = reader.GetDateTime("starting_date"),
-                        // EndingDate = reader.GetDateTime("ending_date")
+                        StartingDate = reader.GetDateTime("starting_date"),
+                        EndingDate = reader.GetDateTime("ending_date")
                     });
                 }
             }
@@ -372,8 +372,8 @@ namespace HospitalManagementSystem.Services
                     {
                         ID = reader.GetString("medicine_id"),
                         Name = reader.GetString("name"),
-                        // StartingDate = reader.GetDateTime("starting_date"),
-                        // EndingDate = reader.GetDateTime("ending_date")
+                        StartingDate = reader.GetDateTime("starting_date"),
+                        EndingDate = reader.GetDateTime("ending_date")
                     });
                 }
             }
@@ -505,13 +505,59 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"INSERT INTO department VALUES({department.ID}', '{department.Name}')";
+                String query = $"INSERT INTO department VALUES('{department.ID}', '{department.Name}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
             }
             catch
             {
                 Console.WriteLine("Error Inserting Department.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void InsertDoctor(Doctor doctor)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO doctor VALUES('{doctor.ID}', '{doctor.Name}', " +
+                    $"'{doctor.BirthDate}', '{doctor.Address}', '{doctor.EmploymentDate}', '{doctor.Department.ID}'," +
+                    $"{doctor.Salary}, {doctor.IsHead})";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Doctor.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void InsertNurse(Nurse nurse)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO nurse VALUES('{nurse.ID}', '{nurse.Name}', " +
+                    $"'{nurse.BirthDate}', '{nurse.Address}', '{nurse.EmploymentDate}', '{nurse.Department.ID}'," +
+                    $"{nurse.Salary})";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Nurse.");
             }
             finally
             {
