@@ -4,11 +4,26 @@ using System;
 using System.Windows.Input;
 using System.Collections.Generic;
 using HospitalManagementSystem.Services;
+using System.Linq;
 
 namespace HospitalManagementSystem.ViewModels
 {
     public class EmployeesViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Items Properties
+        /// </summary>
+        public ObservableCollection<EmployeeCardViewModel> Employees { get; set; }
+        public ObservableCollection<EmployeeCardViewModel> FilteredEmployees { get; set; }
+
+        /// <summary>
+        /// Search Bar Properties
+        /// </summary>
+        public String SearchQuery { get; set; }
+        
+        /// <summary>
+        /// Add Dialog Properites
+        /// </summary>
         public String EmployeeNameTextBox { get; set;  }
         public String EmployeeAddressTextBox { get; set; }
         public String EmployeeSalaryTextBox { get; set; }
@@ -44,11 +59,20 @@ namespace HospitalManagementSystem.ViewModels
                     }
                 );
             }
+            FilteredEmployees = new ObservableCollection<EmployeeCardViewModel>(Employees);
         }
 
         private void Search()
         {
-            Console.WriteLine("Searching Not Yet Implemented...");
+            if (String.IsNullOrEmpty(SearchQuery))
+            {
+                FilteredEmployees = new ObservableCollection<EmployeeCardViewModel>(Employees);
+                return;
+            }
+
+            FilteredEmployees = new ObservableCollection<EmployeeCardViewModel>(
+                Employees.Where(employee => employee.Name.ToLower().Contains(SearchQuery))
+            );
         }
 
         public void addEmployee()
