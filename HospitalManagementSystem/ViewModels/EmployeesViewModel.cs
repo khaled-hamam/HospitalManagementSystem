@@ -69,7 +69,7 @@ namespace HospitalManagementSystem.ViewModels
                     {
                         Name = newDoctor.Name,
                         Salary = $"{newDoctor.Salary}$",
-                        Department = newDoctor.Department.ToString(),
+                        Department = newDoctor.Department.Name,
                         Role = "Doctor"
                     }
                    );
@@ -93,7 +93,7 @@ namespace HospitalManagementSystem.ViewModels
                     {
                         Name = newNurse.Name,
                         Salary = $"{newNurse.Salary}$",
-                        Department = newNurse.Department.ToString(),
+                        Department = newNurse.Department.Name,
                         Role = "Nurse"
                     }
                    );

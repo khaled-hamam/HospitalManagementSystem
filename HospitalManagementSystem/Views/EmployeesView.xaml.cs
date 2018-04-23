@@ -45,7 +45,7 @@ namespace HospitalManagementSystem.Views
             // TODO: Update DB
 
             Console.WriteLine(EmployeeDepartmentComboBox.SelectedValue);
-            ViewModel.addEmployee();
+           
             if (ViewModel.ValidateName() )
             {
                 ViewModel.addEmployee();
