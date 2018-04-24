@@ -18,7 +18,7 @@
             Foreground="{StaticResource DarkText}"
             materialDesign:ShadowAssist.ShadowDepth="Depth1">
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="{Binding AppointmentDate}" FontSize="20" FontWeight="Bold">Appointment Date</TextBlock>
+                <TextBlock Text="{Binding AppointmentDate}" Style="{StaticResource InfoValue}" FontSize="20" FontWeight="Bold"></TextBlock>
                 <Grid Margin="0 5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />

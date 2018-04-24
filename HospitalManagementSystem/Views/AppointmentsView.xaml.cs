@@ -2,6 +2,7 @@
 using HospitalManagementSystem.ViewModels;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
+using System;
 
 namespace HospitalManagementSystem.Views
 {
@@ -18,31 +19,38 @@ namespace HospitalManagementSystem.Views
             DataContext = ViewModel;
             InitializeComponent();
             AppointmentDatePicker.BlackoutDates.AddDatesInPast();
+            PatientNameComboBox.DisplayMemberPath = "Value";
+            PatientNameComboBox.SelectedValuePath = "Key";
+            PatientNameComboBox.ItemsSource = ViewModel.patientsComboBoxItems;
+
+            DoctorNameComboBox.DisplayMemberPath = "Value";
+            DoctorNameComboBox.SelectedValuePath = "Key";
+            DoctorNameComboBox.ItemsSource = ViewModel.doctorsComboBoxItems;
         }
 
-        public void addAppointment(object sender, RoutedEventArgs e)
+        public void addSubmit(object sender, RoutedEventArgs e)
         {
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-            if (ViewModel.Validate() && AppointmentTimePicker.SelectedTime != null && AppointmentDatePicker.SelectedDate !=null)
+            if (ViewModel.Validate())
             {
-                ViewModel.Appointments.Add(
-                    new AppointmentCardViewModel
-                    {
-                        PatientName = "Patient Name",
-                        DoctorName = "Doctor Name",
-                        Duration = "00:30",
-                        AppointmentDate = "Appointment Date"
-                    }
-                );
+                ViewModel.addAppointment();
                 // Closing the Dialog
                 DialogHost.CloseDialogCommand.Execute(addAppointmentDialaog, null);
+                AppointmentDuration.Clear();
+                AppointmentTimePicker.SelectedTime = null;
+                PatientNameComboBox.SelectedItem = null;
+                DoctorNameComboBox.SelectedItem = null;
+                AppointmentDatePicker.SelectedDate = DateTime.Today;
+
             }
             else
             {
-                MessageBox.Show("Input Not Valid");
+                MessageBox.Show("Invalid Input!");
+
             }
+
         }
     }
 }
