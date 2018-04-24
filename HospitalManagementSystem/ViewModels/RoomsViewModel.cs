@@ -7,6 +7,7 @@ namespace HospitalManagementSystem.ViewModels
     public class RoomsViewModel : BaseViewModel
     {
         public ObservableCollection<RoomCardViewModel> Rooms { get; set; }
+        public string RoomtTypeComboBox { get; set; }
 
         public RoomsViewModel()
         {
@@ -30,6 +31,11 @@ namespace HospitalManagementSystem.ViewModels
                     }
                 );
             }
+        }
+        public bool ValidateRoomtType()
+        {
+            RoomtTypeComboBox = (RoomtTypeComboBox != null) ? RoomtTypeComboBox.Trim() : "";
+            return !(RoomtTypeComboBox == "");
         }
     }
 }

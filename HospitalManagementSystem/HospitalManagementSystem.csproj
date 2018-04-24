@@ -113,6 +113,9 @@
     <Compile Include="Views\Components\RoomCard.xaml.cs">
       <DependentUpon>RoomCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EmployeeDetailsVeiw.xaml.cs">
+      <DependentUpon>EmployeeDetailsVeiw.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoadingView.xaml.cs">
       <DependentUpon>LoadingView.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\RoomCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeDetailsVeiw.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
