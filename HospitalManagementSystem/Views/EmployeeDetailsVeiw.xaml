@@ -10,8 +10,8 @@
              d:DesignHeight="540" d:DesignWidth="640">
     <Grid Background="{StaticResource GreyBG}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320" />
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -21,38 +21,38 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" >
-            <TextBlock Text="Karim Elsayed" FontSize="24" Style="{StaticResource DetailsInfoTitle}" Foreground="{StaticResource PrimaryColor}" />
-            <TextBlock Text="Doctor" Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
+            <TextBlock  Text="{Binding EmployeeName}" FontSize="24" Style="{StaticResource DetailsInfoTitle}" Foreground="{StaticResource PrimaryColor}" />
+            <TextBlock Text="{Binding EmployeeRole}" Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Style="{StaticResource DetailsButton}"  Margin="15 0 0 0">Edit</Button>
-            <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0">Delete</Button>
+            <Button Style="{StaticResource DetailsButton}" Margin="15 0 0 0">EDIT</Button>
+            <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0">DELETE</Button>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="0" >
-            <TextBlock Text="Address" Style="{StaticResource DetailsInfoTitle}" />
-            <TextBlock Text="Karim Address" Style="{StaticResource DetailsInfoValue}" />
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <TextBlock Text="Addres" Style="{StaticResource DetailsInfoTitle}" />
+            <TextBlock Text="{Binding EmployeeAddress}" Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
         <StackPanel  Grid.Row="1" Grid.Column="1">
             <TextBlock Text="BirthDate" Style="{StaticResource DetailsInfoTitle}" />
-            <TextBlock Text="18/3/1998" Style="{StaticResource DetailsInfoValue}" />
+            <TextBlock Text="{Binding EmployeeBirthDate}" Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2">
             <TextBlock Text="Department" Style="{StaticResource DetailsInfoTitle}" />
-            <TextBlock Text="orthohaga (head)" Style="{StaticResource DetailsInfoValue}" />
+            <TextBlock Text="{Binding EmployeeDepartment}" Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
         <StackPanel  Grid.Row="2" Grid.Column="1">
             <TextBlock Text="Employment Date" Style="{StaticResource DetailsInfoTitle}" />
-            <TextBlock Text="18/3/1998"  Style="{StaticResource DetailsInfoValue}" />
+            <TextBlock Text="{Binding EmployeeEmploymentDate}"  Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="3">
             <TextBlock Text="Salary" Style="{StaticResource DetailsInfoTitle}" />
-            <TextBlock Text="3000 $" Style="{StaticResource DetailsInfoValue}" />
+            <TextBlock Text="{Binding EmployeeSalary}" Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="4">
-            <materialDesign:DialogHost  HorizontalAlignment="Center" VerticalAlignment="Center">
+            <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel Margin="16">
-                      <!--Content-->
+                        <!--Content-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
@@ -81,13 +81,9 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="PatientsList">
-                            <ListBoxItem>Patient1</ListBoxItem>
-                            <ListBoxItem>Patient2</ListBoxItem>
-                            <ListBoxItem>Patient3</ListBoxItem>
-                        </ListBox>
+                        <ListBox ItemsSource="{Binding PatientsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="PatientsList"></ListBox>
                         <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                            <TextBlock Foreground="White" Margin="16">Patients: 3</TextBlock>
+                            <TextBlock Text="{Binding PatientsNumber}" Foreground="White" Margin="16"/>
                         </materialDesign:ColorZone>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
@@ -97,11 +93,11 @@
                                 BorderBrush="Transparent"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="{StaticResource PrimaryColor}">
-                           <Viewbox Width="22" Height="22">
-                               <Canvas Width="24" Height="24">
-                                   <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
-                               </Canvas>
-                           </Viewbox>
+                            <Viewbox Width="22" Height="22">
+                                <Canvas Width="24" Height="24">
+                                    <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
+                                </Canvas>
+                            </Viewbox>
                         </Button>
                     </Grid>
                 </Border>
@@ -140,12 +136,9 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="AppointmentsList">
-                            <ListBoxItem>Date: 3/5/2018 - 12:30PM | Patient 2</ListBoxItem>
-                            <ListBoxItem>>Date: 18/6/2018 - 12:30PM | Patient 1</ListBoxItem>
-                        </ListBox>
+                        <ListBox ItemsSource="{Binding AppointmentsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="AppointmentsList"></ListBox>
                         <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                            <TextBlock Foreground="White" Margin="16">Appointmets: 2</TextBlock>
+                            <TextBlock Text="{Binding AppointmentsNumber}" Foreground="White" Margin="16"/>
                         </materialDesign:ColorZone>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
@@ -166,5 +159,4 @@
             </materialDesign:DialogHost>
         </StackPanel>
     </Grid>
-
 </UserControl>
