@@ -92,10 +92,8 @@
                 <Setter Property="ClipToBounds" Value="True"/>
             </Style>
             <!--Details View Button-->
-            <Style x:Key="DetailsButton" TargetType="{x:Type Button}">
+            <Style x:Key="DetailsButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
                 <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0"/>
-                <Setter Property="Width" Value="70"/>
-                <Setter Property="Height" Value="20"/>
                 <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="FontFamily" Value="Arial"/>
