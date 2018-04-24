@@ -21,39 +21,97 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" >
-            <TextBlock Text="Karim Elsayed" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="24" FontWeight="SemiBold" Margin="15 10 0 0" />
-            <TextBlock Text="Doctor" Foreground="{StaticResource LightText}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="18" FontWeight="SemiBold" Margin="15 0 0 0" />
+            <TextBlock Text="Karim Elsayed" FontSize="24" Style="{StaticResource DetailsInfoTitle}" Foreground="{StaticResource PrimaryColor}" />
+            <TextBlock Text="Doctor" Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="70" BorderThickness="0" Background="{StaticResource PrimaryColor}" FontFamily="Arial" FontSize="13" HorizontalAlignment="Center" Margin="10 12 30 0">Edit</Button>
-            <Button  materialDesign:ShadowAssist.ShadowDepth="Depth0" Width="70" BorderThickness="0" Background="{StaticResource PrimaryColor}" FontFamily="Arial" FontSize="13" Margin="10 12 30 0">Delete</Button>
+            <Button Style="{StaticResource DetailsButton}"  Margin="15 0 0 0">Edit</Button>
+            <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0">Delete</Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" >
-            <TextBlock Text="Address" Foreground="{StaticResource LightText}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 15 0 0" />
-            <TextBlock Text="Karim Address" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 5 0 0" />
+            <TextBlock Text="Address" Style="{StaticResource DetailsInfoTitle}" />
+            <TextBlock Text="Karim Address" Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
         <StackPanel  Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="BirthDate" Foreground="{StaticResource LightText}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 15 0 0" />
-            <TextBlock Text="18/3/1998" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 5 0 0" />
+            <TextBlock Text="BirthDate" Style="{StaticResource DetailsInfoTitle}" />
+            <TextBlock Text="18/3/1998" Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2">
-            <TextBlock Text="Department" Foreground="{StaticResource LightText}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 15 0 0" />
-            <TextBlock Text="orthohaga (head)" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 5 0 0" />
+            <TextBlock Text="Department" Style="{StaticResource DetailsInfoTitle}" />
+            <TextBlock Text="orthohaga (head)" Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
         <StackPanel  Grid.Row="2" Grid.Column="1">
-            <TextBlock Text="Employment Date" Foreground="{StaticResource LightText}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 15 0 0" />
-            <TextBlock Text="18/3/1998" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center" HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 5 0 0" />
+            <TextBlock Text="Employment Date" Style="{StaticResource DetailsInfoTitle}" />
+            <TextBlock Text="18/3/1998"  Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="3">
-            <TextBlock Text="Salary" Foreground="{StaticResource LightText}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 15 0 0" />
-            <TextBlock Text="3000 $" Foreground="{StaticResource PrimaryColor}" VerticalAlignment="Center"  HorizontalAlignment="Left"  FontFamily="Arial" FontSize="14" FontWeight="SemiBold" Margin="15 5 0 0" />
+            <TextBlock Text="Salary" Style="{StaticResource DetailsInfoTitle}" />
+            <TextBlock Text="3000 $" Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="4">
             <materialDesign:DialogHost  HorizontalAlignment="Center" VerticalAlignment="Center">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel Margin="16">
-                        <TextBlock>Add a new fruit.</TextBlock>
-                        <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="FruitTextBox" />
+                      <!--Content-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsDefault="True"
+                                    Margin="0 8 8 0"
+                                    Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    <system:Boolean>True</system:Boolean>
+                                </Button.CommandParameter>
+                                SUBMIT
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsCancel="True"
+                                    Margin="0 8 8 0"
+                                    Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    <system:Boolean>False</system:Boolean>
+                                </Button.CommandParameter>
+                                CANCEL
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+                <Border Style="{StaticResource DetailsDialogHostBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ListBox Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="PatientsList">
+                            <ListBoxItem>Patient1</ListBoxItem>
+                            <ListBoxItem>Patient2</ListBoxItem>
+                            <ListBoxItem>Patient3</ListBoxItem>
+                        </ListBox>
+                        <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                            <TextBlock Foreground="White" Margin="16">Patients: 3</TextBlock>
+                        </materialDesign:ColorZone>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                Grid.Row="0" Margin="0 0 28 -20"
+                                BorderThickness="0"
+                                BorderBrush="Transparent"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                Background="{StaticResource PrimaryColor}">
+                           <Viewbox Width="22" Height="22">
+                               <Canvas Width="24" Height="24">
+                                   <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
+                               </Canvas>
+                           </Viewbox>
+                        </Button>
+                    </Grid>
+                </Border>
+            </materialDesign:DialogHost>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="4">
+            <materialDesign:DialogHost  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel Margin="16">
+                        <!--Content-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
@@ -76,29 +134,32 @@
                         </StackPanel>
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
-                <Border BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}" MinWidth="256" MinHeight="256" ClipToBounds="True">
+                <Border Style="{StaticResource DetailsDialogHostBorder}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox x:Name="FruitListBox">
-                            <ListBoxItem>Apple</ListBoxItem>
-                            <ListBoxItem>Banana</ListBoxItem>
-                            <ListBoxItem>Pear</ListBoxItem>
+                        <ListBox Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="AppointmentsList">
+                            <ListBoxItem>Date: 3/5/2018 - 12:30PM | Patient 2</ListBoxItem>
+                            <ListBoxItem>>Date: 18/6/2018 - 12:30PM | Patient 1</ListBoxItem>
                         </ListBox>
-                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                            <TextBlock Margin="16">Fruit Bowl</TextBlock>
+                        <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                            <TextBlock Foreground="White" Margin="16">Appointmets: 2</TextBlock>
                         </materialDesign:ColorZone>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                 VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                Grid.Row="0" Margin="0 0 28 -20">
-                           <Viewbox Width="22" Height="22">
-                               <Canvas Width="24" Height="24">
-                                   <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
-                               </Canvas>
-                           </Viewbox>
+                                Grid.Row="0" Margin="0 0 28 -20"
+                                BorderThickness="0"
+                                BorderBrush="Transparent"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                Background="{StaticResource PrimaryColor}">
+                            <Viewbox Width="22" Height="22">
+                                <Canvas Width="24" Height="24">
+                                    <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
+                                </Canvas>
+                            </Viewbox>
                         </Button>
                     </Grid>
                 </Border>
