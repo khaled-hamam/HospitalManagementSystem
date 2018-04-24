@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.Models
 {
-    class Room
+    abstract class Room
     {
         protected String id;
         protected int roomNumber;
