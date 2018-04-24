@@ -42,6 +42,8 @@ namespace HospitalManagementSystem.Views
             if (ViewModel.ValidateDepartment())
             {
                 ViewModel.addDepartment();
+                DepartmentNameTextBox.Clear();
+                DepartmentHeadComboBox.SelectedItem = null;
 
             }
             // Closing the Dialog

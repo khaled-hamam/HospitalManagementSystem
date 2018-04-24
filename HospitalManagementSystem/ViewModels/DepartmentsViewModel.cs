@@ -15,7 +15,7 @@ namespace HospitalManagementSystem.ViewModels
         /// Items Properties
         /// </summary>
         public ObservableCollection<DepartmentCardViewModel> Departments { get; set; }
-        public ObservableCollection<DepartmentCardViewModel> FilteredDepartments { get; set; }
+        public ObservableCollection<DepartmentCardViewModel> FilteredDepartments { get; set; } 
 
         /// <summary>
         /// Search Bar Properties
@@ -84,11 +84,19 @@ namespace HospitalManagementSystem.ViewModels
                 new DepartmentCardViewModel
                 {
                     Name = newDepartment.Name,
-                    PatientsNumber = 0,
-                    EmployeesNumber = 0
+                    PatientsNumber = newDepartment.Patients.Count,
+                    EmployeesNumber = newDepartment.Nurse.Count + newDepartment.Doctors.Count
                 }
                 );
-            Hospital.Departments.Add("0",newDepartment);
+            FilteredDepartments.Add(
+               new DepartmentCardViewModel
+               {
+                   Name = newDepartment.Name,
+                   PatientsNumber = newDepartment.Patients.Count,
+                   EmployeesNumber = newDepartment.Nurse.Count + newDepartment.Doctors.Count
+               }
+               );
+            Hospital.Departments.Add(newDepartment.ID,newDepartment);
             HospitalDB.InsertDepartment(newDepartment);
 
         }
