@@ -7,6 +7,7 @@
              xmlns:Components="clr-namespace:HospitalManagementSystem.Views.Components"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="640">
     <Grid Background="{StaticResource GreyBG}">
@@ -27,11 +28,16 @@
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0" Margin="8 0 0 0" 
                          materialDesign:HintAssist.Hint="Type to search" 
+                         Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                          materialDesign:HintAssist.HintOpacity="0.4"
                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
                          BorderThickness="0"
                          MinWidth="200" VerticalAlignment="Center"
-                         Foreground="{StaticResource DarkText}"/>
+                    Foreground="{StaticResource DarkText}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding SearchAction}" Key="Return" />
+                    </TextBox.InputBindings>
+                </TextBox>
                 <Button Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="1">
                     <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                 </Button>
@@ -48,16 +54,23 @@
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
-                            <TextBox   Text="{Binding PatientNameTextBox}"
+                            <ComboBox 
                                 materialDesign:HintAssist.Hint="Patient Name"  
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" 
-                                x:Name="PatientNameTextBox" />
-                            <TextBox  Text="{Binding DoctorNameTextBox}"
+                                SelectedItem="{Binding PatientNameComboBox}"
+                                IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                Margin="0 8 0 0" 
+                                HorizontalAlignment="Left"  
+                                Width="200" 
+                                x:Name="PatientNameComboBox" />
+                            <ComboBox 
                                 materialDesign:HintAssist.Hint="Doctor Name"  
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
-                                Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" 
-                                x:Name="DoctorNameTextBox" />
+                                SelectedItem="{Binding DoctorNameComboBox}"
+                                IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                Margin="0 8 0 0" 
+                                HorizontalAlignment="Left"  
+                                Width="200" 
+                                x:Name="DoctorNameComboBox" />
+
                             <DatePicker Text="{Binding AppointmentDatePicker}"
                                 materialDesign:HintAssist.Hint="Appointment Date"  
                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
@@ -80,7 +93,7 @@
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"
-                                    Click="addAppointment">
+                                    Click="addSubmit">
                                 <Button.CommandParameter>
                                     <system:Boolean>True</system:Boolean>
                                 </Button.CommandParameter>
@@ -99,7 +112,7 @@
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding Appointments}">
+                    <ItemsControl ItemsSource="{Binding FilteredAppointments}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Components:AppointmentCard />

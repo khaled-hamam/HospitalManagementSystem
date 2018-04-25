@@ -1,32 +1,78 @@
 ﻿using HospitalManagementSystem.Models;
 using System.Collections.ObjectModel;
 using System;
-using System.Windows;
+using HospitalManagementSystem.Services;
+using System.Collections.Generic;
+using System.Windows.Input;
+using System.Linq;
 
 namespace HospitalManagementSystem.ViewModels
 {
     public class AppointmentsViewModel : BaseViewModel
     {
-        public String PatientNameTextBox { get; set; }
-        public String DoctorNameTextBox { get; set; }
+        public ObservableCollection<AppointmentCardViewModel> FilteredAppointments { get; set; }
+
+        public String SearchQuery { get; set; }
+
+        public ComboBoxPairs PatientNameComboBox { get; set; }
+        public ComboBoxPairs DoctorNameComboBox { get; set; }
         public String AppointmentDuration { get; set; }
+        public DateTime AppointmentDatePicker { get; set; }
+        public String AppointmentTimePicker { get; set; }
+        public String datePickerString { get; set; }
+        public String timePickerString { get; set; }
+
+        public List<ComboBoxPairs> patientsComboBoxItems;
+        public List<ComboBoxPairs> doctorsComboBoxItems;
+
+        public ICommand SearchAction { get; set; }
 
         public ObservableCollection<AppointmentCardViewModel> Appointments { get; set; }
         public bool Validate()
         {
-            PatientNameTextBox = (PatientNameTextBox != null) ? PatientNameTextBox.Trim() : "";
-            DoctorNameTextBox = (DoctorNameTextBox != null) ? DoctorNameTextBox.Trim() : "";
-            AppointmentDuration = (AppointmentDuration != null) ? AppointmentDuration.Trim() : "";
 
-            if (PatientNameTextBox == "")
-            {
-                return false;
-            }
-            if (DoctorNameTextBox == "")
-            {
-                return false;
-            }
+            AppointmentDuration = (AppointmentDuration != null) ? AppointmentDuration.Trim() : "";
+            AppointmentTimePicker = (AppointmentTimePicker != null) ? AppointmentTimePicker.Trim() : "";
+
             if (AppointmentDuration == "")
+            {
+                return false;
+            }
+            if (AppointmentTimePicker == "")
+            {
+                return false;
+            }
+            if (PatientNameComboBox == null)
+            {
+                return false;
+            }
+            if (DoctorNameComboBox == null)
+            {
+                return false;
+            }
+            for (int i = 0; i < AppointmentDuration.Length; i++)
+            {
+                if (AppointmentDuration[i] >= 'a' && AppointmentDuration[i] <= 'z')
+                {
+                    return false;
+                }
+            }
+            bool foundPatient = false, foundDoctor = false;
+            foreach (Patient patient in Hospital.Patients.Values)
+            {
+                if (patient.GetType() == typeof(AppointmentPatient) && PatientNameComboBox.Value == patient.Name)
+                {
+                    foundPatient = true;
+                }
+            }
+            foreach (Employee employee in Hospital.Employees.Values)
+            {
+                if (employee.GetType() == typeof(Doctor) && DoctorNameComboBox.Value == employee.Name)
+                {
+                    foundDoctor = true;
+                }
+            }
+            if (!foundPatient || !foundDoctor)
             {
                 return false;
             }
@@ -34,7 +80,31 @@ namespace HospitalManagementSystem.ViewModels
         }
         public AppointmentsViewModel()
         {
+            AppointmentDatePicker = DateTime.Today;
+
+
+            patientsComboBoxItems = new List<ComboBoxPairs>();
+            doctorsComboBoxItems = new List<ComboBoxPairs>();
+
+            SearchAction = new RelayCommand(Search);
+
+            foreach (Patient patient in Hospital.Patients.Values)
+            {
+                if (patient.GetType() == typeof(AppointmentPatient))
+                {
+                    patientsComboBoxItems.Add(new ComboBoxPairs(patient.ID, patient.Name));
+                }
+            }
+
+            foreach (Employee employee in Hospital.Employees.Values)
+            {
+                if (employee.GetType() == typeof(Doctor))
+                {
+                    doctorsComboBoxItems.Add(new ComboBoxPairs(employee.ID, employee.Name));
+                }
+            }
             Appointments = new ObservableCollection<AppointmentCardViewModel>();
+
             foreach (Appointment appointment in Hospital.Appointments.Values)
             {
                 Appointments.Add(
@@ -42,11 +112,50 @@ namespace HospitalManagementSystem.ViewModels
                     {
                         PatientName = appointment.Patient.Name,
                         DoctorName = appointment.Doctor.Name,
-                        Duration = appointment.Duration.ToString(),
+                        Duration = appointment.Duration.ToString() + " mins",
                         AppointmentDate = appointment.Date.ToString()
                     }
                 );
             }
+            FilteredAppointments = new ObservableCollection<AppointmentCardViewModel>(Appointments);
+
+        }
+        private void Search()
+        {
+            if (String.IsNullOrEmpty(SearchQuery))
+            {
+                FilteredAppointments = new ObservableCollection<AppointmentCardViewModel>(Appointments);
+                return;
+            }
+
+            FilteredAppointments = new ObservableCollection<AppointmentCardViewModel>(
+                Appointments.Where(Appointment => Appointment.AppointmentDate.ToString().Contains(SearchQuery))
+            );
+        }
+        public void addAppointment()
+        {
+            datePickerString = AppointmentDatePicker.ToShortDateString();
+            datePickerString += " ";
+            datePickerString += AppointmentTimePicker;
+
+            Appointment newAppointment = new Appointment
+            {
+                Patient = (AppointmentPatient)Hospital.Patients[PatientNameComboBox.Key],
+                Doctor = (Doctor)Hospital.Employees[DoctorNameComboBox.Key],
+                Duration = Int32.Parse(AppointmentDuration),
+                Date = DateTime.Parse(datePickerString),
+            };
+            Appointments.Add(
+                new AppointmentCardViewModel
+                {
+                    PatientName = newAppointment.Patient.Name,
+                    DoctorName = newAppointment.Doctor.Name,
+                    Duration = newAppointment.Duration.ToString(),
+                    AppointmentDate = newAppointment.Date.ToString()
+
+                });
+            Hospital.Appointments.Add(newAppointment.ID, newAppointment);
+            HospitalDB.InsertAppointment(newAppointment);
         }
     }
 }
