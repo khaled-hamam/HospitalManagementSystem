@@ -19,7 +19,7 @@ namespace HospitalManagementSystem.Models
 
         public ResidentPatient() : base()
         {
-            this.Room = new Room();
+            //this.Room = new Room();
             this.History = new Dictionary<String, Medicine>();
         }
         public ResidentPatient(String name, DateTime birthDate, String address, String diagnosis, Room room, int duration) : base(name, birthDate, address, diagnosis)
