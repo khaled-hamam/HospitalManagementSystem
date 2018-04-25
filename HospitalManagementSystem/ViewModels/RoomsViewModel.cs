@@ -125,7 +125,7 @@ namespace HospitalManagementSystem.ViewModels
                 HospitalDB.InsertRoom(newSemiPrivateRoom);
             }
 
-            else if(RoomType == "Standard Ward<")
+            else if(RoomType == "Standard Ward")
             {
                 StandardWard newStandardWardRoom = new StandardWard
                 {
