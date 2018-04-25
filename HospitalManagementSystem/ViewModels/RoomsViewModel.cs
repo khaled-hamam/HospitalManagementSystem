@@ -27,7 +27,6 @@ namespace HospitalManagementSystem.ViewModels
         public String RoomType { get; set; }
 
         public ICommand SearchAction { get; set; }
-        public string RoomtTypeComboBox { get; set; }
 
         public RoomsViewModel()
         {
@@ -126,7 +125,7 @@ namespace HospitalManagementSystem.ViewModels
                 HospitalDB.InsertRoom(newSemiPrivateRoom);
             }
 
-            else if(RoomType == "Standard Ward")
+            else if(RoomType == "Standard Ward<")
             {
                 StandardWard newStandardWardRoom = new StandardWard
                 {
@@ -167,16 +166,10 @@ namespace HospitalManagementSystem.ViewModels
                 if (int.Parse(RoomNumber) == room.RoomNumber)
                     return false;
             }
-
-
             
             return true;
         }
 
-        public bool ValidateRoomtType()
-        {
-            RoomtTypeComboBox = (RoomtTypeComboBox != null) ? RoomtTypeComboBox.Trim() : "";
-            return !(RoomtTypeComboBox == "");
-        }
+
     }
 }
