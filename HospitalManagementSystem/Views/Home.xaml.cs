@@ -54,5 +54,6 @@ namespace HospitalManagementSystem.Views
         {
             ViewModel.Content = new RoomsViewModel();
         }
+
     }
 }
