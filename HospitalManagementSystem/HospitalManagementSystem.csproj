@@ -87,6 +87,7 @@
     <Compile Include="ViewModels\DepartmentCardViewModel.cs" />
     <Compile Include="ViewModels\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\EmployeeCardViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeDetailsVeiwModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoadingViewModel.cs" />
@@ -112,6 +113,9 @@
     </Compile>
     <Compile Include="Views\Components\RoomCard.xaml.cs">
       <DependentUpon>RoomCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeDetailsVeiw.xaml.cs">
+      <DependentUpon>EmployeeDetailsVeiw.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoadingView.xaml.cs">
       <DependentUpon>LoadingView.xaml</DependentUpon>
@@ -146,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\RoomCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeDetailsVeiw.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

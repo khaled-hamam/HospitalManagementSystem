@@ -1,4 +1,5 @@
 ﻿using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,21 +7,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace HospitalManagementSystem.ViewModels
 {
     public class PatientsViewModel : BaseViewModel
     {
-        public string PatientNameTextBox { get; set; }
-        public ObservableCollection<PatientCardViewModel> Patients { get; set; }
-        public bool Validate()
+        /// <summary>
+        /// Add Dialog Properties
+        /// </summary>
+        public String PatientNameTextBox { get; set; }
+        public String PatientAddressTextBox { get; set; }
+        public ComboBoxPairs RoomNumberComboBox { get; set; }
+        public List<ComboBoxPairs> ComboBoxItems;
+
+        private String patientTypeComboBox;
+        public String PatientTypeComboBox
         {
-            PatientNameTextBox = (PatientNameTextBox != null)? PatientNameTextBox.Trim() : "";
-            return !(PatientNameTextBox == "");
+            get => patientTypeComboBox;
+            set
+            {
+                if (value == "Resident Patient")
+                    IsResident = Visibility.Visible;
+                else
+                    IsResident = Visibility.Collapsed;
+
+                patientTypeComboBox = value;
+            }
         }
+
+        public DateTime PatientBirthDatePicker { get; set; }
+        public String PatientRoomNumber { get; set; }
+        public Visibility IsResident { get; set; }
+
+        public ICommand SearchAction { get; set; }
+        /// <summary>
+        /// Search Bar Properties
+        /// </summary>
+        public String SearchQuery { get; set; }
+        /// <summary>
+        /// Items Properties
+        /// </summary>
+        public ObservableCollection<PatientCardViewModel> Patients { get; set; }
+        public ObservableCollection<PatientCardViewModel> FilteredPatients { get; set; }
+
         public PatientsViewModel()
         {
+            IsResident = Visibility.Collapsed;
+            SearchAction = new RelayCommand(Search);
             Patients = new ObservableCollection<PatientCardViewModel>();
+            PatientBirthDatePicker = DateTime.Today;
+            ComboBoxItems = new List<ComboBoxPairs>();
+            foreach (Room room in Hospital.Rooms.Values) {
+                ComboBoxItems.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
+             }
+
             foreach (Patient patient in Hospital.Patients.Values)
             {
                 Patients.Add(
@@ -32,6 +73,75 @@ namespace HospitalManagementSystem.ViewModels
                     }
                 );
             }
+            FilteredPatients = new ObservableCollection<PatientCardViewModel>(Patients);
         }
+        private void Search()
+        {
+            if (String.IsNullOrEmpty(SearchQuery))
+            {
+                FilteredPatients = new ObservableCollection<PatientCardViewModel>(Patients);
+                return;
+            }
+            FilteredPatients = new ObservableCollection<PatientCardViewModel>(Patients.Where(patient => patient.Name.ToLower().Contains(SearchQuery)));
+        }
+        public bool ValidateInput()
+        {
+            PatientNameTextBox = (PatientNameTextBox != null) ? PatientNameTextBox.Trim() : "";
+            PatientAddressTextBox = (PatientAddressTextBox != null) ? PatientAddressTextBox.Trim() : "";
+            PatientTypeComboBox = (PatientTypeComboBox != null) ? PatientTypeComboBox.Trim() : "";
+            return !(PatientNameTextBox == "" || PatientAddressTextBox == ""  || PatientTypeComboBox == "");
+        }
+        public void addPatient()
+        {
+            if (PatientTypeComboBox == "Resident Patient")
+            {
+                ResidentPatient newPatient = new ResidentPatient
+                {
+                    Name = PatientNameTextBox,
+                    Address = PatientAddressTextBox,
+                    BirthDate = PatientBirthDatePicker,
+                    Room = Hospital.Rooms[RoomNumberComboBox.Key]
+                };
+                Patients.Add(new PatientCardViewModel
+                {
+                    Name = PatientNameTextBox,
+                    Type = PatientTypeComboBox,
+                    ShortDiagnosis = "Not Implemented yet"
+                });
+
+                FilteredPatients.Add(new PatientCardViewModel
+                {
+                    Name = PatientNameTextBox,
+                    Type = PatientTypeComboBox,
+                    ShortDiagnosis = "Not Implemented yet"
+                });
+                Hospital.Patients.Add(newPatient.ID, newPatient);
+                HospitalDB.InsertPatient(newPatient);
+            } else {
+                AppointmentPatient newPatient = new AppointmentPatient
+                {
+                    Name = PatientNameTextBox,
+                    Address = PatientAddressTextBox,
+                    BirthDate = PatientBirthDatePicker,
+                };
+
+                Patients.Add(new PatientCardViewModel {
+                    Name = PatientNameTextBox,
+                    Type = PatientTypeComboBox,
+                    ShortDiagnosis = "Not Implemented yet"
+                });
+
+                FilteredPatients.Add(new PatientCardViewModel
+                {
+                    Name = PatientNameTextBox,
+                    Type = PatientTypeComboBox,
+                    ShortDiagnosis = "Not Implemented yet"
+                });
+
+                Hospital.Patients.Add(newPatient.ID, newPatient);
+                HospitalDB.InsertPatient(newPatient);
+            }
+        }
+ 
     }
 }

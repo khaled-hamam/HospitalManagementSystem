@@ -32,6 +32,19 @@ namespace HospitalManagementSystem.ViewModels
 
         public ICommand SearchAction { get; set; }
 
+        public string DepartmentNameTextBox { get; set; }
+        public string DepartmentHeadIDTextBox { get; set; }
+        public bool ValidateNameTextBox()
+        {
+            DepartmentNameTextBox = (DepartmentNameTextBox != null) ? DepartmentNameTextBox.Trim() : "";
+            return !(DepartmentNameTextBox == "");
+        }
+        public bool ValidateHeadIDTextBox()
+        {
+            DepartmentHeadIDTextBox = (DepartmentHeadIDTextBox != null) ? DepartmentHeadIDTextBox.Trim() : "";
+            return !(DepartmentHeadIDTextBox == "");
+        }
+
         public DepartmentsViewModel()
         {
             ComboBoxItems = new List<ComboBoxPairs>();

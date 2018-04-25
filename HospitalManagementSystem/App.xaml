@@ -67,6 +67,40 @@
                 <Setter Property="Foreground" Value="{StaticResource DarkText}" />
             </Style>
             
+            <!-- Details View Info Title -->
+            <Style x:Key="DetailsInfoTitle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{StaticResource LightText}" />
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="FontFamily" Value="Arial"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Margin" Value="15 15 0 0"/>
+            </Style>
+            
+            <!-- Details View Info Value -->
+            <Style x:Key="DetailsInfoValue" BasedOn="{StaticResource DetailsInfoTitle}" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="Margin" Value="15 5 0 0"/>
+            </Style>
+            <!--Details View DialogHost Border-->
+            <Style x:Key="DetailsDialogHostBorder" TargetType="{x:Type Border}">
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="MinWidth" Value="256"/>
+                <Setter Property="MinHeight" Value="256"/>
+                <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="ClipToBounds" Value="True"/>
+            </Style>
+            <!--Details View Button-->
+            <Style x:Key="DetailsButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+                <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0"/>
+                <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="FontFamily" Value="Arial"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="white"/>
+            </Style>
             <!-- Meterial Design Theme -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />

@@ -27,6 +27,7 @@ namespace HospitalManagementSystem.ViewModels
         public String RoomType { get; set; }
 
         public ICommand SearchAction { get; set; }
+        public string RoomtTypeComboBox { get; set; }
 
         public RoomsViewModel()
         {
@@ -53,6 +54,7 @@ namespace HospitalManagementSystem.ViewModels
             }
             FilteredRooms= new ObservableCollection<RoomCardViewModel>(Rooms);
         }
+
 
         private void Search()
         {
@@ -171,5 +173,10 @@ namespace HospitalManagementSystem.ViewModels
             return true;
         }
 
+        public bool ValidateRoomtType()
+        {
+            RoomtTypeComboBox = (RoomtTypeComboBox != null) ? RoomtTypeComboBox.Trim() : "";
+            return !(RoomtTypeComboBox == "");
+        }
     }
 }
