@@ -45,7 +45,6 @@
             <RowDefinition Height="70"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" >
@@ -53,7 +52,7 @@
             <TextBlock Text="{Binding PatientType}"  Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Style="{StaticResource DetailsButton}" Margin="15 0 0 0" MouseUp="EditAppointmentPatient">EDIT</Button>
+            <Button Style="{StaticResource DetailsButton}" Margin="15 0 0 0" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">EDIT</Button>
             <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0" MouseUp="DeleteAppointmentPatient">DELETE</Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
@@ -68,16 +67,11 @@
             <TextBlock  Text="Diagnosis" Style="{StaticResource DetailsInfoTitle}" />
             <TextBlock Text="{Binding PatientDiagnosis}" Style="{StaticResource DetailsInfoValue}" />
         </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="3">
-            <TextBlock Text="Bill" Style="{StaticResource DetailsInfoTitle}" />
-            <TextBlock Text="{Binding PatientBill}" Style="{StaticResource DetailsInfoValue}" />
-        </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="2">
-            <TextBlock Text="Appointment Details" Style="{StaticResource DetailsInfoTitle}" />
-            <TextBlock Text="{Binding AppointmentDate}" Style="{StaticResource DetailsInfoValue}" />
-            <TextBlock Text="{Binding AppointmentDoctor}" Style="{StaticResource DetailsInfoValue}" Margin="15 0 0 0 " />
-        </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="4">
+                <StackPanel Grid.Column="1" Grid.Row="2">
+                    <TextBlock Text="Bill" Style="{StaticResource DetailsInfoTitle}" />
+                    <TextBlock Text="{Binding PatientBill}" Style="{StaticResource DetailsInfoValue}" />
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="4">
             <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel Margin="16">
@@ -132,6 +126,61 @@
                 </Border>
             </materialDesign:DialogHost>
         </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="4">
+                    <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
+                        <materialDesign:DialogHost.DialogContent>
+                            <StackPanel Margin="16">
+                                <!--Content-->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsDefault="True"
+                                    Margin="0 8 8 0"
+                                    Command="materialDesign:DialogHost.CloseDialogCommand">
+                                        <Button.CommandParameter>
+                                            <system:Boolean>True</system:Boolean>
+                                        </Button.CommandParameter>
+                                        SUBMIT
+                                    </Button>
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsCancel="True"
+                                    Margin="0 8 8 0"
+                                    Command="materialDesign:DialogHost.CloseDialogCommand">
+                                        <Button.CommandParameter>
+                                            <system:Boolean>False</system:Boolean>
+                                        </Button.CommandParameter>
+                                        CANCEL
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </materialDesign:DialogHost.DialogContent>
+                        <Border  Style="{StaticResource DetailsDialogHostBorder}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ListBox ItemsSource="{Binding AppointmentsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="AppointmentsList"></ListBox>
+                                <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                                    <TextBlock Text="{Binding AppointmentsNumber}" Foreground="White" Margin="16"/>
+                                </materialDesign:ColorZone>
+                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                Grid.Row="0" Margin="0 0 28 -20"
+                                BorderThickness="0"
+                                BorderBrush="Transparent"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                Background="{StaticResource PrimaryColor}">
+                                    <Viewbox Width="22" Height="22">
+                                        <Canvas Width="24" Height="24">
+                                            <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
+                                        </Canvas>
+                                    </Viewbox>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </materialDesign:DialogHost>
+                </StackPanel>
             </Grid>
         </materialDesign:DialogHost>
     </Grid>

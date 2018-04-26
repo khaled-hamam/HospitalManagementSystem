@@ -158,13 +158,13 @@
                         </StackPanel>
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
-                <Border Style="{StaticResource DetailsDialogHostBorder}">
+                        <Border  Visibility="{Binding IsDoctor}" Style="{StaticResource DetailsDialogHostBorder}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox  ItemsSource="{Binding AppointmentsList}"  Visibility="{Binding IsDoctor}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="AppointmentsList"></ListBox>
+                        <ListBox  ItemsSource="{Binding AppointmentsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="AppointmentsList"></ListBox>
                         <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                             <TextBlock Text="{Binding AppointmentsNumber}" Foreground="White" Margin="16"/>
                         </materialDesign:ColorZone>
@@ -213,13 +213,13 @@
                         </StackPanel>
                     </StackPanel>
                 </materialDesign:DialogHost.DialogContent>
-                <Border Style="{StaticResource DetailsDialogHostBorder}">
+                        <Border Visibility="{Binding IsNurse}" Style="{StaticResource DetailsDialogHostBorder}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox ItemsSource="{Binding RoomsList}"  Visibility="{Binding IsNurse}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="RoomsList"></ListBox>
+                        <ListBox ItemsSource="{Binding RoomsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="RoomsList"></ListBox>
                         <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                             <TextBlock Text="{Binding RoomsNumber}" Foreground="White" Margin="16"/>
                         </materialDesign:ColorZone>

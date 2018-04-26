@@ -14,11 +14,11 @@ namespace HospitalManagementSystem.ViewModels
         public String PatientAddress { get; set; }
         public String PatientBirthDate { get; set; }
         public String PatientDiagnosis { get; set; }
-        public String AppointmentDate { get; set; }
-        public String AppointmentDoctor { get; set; }
         public String PatientBill { get; set; }
         public ObservableCollection<String> DoctorsNumber { get; set; }
         public ObservableCollection<String> DoctorsList { get; set; }
+        public ObservableCollection<String> AppointmentsList { get; set; }
+        public ObservableCollection<String> AppointmentsNumber { get; set; }
 
         public void EditAppointmentPatient()
         {

@@ -39,16 +39,16 @@ namespace HospitalManagementSystem.Views
 
         private void navigateToEmployees(object sender, MouseButtonEventArgs e)
         {
-            ViewModel.Content = new EmployeesViewModel();
+            ViewModel.Content = new ResidentPatientDetailsViewModel();
         }
         private void navigateToPatients(object sender, RoutedEventArgs e)
         {
-            ViewModel.Content = new PatientsViewModel();
+            ViewModel.Content = new AppointmentPatientDetailsViewModel();
         }
 
         private void navigateToAppointments(object sender, RoutedEventArgs e)
         {   
-            ViewModel.Content = new AppointmentsViewModel();
+            ViewModel.Content = new EmployeeDetailsVeiwModel();
         }
 
         private void navigateToRooms(object sender, RoutedEventArgs e)
