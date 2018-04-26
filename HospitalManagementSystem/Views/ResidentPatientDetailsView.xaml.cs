@@ -17,26 +17,25 @@ using System.Windows.Shapes;
 namespace HospitalManagementSystem.Views
 {
     /// <summary>
-    /// Interaction logic for EmployeeDetailsVeiw.xaml
+    /// Interaction logic for ResidentPatientDetailsView.xaml
     /// </summary>
-    public partial class EmployeeDetailsVeiw : UserControl
+    public partial class ResidentPatientDetailsView : UserControl
     {
-        public EmployeeDetailsVeiwModel ViewModel { get; set; }
-        public EmployeeDetailsVeiw()
+        public ResidentPatientDetailsViewModel ViewModel { get; set; }
+        public ResidentPatientDetailsView()
         {
-            ViewModel = new EmployeeDetailsVeiwModel();
+            ViewModel = new ResidentPatientDetailsViewModel();
             DataContext = ViewModel;
             InitializeComponent();
         }
-
-        private void DeleteEmployee(object sender, MouseButtonEventArgs e)
+        private void DeleteResidentPatient(object sender, MouseButtonEventArgs e)
         {
-            ViewModel.DeleteEmployee();
+            ViewModel.DeleteResidentPatient();
         }
 
-        private void EditEmployee(object sender, RoutedEventArgs e)
+        private void EditResidentPatient(object sender, RoutedEventArgs e)
         {
-            ViewModel.EditEmployee();
+            ViewModel.EditResidentPatient();
         }
     }
 }

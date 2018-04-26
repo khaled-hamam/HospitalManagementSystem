@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace HospitalManagementSystem.ViewModels
 {
@@ -13,7 +14,6 @@ namespace HospitalManagementSystem.ViewModels
         /// Details View Properites
         /// </summary>
         public String EmployeeName { get; set; }
-        public String EmployeeRole { get; set; }
         public String EmployeeAddress { get; set; }
         public String EmployeeBirthDate { get; set; }
         public String EmployeeDepartment { get; set; }
@@ -21,7 +21,42 @@ namespace HospitalManagementSystem.ViewModels
         public String EmployeeSalary { get; set; }
         public ObservableCollection<String> PatientsList { get; set; }
         public ObservableCollection<String> AppointmentsList { get; set; }
+        public ObservableCollection<String> RoomsList { get; set; }
         public ObservableCollection<String> PatientsNumber { get; set; }
         public ObservableCollection<String> AppointmentsNumber { get; set; }
+
+        private String employeeRole { get; set; }
+        public Visibility IsDoctor { get; set; }
+        public Visibility IsNurse { get; set; }
+        public String EmployeeRole {
+            get => employeeRole;
+            set {
+                if (value == "Doctor")
+                {
+                    IsDoctor = Visibility.Visible;
+                    IsNurse = Visibility.Collapsed;
+                }
+                else
+                {
+                    IsNurse = Visibility.Visible;
+                    IsDoctor = Visibility.Collapsed;
+                }
+                employeeRole = value;
+            }
+        }
+        public EmployeeDetailsVeiwModel()
+        {
+            IsDoctor = Visibility.Collapsed;
+            IsNurse = Visibility.Collapsed;         
+        }
+        public void EditEmployee()
+        {
+
+        }
+        public void DeleteEmployee()
+        {
+
+        }
+
     }
 }
