@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="HospitalManagementSystem.Views.RoomsView"
+<UserControl x:Class="HospitalManagementSystem.Views.RoomsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -48,7 +48,8 @@
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel>
                         <StackPanel Margin="16">
-                            <ComboBox Text="{Binding RoomtTypeComboBox }" materialDesign:HintAssist.Hint="Room Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomtTypeComboBox" >
+                            <TextBox Text="{Binding RoomNumber}"  materialDesign:HintAssist.Hint="Room Number"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomNumberTextBox" />
+                            <ComboBox Text="{Binding RoomType }" materialDesign:HintAssist.Hint="Room Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomtTypeComboBox" >
                                 <ComboBoxItem>Private</ComboBoxItem>
                                 <ComboBoxItem>Semi Private</ComboBoxItem>
                                 <ComboBoxItem>Standard Ward</ComboBoxItem>

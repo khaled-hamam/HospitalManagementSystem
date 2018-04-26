@@ -97,6 +97,16 @@ namespace HospitalManagementSystem.ViewModels
                     }
                    );
 
+                FilteredEmployees.Add(
+                   new EmployeeCardViewModel
+                   {
+                       Name = newDoctor.Name,
+                       Salary = $"{newDoctor.Salary}$",
+                       Department = newDoctor.Department.Name,
+                       Role = "Doctor"
+                   }
+                  );
+
                 Hospital.Employees.Add(newDoctor.ID, newDoctor);
                 HospitalDB.InsertDoctor(newDoctor);
             }
@@ -120,6 +130,16 @@ namespace HospitalManagementSystem.ViewModels
                         Role = "Nurse"
                     }
                    );
+               FilteredEmployees.Add(
+                  new EmployeeCardViewModel
+                  {
+                      Name = newNurse.Name,
+                      Salary = $"{newNurse.Salary}$",
+                      Department = newNurse.Department.Name,
+                      Role = "Nurse"
+                  }
+                 );
+
                 Hospital.Employees.Add(newNurse.ID, newNurse);
                 HospitalDB.InsertNurse(newNurse);
 
@@ -133,12 +153,11 @@ namespace HospitalManagementSystem.ViewModels
             EmployeeNameTextBox = (EmployeeNameTextBox != null) ? EmployeeNameTextBox.Trim() : "";
             EmployeeAddressTextBox = (EmployeeAddressTextBox != null) ? EmployeeAddressTextBox.Trim() : "";
             EmployeeSalaryTextBox = (EmployeeSalaryTextBox != null) ? EmployeeSalaryTextBox.Trim() : "";
-            EmployeeDepartment.Value = (EmployeeDepartment.Value != null) ? EmployeeDepartment.Value.Trim() : "";
             EmployeeRole = (EmployeeRole != null) ? EmployeeRole.Trim() : "";
             if (EmployeeNameTextBox == "") return false;
             if (EmployeeAddressTextBox == "") return false;
             if (EmployeeSalaryTextBox == "") return false;
-            if (EmployeeDepartment.Value == "") return false;
+            if (EmployeeDepartment == null) return false;
             if (EmployeeRole == "") return false;
             return true;
         }

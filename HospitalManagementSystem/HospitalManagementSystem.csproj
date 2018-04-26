@@ -86,6 +86,7 @@
     <Compile Include="ViewModels\AppointmentsViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DepartmentCardViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentDetailsViewModel.cs" />
     <Compile Include="ViewModels\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\EmployeeCardViewModel.cs" />
     <Compile Include="ViewModels\EmployeeDetailsVeiwModel.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="ViewModels\PatientsViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\RoomCardViewModel.cs" />
+    <Compile Include="ViewModels\RoomDetailsViewModel.cs" />
     <Compile Include="ViewModels\RoomsViewModel.cs" />
     <Compile Include="Views\AppointmentPatientDetailsView.xaml.cs">
       <DependentUpon>AppointmentPatientDetailsView.xaml</DependentUpon>
@@ -109,6 +111,9 @@
     </Compile>
     <Compile Include="Views\Components\DepartmentCard.xaml.cs">
       <DependentUpon>DepartmentCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentDetailsView.xaml.cs">
+      <DependentUpon>DepartmentDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\EmployeeCard.xaml.cs">
       <DependentUpon>EmployeeCard.xaml</DependentUpon>
@@ -125,8 +130,13 @@
     <Compile Include="Views\LoadingView.xaml.cs">
       <DependentUpon>LoadingView.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Views\ResidentPatientDetailsView.xaml.cs">
       <DependentUpon>ResidentPatientDetailsView.xaml</DependentUpon>
+=======
+    <Compile Include="Views\RoomDetailsView.xaml.cs">
+      <DependentUpon>RoomDetailsView.xaml</DependentUpon>
+>>>>>>> de03ba97547d289accc450dbf654a5a439338ce2
     </Compile>
     <Compile Include="Views\RoomsView.xaml.cs">
       <DependentUpon>RoomsView.xaml</DependentUpon>
@@ -153,6 +163,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DepartmentDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Components\EmployeeCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,7 +187,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
     <Page Include="Views\ResidentPatientDetailsView.xaml">
+=======
+    <Page Include="Views\RoomDetailsView.xaml">
+>>>>>>> de03ba97547d289accc450dbf654a5a439338ce2
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -27,6 +27,7 @@
         <DataTemplate x:Name="LoadingView" DataType="{x:Type viewmodels:LoadingViewModel}">
             <views:LoadingView DataContext="{Binding Content}"/>
         </DataTemplate>
+<<<<<<< HEAD
         <DataTemplate x:Name="EmployeeDetails" DataType="{x:Type viewmodels:EmployeeDetailsVeiwModel}">
             <views:EmployeeDetailsVeiw DataContext="{Binding Content}"/>
         </DataTemplate>
@@ -36,6 +37,8 @@
         <DataTemplate x:Name="AppointmentPatientDetailsView" DataType="{x:Type viewmodels:AppointmentPatientDetailsViewModel}">
             <views:AppointmentPatientDetailsView DataContext="{Binding Content}"/>
         </DataTemplate>
+=======
+>>>>>>> de03ba97547d289accc450dbf654a5a439338ce2
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

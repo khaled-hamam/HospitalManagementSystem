@@ -49,9 +49,15 @@ namespace HospitalManagementSystem.Views
             if (ViewModel.ValidateName() )
             {
                 ViewModel.addEmployee();
+                EmployeeNameTextBox.Clear();
+                EmployeeAddressTextBox.Clear();
+                EmployeeBirthDatePicker.SelectedDate = DateTime.Today;
+                EmployeeSalaryTextBox.Clear();
+                EmployeeDepartmentComboBox.SelectedItem = null;
+                EmpoloyeeRoleComboBox.SelectedItem = null;
 
             // Closing the Dialog
-            DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
+                DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
 
             }
             else

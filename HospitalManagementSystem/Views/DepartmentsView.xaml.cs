@@ -29,6 +29,9 @@ namespace HospitalManagementSystem.Views
             ViewModel = new DepartmentsViewModel();
             DataContext = ViewModel;
             InitializeComponent();
+            DepartmentHeadComboBox.DisplayMemberPath = "Value";
+            DepartmentHeadComboBox.SelectedValuePath = "Key";
+            DepartmentHeadComboBox.ItemsSource = ViewModel.ComboBoxItems;
         }
 
         public void addDepartment(object sender, RoutedEventArgs e)
@@ -36,21 +39,15 @@ namespace HospitalManagementSystem.Views
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-            if (ViewModel.ValidateNameTextBox() && ViewModel.ValidateHeadIDTextBox())
+            if (ViewModel.ValidateDepartment())
             {
-                ViewModel.Departments.Add(
-                    new DepartmentCardViewModel
-                    {
-                        Name = "Name",
-                        EmployeesNumber = 1,
-                        PatientsNumber = 2
-                    }
-                );
-                // Closing the Dialog
-                DialogHost.CloseDialogCommand.Execute(addDepartmentDialaog, null);
-            } else {
-                MessageBox.Show("Invalid Entry");
+                ViewModel.addDepartment();
+                DepartmentNameTextBox.Clear();
+                DepartmentHeadComboBox.SelectedItem = null;
+
             }
+            // Closing the Dialog
+            DialogHost.CloseDialogCommand.Execute(addDepartmentDialaog, null);
         }
     }
 }
