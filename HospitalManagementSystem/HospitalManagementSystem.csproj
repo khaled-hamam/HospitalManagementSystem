@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\AppointmentsViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DepartmentCardViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentDetailsViewModel.cs" />
     <Compile Include="ViewModels\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\EmployeeCardViewModel.cs" />
     <Compile Include="ViewModels\EmployeeDetailsVeiwModel.cs" />
@@ -104,6 +105,9 @@
     </Compile>
     <Compile Include="Views\Components\DepartmentCard.xaml.cs">
       <DependentUpon>DepartmentCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentDetailsView.xaml.cs">
+      <DependentUpon>DepartmentDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\EmployeeCard.xaml.cs">
       <DependentUpon>EmployeeCard.xaml</DependentUpon>
@@ -138,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\DepartmentCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DepartmentDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
