@@ -130,13 +130,11 @@
     <Compile Include="Views\LoadingView.xaml.cs">
       <DependentUpon>LoadingView.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Views\ResidentPatientDetailsView.xaml.cs">
       <DependentUpon>ResidentPatientDetailsView.xaml</DependentUpon>
-=======
+    </Compile>
     <Compile Include="Views\RoomDetailsView.xaml.cs">
       <DependentUpon>RoomDetailsView.xaml</DependentUpon>
->>>>>>> de03ba97547d289accc450dbf654a5a439338ce2
     </Compile>
     <Compile Include="Views\RoomsView.xaml.cs">
       <DependentUpon>RoomsView.xaml</DependentUpon>
@@ -187,11 +185,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
     <Page Include="Views\ResidentPatientDetailsView.xaml">
-=======
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RoomDetailsView.xaml">
->>>>>>> de03ba97547d289accc450dbf654a5a439338ce2
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
