@@ -33,11 +33,8 @@ namespace HospitalManagementSystem.Views
 
         private void navigateToDepartments(object sender, MouseButtonEventArgs e)
         {
-<<<<<<< HEAD
             ViewModel.Content = new ResidentPatientDetailsViewModel();
-=======
             ViewModel.Content = new DepartmentsViewModel();
->>>>>>> de03ba97547d289accc450dbf654a5a439338ce2
         }
 
         private void navigateToEmployees(object sender, MouseButtonEventArgs e)
