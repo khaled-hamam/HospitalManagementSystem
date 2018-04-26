@@ -61,7 +61,6 @@
                                      x:Name="DepartmentHeadComboBox" 
                                      IsEditable="True" 
                                     SelectedItem="{Binding EmployeeHead}"
-                                     
                                      />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
