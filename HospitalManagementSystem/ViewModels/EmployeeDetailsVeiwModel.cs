@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalManagementSystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,6 +26,15 @@ namespace HospitalManagementSystem.ViewModels
         public ObservableCollection<String> PatientsNumber { get; set; }
         public ObservableCollection<String> AppointmentsNumber { get; set; }
 
+        public String EditEmployeeNameTextBox { get; set; }
+        public String EditEmployeeAddressTextBox { get; set; }
+        public String EditEmployeeSalaryTextBox { get; set; }
+        public ComboBoxPairs EditEmployeeDepartment { get; set; }
+        public String EditEmployeeRole { get; set; }
+        public DateTime EditEmployeeDatePicker { get; set; }
+
+        public List<ComboBoxPairs> EditDepartmentComboBoxItems;
+
         private String employeeRole { get; set; }
         public Visibility IsDoctor { get; set; }
         public Visibility IsNurse { get; set; }
@@ -46,8 +56,12 @@ namespace HospitalManagementSystem.ViewModels
         }
         public EmployeeDetailsVeiwModel()
         {
-            IsDoctor = Visibility.Collapsed;
-            IsNurse = Visibility.Collapsed;         
+            EditEmployeeDatePicker = DateTime.Today;
+            EditDepartmentComboBoxItems = new List<ComboBoxPairs>();
+            foreach (Department department in Hospital.Departments.Values)
+            {
+                EditDepartmentComboBoxItems.Add(new ComboBoxPairs(department.ID, department.Name));
+            }
         }
         public void EditEmployee()
         {

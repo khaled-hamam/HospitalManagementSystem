@@ -94,8 +94,8 @@
                     <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
                         <materialDesign:DialogHost.DialogContent>
                             <StackPanel Margin="16">
-                                <!--Content-->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                    <ComboBox  SelectedItem="{Binding DoctorComboBox}" Text="{Binding DoctorsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Doctor"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="DoctorsComboBox"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"
@@ -203,8 +203,8 @@
                     <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
                         <materialDesign:DialogHost.DialogContent>
                             <StackPanel Margin="16">
-                                <!--Content-->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                    <ComboBox  SelectedItem="{Binding NurseComboBox}" Text="{Binding NursesComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Nurse"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="NursesComboBox"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"

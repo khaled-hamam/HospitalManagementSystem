@@ -12,8 +12,16 @@
         <materialDesign:DialogHost Name="EditPatientDetails"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
-                    <!--Content-->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <TextBox Text="{Binding PatientNameTextBox}" materialDesign:HintAssist.Hint="Patient Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientNameTextBox"  />
+                    <TextBox Text="{Binding PatientAddressTextBox}" materialDesign:HintAssist.Hint="Patient Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientAddressTextBox" />
+                    <DatePicker Text="{Binding PatientBirthDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
+                    <ComboBox Text="{Binding PatientTypeComboBox }" materialDesign:HintAssist.Hint="Patient Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientTypeComboBox">
+                        <ComboBoxItem>Resident Patient</ComboBoxItem>
+                        <ComboBoxItem>Appointment Patient</ComboBoxItem>
+                    </ComboBox>
+                    <TextBox Text="{Binding PatientDiagnosisTextBox}" materialDesign:HintAssist.Hint="Patient Diagnosis"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientDiagnosisTextBox" />
+                        <TextBox Text="{Binding PatientBillTextBox}" materialDesign:HintAssist.Hint="Patient Bill"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name= "PatientBillTextBox" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"
@@ -75,8 +83,8 @@
             <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel Margin="16">
-                        <!--Content-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                           <ComboBox  SelectedItem="{Binding DoctorComboBox}" Text="{Binding DoctorsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Doctor"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="DoctorsComboBox"/>
+                           <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"
@@ -128,31 +136,6 @@
         </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="4">
                     <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
-                        <materialDesign:DialogHost.DialogContent>
-                            <StackPanel Margin="16">
-                                <!--Content-->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsDefault="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                        <Button.CommandParameter>
-                                            <system:Boolean>True</system:Boolean>
-                                        </Button.CommandParameter>
-                                        SUBMIT
-                                    </Button>
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsCancel="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                        <Button.CommandParameter>
-                                            <system:Boolean>False</system:Boolean>
-                                        </Button.CommandParameter>
-                                        CANCEL
-                                    </Button>
-                                </StackPanel>
-                            </StackPanel>
-                        </materialDesign:DialogHost.DialogContent>
                         <Border  Style="{StaticResource DetailsDialogHostBorder}">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -163,20 +146,6 @@
                                 <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                                     <TextBlock Text="{Binding AppointmentsNumber}" Foreground="White" Margin="16"/>
                                 </materialDesign:ColorZone>
-                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                Grid.Row="0" Margin="0 0 28 -20"
-                                BorderThickness="0"
-                                BorderBrush="Transparent"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="{StaticResource PrimaryColor}">
-                                    <Viewbox Width="22" Height="22">
-                                        <Canvas Width="24" Height="24">
-                                            <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
-                                        </Canvas>
-                                    </Viewbox>
-                                </Button>
                             </Grid>
                         </Border>
                     </materialDesign:DialogHost>

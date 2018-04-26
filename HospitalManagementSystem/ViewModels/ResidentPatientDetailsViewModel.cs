@@ -27,7 +27,14 @@ namespace HospitalManagementSystem.ViewModels
         public String EditPatientAddressTextBox { get; set; }
         public DateTime EditPatientBirthDatePicker { get; set; }
         public ComboBoxPairs EditRoomNumberComboBox { get; set; }
-        public List<ComboBoxPairs> ComboBoxItems;
+        public List<ComboBoxPairs> RoomNumberComboBoxItems;
+        public ComboBoxPairs DoctorComboBoxPair { get; set; }
+        public String DoctorComboBox { get; set; }
+        public List<ComboBoxPairs> DoctorsComboBoxItems;
+        public ComboBoxPairs NurseComboBoxPair { get; set; }
+        public String NurseComboBox { get; set; }
+        public List<ComboBoxPairs> NursesComboBoxItems;
+
         public Visibility IsResident { get; set; }
 
 
@@ -49,11 +56,15 @@ namespace HospitalManagementSystem.ViewModels
         {
             IsResident = Visibility.Collapsed;
             EditPatientBirthDatePicker = DateTime.Today;
-            ComboBoxItems = new List<ComboBoxPairs>();
+            RoomNumberComboBoxItems = new List<ComboBoxPairs>();
             foreach (Room room in Hospital.Rooms.Values)
             {
-                ComboBoxItems.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
+                RoomNumberComboBoxItems.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
             }
+            //TODO : DoctorsComboBoxItems 
+
+            // TODO : NursesComboBoxItems
+
         }
 
         public void EditResidentPatient()

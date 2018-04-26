@@ -12,7 +12,30 @@
         <materialDesign:DialogHost Name="EditEmployeeDetails"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
-                    <!--Content-->
+                    <TextBox Text="{Binding EditEmployeeNameTextBox}"  materialDesign:HintAssist.Hint="Employee Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="EditEmployeeNameTextBox" />
+                    <TextBox Text="{Binding EditEmployeeAddressTextBox}" materialDesign:HintAssist.Hint="Employee Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EditEmployeeAddressTextBox" />
+                    <DatePicker Text="{Binding EditEmployeeDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EditEmployeeBirthDatePicker" />
+                    <TextBox Text="{Binding EditEmployeeSalaryTextBox}" materialDesign:HintAssist.Hint="Employee salary"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EditEmployeeSalaryTextBox" />
+                    <ComboBox 
+                                materialDesign:HintAssist.Hint="Employee Department"  
+                                SelectedItem="{Binding EditEmployeeDepartment}"
+                                IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                Margin="0 8 0 0" 
+                                HorizontalAlignment="Left"  
+                                Width="200" 
+                                x:Name="EditEmployeeDepartmentComboBox" />
+                    <ComboBox 
+                                Text="{Binding EditEmployeeRole}" 
+                                materialDesign:HintAssist.Hint="Employee Role"  
+                                IsEditable="True"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                Margin="0 8 0 0" 
+                                HorizontalAlignment="Left" 
+                                Width="200" 
+                                x:Name="EditEmpoloyeeRoleComboBox" >
+                        <ComboBoxItem>Doctor</ComboBoxItem>
+                        <ComboBoxItem>Nurse</ComboBoxItem>
+                    </ComboBox>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
@@ -80,8 +103,8 @@
             <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel Margin="16">
-                        <!--Content-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                <ComboBox  SelectedItem="{Binding PatientComboBox}" Text="{Binding PatientsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Patient"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientsComboBox"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"
@@ -135,8 +158,8 @@
             <materialDesign:DialogHost  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel Margin="16">
-                        <!--Content-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                <ComboBox  SelectedItem="{Binding AppointmentComboBox}" Text="{Binding AppointmentsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Appointment"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="AppointmentsComboBox"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"
@@ -190,7 +213,7 @@
             <materialDesign:DialogHost  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel Margin="16">
-                        <!--Content-->
+                                <ComboBox  SelectedItem="{Binding RoomComboBox}" Text="{Binding RoomsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Room"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="RoomsComboBox"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
