@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalManagementSystem.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,25 @@ namespace HospitalManagementSystem.Views
     /// </summary>
     public partial class EmployeeDetailsVeiw : UserControl
     {
+        public EmployeeDetailsVeiwModel ViewModel { get; set; }
         public EmployeeDetailsVeiw()
         {
+            ViewModel = new EmployeeDetailsVeiwModel();
+            DataContext = ViewModel;
             InitializeComponent();
+            EditEmployeeDepartmentComboBox.DisplayMemberPath = "Value";
+            EditEmployeeDepartmentComboBox.SelectedValuePath = "Key";
+            EditEmployeeDepartmentComboBox.ItemsSource = ViewModel.EditDepartmentComboBoxItems;
+        }
+
+        private void DeleteEmployee(object sender, MouseButtonEventArgs e)
+        {
+            ViewModel.DeleteEmployee();
+        }
+
+        private void EditEmployee(object sender, RoutedEventArgs e)
+        {
+            ViewModel.EditEmployee();
         }
     }
 }

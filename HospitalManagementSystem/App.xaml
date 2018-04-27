@@ -95,9 +95,10 @@
             <Style x:Key="DetailsButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
                 <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0"/>
                 <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="Width" Value="80"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="FontFamily" Value="Arial"/>
-                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontSize" Value="12"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="Foreground" Value="white"/>
             </Style>
