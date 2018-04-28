@@ -1,21 +1,9 @@
 ﻿using HospitalManagementSystem.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using MaterialDesignThemes.Wpf;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace HospitalManagementSystem.Views.Components
+namespace HospitalManagementSystem.Views
 {
     /// <summary>
     /// Interaction logic for DepartmentDetailsView.xaml
@@ -23,27 +11,27 @@ namespace HospitalManagementSystem.Views.Components
     public partial class DepartmentDetailsView : UserControl
     {
 
-        public DepartmentDetailsViewModel ViewModel { get; set; }
+        //public DepartmentDetailsViewModel ViewModel { get; set; }
 
         public DepartmentDetailsView()
         {
-            ViewModel = new DepartmentDetailsViewModel();
-            DataContext = ViewModel;
+            //ViewModel = new DepartmentDetailsViewModel("1");
+            //DataContext = ViewModel;
             InitializeComponent();
             DepartmentDoctorComboBox.DisplayMemberPath = "Value";
             DepartmentDoctorComboBox.SelectedValuePath = "Key";
-            DepartmentDoctorComboBox.ItemsSource = ViewModel.DoctorsComboBoxItems;
+            DepartmentDoctorComboBox.ItemsSource = ((DepartmentDetailsViewModel)DataContext).DoctorsComboBoxItems;
 
             DepartmentNursesComboBox.DisplayMemberPath = "Value";
             DepartmentNursesComboBox.SelectedValuePath = "Key";
-            DepartmentNursesComboBox.ItemsSource = ViewModel.NursesComboBoxItems;
+            DepartmentNursesComboBox.ItemsSource = ((DepartmentDetailsViewModel)DataContext).NursesComboBoxItems;
 
             DepartmentPatientsComboBox.DisplayMemberPath = "Value";
             DepartmentPatientsComboBox.SelectedValuePath = "Key";
-            DepartmentPatientsComboBox.ItemsSource = ViewModel.PatientsComboBoxItems;
+            DepartmentPatientsComboBox.ItemsSource = ((DepartmentDetailsViewModel)DataContext).PatientsComboBoxItems;
 
         }
-       
+
 
         private void DeleteDepartment(object sender, MouseButtonEventArgs e)
         {

@@ -15,7 +15,7 @@ namespace HospitalManagementSystem.ViewModels
         /// Items Properties
         /// </summary>
         public ObservableCollection<DepartmentCardViewModel> Departments { get; set; }
-        public ObservableCollection<DepartmentCardViewModel> FilteredDepartments { get; set; } 
+        public ObservableCollection<DepartmentCardViewModel> FilteredDepartments { get; set; }
 
         /// <summary>
         /// Search Bar Properties
@@ -58,14 +58,15 @@ namespace HospitalManagementSystem.ViewModels
                 }
             }
 
-            foreach(Department department in Hospital.Departments.Values)
+            foreach (Department department in Hospital.Departments.Values)
             {
                 Departments.Add(
                     new DepartmentCardViewModel
                     {
+                        ID = department.ID,
                         Name = department.Name,
-                        EmployeesNumber= department.Nurse.Count+department.Doctors.Count,
-                        PatientsNumber = department.Patients.Count                 
+                        EmployeesNumber = department.Nurse.Count + department.Doctors.Count,
+                        PatientsNumber = department.Patients.Count
                     }
                 );
             }
@@ -96,6 +97,7 @@ namespace HospitalManagementSystem.ViewModels
             Departments.Add(
                 new DepartmentCardViewModel
                 {
+                    ID = newDepartment.ID,
                     Name = newDepartment.Name,
                     PatientsNumber = newDepartment.Patients.Count,
                     EmployeesNumber = newDepartment.Nurse.Count + newDepartment.Doctors.Count
@@ -104,12 +106,13 @@ namespace HospitalManagementSystem.ViewModels
             FilteredDepartments.Add(
                new DepartmentCardViewModel
                {
+                   ID = newDepartment.ID,
                    Name = newDepartment.Name,
                    PatientsNumber = newDepartment.Patients.Count,
                    EmployeesNumber = newDepartment.Nurse.Count + newDepartment.Doctors.Count
                }
                );
-            Hospital.Departments.Add(newDepartment.ID,newDepartment);
+            Hospital.Departments.Add(newDepartment.ID, newDepartment);
             HospitalDB.InsertDepartment(newDepartment);
 
         }
