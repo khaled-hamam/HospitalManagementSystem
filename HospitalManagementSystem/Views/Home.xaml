@@ -10,34 +10,34 @@
         Title="Hospital Management System" Height="600" Width="800">
     <Window.Resources>
         <DataTemplate x:Name="EmployeesView" DataType="{x:Type viewmodels:EmployeesViewModel}">
-            <views:EmployeesView DataContext="{Binding Content}"/>
+            <views:EmployeesView />
         </DataTemplate>
         <DataTemplate x:Name="PatientsView" DataType="{x:Type viewmodels:PatientsViewModel}">
-            <views:PatientsView DataContext="{Binding Content}"/>
+            <views:PatientsView />
         </DataTemplate>
         <DataTemplate x:Name="DepartmentsView" DataType="{x:Type viewmodels:DepartmentsViewModel}">
-            <views:DepartmentsView DataContext="{Binding Content}"/>
+            <views:DepartmentsView />
         </DataTemplate>
         <DataTemplate x:Name="AppointmentsView" DataType="{x:Type viewmodels:AppointmentsViewModel}">
-            <views:AppointmentsView DataContext="{Binding Content}"/>
+            <views:AppointmentsView />
         </DataTemplate>
         <DataTemplate x:Name="RoomsView" DataType="{x:Type viewmodels:RoomsViewModel}">
-            <views:RoomsView DataContext="{Binding Content}"/>
+            <views:RoomsView />
         </DataTemplate>
         <DataTemplate x:Name="LoadingView" DataType="{x:Type viewmodels:LoadingViewModel}">
-            <views:LoadingView DataContext="{Binding Content}"/>
+            <views:LoadingView />
         </DataTemplate>
         <DataTemplate x:Name="EmployeeDetails" DataType="{x:Type viewmodels:EmployeeDetailsVeiwModel}">
-            <views:EmployeeDetailsVeiw DataContext="{Binding Content}"/>
+            <views:EmployeeDetailsVeiw />
         </DataTemplate>
         <DataTemplate x:Name="ResidentPatientDetailsView" DataType="{x:Type viewmodels:ResidentPatientDetailsViewModel}">
-            <views:ResidentPatientDetailsView DataContext="{Binding Content}"/>
+            <views:ResidentPatientDetailsView />
         </DataTemplate>
         <DataTemplate x:Name="AppointmentPatientDetailsView" DataType="{x:Type viewmodels:AppointmentPatientDetailsViewModel}">
-            <views:AppointmentPatientDetailsView DataContext="{Binding Content}"/>
+            <views:AppointmentPatientDetailsView />
         </DataTemplate>
         <DataTemplate x:Name="DepartmentDetailsView" DataType="{x:Type viewmodels:DepartmentDetailsViewModel}">
-            <views:DepartmentDetailsView DataContext="{Binding Content}"/>
+            <views:DepartmentDetailsView />
         </DataTemplate>
 
     </Window.Resources>
