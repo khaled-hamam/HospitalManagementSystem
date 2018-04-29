@@ -74,13 +74,16 @@
                             <materialDesign:DialogHost.DialogContent>
                                 <StackPanel Margin="16">
                                     <ComboBox 
-                                materialDesign:HintAssist.Hint="Department Doctors"  
-                                SelectedItem="{Binding DepartmentDoctors}"
-                                IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
-                                Margin="0 8 0 0" 
-                                HorizontalAlignment="Left"  
-                                Width="200" 
-                                x:Name="DepartmentDoctorComboBox" />
+                                        materialDesign:HintAssist.Hint="Department Doctors"  
+                                        SelectedItem="{Binding DepartmentDoctors}"
+                                        IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                        Margin="0 8 0 0" 
+                                        HorizontalAlignment="Left"  
+                                        Width="200" 
+                                        x:Name="DepartmentDoctorComboBox"
+                                        DisplayMemberPath="Value"
+                                        SelectedValuePath="Key"
+                                        ItemsSource="{Binding DoctorsComboBoxItems}"/>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
@@ -139,13 +142,16 @@
                             <materialDesign:DialogHost.DialogContent>
                                 <StackPanel Margin="16">
                                     <ComboBox 
-                                materialDesign:HintAssist.Hint="Department Patients"  
-                                SelectedItem="{Binding DepartmentPatients}"
-                                IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
-                                Margin="0 8 0 0" 
-                                HorizontalAlignment="Left"  
-                                Width="200" 
-                                x:Name="DepartmentPatientsComboBox" />
+                                        materialDesign:HintAssist.Hint="Department Patients"  
+                                        SelectedItem="{Binding DepartmentPatients}"
+                                        IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                        Margin="0 8 0 0" 
+                                        HorizontalAlignment="Left"  
+                                        Width="200" 
+                                        x:Name="DepartmentPatientsComboBox"
+                                        DisplayMemberPath="Key"
+                                        SelectedValuePath="Value"
+                                        ItemsSource="{Binding PatientsComboBoxItems}"/>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
@@ -202,13 +208,16 @@
                             <materialDesign:DialogHost.DialogContent>
                                 <StackPanel Margin="16">
                                     <ComboBox 
-                                materialDesign:HintAssist.Hint="Department Nurses"  
-                                SelectedItem="{Binding DepartmentNurses}"
-                                IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
-                                Margin="0 8 0 0" 
-                                HorizontalAlignment="Left"  
-                                Width="200" 
-                                x:Name="DepartmentNursesComboBox" />
+                                        materialDesign:HintAssist.Hint="Department Nurses"  
+                                        SelectedItem="{Binding DepartmentNurses}"
+                                        IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                        Margin="0 8 0 0" 
+                                        HorizontalAlignment="Left"  
+                                        Width="200" 
+                                        x:Name="DepartmentNursesComboBox"
+                                        DisplayMemberPath="Value"
+                                        SelectedValuePath="Key"
+                                        ItemsSource="{Binding NursesComboBoxItems}"/>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"

@@ -7,19 +7,26 @@ namespace HospitalManagementSystem.ViewModels
 {
     public class DepartmentDetailsViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Displayed Data Properites
+        /// </summary>
         public String DepartmetnId { get; set; }
         public ObservableCollection<String> DoctorsList { get; set; }
         public ObservableCollection<String> NursesList { get; set; }
         public ObservableCollection<String> PatientsList { get; set; }
         public String DepartmentName { set; get; }
         public String HeadName { set; get; }
-        public List<ComboBoxPairs> DoctorsComboBoxItems;
-        public List<ComboBoxPairs> NursesComboBoxItems;
-        public List<ComboBoxPairs> PatientsComboBoxItems;
+
+        /// <summary>
+        /// ComboBox Sources Properties
+        /// </summary>
+        public ObservableCollection<ComboBoxPairs> DoctorsComboBoxItems { get; set; }
+        public ObservableCollection<ComboBoxPairs> NursesComboBoxItems { get; set; }
+        public ObservableCollection<ComboBoxPairs> PatientsComboBoxItems { get; set; }
 
         public DepartmentDetailsViewModel(String id)
         {
-            DoctorsComboBoxItems = new List<ComboBoxPairs>();
+            DoctorsComboBoxItems = new ObservableCollection<ComboBoxPairs>();
             foreach (Doctor doctor in Hospital.Departments[id].Doctors.Values)
             {
                 DoctorsComboBoxItems.Add(new ComboBoxPairs(doctor.ID, doctor.Name));
