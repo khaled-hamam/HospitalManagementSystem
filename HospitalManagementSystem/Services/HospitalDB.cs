@@ -201,7 +201,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"SELECT room_id FROM nurse_room WHERE nurse_id = {nurseID}";
+                String query = $"SELECT room_id FROM nurse_room WHERE nurse_id = '{nurseID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 while(reader.Read())
@@ -211,7 +211,7 @@ namespace HospitalManagementSystem.Services
             }
             catch
             {
-                Console.WriteLine("Error Occured Fetching Department.");
+                Console.WriteLine("Error Occured Fetching Nurse Room.");
             }
             finally
             {
