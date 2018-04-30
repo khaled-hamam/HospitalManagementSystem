@@ -596,7 +596,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"INSERT INTO room VALUES('{room.ID}', {room.RoomNumber}, '{room.GetType()}'";
+                String query = $"INSERT INTO room VALUES('{room.ID}', {room.RoomNumber}, '{room.GetType()}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
             }
