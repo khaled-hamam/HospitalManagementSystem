@@ -712,7 +712,7 @@ namespace HospitalManagementSystem.Services
                 String query = $"UPDATE nurse SET name = '{nurse.Name}', birth_date = '{nurse.BirthDate}', " +
                     $"address = '{nurse.Address}', employement_date = '{nurse.EmploymentDate}', " +
                     $"department_id = '{nurse.Department.ID}', salary = {nurse.Salary} " +
-                    $"WHERE doctor_id = '{nurse.ID}'";
+                    $"WHERE nurse_id = '{nurse.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
             }
@@ -726,6 +726,75 @@ namespace HospitalManagementSystem.Services
             }
         }
 
+        public async static void UpdateAppointment(Appointment appointment)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE appointment SET patient_id = '{appointment.Patient.ID}', doctor_id = '{appointment.Doctor.ID}', " +
+                    $"date = '{appointment.Date}', duration = {appointment.Duration}, " +
+                    $"WHERE appointment_id = '{appointment.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Appointment.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void UpdatePatient(Patient patient)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE patient SET name = '{patient.Name}', birth_date = '{patient.BirthDate}', " +
+                    $"address = '{patient.Address}', diagnosis = '{patient.Diagnosis}', " +
+                    $"WHERE patient_id = '{patient.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Patient.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void UpdateRoom(Room room)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE room SET room_number = '{room.RoomNumber}', type = '{room.GetType()}', " +
+                    $"WHERE room_id = '{room.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Room.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
+
     }
 }
