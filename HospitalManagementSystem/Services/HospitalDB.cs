@@ -654,5 +654,78 @@ namespace HospitalManagementSystem.Services
             }
         }
         #endregion
+
+        #region Updating Operations
+
+        public async static void UpdateDepartment(Department department)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE department SET name = '{department.Name}' WHERE department_id = '{department.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch 
+            {
+                Console.WriteLine("Error Updating Department.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void UpdateDoctor(Doctor doctor)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE doctor SET name = '{doctor.Name}', birth_date = '{doctor.BirthDate}', " +
+                    $"address = '{doctor.Address}', employement_date = '{doctor.EmploymentDate}', " +
+                    $"department_id = '{doctor.Department.ID}', salary = {doctor.Salary}, is_head = {doctor.IsHead} " +
+                    $"WHERE doctor_id = '{doctor.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Doctor.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void UpdateNurse(Nurse nurse)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE nurse SET name = '{nurse.Name}', birth_date = '{nurse.BirthDate}', " +
+                    $"address = '{nurse.Address}', employement_date = '{nurse.EmploymentDate}', " +
+                    $"department_id = '{nurse.Department.ID}', salary = {nurse.Salary} " +
+                    $"WHERE doctor_id = '{nurse.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Nurse.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        #endregion
     }
 }
