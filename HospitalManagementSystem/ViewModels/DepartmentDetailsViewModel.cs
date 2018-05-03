@@ -1,7 +1,10 @@
 ﻿using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Services;
+using HospitalManagementSystem.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace HospitalManagementSystem.ViewModels
 {
@@ -16,30 +19,54 @@ namespace HospitalManagementSystem.ViewModels
         public ObservableCollection<String> PatientsList { get; set; }
         public String DepartmentName { set; get; }
         public String HeadName { set; get; }
+        public String EditDepartmentName { get; set; }
 
-        /// <summary>
-        /// ComboBox Sources Properties
-        /// </summary>
-        public ObservableCollection<ComboBoxPairs> DoctorsComboBoxItems { get; set; }
-        public ObservableCollection<ComboBoxPairs> NursesComboBoxItems { get; set; }
-        public ObservableCollection<ComboBoxPairs> PatientsComboBoxItems { get; set; }
 
+        public ICommand EditDepartment { get; set; }
+        public ICommand DeleteDepartment { get; set; }
         public DepartmentDetailsViewModel(String id)
         {
-            DoctorsComboBoxItems = new ObservableCollection<ComboBoxPairs>();
-            foreach (Doctor doctor in Hospital.Departments[id].Doctors.Values)
+            DepartmetnId = id;
+            EditDepartment = new RelayCommand(EditDepartments);
+            DeleteDepartment = new RelayCommand(DeleteDepartments);
+            DoctorsList = new ObservableCollection<string>();
+            NursesList = new ObservableCollection<string>();
+            PatientsList = new ObservableCollection<string>();
+
+          foreach (Doctor doctor in Hospital.Departments[id].Doctors.Values)
             {
-                DoctorsComboBoxItems.Add(new ComboBoxPairs(doctor.ID, doctor.Name));
+                if (doctor.IsHead)
+                    HeadName = doctor.Name;
             }
 
-            /* NursesComboBoxItems = new List<ComboBoxPairs>();
-             foreach (Nurse nurse in Hospital.Departments[DepartmetnId].Nurse.Values)
-             {
-                     NursesComboBoxItems.Add(new ComboBoxPairs(nurse.ID, nurse.Name));
-             }*/
+          foreach(Doctor doctor in Hospital.Departments[id].Doctors.Values)
+            {
+                DoctorsList.Add(doctor.Name);
+                Console.WriteLine(doctor.Name);
+            }
+          
+          foreach(Nurse nurse in Hospital.Departments[id].Nurse.Values)
+            {
+                NursesList.Add(nurse.Name);
+            }
+          //TODO Patients List
+        }
+
+        public void EditDepartments()
+        {
+            DepartmentName = EditDepartmentName;
+            Hospital.Departments[DepartmetnId].Name = EditDepartmentName;
+            HospitalDB.UpdateDepartment(Hospital.Departments[DepartmetnId]);
+            Home.ViewModel.CloseRootDialog();
 
         }
 
-
+        public void DeleteDepartments()
+        {
+            Hospital.Departments.Remove(DepartmetnId);
+            Home.ViewModel.CloseRootDialog();
+            Home.ViewModel.Content = new DepartmentsViewModel();
+            //TODO delete from DB
+        }
     }
 }
