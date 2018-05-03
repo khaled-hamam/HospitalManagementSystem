@@ -40,6 +40,7 @@ namespace HospitalManagementSystem.Views
         private void EditEmployee(object sender, RoutedEventArgs e)
         {
             ViewModel.EditEmployee();
+            Home.ViewModel.CloseRootDialog();
         }
     }
 }

@@ -10,148 +10,188 @@
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="640">
     <Grid Background="{StaticResource GreyBG}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320" />
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0" >
-            <TextBlock Text="Room Number" FontSize="24" Style="{StaticResource DetailsInfoTitle}" Foreground="{StaticResource PrimaryColor}" />
-            <TextBlock Text="Room Type" Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
-        </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Style="{StaticResource DetailsButton}"  Margin="15 0 0 0">Edit</Button>
-            <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0">Delete</Button>
-        </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="1" Margin="20 0 0 0">
-            <TextBlock Text="Room Price" Style="{StaticResource DetailsInfoTitle}" />
-            <TextBlock Text="40$" Style="{StaticResource DetailsInfoValue}" />
-        </StackPanel>
-        <StackPanel  Grid.Row="1" Grid.Column="1" Margin="5 0 0 0">
-            <TextBlock Text="Room Capacity" Style="{StaticResource DetailsInfoTitle}" />
-            <TextBlock Text="2 Beds"  Style="{StaticResource DetailsInfoValue}" />
-        </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="2" Margin="0 40 0 0">
-            <materialDesign:DialogHost  HorizontalAlignment="Center" VerticalAlignment="Center">
-                <materialDesign:DialogHost.DialogContent>
-                    <StackPanel Margin="16">
-                        <!--Content-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsDefault="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                <Button.CommandParameter>
-                                    <system:Boolean>True</system:Boolean>
-                                </Button.CommandParameter>
-                                SUBMIT
-                            </Button>
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsCancel="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                <Button.CommandParameter>
-                                    <system:Boolean>False</system:Boolean>
-                                </Button.CommandParameter>
-                                CANCEL
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>
-                </materialDesign:DialogHost.DialogContent>
-                <Border Style="{StaticResource DetailsDialogHostBorder}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <ListBox Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="PatientsList">
-                            <ListBoxItem>Patient1</ListBoxItem>
-                            <ListBoxItem>Patient2</ListBoxItem>
-                            <ListBoxItem>Patient3</ListBoxItem>
-                        </ListBox>
-                        <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                            <TextBlock Foreground="White" Margin="16">Patients: 3</TextBlock>
-                        </materialDesign:ColorZone>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                Grid.Row="0" Margin="0 0 28 -20"
-                                BorderThickness="0"
-                                BorderBrush="Transparent"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="{StaticResource PrimaryColor}">
-                            <Viewbox Width="22" Height="22">
-                                <Canvas Width="24" Height="24">
-                                    <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
-                                </Canvas>
-                            </Viewbox>
-                        </Button>
-                    </Grid>
-                </Border>
-            </materialDesign:DialogHost>
-        </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="2" Margin="0 40 0 0">
-            <materialDesign:DialogHost  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0">
-                <materialDesign:DialogHost.DialogContent>
-                    <StackPanel Margin="16">
-                        <!--Content-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsDefault="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                <Button.CommandParameter>
-                                    <system:Boolean>True</system:Boolean>
-                                </Button.CommandParameter>
-                                ACCEPT
-                            </Button>
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsCancel="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                <Button.CommandParameter>
-                                    <system:Boolean>False</system:Boolean>
-                                </Button.CommandParameter>
-                                CANCEL
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>
-                </materialDesign:DialogHost.DialogContent>
-                <Border Style="{StaticResource DetailsDialogHostBorder}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <ListBox Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="AppointmentsList">
-                            <ListBoxItem>Nurse1</ListBoxItem>
-                            <ListBoxItem>>Nurse2</ListBoxItem>
-                        </ListBox>
-                        <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                            <TextBlock Foreground="White" Margin="16">Nurses: 2</TextBlock>
-                        </materialDesign:ColorZone>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                Grid.Row="0" Margin="0 0 28 -20"
-                                BorderThickness="0"
-                                BorderBrush="Transparent"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="{StaticResource PrimaryColor}">
-                            <Viewbox Width="22" Height="22">
-                                <Canvas Width="24" Height="24">
-                                    <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
-                                </Canvas>
-                            </Viewbox>
-                        </Button>
-                    </Grid>
-                </Border>
-            </materialDesign:DialogHost>
-        </StackPanel>
-    </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <StackPanel Grid.Column="0" Grid.Row="0" Margin="10 5 0 0" >
+                <TextBlock  Text="{Binding RoomNumber}" FontSize="30" Style="{StaticResource DetailsInfoTitle}" Foreground="{StaticResource PrimaryColor}" />
+                <TextBlock Text="{Binding RoomType}" Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource DetailsButton}"  Margin="15 0 0 0" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">Edit
+                    <Button.CommandParameter>
+                        <StackPanel>
+                            <StackPanel Margin="16">
+                                <TextBox Text="{Binding RoomNumber}"  materialDesign:HintAssist.Hint="Room Number"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomNumberTextBox" />
+                                <ComboBox Text="{Binding RoomType }" materialDesign:HintAssist.Hint="Room Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomtTypeComboBox" >
+                                    <ComboBoxItem>Private</ComboBoxItem>
+                                    <ComboBoxItem>Semi Private</ComboBoxItem>
+                                    <ComboBoxItem>Standard Ward</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsDefault="True"
+                                    Margin="0 8 8 0"
+                                    Click="editRoom">
+                                    <Button.CommandParameter>
+                                        <system:Boolean>True</system:Boolean>
+                                    </Button.CommandParameter>
+                                    EDIT
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsCancel="True"
+                                        Margin="0 8 0 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                    <Button.CommandParameter>
+                                        <system:Boolean>False</system:Boolean>
+                                    </Button.CommandParameter>
+                                    CANCEL
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button.CommandParameter>
+                </Button>
+                <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0">Delete</Button>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1" Margin="20 0 0 0">
+                <TextBlock Text="Room Price" Style="{StaticResource DetailsInfoTitle}" />
+                <TextBlock Text="{Binding roomPrice}" Style="{StaticResource DetailsInfoValue}" />
+            </StackPanel>
+            <StackPanel  Grid.Row="1" Grid.Column="1" Margin="5 0 0 0">
+                <TextBlock Text="Room Capacity" Style="{StaticResource DetailsInfoTitle}" />
+                <TextBlock Text="{Binding roomCapacity}"  Style="{StaticResource DetailsInfoValue}" />
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="4">
+                <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 40 0 0" VerticalAlignment="Center">
+                    <Border Style="{StaticResource DetailsDialogHostBorder}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ListBox ItemsSource="{Binding PatientsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="PatientsList"></ListBox>
+                            <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                                <TextBlock Text="{Binding PatientsNumber}" Foreground="White" Margin="16"/>
+                            </materialDesign:ColorZone>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                Grid.Row="0" Margin="0 0 28 -20"
+                                BorderThickness="0"
+                                BorderBrush="Transparent"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                Background="{StaticResource PrimaryColor}">
+                                <Button.CommandParameter>
+                                    <StackPanel Margin="16">
+                                        <ComboBox Text="{Binding PatientsComboBoxItems }" materialDesign:HintAssist.Hint="Patients Names"
+                                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                                            Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientsComboBoxItems"
+                                            DisplayMemberPath="Key"
+                                         SelectedValuePath="Value"
+                                         ItemsSource="{Binding PatientsComboBoxItems}">
+                                        </ComboBox>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsDefault="True"
+                                                Margin="0 8 8 0"
+                                                Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean>True</system:Boolean>
+                                                </Button.CommandParameter>
+                                                ADD
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Margin="0 8 8 0"
+                                                Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean>False</system:Boolean>
+                                                </Button.CommandParameter>
+                                                CANCEL
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                                <Viewbox Width="22" Height="22">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </materialDesign:DialogHost>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="4">
+                <materialDesign:DialogHost  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 40 0 0">
+                    <Border Style="{StaticResource DetailsDialogHostBorder}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ListBox ItemsSource="{Binding AppointmentsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="NursesList"></ListBox>
+                            <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                                <TextBlock Text="{Binding NursesNumber}" Foreground="White" Margin="16"/>
+                            </materialDesign:ColorZone>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                Grid.Row="0" Margin="0 0 28 -20"
+                                BorderThickness="0"
+                                BorderBrush="Transparent"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                Background="{StaticResource PrimaryColor}">
+                                <Button.CommandParameter>
+                                    <StackPanel Margin="16">
+                                        <ComboBox Text="{Binding NursesComboBoxItems }" materialDesign:HintAssist.Hint="Nurses Names"
+                                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                                            Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="NursesComboBoxItems" 
+                                            DisplayMemberPath="Key"
+                                         SelectedValuePath="Value"
+                                         ItemsSource="{Binding NursesComboBoxItems}">
+                                        </ComboBox>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsDefault="True"
+                                                Margin="0 8 8 0"
+                                                Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean>True</system:Boolean>
+                                                </Button.CommandParameter>
+                                                ADD
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Margin="0 8 8 0"
+                                                Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean>False</system:Boolean>
+                                                </Button.CommandParameter>
+                                                CANCEL
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                                <Viewbox Width="22" Height="22">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </materialDesign:DialogHost>
+            </StackPanel>
+        </Grid>
+    </Grid>
 </UserControl>

@@ -55,9 +55,9 @@ namespace HospitalManagementSystem.Views
                 EmployeeSalaryTextBox.Clear();
                 EmployeeDepartmentComboBox.SelectedItem = null;
                 EmpoloyeeRoleComboBox.SelectedItem = null;
-
+                Home.ViewModel.CloseRootDialog();
             // Closing the Dialog
-                DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
+               // DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
 
             }
             else

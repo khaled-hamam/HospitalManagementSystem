@@ -1,12 +1,8 @@
 ﻿using HospitalManagementSystem.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MaterialDesignThemes.Wpf;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Input;
 
 namespace HospitalManagementSystem.Views
 {
@@ -19,9 +15,32 @@ namespace HospitalManagementSystem.Views
 
         public RoomDetailsView()
         {
-            ViewModel = new RoomDetailsViewModel();
-            DataContext = ViewModel;
+
             InitializeComponent();
+        }
+
+        public void editRoom(object sender, RoutedEventArgs e)
+        {
+            // TODO: Openning a Message Box with Add
+            // TODO: Add to Hospital Class
+            // TODO: Update DB
+
+            // Closing the Dialog
+            Home.ViewModel.CloseRootDialog();
+
+
+        }
+        private void deleteRoom(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void assignPatientToRoom(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void assignNurseToRoom(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

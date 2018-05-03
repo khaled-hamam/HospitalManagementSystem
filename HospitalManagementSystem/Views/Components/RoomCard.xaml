@@ -16,6 +16,11 @@
             Height="90" Width="400" Padding="5"
             Foreground="{StaticResource DarkText}"
             materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <materialDesign:Card.InputBindings>
+                <MouseBinding 
+              Command="{Binding NavigateToDetailsAction}"
+              MouseAction="LeftClick"/>
+            </materialDesign:Card.InputBindings>
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="{Binding RoomNumber}" FontSize="24" FontWeight="Bold"/>
                 <Grid Margin="0 5">

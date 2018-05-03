@@ -23,7 +23,8 @@ namespace HospitalManagementSystem.Views
 
         private void EditDepartment(object sender, RoutedEventArgs e)
         {
-            
+            Home.ViewModel.CloseRootDialog();
+
         }
     }
 }
