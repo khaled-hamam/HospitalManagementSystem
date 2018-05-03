@@ -39,7 +39,8 @@ namespace HospitalManagementSystem.Views
             { MessageBox.Show("Invalid Entry"); return;}
             ViewModel.addPatient();
             // Closing the Dialog
-            DialogHost.CloseDialogCommand.Execute(addPatientDialaog, null);
+            // DialogHost.CloseDialogCommand.Execute(addPatientDialaog, null);
+           
             PatientNameTextBox.Clear();
             PatientAddressTextBox.Clear();
             PatientBirthDatetDatePicker.SelectedDate = DateTime.Today;

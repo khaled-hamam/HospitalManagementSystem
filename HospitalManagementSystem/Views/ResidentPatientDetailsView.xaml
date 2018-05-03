@@ -11,46 +11,7 @@
              d:DesignHeight="540" d:DesignWidth="640">
     <Grid Background="{StaticResource GreyBG}">
         <ScrollViewer Grid.ColumnSpan="2" Grid.RowSpan="5"   >
-            <materialDesign:DialogHost Name="EditPatientDetails"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <materialDesign:DialogHost.DialogContent>
-                    <StackPanel>
-                        <StackPanel Margin="16">
-                            <TextBox Text="{Binding EditPatientNameTextBox}" materialDesign:HintAssist.Hint="Patient Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientNameTextBox"  />
-                            <TextBox Text="{Binding EditPatientAddressTextBox}" materialDesign:HintAssist.Hint="Patient Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientAddressTextBox" />
-                            <DatePicker Text="{Binding EditPatientBirthDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
-                            <ComboBox Text="{Binding EditPatientTypeComboBox }" materialDesign:HintAssist.Hint="Patient Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientTypeComboBox" >
-                                <ComboBoxItem>Resident Patient</ComboBoxItem>
-                                <ComboBoxItem>Appointment Patient</ComboBoxItem>
-                            </ComboBox>
-                            <ComboBox  SelectedItem="{Binding EditRoomNumberComboBox}" Visibility="{Binding IsResident}" Text="{Binding PatientRoomNumber}" IsEditable="True" materialDesign:HintAssist.Hint="Patient Room Number"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientRoomNumberComboBox"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    VerticalAlignment="Bottom"
-                                    HorizontalAlignment="left"
-                                    IsDefault="True"
-                                    Margin="0 8 0 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand"
-                                    Click="EditResidentPatient">
-                                    <Button.CommandParameter>
-                                        <system:Boolean>True</system:Boolean>
-                                    </Button.CommandParameter>
-                                    SUBMIT
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsCancel="True"
-                                    VerticalAlignment="Bottom"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                    <Button.CommandParameter>
-                                        <system:Boolean>False</system:Boolean>
-                                    </Button.CommandParameter>
-                                    CANCEL
-                                </Button>
-                            </StackPanel>
-                        </StackPanel>
-                    </StackPanel>
-                </materialDesign:DialogHost.DialogContent>
-                    <Grid>
+                <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -66,8 +27,48 @@
                 <TextBlock  Text="{Binding PatientName}" FontSize="24" Style="{StaticResource DetailsInfoTitle}" Foreground="{StaticResource PrimaryColor}" />
                 <TextBlock Text="{Binding PatientType}"  Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
             </StackPanel>
+                    <!--Main Buttons-->
             <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                 <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{StaticResource DetailsButton}" Margin="15 0 0 0">EDIT</Button>
+                 <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{StaticResource DetailsButton}" Margin="15 0 0 0">EDIT
+                            <Button.CommandParameter>
+                                <StackPanel>
+                                    <StackPanel Margin="16">
+                                        <TextBox Text="{Binding EditPatientNameTextBox}" materialDesign:HintAssist.Hint="Patient Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientNameTextBox"  />
+                                        <TextBox Text="{Binding EditPatientAddressTextBox}" materialDesign:HintAssist.Hint="Patient Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientAddressTextBox" />
+                                        <DatePicker Text="{Binding EditPatientBirthDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
+                                        <ComboBox Text="{Binding EditPatientTypeComboBox }" materialDesign:HintAssist.Hint="Patient Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientTypeComboBox" >
+                                            <ComboBoxItem>Resident Patient</ComboBoxItem>
+                                            <ComboBoxItem>Appointment Patient</ComboBoxItem>
+                                        </ComboBox>
+                                        <ComboBox  SelectedItem="{Binding EditRoomNumberComboBox}" Visibility="{Binding IsResident}" Text="{Binding PatientRoomNumber}" IsEditable="True" materialDesign:HintAssist.Hint="Patient Room Number"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientRoomNumberComboBox"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                VerticalAlignment="Bottom"
+                                                HorizontalAlignment="left"
+                                                IsDefault="True"
+                                                Margin="0 8 0 0"
+                                                Command="materialDesign:DialogHost.CloseDialogCommand"
+                                                Click="EditResidentPatient">
+                                                   <Button.CommandParameter>
+                                                    <system:Boolean>True</system:Boolean>
+                                                </Button.CommandParameter>
+                                                SUBMIT
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    VerticalAlignment="Bottom"
+                                                    Margin="0 8 8 0"
+                                                    Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean>False</system:Boolean>
+                                                </Button.CommandParameter>
+                                                CANCEL
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Button.CommandParameter>
+                 </Button>
                 <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0" MouseUp="DeleteResidentPatient">DELETE</Button>
             </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="0">
@@ -90,34 +91,10 @@
                     <TextBlock  Text="Bill" Style="{StaticResource DetailsInfoTitle}" />
                     <TextBlock Text="{Binding PatientBill}" Style="{StaticResource DetailsInfoValue}" />
                 </StackPanel>
+                    <!--Doctor List Dialogbox-->
                 <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="4">
-                    <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
-                        <materialDesign:DialogHost.DialogContent>
-                            <StackPanel Margin="16">
-                                    <ComboBox  SelectedItem="{Binding DoctorComboBox}" Text="{Binding DoctorsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Doctor"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="DoctorsComboBox"/>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsDefault="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                        <Button.CommandParameter>
-                                            <system:Boolean>True</system:Boolean>
-                                        </Button.CommandParameter>
-                                        SUBMIT
-                                    </Button>
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsCancel="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                        <Button.CommandParameter>
-                                            <system:Boolean>False</system:Boolean>
-                                        </Button.CommandParameter>
-                                        CANCEL
-                                    </Button>
-                                </StackPanel>
-                            </StackPanel>
-                        </materialDesign:DialogHost.DialogContent>
-                        <Border  Style="{StaticResource DetailsDialogHostBorder}">
+                        <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
+                            <Border  Style="{StaticResource DetailsDialogHostBorder}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
@@ -128,13 +105,38 @@
                                     <TextBlock Text="{Binding DoctorsNumber}" Foreground="White" Margin="16"/>
                                 </materialDesign:ColorZone>
                                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                Grid.Row="0" Margin="0 0 28 -20"
-                                BorderThickness="0"
-                                BorderBrush="Transparent"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="{StaticResource PrimaryColor}">
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                        Grid.Row="0" Margin="0 0 28 -20"
+                                        BorderThickness="0"
+                                        BorderBrush="Transparent"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                        Background="{StaticResource PrimaryColor}">
+                                        <Button.CommandParameter>
+                                            <StackPanel Margin="16">
+                                                <ComboBox  SelectedItem="{Binding DoctorComboBox}" Text="{Binding DoctorsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Doctor"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="DoctorsComboBox"/>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                            IsDefault="True"
+                                                            Margin="0 8 8 0"
+                                                            Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                        <Button.CommandParameter>
+                                                            <system:Boolean>True</system:Boolean>
+                                                        </Button.CommandParameter>
+                                                        SUBMIT
+                                                    </Button>
+                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                            IsCancel="True"
+                                                            Margin="0 8 8 0"
+                                                             Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                        <Button.CommandParameter>
+                                                            <system:Boolean>False</system:Boolean>
+                                                        </Button.CommandParameter>
+                                                        CANCEL
+                                                    </Button>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Button.CommandParameter>
                                     <Viewbox Width="22" Height="22">
                                         <Canvas Width="24" Height="24">
                                             <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
@@ -144,34 +146,9 @@
                             </Grid>
                         </Border>
                     </materialDesign:DialogHost>
-
-                    <materialDesign:DialogHost  Margin="15 30 0 15"  HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <materialDesign:DialogHost.DialogContent>
-                            <StackPanel Margin="16">
-                                <!--Content-->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsDefault="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                        <Button.CommandParameter>
-                                            <system:Boolean>True</system:Boolean>
-                                        </Button.CommandParameter>
-                                        SUBMIT
-                                    </Button>
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsCancel="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                        <Button.CommandParameter>
-                                            <system:Boolean>False</system:Boolean>
-                                        </Button.CommandParameter>
-                                        CANCEL
-                                    </Button>
-                                </StackPanel>
-                            </StackPanel>
-                        </materialDesign:DialogHost.DialogContent>
-                        <Border  Style="{StaticResource DetailsDialogHostBorder}">
+                        <!--Medical History dialogbox-->
+                        <materialDesign:DialogHost  Margin="15 30 0 15"  HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Border  Style="{StaticResource DetailsDialogHostBorder}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
@@ -182,13 +159,37 @@
                                     <TextBlock Text="Medical History" Foreground="White" Margin="16"/>
                                 </materialDesign:ColorZone>
                                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                Grid.Row="0" Margin="0 0 28 -20"
-                                BorderThickness="0"
-                                BorderBrush="Transparent"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="{StaticResource PrimaryColor}">
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                        Grid.Row="0" Margin="0 0 28 -20"
+                                        BorderThickness="0"
+                                        BorderBrush="Transparent"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                        Background="{StaticResource PrimaryColor}">
+                                        <Button.CommandParameter>
+                                            <StackPanel Margin="16">
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                            IsDefault="True"
+                                                            Margin="0 8 8 0"
+                                                            Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                        <Button.CommandParameter>
+                                                            <system:Boolean>True</system:Boolean>
+                                                        </Button.CommandParameter>
+                                                        SUBMIT
+                                                    </Button>
+                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                            IsCancel="True"
+                                                            Margin="0 8 8 0"
+                                                            Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                        <Button.CommandParameter>
+                                                            <system:Boolean>False</system:Boolean>
+                                                        </Button.CommandParameter>
+                                                        CANCEL
+                                                    </Button>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Button.CommandParameter>
                                     <Viewbox Width="22" Height="22">
                                         <Canvas Width="24" Height="24">
                                             <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
@@ -200,33 +201,8 @@
                     </materialDesign:DialogHost>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="4">
-                    <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
-                        <materialDesign:DialogHost.DialogContent>
-                            <StackPanel Margin="16">
-                                    <ComboBox  SelectedItem="{Binding NurseComboBox}" Text="{Binding NursesComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Nurse"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="NursesComboBox"/>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsDefault="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                        <Button.CommandParameter>
-                                            <system:Boolean>True</system:Boolean>
-                                        </Button.CommandParameter>
-                                        SUBMIT
-                                    </Button>
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsCancel="True"
-                                    Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand">
-                                        <Button.CommandParameter>
-                                            <system:Boolean>False</system:Boolean>
-                                        </Button.CommandParameter>
-                                        CANCEL
-                                    </Button>
-                                </StackPanel>
-                            </StackPanel>
-                        </materialDesign:DialogHost.DialogContent>
-                        <Border Style="{StaticResource DetailsDialogHostBorder}">
+                        <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
+                            <Border Style="{StaticResource DetailsDialogHostBorder}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
@@ -237,13 +213,38 @@
                                     <TextBlock Text="{Binding NursesNumber}" Foreground="White" Margin="16"/>
                                 </materialDesign:ColorZone>
                                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                Grid.Row="0" Margin="0 0 28 -20"
-                                BorderThickness="0"
-                                BorderBrush="Transparent"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="{StaticResource PrimaryColor}">
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                        Grid.Row="0" Margin="0 0 28 -20"
+                                        BorderThickness="0"
+                                        BorderBrush="Transparent"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                        Background="{StaticResource PrimaryColor}">
+                                        <Button.CommandParameter>
+                                            <StackPanel Margin="16">
+                                                <ComboBox  SelectedItem="{Binding NurseComboBox}" Text="{Binding NursesComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Nurse"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="NursesComboBox"/>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                            IsDefault="True"
+                                                            Margin="0 8 8 0"
+                                                            Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                        <Button.CommandParameter>
+                                                            <system:Boolean>True</system:Boolean>
+                                                        </Button.CommandParameter>
+                                                        SUBMIT
+                                                    </Button>
+                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsCancel="True"
+                                                        Margin="0 8 8 0"
+                                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                        <Button.CommandParameter>
+                                                            <system:Boolean>False</system:Boolean>
+                                                        </Button.CommandParameter>
+                                                        CANCEL
+                                                    </Button>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Button.CommandParameter>
                                     <Viewbox Width="22" Height="22">
                                         <Canvas Width="24" Height="24">
                                             <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
@@ -255,7 +256,6 @@
                     </materialDesign:DialogHost>
                 </StackPanel>
             </Grid>
-            </materialDesign:DialogHost>
         </ScrollViewer>
     </Grid>
 </UserControl>

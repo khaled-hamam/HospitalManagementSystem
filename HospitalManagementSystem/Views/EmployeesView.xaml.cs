@@ -57,7 +57,7 @@ namespace HospitalManagementSystem.Views
                 EmpoloyeeRoleComboBox.SelectedItem = null;
 
             // Closing the Dialog
-                DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
+               // DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
 
             }
             else

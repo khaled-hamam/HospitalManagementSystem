@@ -41,10 +41,6 @@ namespace HospitalManagementSystem.Views
                 ViewModel.addRoom();
                 RoomNumberTextBox.Clear();
                 RoomtTypeComboBox.SelectedItem = null;
-
-                // Closing the Dialog
-                DialogHost.CloseDialogCommand.Execute(addRoomDialaog, null);
-
             }
             else
             {
