@@ -573,7 +573,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"INSERT INTO patient VALUES('{patient.ID}', '{patient.Name}', " +
-                    $"'{patient.BirthDate}', '{patient.Address}', '{patient.Diagnosis}'";
+                    $"'{patient.BirthDate}', '{patient.Address}', '{patient.Diagnosis}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
 
