@@ -26,7 +26,7 @@
                     </StackPanel>
                     <!--Main buttons-->
                     <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Style="{StaticResource DetailsButton}" Margin="15 0 0 0" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">EDIT
+                    <Button Style="{StaticResource DetailsButton}" Margin="15 0 0 0" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">EDIT
                             <Button.CommandParameter>
                                 <StackPanel>
                                     <StackPanel Margin="16">

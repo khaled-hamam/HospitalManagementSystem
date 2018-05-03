@@ -24,9 +24,9 @@ namespace HospitalManagementSystem.Views
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-           
+
             // Closing the Dialog
-            DialogHost.CloseDialogCommand.Execute(editRoomDialaog, null);
+            Home.ViewModel.CloseRootDialog();
 
 
         }
