@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Collections.Generic;
 using HospitalManagementSystem.Services;
 using System.Linq;
+using System.Windows;
 
 namespace HospitalManagementSystem.ViewModels
 {
@@ -28,10 +29,26 @@ namespace HospitalManagementSystem.ViewModels
         public String EmployeeAddressTextBox { get; set; }
         public String EmployeeSalaryTextBox { get; set; }
         public ComboBoxPairs EmployeeDepartment { get; set; }
-        public String EmployeeRole { get; set; }
         public DateTime EmployeeDatePicker { get; set; }
+        public String EmpoloyeeRoleComboBox { get; set; }
+        public String doc;
+        public bool isHeadCheck { get; set; }
+        public  String EmployeeRole
+        {
+            get => doc;
+            set
+            {
+                if (value == "Doctor")
+                    isHead = Visibility.Visible;
+                else
+                    isHead = Visibility.Collapsed;
+
+                doc = value;
+            }
+        }
 
         public List<ComboBoxPairs> ComboBoxItems;
+        public Visibility isHead { get; set; }
 
         public ICommand SearchAction { get; set; }
 
@@ -40,7 +57,9 @@ namespace HospitalManagementSystem.ViewModels
             EmployeeDatePicker = DateTime.Today;
             ComboBoxItems = new List<ComboBoxPairs>();
             SearchAction = new RelayCommand(Search);
-            foreach(Department department in Hospital.Departments.Values)
+            isHead = Visibility.Collapsed;
+           
+            foreach (Department department in Hospital.Departments.Values)
             {
                 ComboBoxItems.Add(new ComboBoxPairs(department.ID, department.Name));
             }
@@ -77,13 +96,27 @@ namespace HospitalManagementSystem.ViewModels
         public void addEmployee()
         {
             if (EmployeeRole == "Doctor") {
-
+                if(isHeadCheck)
+                {
+                    foreach(Employee employee in Hospital.Employees.Values)
+                    {
+                        if (employee.GetType() == typeof(Doctor))
+                        {
+                            if (Hospital.Departments[Hospital.Employees[employee.ID].Department.ID].Doctors[employee.ID].IsHead)
+                            {
+                                Hospital.Departments[Hospital.Employees[employee.ID].Department.ID].Doctors[employee.ID].IsHead = false;
+                                break;
+                            }
+                        }
+                    }
+                }
                 Doctor newDoctor = new Doctor
                 {
                     Name = EmployeeNameTextBox,
                     Salary = Double.Parse(EmployeeSalaryTextBox),
                     Department = Hospital.Departments[EmployeeDepartment.Key],
-                    Address = EmployeeAddressTextBox, 
+                    Address = EmployeeAddressTextBox,
+                    IsHead = isHeadCheck
          
                 };
 
@@ -109,6 +142,7 @@ namespace HospitalManagementSystem.ViewModels
 
                 Hospital.Employees.Add(newDoctor.ID, newDoctor);
                 HospitalDB.InsertDoctor(newDoctor);
+                //TODO UPDATE DOCTOR IN DB
             }
             else if(EmployeeRole=="Nurse")
             {
@@ -142,7 +176,6 @@ namespace HospitalManagementSystem.ViewModels
 
                 Hospital.Employees.Add(newNurse.ID, newNurse);
                 HospitalDB.InsertNurse(newNurse);
-
             }
 
         }
