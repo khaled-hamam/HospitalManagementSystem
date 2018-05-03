@@ -24,6 +24,9 @@
         <DataTemplate x:Name="RoomsView" DataType="{x:Type viewmodels:RoomsViewModel}">
             <views:RoomsView />
         </DataTemplate>
+        <DataTemplate x:Name="RoomsDetailsView" DataType="{x:Type viewmodels:RoomDetailsViewModel}">
+            <views:RoomDetailsView />
+        </DataTemplate>
         <DataTemplate x:Name="LoadingView" DataType="{x:Type viewmodels:LoadingViewModel}">
             <views:LoadingView />
         </DataTemplate>
