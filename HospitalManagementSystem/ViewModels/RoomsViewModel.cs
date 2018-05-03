@@ -45,6 +45,7 @@ namespace HospitalManagementSystem.ViewModels
                 Rooms.Add(
                     new RoomCardViewModel
                     {
+                        ID = room.ID,
                         RoomNumber = room.RoomNumber,
                         Type = type,
                         Capacity = room.Patients.Count.ToString() + "/" + room.Capacity
@@ -78,6 +79,7 @@ namespace HospitalManagementSystem.ViewModels
                 Rooms.Add(
                     new RoomCardViewModel
                     {
+                        ID = newPrivateRoom.ID,
                         RoomNumber = newPrivateRoom.RoomNumber,
                         Type = "Private Room",
                         Capacity = newPrivateRoom.Patients.Count.ToString() + '/' + newPrivateRoom.Capacity.ToString()
@@ -87,6 +89,7 @@ namespace HospitalManagementSystem.ViewModels
                 FilteredRooms.Add(
                     new RoomCardViewModel
                     {
+                        ID = newPrivateRoom.ID,
                         RoomNumber = newPrivateRoom.RoomNumber,
                         Type = "Private Room",
                         Capacity = newPrivateRoom.Patients.Count.ToString() + '/' + newPrivateRoom.Capacity.ToString()
@@ -106,6 +109,7 @@ namespace HospitalManagementSystem.ViewModels
                 Rooms.Add(
                        new RoomCardViewModel
                        {
+                           ID = newSemiPrivateRoom.ID,
                            RoomNumber = newSemiPrivateRoom.RoomNumber,
                            Type = "Semi Private Room",
                            Capacity = newSemiPrivateRoom.Patients.Count.ToString() + '/' + newSemiPrivateRoom.Capacity.ToString()
@@ -115,6 +119,7 @@ namespace HospitalManagementSystem.ViewModels
                 FilteredRooms.Add(
                     new RoomCardViewModel
                     {
+                        ID = newSemiPrivateRoom.ID,
                         RoomNumber = newSemiPrivateRoom.RoomNumber,
                         Type = "Semi Private Room" ,
                         Capacity = newSemiPrivateRoom.Patients.Count.ToString() + '/' + newSemiPrivateRoom.Capacity.ToString()
@@ -134,6 +139,7 @@ namespace HospitalManagementSystem.ViewModels
                 Rooms.Add(
                        new RoomCardViewModel
                        {
+                           ID = newStandardWardRoom.ID,
                            RoomNumber = newStandardWardRoom.RoomNumber,
                            Type = "StandardWard Room",
                            Capacity = newStandardWardRoom.Patients.Count.ToString() + '/' + newStandardWardRoom.Capacity.ToString()
@@ -143,6 +149,7 @@ namespace HospitalManagementSystem.ViewModels
                 FilteredRooms.Add(
                     new RoomCardViewModel
                     {
+                        ID = newStandardWardRoom.ID,
                         RoomNumber = newStandardWardRoom.RoomNumber,
                         Type = "StandardWard Room",
                         Capacity = newStandardWardRoom.Patients.Count.ToString() + '/' + newStandardWardRoom.Capacity.ToString()
