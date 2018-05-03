@@ -47,7 +47,9 @@ namespace HospitalManagementSystem.Views
 
             }
             // Closing the Dialog
-            DialogHost.CloseDialogCommand.Execute(addDepartmentDialaog, null);
+            //DialogHost.CloseDialogCommand.Execute(addDepartmentDialaog, null);
+            Home.ViewModel.CloseRootDialog();
+
         }
     }
 }

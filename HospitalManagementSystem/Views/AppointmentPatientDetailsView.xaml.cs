@@ -37,7 +37,7 @@ namespace HospitalManagementSystem.Views
 
         private void EditAppointmentPatient(object sender, RoutedEventArgs e)
         {
-
+            Home.ViewModel.CloseRootDialog();
         }
     }
 }

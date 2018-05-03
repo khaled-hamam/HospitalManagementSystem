@@ -38,8 +38,11 @@ namespace HospitalManagementSystem.Views
             if (!ViewModel.ValidateInput())
             { MessageBox.Show("Invalid Entry"); return;}
             ViewModel.addPatient();
+            Home.ViewModel.CloseRootDialog();
+
             // Closing the Dialog
-            DialogHost.CloseDialogCommand.Execute(addPatientDialaog, null);
+            // DialogHost.CloseDialogCommand.Execute(addPatientDialaog, null);
+
             PatientNameTextBox.Clear();
             PatientAddressTextBox.Clear();
             PatientBirthDatetDatePicker.SelectedDate = DateTime.Today;
