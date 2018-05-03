@@ -41,7 +41,7 @@
         </DataTemplate>
 
     </Window.Resources>
-   <materialDesign:DialogHost Name="RootDialaog"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+   <materialDesign:DialogHost Identifier="{Binding RootDialog }" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="160" />

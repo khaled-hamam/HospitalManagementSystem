@@ -50,7 +50,6 @@
             </StackPanel>
         </Grid>
         <ScrollViewer Grid.Row="1">
-            <materialDesign:DialogHost Name="addAppointmentDialaog"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid>
                     <ItemsControl ItemsSource="{Binding FilteredAppointments}">
                         <ItemsControl.ItemTemplate>
@@ -115,7 +114,6 @@
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand"
                                     Click="addSubmit">
                                         <Button.CommandParameter>
                                             <system:Boolean>True</system:Boolean>
@@ -136,7 +134,6 @@
                         </Button.CommandParameter>
                     </Button>
                 </Grid>
-            </materialDesign:DialogHost>
         </ScrollViewer>
     </Grid>
 </UserControl>

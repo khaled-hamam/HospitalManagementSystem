@@ -1,10 +1,12 @@
 ﻿using HospitalManagementSystem.Models;
+using MaterialDesignThemes.Wpf;
 using System;
 
 namespace HospitalManagementSystem.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
+        public DialogHost RootDialog { set; get; }
         private BaseViewModel previousContent;
         private BaseViewModel content;
         public BaseViewModel Content
@@ -52,12 +54,18 @@ namespace HospitalManagementSystem.ViewModels
 
         public void InitializeHospital()
         {
-           Hospital.InitializeData();
+            Hospital.InitializeData();
         }
 
         public void GoBack()
         {
             Content = previousContent;
+        }
+
+        public void CloseRootDialog()
+        {
+            DialogHost.CloseDialogCommand.Execute(RootDialog, null);
+
         }
     }
 }
