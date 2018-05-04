@@ -30,7 +30,7 @@
                     <Button.CommandParameter>
                         <StackPanel>
                             <StackPanel Margin="16">
-                                <TextBox Text="{Binding RoomNumber}"  materialDesign:HintAssist.Hint="Room Number"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomNumberTextBox" />
+                                <TextBox Text="{Binding editedRoomNumber}"  materialDesign:HintAssist.Hint="Room Number"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomNumberTextBox" />
                                 <ComboBox Text="{Binding RoomType }" materialDesign:HintAssist.Hint="Room Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomtTypeComboBox" >
                                     <ComboBoxItem>Private</ComboBoxItem>
                                     <ComboBoxItem>Semi Private</ComboBoxItem>
@@ -41,7 +41,7 @@
                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"
-                                    Click="editRoom">
+                                    Command="{Binding EditRoom}">
                                     <Button.CommandParameter>
                                         <system:Boolean>True</system:Boolean>
                                     </Button.CommandParameter>
@@ -60,7 +60,35 @@
                         </StackPanel>
                     </Button.CommandParameter>
                 </Button>
-                <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0">Delete</Button>
+                <Button Style="{StaticResource DetailsButton}"  Margin="15 0 40 0" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">Delete
+                    <Button.CommandParameter>
+                        <StackPanel>
+                            <StackPanel Margin="16">
+                                <TextBlock  Text="Do You Want To Delete Room?" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                            IsDefault="True"
+                                            Margin="0 8 8 0"
+                                            Command="{Binding DeleteRoom}" >
+                                    <Button.CommandParameter>
+                                        <system:Boolean>True</system:Boolean>
+                                    </Button.CommandParameter>
+                                    YES
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                            IsCancel="True"
+                                            Margin="0 8 0 0"
+                                            Command="materialDesign:DialogHost.CloseDialogCommand">
+                                    <Button.CommandParameter>
+                                        <system:Boolean>False</system:Boolean>
+                                    </Button.CommandParameter>
+                                    NO
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button.CommandParameter>
+                </Button>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="1" Margin="20 0 0 0">
                 <TextBlock Text="Room Price" Style="{StaticResource DetailsInfoTitle}" />
@@ -92,18 +120,18 @@
                                 Background="{StaticResource PrimaryColor}">
                                 <Button.CommandParameter>
                                     <StackPanel Margin="16">
-                                        <ComboBox Text="{Binding PatientsComboBoxItems }" materialDesign:HintAssist.Hint="Patients Names"
+                                        <ComboBox ItemsSource="{Binding PatientsComboBoxItems }" materialDesign:HintAssist.Hint="Patients Names"
                                           Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                                             Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientsComboBoxItems"
-                                            DisplayMemberPath="Key"
-                                         SelectedValuePath="Value"
-                                         ItemsSource="{Binding PatientsComboBoxItems}">
+                                            DisplayMemberPath="Value"
+                                            SelectedValuePath="Key"
+                                            SelectedItem="{Binding PatientSelectedItem}">
                                         </ComboBox>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsDefault="True"
                                                 Margin="0 8 8 0"
-                                                Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                Click="assignPatientToRoom">
                                                 <Button.CommandParameter>
                                                     <system:Boolean>True</system:Boolean>
                                                 </Button.CommandParameter>
@@ -153,18 +181,18 @@
                                 Background="{StaticResource PrimaryColor}">
                                 <Button.CommandParameter>
                                     <StackPanel Margin="16">
-                                        <ComboBox Text="{Binding NursesComboBoxItems }" materialDesign:HintAssist.Hint="Nurses Names"
+                                        <ComboBox ItemsSource="{Binding NursesComboBoxItems }" materialDesign:HintAssist.Hint="Nurses Names"
                                           Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                                             Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="NursesComboBoxItems" 
-                                            DisplayMemberPath="Key"
-                                         SelectedValuePath="Value"
-                                         ItemsSource="{Binding NursesComboBoxItems}">
+                                            DisplayMemberPath="Value"
+                                                SelectedValuePath="Key" 
+                                         SelectedItem="{Binding NurseSelectedItem}">
                                         </ComboBox>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsDefault="True"
                                                 Margin="0 8 8 0"
-                                                Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                Click="assignNurseToRoom">
                                                 <Button.CommandParameter>
                                                     <system:Boolean>True</system:Boolean>
                                                 </Button.CommandParameter>
