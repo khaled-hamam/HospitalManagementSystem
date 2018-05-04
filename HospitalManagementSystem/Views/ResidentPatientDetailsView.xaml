@@ -40,7 +40,18 @@
                                             <ComboBoxItem>Resident Patient</ComboBoxItem>
                                             <ComboBoxItem>Appointment Patient</ComboBoxItem>
                                         </ComboBox>
-                                        <ComboBox  SelectedItem="{Binding EditRoomNumberComboBox}" Visibility="{Binding IsResident}" Text="{Binding PatientRoomNumber}" IsEditable="True" materialDesign:HintAssist.Hint="Patient Room Number"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientRoomNumberComboBox"/>
+                                        <ComboBox  SelectedItem="{Binding EditRoomNumberComboBox}"
+                                                   Visibility="{Binding IsResident}" 
+                                                   IsEditable="True"
+                                                   materialDesign:HintAssist.Hint="Patient Room Number"  
+                                                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                                   Margin="0 8 0 0" 
+                                                   DisplayMemberPath="Value"
+                                                   SelectedValuePath="Key"
+                                                   HorizontalAlignment="Left"  
+                                                   Width="200" 
+                                                   ItemsSource="{Binding PatientRoomNumberComboBox}"
+                                                   x:Name="PatientRoomNumberComboBox"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 VerticalAlignment="Bottom"
@@ -99,7 +110,13 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <ListBox ItemsSource="{Binding DoctorsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="DoctorsList"></ListBox>
+                                <ListBox
+                                    ItemsSource="{Binding DoctorsList}"
+                                    Background="White"
+                                    Foreground="{StaticResource PrimaryColor}"
+                                    x:Name="DoctorsList"
+                                    DisplayMemberPath="Value"
+                                    SelectedValuePath="Key"/>
                                 <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                                     <TextBlock Text="{Binding DoctorsNumber}" Foreground="White" Margin="16"/>
                                 </materialDesign:ColorZone>
@@ -113,7 +130,18 @@
                                         Background="{StaticResource PrimaryColor}">
                                         <Button.CommandParameter>
                                             <StackPanel Margin="16">
-                                                <ComboBox  SelectedItem="{Binding DoctorComboBox}" Text="{Binding DoctorsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Doctor"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="DoctorsComboBox"/>
+                                                <ComboBox 
+                                                    SelectedItem="{Binding DoctorComboBox}"
+                                                    ItemsSource="{Binding DoctorsComboBox}" 
+                                                    IsEditable="True"
+                                                    materialDesign:HintAssist.Hint="Add Doctor"  
+                                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                                                    Margin="0 8 0 0" 
+                                                    HorizontalAlignment="Left" 
+                                                    Width="200" 
+                                                    DisplayMemberPath="Value"
+                                                    SelectedValuePath="Key"
+                                                    x:Name="DoctorsComboBox"/>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
@@ -153,7 +181,13 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <ListBox ItemsSource="{Binding MedicalHistoryList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="MedicalHistoryList"></ListBox>
+                                <ListBox 
+                                    ItemsSource="{Binding MedicalHistoryList}"
+                                    Background="White"
+                                    Foreground="{StaticResource PrimaryColor}"
+                                    x:Name="MedicalHistoryList"
+                                    DisplayMemberPath="Value"
+                                    SelectedValuePath="Key"/>
                                 <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                                     <TextBlock Text="Medical History" Foreground="White" Margin="16"/>
                                 </materialDesign:ColorZone>
@@ -167,7 +201,8 @@
                                         Background="{StaticResource PrimaryColor}">
                                         <Button.CommandParameter>
                                             <StackPanel Margin="16">
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                            <TextBox Text="{Binding MedicalHistoryTextBox}" materialDesign:HintAssist.Hint="Add medicine"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="MedicalHistoryTextBox"  />
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
                                                         Command="materialDesign:DialogHost.CloseDialogCommand"    
@@ -200,6 +235,7 @@
                     </materialDesign:DialogHost>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="4">
+                    <!--Nurse List-->
                         <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
                             <Border Style="{StaticResource DetailsDialogHostBorder}">
                             <Grid>
@@ -207,7 +243,13 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <ListBox ItemsSource="{Binding NursessList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="NursesList"></ListBox>
+                                <ListBox 
+                                    ItemsSource="{Binding NursesList}" 
+                                    Background="White" 
+                                    Foreground="{StaticResource PrimaryColor}" 
+                                    x:Name="NursesList"
+                                    DisplayMemberPath="Value"
+                                    SelectedValuePath="Key"/>
                                 <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                                     <TextBlock Text="{Binding NursesNumber}" Foreground="White" Margin="16"/>
                                 </materialDesign:ColorZone>
@@ -221,7 +263,18 @@
                                         Background="{StaticResource PrimaryColor}">
                                         <Button.CommandParameter>
                                             <StackPanel Margin="16">
-                                                <ComboBox  SelectedItem="{Binding NurseComboBox}" Text="{Binding NursesComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Nurse"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="NursesComboBox"/>
+                                                <ComboBox 
+                                                    SelectedItem="{Binding NurseComboBox}" 
+                                                    ItemsSource="{Binding NursesComboBox}" 
+                                                    DisplayMemberPath="Value"
+                                                    SelectedValuePath="Key"
+                                                    IsEditable="True" 
+                                                    materialDesign:HintAssist.Hint="Add Nurse"
+                                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                                                    Margin="0 8 0 0" 
+                                                    HorizontalAlignment="Left" 
+                                                    Width="200" 
+                                                    x:Name="NursesComboBox"/>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
