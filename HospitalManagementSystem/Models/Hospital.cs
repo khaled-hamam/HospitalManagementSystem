@@ -152,10 +152,12 @@ namespace HospitalManagementSystem.Models
                 // Fetching Appointment Patient
                 String patientID = HospitalDB.FetchAppointmentPatient(appointment.ID);
                 appointment.Patient = (AppointmentPatient)Patients[patientID];
+                ((AppointmentPatient)Patients[patientID]).addAppointment(appointment);
 
                 // Fetching Appointment Doctor
                 String doctorID = HospitalDB.FetchAppointmentDoctor(appointment.ID);
                 appointment.Doctor = (Doctor)Employees[doctorID];
+                ((Doctor)Employees[doctorID]).addAppointment(appointment);
 
                 Appointments.Add(appointment.ID, appointment);
             }

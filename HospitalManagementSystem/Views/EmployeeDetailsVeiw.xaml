@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" >
             <TextBlock  Text="{Binding EmployeeName}" FontSize="24" Style="{StaticResource DetailsInfoTitle}" Foreground="{StaticResource PrimaryColor}" />
-            <TextBlock Text="{Binding employeeRole}"  Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
+            <TextBlock Text="{Binding EmployeeRole}"  Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
         </StackPanel>
                 <!--Main Buttons-->
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -36,6 +36,9 @@
                                 <TextBox Text="{Binding EditEmployeeSalaryTextBox}" materialDesign:HintAssist.Hint="Employee salary"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EditEmployeeSalaryTextBox" />
                                 <ComboBox 
                                 materialDesign:HintAssist.Hint="Employee Department"  
+                                ItemsSource="{Binding EditDepartmentComboBox}"
+                                DisplayMemberPath="Value"
+                                SelectedValuePath="Key"
                                 SelectedItem="{Binding EditEmployeeDepartment}"
                                 IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
                                 Margin="0 8 0 0" 
@@ -108,8 +111,13 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox ItemsSource="{Binding PatientsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="PatientsList"></ListBox>
-                        <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                            <ListBox ItemsSource="{Binding PatientsList}" 
+                                 Background="White" 
+                                 Foreground="{StaticResource PrimaryColor}" 
+                                 x:Name="PatientsList"
+                                 DisplayMemberPath="Value"
+                                 SelectedValuePath="Key"/>
+                            <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                             <TextBlock Text="{Binding PatientsNumber}" Foreground="White" Margin="16"/>
                         </materialDesign:ColorZone>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
@@ -122,7 +130,18 @@
                                 Background="{StaticResource PrimaryColor}">
                                     <Button.CommandParameter>
                                         <StackPanel Margin="16">
-                                            <ComboBox  SelectedItem="{Binding PatientComboBox}" Text="{Binding PatientsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Patient"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientsComboBox"/>
+                                            <ComboBox  
+                                                SelectedItem="{Binding PatientComboBox}" 
+                                                DisplayMemberPath="Value"
+                                                SelectedValuePath="Key"
+                                                ItemsSource="{Binding PatientsComboBox}" 
+                                                IsEditable="True" 
+                                                materialDesign:HintAssist.Hint="Add Patient"  
+                                                Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                                Margin="0 8 0 0" 
+                                                HorizontalAlignment="Left"
+                                                Width="200"
+                                                x:Name="PatientsComboBox"/>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
@@ -163,53 +182,20 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox  ItemsSource="{Binding AppointmentsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="AppointmentsList"></ListBox>
-                        <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                            <TextBlock Text="{Binding AppointmentsNumber}" Foreground="White" Margin="16"/>
-                        </materialDesign:ColorZone>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                Grid.Row="0" Margin="0 0 28 -20"
-                                BorderThickness="0"
-                                BorderBrush="Transparent"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="{StaticResource PrimaryColor}">
-                                    <Button.CommandParameter>
-                                        <StackPanel Margin="16">
-                                            <ComboBox  SelectedItem="{Binding AppointmentComboBox}" Text="{Binding AppointmentsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Appointment"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="AppointmentsComboBox"/>
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                        IsDefault="True"
-                                                        Margin="0 8 8 0">
-                                                <Button.CommandParameter>
-                                                        <system:Boolean>True</system:Boolean>
-                                                    </Button.CommandParameter>
-                                                    ACCEPT
-                                                </Button>
-                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                        IsCancel="True"
-                                                        Margin="0 8 8 0"
-                                                        Command="materialDesign:DialogHost.CloseDialogCommand">
-                                                    <Button.CommandParameter>
-                                                        <system:Boolean>False</system:Boolean>
-                                                    </Button.CommandParameter>
-                                                    CANCEL
-                                                </Button>
-                                            </StackPanel>
-                                        </StackPanel>
-                                    </Button.CommandParameter>
-                            <Viewbox Width="22" Height="22">
-                                <Canvas Width="24" Height="24">
-                                    <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
-                                </Canvas>
-                            </Viewbox>
-                        </Button>
-                    </Grid>
+                            <ListBox  ItemsSource="{Binding AppointmentsList}" 
+                                  Background="White" 
+                                  Foreground="{StaticResource PrimaryColor}" 
+                                  x:Name="AppointmentsList"
+                                   DisplayMemberPath="Value"
+                                    SelectedValuePath="Key"/>
+                            <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                                <TextBlock Text="{Binding AppointmentsNumber}" Foreground="White" Margin="16"/>
+                            </materialDesign:ColorZone>
+                        </Grid>
                 </Border>
             </materialDesign:DialogHost>
         </StackPanel>
-                <!--Nurse List Dialogbox-->
+                <!--Rooms List Dialogbox-->
         <StackPanel Grid.Column="1" Grid.Row="4">
                     <materialDesign:DialogHost  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0">
                         <Border Visibility="{Binding IsNurse}" Style="{StaticResource DetailsDialogHostBorder}">
@@ -218,8 +204,13 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox ItemsSource="{Binding RoomsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="RoomsList"></ListBox>
-                        <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                            <ListBox ItemsSource="{Binding RoomsList}" 
+                                 Background="White" 
+                                 Foreground="{StaticResource PrimaryColor}" 
+                                 x:Name="RoomsList"
+                                  DisplayMemberPath="Value"
+                                    SelectedValuePath="Key"/>
+                            <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                             <TextBlock Text="{Binding RoomsNumber}" Foreground="White" Margin="16"/>
                         </materialDesign:ColorZone>
                                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
@@ -232,7 +223,18 @@
                                         Background="{StaticResource PrimaryColor}">
                                     <Button.CommandParameter>
                                         <StackPanel Margin="16">
-                                            <ComboBox  SelectedItem="{Binding RoomComboBox}" Text="{Binding RoomsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Room"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="RoomsComboBox"/>
+                                            <ComboBox 
+                                                SelectedItem="{Binding RoomComboBox}"
+                                                ItemsSource="{Binding RoomsComboBox}" 
+                                                IsEditable="True" 
+                                                materialDesign:HintAssist.Hint="Add Room"  
+                                                Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                                Margin="0 8 0 0"
+                                                HorizontalAlignment="Left" 
+                                                Width="200" 
+                                                DisplayMemberPath="Value"
+                                                SelectedValuePath="Key"
+                                                x:Name="RoomsComboBox"/>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"

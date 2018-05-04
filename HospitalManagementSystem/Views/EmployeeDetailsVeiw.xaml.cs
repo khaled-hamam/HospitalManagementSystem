@@ -24,12 +24,7 @@ namespace HospitalManagementSystem.Views
         public EmployeeDetailsVeiwModel ViewModel { get; set; }
         public EmployeeDetailsVeiw()
         {
-            ViewModel = new EmployeeDetailsVeiwModel();
-            DataContext = ViewModel;
             InitializeComponent();
-            EditEmployeeDepartmentComboBox.DisplayMemberPath = "Value";
-            EditEmployeeDepartmentComboBox.SelectedValuePath = "Key";
-            EditEmployeeDepartmentComboBox.ItemsSource = ViewModel.EditDepartmentComboBoxItems;
         }
 
         private void DeleteEmployee(object sender, MouseButtonEventArgs e)
