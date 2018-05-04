@@ -163,6 +163,8 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                             <ListBox 
+                            DisplayMemberPath="Value"
+                            SelectedValuePath="Key"
                             ItemsSource="{Binding AppointmentsList}" 
                             Background="White" 
                             Foreground="{StaticResource PrimaryColor}" 
