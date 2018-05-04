@@ -20,7 +20,9 @@ namespace HospitalManagementSystem.ViewModels
         public String DepartmentName { set; get; }
         public String HeadName { set; get; }
         public String EditDepartmentName { get; set; }
-
+        public String  DoctorsCount { get; set; }
+        public String NursesCount { get; set;}
+        public String   PatientsCount { get; set; }
 
         public ICommand EditDepartment { get; set; }
         public ICommand DeleteDepartment { get; set; }
@@ -33,16 +35,11 @@ namespace HospitalManagementSystem.ViewModels
             NursesList = new ObservableCollection<string>();
             PatientsList = new ObservableCollection<string>();
 
-          foreach (Doctor doctor in Hospital.Departments[id].Doctors.Values)
-            {
-                if (doctor.IsHead)
-                    HeadName = doctor.Name;
-            }
-
+            DoctorsCount = "Doctors: " + Hospital.Departments[id].Doctors.Count.ToString();
+            NursesCount = "Nurses: " + Hospital.Departments[id].Nurse.Count.ToString();
           foreach(Doctor doctor in Hospital.Departments[id].Doctors.Values)
             {
                 DoctorsList.Add(doctor.Name);
-                Console.WriteLine(doctor.Name);
             }
           
           foreach(Nurse nurse in Hospital.Departments[id].Nurse.Values)

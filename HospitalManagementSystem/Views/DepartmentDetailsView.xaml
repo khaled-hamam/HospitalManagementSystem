@@ -87,14 +87,16 @@
                 </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" >
                         <TextBlock Text="Head Name" Style="{StaticResource DetailsInfoTitle}"/>
+
                     <TextBlock Text="{Binding HeadName}"  Style="{StaticResource DetailsInfoTitle}"  Margin="15 0 0 0" Foreground="{StaticResource PrimaryColor}" />
+
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="2">
                     <materialDesign:DialogHost Name="addDoctorDialog"  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
                         <Border Style="{StaticResource DetailsDialogHostBorder}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="170*"/>
+                                    <ColumnDefinition Width="170*" />
                                     <ColumnDefinition Width="64*"/>
                                     <ColumnDefinition Width="21*"/>
                                 </Grid.ColumnDefinitions>
@@ -102,9 +104,10 @@
                                     <RowDefinition Height="205" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <ListBox ItemsSource="{Binding DoctorsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="DoctorsList" Grid.ColumnSpan="3" Margin="0,0,0.4,0.4"></ListBox>
-                                <materialDesign:ColorZone Background="#0e263e" Effect="{DynamicResource MaterialDesignShadowDepth5}" Grid.ColumnSpan="3" Margin="0,206,0.4,-0.6" Grid.RowSpan="2">
-                                    <TextBlock Text="{Binding DoctorName}" Foreground="White" Margin="16"/>
+                                <ListBox ItemsSource="{Binding DoctorsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="DoctorsList" Grid.ColumnSpan="3">
+                                </ListBox>
+                                <materialDesign:ColorZone Grid.Row="2" Background="#0e263e" Effect="{DynamicResource MaterialDesignShadowDepth5}" Grid.ColumnSpan="3">
+                                    <TextBlock Text="{Binding DoctorsCount}" Foreground="White" Margin="16"/>
                                 </materialDesign:ColorZone>
                             </Grid>
                         </Border>
@@ -119,7 +122,7 @@
                                 </Grid.RowDefinitions>
                                     <ListBox  ItemsSource="{Binding PatientsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="PatientList"></ListBox>
                                 <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                                    <TextBlock Text="{Binding PatientsName}" Foreground="White" Margin="16"/>
+                                    <TextBlock Text="{Binding PatientsCount}" Foreground="White" Margin="16"/>
                                 </materialDesign:ColorZone>
                             </Grid>
                             </Border>
@@ -136,7 +139,7 @@
                                 </Grid.RowDefinitions>
                                     <ListBox ItemsSource="{Binding NursesList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="NursesList"></ListBox>
                                     <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                                        <TextBlock Text="{Binding NurseName}" Foreground="White" Margin="16"/>
+                                        <TextBlock Text="{Binding NursesCount}" Foreground="White" Margin="16"/>
                                     </materialDesign:ColorZone>
                                   
                                 </Grid>
