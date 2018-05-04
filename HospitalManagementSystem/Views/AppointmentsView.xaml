@@ -63,11 +63,14 @@
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
+                </Grid>
+        </ScrollViewer>
                     <Button 
                         Margin="0 0 35 20"
                         Background="{StaticResource PrimaryColor}"
                         BorderThickness="0"
                         BorderBrush="Transparent"
+                        Grid.Row="1"
                         materialDesign:ShadowAssist.ShadowDepth="Depth1"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                              
                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
@@ -133,7 +136,5 @@
                             </StackPanel>
                         </Button.CommandParameter>
                     </Button>
-                </Grid>
-        </ScrollViewer>
     </Grid>
 </UserControl>
