@@ -21,12 +21,9 @@ namespace HospitalManagementSystem.ViewModels
 
         public void navigateToDetails()
         {
-            String headname = "";
-            foreach (Doctor doctor in Hospital.Departments[ID].Doctors.Values)
-            {
-
-                if (doctor.IsHead) headname = doctor.Name;
-            }
+            String headname;
+            if (String.IsNullOrEmpty(Hospital.Departments[ID].HeadID)) headname = "N/A";
+            else headname = Hospital.Employees[Hospital.Departments[ID].HeadID].Name;
 
             Home.ViewModel.Content = new DepartmentDetailsViewModel(ID)
             {
