@@ -34,8 +34,8 @@ namespace HospitalManagementSystem.ViewModels
                 RoomNumber = Hospital.Rooms[ID].RoomNumber.ToString(),
                 RoomID = Hospital.Rooms[ID].ID,
                 RoomType = type,
-                roomCapacity = Hospital.Rooms[ID].Capacity.ToString(),
-                roomPrice = Hospital.Rooms[ID].Price.ToString(),
+                roomCapacity = Hospital.Rooms[ID].Patients.Count.ToString() + '/' + Hospital.Rooms[ID].Capacity.ToString(),
+                roomPrice = $"{Hospital.Rooms[ID].Price}$",
             };
         }
     }
