@@ -201,7 +201,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"SELECT room_id FROM nurse_room WHERE nurse_id = {nurseID}";
+                String query = $"SELECT room_id FROM nurse_room WHERE nurse_id = '{nurseID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 while(reader.Read())
@@ -211,7 +211,7 @@ namespace HospitalManagementSystem.Services
             }
             catch
             {
-                Console.WriteLine("Error Occured Fetching Department.");
+                Console.WriteLine("Error Occured Fetching Nurse Room.");
             }
             finally
             {
@@ -405,7 +405,7 @@ namespace HospitalManagementSystem.Services
                     appointments.Add(new Appointment
                     {
                         ID = reader.GetString("appointment_id"),
-                        // Date = reader.GetDateTime("date"),
+                        Date = reader.GetDateTime("date"),
                         Duration = reader.GetInt32("duration")
                     });
                 }
@@ -527,7 +527,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"INSERT INTO doctor VALUES('{doctor.ID}', '{doctor.Name}', " +
-                    $"'{doctor.BirthDate}', '{doctor.Address}', '{doctor.EmploymentDate}', '{doctor.Department.ID}'," +
+                    $"'{doctor.BirthDate.ToString("yyyy-mm-dd")}', '{doctor.Address}', '{doctor.EmploymentDate.ToString("yyyy-mm-dd")}', '{doctor.Department.ID}'," +
                     $"{doctor.Salary}, {doctor.IsHead})";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -550,7 +550,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"INSERT INTO nurse VALUES('{nurse.ID}', '{nurse.Name}', " +
-                    $"'{nurse.BirthDate}', '{nurse.Address}', '{nurse.EmploymentDate}', '{nurse.Department.ID}'," +
+                    $"'{nurse.BirthDate.ToString("yyyy-mm-dd")}', '{nurse.Address}', '{nurse.EmploymentDate.ToString("yyyy-mm-dd")}', '{nurse.Department.ID}'," +
                     $"{nurse.Salary})";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -573,7 +573,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"INSERT INTO patient VALUES('{patient.ID}', '{patient.Name}', " +
-                    $"'{patient.BirthDate}', '{patient.Address}', '{patient.Diagnosis}'";
+                    $"'{patient.BirthDate.ToString("yyyy-mm-dd")}', '{patient.Address}', '{patient.Diagnosis}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
 
@@ -596,7 +596,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"INSERT INTO room VALUES('{room.ID}', {room.RoomNumber}, '{room.GetType()}'";
+                String query = $"INSERT INTO room VALUES('{room.ID}', {room.RoomNumber}, '{room.GetType()}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
             }
@@ -618,7 +618,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"INSERT INTO appointment VALUES('{appointment.ID}', '{appointment.Patient.ID}', " +
-                    $"'{appointment.Doctor.ID}', '{appointment.Date}', {appointment.Duration}";
+                    $"'{appointment.Doctor.ID}', '{appointment.Date.ToString("yyyy-mm-dd")}', {appointment.Duration}";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
             }
@@ -640,7 +640,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"INSERT INTO medicine VALUES('{medicine.ID}', '{medicine.Name}', " +
-                    $"'{medicine.StartingDate}', '{medicine.EndingDate}', '{patient.ID}'";
+                    $"'{medicine.StartingDate.ToString("yyyy-mm-dd")}', '{medicine.EndingDate.ToString("yyyy-mm-dd")}', '{patient.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
             }
@@ -654,5 +654,147 @@ namespace HospitalManagementSystem.Services
             }
         }
         #endregion
+
+        #region Updating Operations
+
+        public async static void UpdateDepartment(Department department)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE department SET name = '{department.Name}' WHERE department_id = '{department.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch 
+            {
+                Console.WriteLine("Error Updating Department.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void UpdateDoctor(Doctor doctor)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE doctor SET name = '{doctor.Name}', birth_date = '{doctor.BirthDate.ToString("yyyy-mm-dd")}', " +
+                    $"address = '{doctor.Address}', employement_date = '{doctor.EmploymentDate.ToString("yyyy-mm-dd")}', " +
+                    $"department_id = '{doctor.Department.ID}', salary = {doctor.Salary}, is_head = {doctor.IsHead} " +
+                    $"WHERE doctor_id = '{doctor.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Doctor.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void UpdateNurse(Nurse nurse)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE nurse SET name = '{nurse.Name}', birth_date = '{nurse.BirthDate.ToString("yyyy-mm-dd")}', " +
+                    $"address = '{nurse.Address}', employement_date = '{nurse.EmploymentDate.ToString("yyyy-mm-dd")}', " +
+                    $"department_id = '{nurse.Department.ID}', salary = {nurse.Salary} " +
+                    $"WHERE nurse_id = '{nurse.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Nurse.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void UpdateAppointment(Appointment appointment)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE appointment SET patient_id = '{appointment.Patient.ID}', doctor_id = '{appointment.Doctor.ID}', " +
+                    $"date = '{appointment.Date.ToString("yyyy-mm-dd")}', duration = {appointment.Duration}, " +
+                    $"WHERE appointment_id = '{appointment.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Appointment.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void UpdatePatient(Patient patient)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE patient SET name = '{patient.Name}', birth_date = '{patient.BirthDate.ToString("yyyy-mm-dd")}', " +
+                    $"address = '{patient.Address}', diagnosis = '{patient.Diagnosis}', " +
+                    $"WHERE patient_id = '{patient.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Patient.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void UpdateRoom(Room room)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE room SET room_number = '{room.RoomNumber}', type = '{room.GetType()}', " +
+                    $"WHERE room_id = '{room.ID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Room.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        #endregion
+
     }
 }
