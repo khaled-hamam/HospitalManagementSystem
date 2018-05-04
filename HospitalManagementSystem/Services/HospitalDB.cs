@@ -796,5 +796,134 @@ namespace HospitalManagementSystem.Services
 
         #endregion
 
+        #region Deleting Operations
+
+        public async static void DeleteDepartment(String id)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM department WHERE department_id = '{id}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Department.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void DeleteDoctor(String id)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM doctor WHERE doctor_id = '{id}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Doctor.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void DeleteNurse(String id)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM nurse WHERE nurse_id = '{id}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Nurse.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void DeletePatient(String id)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM patient WHERE patient_id = '{id}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Patient.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void DeleteAppointment(String id)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM appointment WHERE appointment_id = '{id}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Appointment.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void DeleteRoom(String id)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM room WHERE room_id = '{id}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Room.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        #endregion
     }
 }
