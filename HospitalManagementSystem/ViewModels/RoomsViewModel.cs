@@ -52,7 +52,7 @@ namespace HospitalManagementSystem.ViewModels
                     }
                 );
             }
-            FilteredRooms= new ObservableCollection<RoomCardViewModel>(Rooms);
+            FilteredRooms = new ObservableCollection<RoomCardViewModel>(Rooms);
         }
 
 
@@ -70,7 +70,7 @@ namespace HospitalManagementSystem.ViewModels
 
         public void addRoom()
         {
-            if(RoomType == "Private")
+            if (RoomType == "Private")
             {
                 PrivateRoom newPrivateRoom = new PrivateRoom
                 {
@@ -99,7 +99,7 @@ namespace HospitalManagementSystem.ViewModels
                 Hospital.Rooms.Add(newPrivateRoom.ID, newPrivateRoom);
                 HospitalDB.InsertRoom(newPrivateRoom);
             }
- 
+
             else if (RoomType == "Semi Private")
             {
                 SemiPrivateRoom newSemiPrivateRoom = new SemiPrivateRoom
@@ -121,7 +121,7 @@ namespace HospitalManagementSystem.ViewModels
                     {
                         ID = newSemiPrivateRoom.ID,
                         RoomNumber = newSemiPrivateRoom.RoomNumber,
-                        Type = "Semi Private Room" ,
+                        Type = "Semi Private Room",
                         Capacity = newSemiPrivateRoom.Patients.Count.ToString() + '/' + newSemiPrivateRoom.Capacity.ToString()
                     }
                );
@@ -130,7 +130,7 @@ namespace HospitalManagementSystem.ViewModels
                 HospitalDB.InsertRoom(newSemiPrivateRoom);
             }
 
-            else if(RoomType == "Standard Ward")
+            else if (RoomType == "Standard Ward")
             {
                 StandardWard newStandardWardRoom = new StandardWard
                 {
@@ -173,7 +173,7 @@ namespace HospitalManagementSystem.ViewModels
                 if (int.Parse(RoomNumber) == room.RoomNumber)
                     return false;
             }
-            
+
             return true;
         }
 

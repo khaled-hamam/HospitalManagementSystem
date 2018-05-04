@@ -10,7 +10,7 @@ namespace HospitalManagementSystem.ViewModels
 {
     public class RoomDetailsViewModel : BaseViewModel
     {
-        public String RoomID { get; set; }  
+        public String RoomID { get; set; }
         public String RoomNumber { get; set; }
         public String RoomType { get; set; }
         public String roomPrice { get; set; }
@@ -19,8 +19,8 @@ namespace HospitalManagementSystem.ViewModels
         public String PatientsNumber { get; set; }
         public String NursesNumber { get; set; }
 
-        public ObservableCollection<String> PatientsList { get; set; }
-        public ObservableCollection<String> NursesList { get; set; }
+        public ObservableCollection<ComboBoxPairs> PatientsList { get; set; }
+        public ObservableCollection<ComboBoxPairs> NursesList { get; set; }
 
         public ObservableCollection<ComboBoxPairs> PatientsComboBoxItems { get; set; }
         public ObservableCollection<ComboBoxPairs> NursesComboBoxItems { get; set; }
@@ -30,9 +30,9 @@ namespace HospitalManagementSystem.ViewModels
         public ICommand assignPatient { get; set; }
         public ICommand assignNurse { get; set; }
 
-        public ComboBoxPairs PatientSelectedItem;
-        public ComboBoxPairs NurseSelectedItem;
-        
+        public ComboBoxPairs PatientSelectedItem { get; set; }
+        public ComboBoxPairs NurseSelectedItem { get; set; }
+
 
         public RoomDetailsViewModel(String ID)
         {
@@ -41,16 +41,16 @@ namespace HospitalManagementSystem.ViewModels
             assignPatient = new RelayCommand(AssignPatient);
             EditRoom = new RelayCommand(EditRooms);
             DeleteRoom = new RelayCommand(DeleteRooms);
-            NursesList = new ObservableCollection<String>();
-            PatientsList = new ObservableCollection<String>();
-            PatientSelectedItem = new ComboBoxPairs("","");
-            NurseSelectedItem = new ComboBoxPairs("", "");
+            NursesList = new ObservableCollection<ComboBoxPairs>();
+            PatientsList = new ObservableCollection<ComboBoxPairs>();
+            PatientSelectedItem = new ComboBoxPairs("Key", "Value");
+            NurseSelectedItem = new ComboBoxPairs("Key", "Value");
 
             PatientsComboBoxItems = new ObservableCollection<ComboBoxPairs>();
 
-           foreach (Patient patient in Hospital.Rooms[ID].Patients.Values)
+            foreach (Patient patient in Hospital.Rooms[ID].Patients.Values)
             {
-                PatientsList.Add(patient.Name);
+                PatientsList.Add(new ComboBoxPairs(patient.ID, patient.Name));
             }
 
             foreach (Patient patient in Hospital.Patients.Values)
@@ -58,7 +58,7 @@ namespace HospitalManagementSystem.ViewModels
                 Boolean valid = true;
                 foreach (Patient invalidPatient in Hospital.Rooms[ID].Patients.Values)
                 {
-                    if(patient.ID == invalidPatient.ID)
+                    if (patient.ID == invalidPatient.ID)
                     {
                         valid = false;
                     }
@@ -73,10 +73,10 @@ namespace HospitalManagementSystem.ViewModels
 
             foreach (Nurse nurse in Hospital.Rooms[ID].Nurses.Values)
             {
-                NursesList.Add(nurse.Name);
+                NursesList.Add(new ComboBoxPairs(nurse.ID, nurse.Name));
             }
 
-            foreach (Nurse nurse in Hospital.Employees.Values)
+            foreach (Employee nurse in Hospital.Employees.Values)
             {
                 Boolean valid = true;
                 foreach (Nurse invalidNurse in Hospital.Rooms[ID].Nurses.Values)
@@ -86,7 +86,7 @@ namespace HospitalManagementSystem.ViewModels
                         valid = false;
                     }
                 }
-                if (valid)
+                if (valid && nurse.GetType() == typeof(Nurse))
                 {
                     NursesComboBoxItems.Add(new ComboBoxPairs(nurse.ID, nurse.Name));
                 }
@@ -99,7 +99,28 @@ namespace HospitalManagementSystem.ViewModels
         {
             RoomNumber = editedRoomNumber;
             Hospital.Rooms[RoomID].RoomNumber = int.Parse(editedRoomNumber);
-            roomCapacity = PatientsList.Count + '/' + Hospital.Rooms[RoomID].Capacity.ToString();
+            if (RoomType == "Private")
+            {
+                Hospital.Rooms[RoomID].Capacity = 1;
+                Hospital.Rooms[RoomID].Price = 100;
+            }
+            else if (RoomType == "Semi Private")
+            {
+                Hospital.Rooms[RoomID].Capacity = 2;
+                Hospital.Rooms[RoomID].Price = 50;
+            }
+            else if (RoomType == "Standard Ward")
+            {
+                Hospital.Rooms[RoomID].Capacity = 4;
+                Hospital.Rooms[RoomID].Price = 25;
+            }
+            PatientsList.Clear();
+            NursesList.Clear();
+
+            NursesNumber = $"Nurses : {NursesList.Count}";
+            PatientsNumber = $"Patients : {PatientsList.Count}";
+
+            roomCapacity = $"{PatientsList.Count} / {Hospital.Rooms[RoomID].Capacity}";
             roomPrice = $"{Hospital.Rooms[RoomID].Price}$";
             //HospitalDB.UpdateRoom(Hospital.Rooms[RoomID]);
             Home.ViewModel.CloseRootDialog();
@@ -112,17 +133,54 @@ namespace HospitalManagementSystem.ViewModels
         }
         public void AssignPatient()
         {
+            Home.ViewModel.CloseRootDialog();
 
-            PatientsList.Add(PatientSelectedItem.Value);
-            PatientsComboBoxItems.Remove(PatientSelectedItem);
-            PatientsNumber = $"Patients : {PatientsList.Count}";
+            if (PatientsList.Count > 0 && RoomType == "Private Room")
+            {
+                MessageBox.Show("No Enough Beds In Room");
+            }
+            else if (PatientsList.Count > 1 && RoomType == "Semi Private")
+            {
+                MessageBox.Show("No Enough Beds In Room");
+            }
+            else if (PatientsList.Count > 3 && RoomType == "Standard Ward")
+            {
+                MessageBox.Show("No Enough Beds In Room");
+            }
+            else
+            {
+                PatientsList.Add(new ComboBoxPairs(PatientSelectedItem.Key, PatientSelectedItem.Value));
+                foreach (Patient patient in Hospital.Patients.Values)
+                {
+                    if (patient.ID == PatientSelectedItem.Key && patient.Name == PatientSelectedItem.Value)
+                    {
+                        Hospital.Rooms[RoomID].addPatient(patient);
+                        break;
+                    }
+                }
+                PatientsNumber = $"Patients : {PatientsList.Count}";
+                roomCapacity = $"{PatientsList.Count} / {Hospital.Rooms[RoomID].Capacity}";
+            }
 
         }
         public void AssignNurse()
         {
-            NursesList.Add(NurseSelectedItem.Value);
+            Home.ViewModel.CloseRootDialog();
+
+            NursesList.Add(new ComboBoxPairs(NurseSelectedItem.Key, NurseSelectedItem.Value));
+            foreach (Employee employee in Hospital.Employees.Values)
+            {
+                if (employee.ID == NurseSelectedItem.Key &&
+                   employee.Name == NurseSelectedItem.Value &&
+                   employee.GetType() == typeof(Nurse))
+                {
+                    Hospital.Rooms[RoomID].addNurse((Nurse)employee);
+                    break;
+                }
+            }
             NursesComboBoxItems.Remove(NurseSelectedItem);
             NursesNumber = $"Nurses : {NursesList.Count}";
+
         }
     }
 }

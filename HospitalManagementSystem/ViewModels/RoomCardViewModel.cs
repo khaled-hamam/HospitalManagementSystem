@@ -7,11 +7,11 @@ namespace HospitalManagementSystem.ViewModels
 {
     public class RoomCardViewModel : BaseViewModel
     {
-       public String ID { get; set; }
-       public int RoomNumber { get; set; }
-       public String Type { get; set; }
-       public String Capacity { get; set; }
-        
+        public String ID { get; set; }
+        public int RoomNumber { get; set; }
+        public String Type { get; set; }
+        public String Capacity { get; set; }
+
         public ICommand NavigateToDetailsAction { get; set; }
 
         public RoomCardViewModel()
@@ -34,7 +34,7 @@ namespace HospitalManagementSystem.ViewModels
                 RoomNumber = Hospital.Rooms[ID].RoomNumber.ToString(),
                 RoomID = Hospital.Rooms[ID].ID,
                 RoomType = type,
-                roomCapacity = Hospital.Rooms[ID].Patients.Count.ToString() + '/' + Hospital.Rooms[ID].Capacity.ToString(),
+                roomCapacity = $"{Hospital.Rooms[ID].Patients.Count} / {Hospital.Rooms[ID].Capacity}",
                 roomPrice = $"{Hospital.Rooms[ID].Price}$",
             };
         }

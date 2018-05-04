@@ -16,12 +16,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="130"/>
-                <RowDefinition Height="130"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="0" Grid.Row="0" Margin="10 5 0 0" >
+            <StackPanel Grid.Column="0" Grid.Row="0"  >
                 <TextBlock  Text="{Binding RoomNumber}" FontSize="30" Style="{StaticResource DetailsInfoTitle}" Foreground="{StaticResource PrimaryColor}" />
                 <TextBlock Text="{Binding RoomType}" Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
             </StackPanel>
@@ -90,11 +90,11 @@
                     </Button.CommandParameter>
                 </Button>
             </StackPanel>
-            <StackPanel Grid.Column="0" Grid.Row="1" Margin="20 0 0 0">
+            <StackPanel Grid.Column="0" Grid.Row="1" Margin="0 15 0 0 ">
                 <TextBlock Text="Room Price" Style="{StaticResource DetailsInfoTitle}" />
                 <TextBlock Text="{Binding roomPrice}" Style="{StaticResource DetailsInfoValue}" />
             </StackPanel>
-            <StackPanel  Grid.Row="1" Grid.Column="1" Margin="5 0 0 0">
+            <StackPanel  Grid.Row="1" Grid.Column="1" Margin="0 15 0 0">
                 <TextBlock Text="Room Capacity" Style="{StaticResource DetailsInfoTitle}" />
                 <TextBlock Text="{Binding roomCapacity}"  Style="{StaticResource DetailsInfoValue}" />
             </StackPanel>
@@ -106,7 +106,10 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <ListBox ItemsSource="{Binding PatientsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="PatientsList"></ListBox>
+                            <ListBox ItemsSource="{Binding PatientsList}" 
+                                     DisplayMemberPath="Value"
+                                     SelectedValuePath="Key"
+                                     Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="PatientsList"></ListBox>
                             <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                                 <TextBlock Text="{Binding PatientsNumber}" Foreground="White" Margin="16"/>
                             </materialDesign:ColorZone>
@@ -131,7 +134,7 @@
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsDefault="True"
                                                 Margin="0 8 8 0"
-                                                Click="assignPatientToRoom">
+                                                Command="{Binding assignPatient}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean>True</system:Boolean>
                                                 </Button.CommandParameter>
@@ -167,7 +170,10 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <ListBox ItemsSource="{Binding AppointmentsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="NursesList"></ListBox>
+                            <ListBox ItemsSource="{Binding NursesList}"
+                                     DisplayMemberPath="Value"
+                                     SelectedValuePath="Key"
+                                     Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="NursesList"></ListBox>
                             <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                                 <TextBlock Text="{Binding NursesNumber}" Foreground="White" Margin="16"/>
                             </materialDesign:ColorZone>
@@ -192,7 +198,7 @@
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsDefault="True"
                                                 Margin="0 8 8 0"
-                                                Click="assignNurseToRoom">
+                                               Command="{Binding assignNurse}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean>True</system:Boolean>
                                                 </Button.CommandParameter>
