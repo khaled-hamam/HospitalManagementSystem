@@ -81,16 +81,16 @@ namespace HospitalManagementSystem.ViewModels
             }
             DoctorsNumber = "Doctors: " + Hospital.Patients[id].Doctors.Count().ToString();
 
-            //foreach (Nurse nurse in Hospital.Patients[id].Nurse.Values)
-            //{
-            //    NursessList.Add(new ComboBoxPairs(nurse.ID, nurse.Name));
-            //}
-            //NursesNumber ="Nurses:" + Hospital.Patients[id].Nurse.Count().ToString();
+            foreach (Nurse nurse in ((ResidentPatient)Hospital.Patients[id]).Room.Nurses.Values)
+            {
+                NursesList.Add(new ComboBoxPairs(nurse.ID, nurse.Name));
+            }
+            NursesNumber = "Nurses:" + ((ResidentPatient)Hospital.Patients[id]).Room.Nurses.Count().ToString();
 
-            //foreach (((ResidentPatient)Hospital.Patients[id]).History.Values)
-            //{
-            //    MedicalHistoryList.Add(Hospital.Patients[id]).History.Values)
-            //}
+            foreach (Medicine medicine in ((ResidentPatient)Hospital.Patients[id]).History.Values)
+            {
+                MedicalHistoryList.Add(new ComboBoxPairs(medicine.ID, medicine.Name + " - Starting Date: " + medicine.StartingDate.ToShortDateString() + " | " + medicine.EndingDate.ToShortDateString()));
+            }
 
             //TODO : DoctorsComboBoxItems 
             DoctorsComboBox = new ObservableCollection<ComboBoxPairs>();

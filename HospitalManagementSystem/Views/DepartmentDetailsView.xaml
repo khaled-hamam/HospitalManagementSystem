@@ -87,7 +87,7 @@
                 </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" >
                         <TextBlock Text="Head Name" Style="{StaticResource DetailsInfoTitle}"/>
-                    <TextBlock Text="{Binding HeadName}"  FontSize="24" Style="{StaticResource DetailsInfoTitle}"  Margin="15 0 0 0" Foreground="{StaticResource PrimaryColor}" />
+                    <TextBlock Text="{Binding HeadName}"  Style="{StaticResource DetailsInfoTitle}"  Margin="15 0 0 0" Foreground="{StaticResource PrimaryColor}" />
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="2">
                     <materialDesign:DialogHost Name="addDoctorDialog"  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
