@@ -139,7 +139,7 @@ namespace HospitalManagementSystem.ViewModels
                        Role = "Doctor"
                    }
                   );
-
+                Hospital.Departments[newDoctor.Department.ID].addDoctor(newDoctor);
                 Hospital.Employees.Add(newDoctor.ID, newDoctor);
                 HospitalDB.InsertDoctor(newDoctor);
                 //TODO UPDATE DOCTOR IN DB
@@ -173,7 +173,7 @@ namespace HospitalManagementSystem.ViewModels
                       Role = "Nurse"
                   }
                  );
-
+                Hospital.Departments[newNurse.Department.ID].addNurse(newNurse);
                 Hospital.Employees.Add(newNurse.ID, newNurse);
                 HospitalDB.InsertNurse(newNurse);
             }

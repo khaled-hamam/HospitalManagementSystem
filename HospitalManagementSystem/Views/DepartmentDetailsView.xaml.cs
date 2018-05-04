@@ -16,15 +16,5 @@ namespace HospitalManagementSystem.Views
         }
 
 
-        private void DeleteDepartment(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void EditDepartment(object sender, RoutedEventArgs e)
-        {
-            Home.ViewModel.CloseRootDialog();
-
-        }
     }
 }
