@@ -67,6 +67,7 @@ namespace HospitalManagementSystem.ViewModels
                 Patients.Add(
                     new PatientCardViewModel
                     {
+                        ID = patient.ID,
                         Name = patient.Name,
                         Type = (patient.GetType() == typeof(ResidentPatient)) ? "Resident" : "Appointment",
                         ShortDiagnosis = patient.Diagnosis

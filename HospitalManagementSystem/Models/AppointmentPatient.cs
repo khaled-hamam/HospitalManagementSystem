@@ -32,10 +32,9 @@ namespace HospitalManagementSystem.Models
         public override double getBill()
         {
             int duration = 0;
-            for (int i = 0; i < appointments.Count; i++)
+            foreach(Appointment appointment in Hospital.Appointments.Values)
             {
-                String j = i.ToString();
-                duration += this.Appointments[j].Duration;
+                duration += appointment.Duration;
             }
             float bill = duration + (float)(duration * 0.5);
             return bill;

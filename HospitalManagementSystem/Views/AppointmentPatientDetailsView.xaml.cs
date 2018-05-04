@@ -24,8 +24,6 @@ namespace HospitalManagementSystem.Views
         public AppointmentPatientDetailsViewModel ViewModel { get; set; }
         public AppointmentPatientDetailsView()
         {
-            ViewModel = new AppointmentPatientDetailsViewModel();
-            DataContext = ViewModel;
             InitializeComponent();
         }
 

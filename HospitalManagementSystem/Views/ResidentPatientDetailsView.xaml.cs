@@ -24,12 +24,8 @@ namespace HospitalManagementSystem.Views
         public ResidentPatientDetailsViewModel ViewModel { get; set; }
         public ResidentPatientDetailsView()
         {
-            ViewModel = new ResidentPatientDetailsViewModel();
-            DataContext = ViewModel;
             InitializeComponent();
-            PatientRoomNumberComboBox.DisplayMemberPath = "Value";
-            PatientRoomNumberComboBox.SelectedValuePath = "Key";
-            PatientRoomNumberComboBox.ItemsSource = ViewModel.RoomNumberComboBoxItems;
+           
         }
         private void DeleteResidentPatient(object sender, MouseButtonEventArgs e)
         {
