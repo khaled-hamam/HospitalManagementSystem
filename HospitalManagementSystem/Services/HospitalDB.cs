@@ -810,6 +810,15 @@ namespace HospitalManagementSystem.Services
                     $"WHERE patient_id = '{patient.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
+
+                if (patient.GetType() == typeof(ResidentPatient))
+                {
+                    query = $"UPDATE resident_patient SET room_id = '{((ResidentPatient)patient).Room.ID}', " +
+                        $"department_id = '{((ResidentPatient)patient).Department.ID}' " +
+                        $"WHERE patient_id = '{patient.ID}'";
+                    command = new MySqlCommand(query, con);
+                    await command.ExecuteNonQueryAsync();
+                }
             }
             catch
             {
