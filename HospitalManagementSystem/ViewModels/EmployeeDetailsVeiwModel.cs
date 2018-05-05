@@ -49,7 +49,6 @@ namespace HospitalManagementSystem.ViewModels
         public String EditEmployeeSalaryTextBox { get; set; }
         public String SetEditDepartmentComboBox { get; set; }
         public ComboBoxPairs EditEmployeeDepartment { get; set; }
-        public String EditEmployeeRole { get; set; }
         public DateTime EditEmployeeDatePicker { get; set; }
         public ObservableCollection<ComboBoxPairs> EditDepartmentComboBox { get; set; }
             // Haget el condition
@@ -86,7 +85,6 @@ namespace HospitalManagementSystem.ViewModels
             EditEmployeeAddressTextBox = EmployeeAddress = Hospital.Employees[id].Address;
             EmployeeBirthDate = Hospital.Employees[id].BirthDate.ToShortDateString();
             EmployeeEmploymentDate = Hospital.Employees[id].EmploymentDate.ToShortDateString();
-            EditEmployeeRole = EmployeeRole = (Hospital.Employees[id].GetType() == typeof(Doctor)) ? "Doctor" : "Nurse";
             EditEmployeeSalaryTextBox = Hospital.Employees[id].Salary.ToString();
             SetEditDepartmentComboBox = Hospital.Employees[id].Department.Name;
             EditEmployeeDatePicker = Hospital.Employees[id].BirthDate;
@@ -160,8 +158,6 @@ namespace HospitalManagementSystem.ViewModels
                 Hospital.Employees[EmployeeID].BirthDate = EditEmployeeDatePicker;
                 EmployeeSalary = EditEmployeeSalaryTextBox;
                 Hospital.Employees[EmployeeID].Salary = double.Parse(EditEmployeeSalaryTextBox);
-                EmployeeRole = EditEmployeeRole;
-                //Hospital.Employees[EmployeeID].GetType() = EmployeeRole; 
                 EmployeeDepartment = EditEmployeeDepartment.Value;
             if (Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
                 HospitalDB.UpdateDoctor((Doctor)Hospital.Employees[EmployeeID]);

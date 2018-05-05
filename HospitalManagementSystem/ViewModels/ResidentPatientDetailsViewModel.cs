@@ -135,8 +135,6 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Patients[PatientID].Address = PatientAddress = EditPatientAddressTextBox;
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
             Hospital.Patients[PatientID].BirthDate = EditPatientBirthDatePicker;
-            PatientType = editPatientTypeComboBox;
-            //Hospital.Patients[PatientID]
             HospitalDB.UpdatePatient(Hospital.Patients[PatientID]);
             Home.ViewModel.CloseRootDialog();
         }

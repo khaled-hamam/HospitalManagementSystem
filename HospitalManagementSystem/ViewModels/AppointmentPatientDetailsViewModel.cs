@@ -28,7 +28,6 @@ namespace HospitalManagementSystem.ViewModels
         public DateTime EditPatientBirthDatePicker { get; set; }
         public String EditPatientTypeComboBox { get; set; }
         public String EditPatientDiagnosisTextBox { get; set; }
-        public String EditPatientBillTextBox { get; set; }
 
         // lists
         public String DoctorsNumber { get; set; }
@@ -68,22 +67,19 @@ namespace HospitalManagementSystem.ViewModels
             DoctorComboBox = new ComboBoxPairs("Key", "Value");
             // Edit Content
             editAppointmentPatient = new RelayCommand(EditAppointmentPatient);
-            EditPatientNameTextBox = PatientName;
-            EditPatientAddressTextBox = PatientAddress;
-            EditPatientBillTextBox = PatientBill;
+            EditPatientNameTextBox = Hospital.Patients[id].Name;
+            EditPatientAddressTextBox = Hospital.Patients[id].Address;
             EditPatientBirthDatePicker = Hospital.Patients[id].BirthDate;
-            EditPatientDiagnosisTextBox = PatientDiagnosis;
-            EditPatientTypeComboBox = PatientType;
+            EditPatientDiagnosisTextBox = Hospital.Patients[id].Diagnosis;
+            EditPatientTypeComboBox = Hospital.Patients[id].GetType() == typeof(Patient) ? "Resident Patient" : "Appointment Patient";
         }
         public void EditAppointmentPatient()
         {
            Hospital.Patients[PatientID].Name = PatientName = EditPatientNameTextBox;
             Hospital.Patients[PatientID].Address = PatientAddress = EditPatientAddressTextBox;
-            // ((AppointmentPatient)Hospital.Patients[PatientID]).getBill() = PatientBill = EditPatientBillTextBox;
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
             Hospital.Patients[PatientID].BirthDate = EditPatientBirthDatePicker;
             Hospital.Patients[PatientID].Diagnosis = PatientDiagnosis = EditPatientDiagnosisTextBox;
-            //Hospital.Patients[PatientID].
             HospitalDB.UpdatePatient(Hospital.Patients[PatientID]);
         }
 
