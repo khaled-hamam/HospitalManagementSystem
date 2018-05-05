@@ -1,4 +1,5 @@
 ﻿using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Services;
 using HospitalManagementSystem.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -45,6 +46,8 @@ namespace HospitalManagementSystem.ViewModels
             PatientsList = new ObservableCollection<ComboBoxPairs>();
             PatientSelectedItem = new ComboBoxPairs("Key", "Value");
             NurseSelectedItem = new ComboBoxPairs("Key", "Value");
+            RoomNumber = Hospital.Rooms[ID].RoomNumber.ToString();
+            editedRoomNumber = RoomNumber;
 
             PatientsComboBoxItems = new ObservableCollection<ComboBoxPairs>();
 
@@ -97,33 +100,27 @@ namespace HospitalManagementSystem.ViewModels
 
         public void EditRooms()
         {
-            RoomNumber = editedRoomNumber;
-            Hospital.Rooms[RoomID].RoomNumber = int.Parse(editedRoomNumber);
-            if (RoomType == "Private")
+            if (String.IsNullOrEmpty(editedRoomNumber)) editedRoomNumber = RoomNumber;
+            bool ValideRoom = true;
+            foreach(Room room in Hospital.Rooms.Values)
             {
-                Hospital.Rooms[RoomID].Capacity = 1;
-                Hospital.Rooms[RoomID].Price = 100;
+                if(int.Parse(editedRoomNumber) == room.RoomNumber)
+                {
+                    ValideRoom = false;
+                    break;
+                }
             }
-            else if (RoomType == "Semi Private")
+            if(!ValideRoom && editedRoomNumber != RoomNumber)
             {
-                Hospital.Rooms[RoomID].Capacity = 2;
-                Hospital.Rooms[RoomID].Price = 50;
+                MessageBox.Show("ROOM NUMBER IS ALREADY EXIST");
             }
-            else if (RoomType == "Standard Ward")
-            {
-                Hospital.Rooms[RoomID].Capacity = 4;
-                Hospital.Rooms[RoomID].Price = 25;
+            else
+            {    
+                RoomNumber = editedRoomNumber;
+                Hospital.Rooms[RoomID].RoomNumber = int.Parse(editedRoomNumber);
+                HospitalDB.UpdateRoom(Hospital.Rooms[RoomID]);
+                Home.ViewModel.CloseRootDialog();
             }
-            PatientsList.Clear();
-            NursesList.Clear();
-
-            NursesNumber = $"Nurses : {NursesList.Count}";
-            PatientsNumber = $"Patients : {PatientsList.Count}";
-
-            roomCapacity = $"{PatientsList.Count} / {Hospital.Rooms[RoomID].Capacity}";
-            roomPrice = $"{Hospital.Rooms[RoomID].Price}$";
-            //HospitalDB.UpdateRoom(Hospital.Rooms[RoomID]);
-            Home.ViewModel.CloseRootDialog();
         }
         public void DeleteRooms()
         {

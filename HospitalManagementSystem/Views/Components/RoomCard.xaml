@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:HospitalManagementSystem.Views.Components"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" 
+        Margin="10"
         d:DesignHeight="540" d:DesignWidth="640">
     <Grid>
 

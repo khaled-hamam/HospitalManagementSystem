@@ -31,7 +31,6 @@ namespace HospitalManagementSystem.ViewModels
 
             Home.ViewModel.Content = new RoomDetailsViewModel(ID)
             {
-                RoomNumber = Hospital.Rooms[ID].RoomNumber.ToString(),
                 RoomID = Hospital.Rooms[ID].ID,
                 RoomType = type,
                 roomCapacity = $"{Hospital.Rooms[ID].Patients.Count} / {Hospital.Rooms[ID].Capacity}",
