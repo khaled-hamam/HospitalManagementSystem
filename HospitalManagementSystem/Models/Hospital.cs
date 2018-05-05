@@ -66,12 +66,16 @@ namespace HospitalManagementSystem.Models
                 String departmentID = HospitalDB.FetchPersoneDepartment(doctor.ID);
 
                 // Assigning Doctor to his Department
-                doctor.Department = Departments[departmentID];
-                Departments[departmentID].addDoctor(doctor);
+                if (Departments.ContainsKey(departmentID))
+                {
+                    doctor.Department = Departments[departmentID];
+                    Departments[departmentID].addDoctor(doctor);
 
-                // Checking if the Doctor is the Department's Head
-                if (doctor.IsHead)
-                    Departments[departmentID].HeadID = doctor.ID;
+                    // Checking if the Doctor is the Department's Head
+                    if (doctor.IsHead)
+                        Departments[departmentID].HeadID = doctor.ID;
+                }
+
 
                 Employees.Add(doctor.ID, doctor);
             }
@@ -83,8 +87,11 @@ namespace HospitalManagementSystem.Models
                 String departmentID = HospitalDB.FetchPersoneDepartment(nurse.ID);
 
                 // Assigning Nurse to her Department
-                nurse.Department = Departments[departmentID];
-                Departments[departmentID].addNurse(nurse);
+                if (Departments.ContainsKey(departmentID))
+                {
+                    nurse.Department = Departments[departmentID];
+                    Departments[departmentID].addNurse(nurse);
+                }
 
                 // Fetching Nurse's Rooms
                 List<String> roomsID = HospitalDB.FetchNurseRooms(nurse.ID);
@@ -117,14 +124,19 @@ namespace HospitalManagementSystem.Models
                 {
                     // Fetching Patient's Room from Database
                     String roomID = HospitalDB.FetchPatientRoom(patient.ID);
-                    Rooms[roomID].addPatient(patient);
-                    ((ResidentPatient)patient).Room = Rooms[roomID];
 
-                    // Assigning Patients to Nurses in the Same Room
-                    foreach (Nurse nurse in Rooms[roomID].Nurses.Values)
+                    if (Rooms.ContainsKey(roomID))
                     {
-                        nurse.addPatient(patient);
+                        Rooms[roomID].addPatient(patient);
+                        ((ResidentPatient)patient).Room = Rooms[roomID];
+                    
+                        // Assigning Patients to Nurses in the Same Room
+                        foreach (Nurse nurse in Rooms[roomID].Nurses.Values)
+                        {
+                            nurse.addPatient(patient);
+                        }
                     }
+
 
                     // Fetching Patient's Medicine from Database
                     List<Medicine> medicineList = HospitalDB.FetchMedicine(patient.ID);
