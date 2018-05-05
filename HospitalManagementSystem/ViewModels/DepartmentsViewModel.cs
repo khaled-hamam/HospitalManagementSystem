@@ -21,22 +21,22 @@ namespace HospitalManagementSystem.ViewModels
         /// Search Bar Properties
         /// </summary>
         public String SearchQuery { get; set; }
+        public ICommand SearchAction { get; set; }       
 
         /// <summary>
         /// Add Dialog Properites
         /// </summary>
         public String DepartmentName { get; set; }
         public ComboBoxPairs EmployeeHead { get; set; }
-
         public List<ComboBoxPairs> ComboBoxItems;
-
-        public ICommand SearchAction { get; set; }       
 
         public DepartmentsViewModel()
         {
             ComboBoxItems = new List<ComboBoxPairs>();
             Departments = new ObservableCollection<DepartmentCardViewModel>();
             SearchAction = new RelayCommand(Search);
+
+            //Adding available employees in employees ComboBox
             foreach (Employee employee in Hospital.Employees.Values)
             {
                 if (employee.GetType() == typeof(Doctor))
@@ -45,6 +45,7 @@ namespace HospitalManagementSystem.ViewModels
                 }
             }
 
+            //Adding All Departments Cards
             foreach (Department department in Hospital.Departments.Values)
             {
                 Departments.Add(
@@ -76,11 +77,17 @@ namespace HospitalManagementSystem.ViewModels
 
         public void addDepartment()
         {
+            //Add the new Department to the hospital & DB
             Department newDepartment = new Department
             {
                 Name = DepartmentName,
                 HeadID = EmployeeHead.Key
             };
+
+            Hospital.Departments.Add(newDepartment.ID, newDepartment);
+            HospitalDB.InsertDepartment(newDepartment);
+
+            //Add card to the new department
             Departments.Add(
                 new DepartmentCardViewModel
                 {
@@ -99,9 +106,6 @@ namespace HospitalManagementSystem.ViewModels
                    EmployeesNumber = newDepartment.Nurse.Count + newDepartment.Doctors.Count
                }
                );
-            Hospital.Departments.Add(newDepartment.ID, newDepartment);
-            HospitalDB.InsertDepartment(newDepartment);
-
         }
 
         public bool ValidateDepartment()

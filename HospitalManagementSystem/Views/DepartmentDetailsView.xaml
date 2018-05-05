@@ -20,11 +20,17 @@
                         <RowDefinition Height="70"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <!--Main View-->
+                    <!--#region TextBlocks-->
                     <StackPanel Grid.Column="0" Grid.Row="0" >
                         <TextBlock  Text="{Binding DepartmentName}" FontSize="24" Style="{StaticResource DetailsInfoTitle}" Foreground="{StaticResource PrimaryColor}" />
                     </StackPanel>
-                    <!--Main buttons-->
+                    
+                    <StackPanel Grid.Column="0" Grid.Row="1" >
+                        <TextBlock Text="Head Name" Style="{StaticResource DetailsInfoTitle}"/>
+                        <TextBlock Text="{Binding HeadName}"  Style="{StaticResource DetailsInfoTitle}"  Margin="15 0 0 0" Foreground="{StaticResource PrimaryColor}" />
+                     </StackPanel>
+                    <!--#endregion-->
+                    <!--#region Main buttons-->
                     <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Style="{StaticResource DetailsButton}" Margin="15 0 0 0" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">EDIT
                             <Button.CommandParameter>
@@ -85,13 +91,10 @@
                         </Button.CommandParameter>
                     </Button>
                 </StackPanel>
-                    <StackPanel Grid.Column="0" Grid.Row="1" >
-                        <TextBlock Text="Head Name" Style="{StaticResource DetailsInfoTitle}"/>
-
-                    <TextBlock Text="{Binding HeadName}"  Style="{StaticResource DetailsInfoTitle}"  Margin="15 0 0 0" Foreground="{StaticResource PrimaryColor}" />
-
-                    </StackPanel>
+                    <!--#endregion-->
+                    <!--#region Main Lists-->
                     <StackPanel Grid.Column="0" Grid.Row="2">
+                    <!--Doctors List DialogBox-->
                     <materialDesign:DialogHost Name="addDoctorDialog"  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
                         <Border Style="{StaticResource DetailsDialogHostBorder}">
                             <Grid>
@@ -146,6 +149,7 @@
                             </Border>
                         </materialDesign:DialogHost>
                     </StackPanel>
+                    <!--#endregion-->
                 </Grid>
         </ScrollViewer>
     </Grid>
