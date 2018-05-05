@@ -37,6 +37,7 @@
                                 <ComboBox 
                                 materialDesign:HintAssist.Hint="Employee Department"  
                                 ItemsSource="{Binding EditDepartmentComboBox}"
+                                Text="{Binding SetEditDepartmentComboBox}"
                                 DisplayMemberPath="Value"
                                 SelectedValuePath="Key"
                                 SelectedItem="{Binding EditEmployeeDepartment}"
@@ -60,8 +61,8 @@
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
-                                    Margin="0 8 8 0"
-                                     Click="EditEmployee">
+                                    Command="{Binding editEmployee}"
+                                    Margin="0 8 8 0">
                                         <Button.CommandParameter>
                                             <system:Boolean>True</system:Boolean>
                                         </Button.CommandParameter>
@@ -80,7 +81,7 @@
                             </StackPanel>
                         </Button.CommandParameter>
             </Button>
-            <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0" MouseUp="DeleteEmployee">DELETE</Button>
+            <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0">DELETE</Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
             <TextBlock Text="Addres" Style="{StaticResource DetailsInfoTitle}" />
@@ -145,6 +146,7 @@
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
+                                                        Command="{Binding assignPatient}"
                                                         Margin="0 8 8 0">
                                                 <Button.CommandParameter>
                                                         <system:Boolean>True</system:Boolean>
@@ -182,7 +184,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                            <ListBox  ItemsSource="{Binding AppointmentsList}" 
+                            <ListBox ItemsSource="{Binding AppointmentsList}" 
                                   Background="White" 
                                   Foreground="{StaticResource PrimaryColor}" 
                                   x:Name="AppointmentsList"
@@ -238,6 +240,7 @@
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
+                                                        Command="{Binding assignRoom}"
                                                         Margin="0 8 8 0">
                                                 <Button.CommandParameter>
                                                         <system:Boolean>True</system:Boolean>

@@ -1,4 +1,6 @@
 ﻿using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Services;
+using HospitalManagementSystem.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace HospitalManagementSystem.ViewModels
 {
@@ -14,7 +17,8 @@ namespace HospitalManagementSystem.ViewModels
         /// <summary>
         /// Details View Properites
         /// </summary>
-       
+
+        public String EmployeeID;
             // Main Page
         public String EmployeeName { get; set; }
         public String EmployeeAddress { get; set; }
@@ -31,10 +35,19 @@ namespace HospitalManagementSystem.ViewModels
         public String RoomsNumber { get; set; }
         public ObservableCollection<ComboBoxPairs> PatientsComboBox { get; set; }
         public ObservableCollection<ComboBoxPairs> RoomsComboBox { get; set; }
+
+        // List Content
+        public ICommand assignPatient { get; set; }
+        public ComboBoxPairs PatientComboBox { get; set; }
+        public ICommand assignRoom { get; set; }
+        public ComboBoxPairs RoomComboBox { get; set; }
         // Edit Content
+        public ICommand editEmployee { get; set; }
+        public ICommand deleteEmployee { get; set; }
         public String EditEmployeeNameTextBox { get; set; }
         public String EditEmployeeAddressTextBox { get; set; }
         public String EditEmployeeSalaryTextBox { get; set; }
+        public String SetEditDepartmentComboBox { get; set; }
         public ComboBoxPairs EditEmployeeDepartment { get; set; }
         public String EditEmployeeRole { get; set; }
         public DateTime EditEmployeeDatePicker { get; set; }
@@ -66,13 +79,21 @@ namespace HospitalManagementSystem.ViewModels
         public EmployeeDetailsVeiwModel(String id)
         {
             EditEmployeeDatePicker = DateTime.Today;
-
-            // set Main Page Information
-            EmployeeAddress = Hospital.Employees[id].Address;
+            EmployeeID = id;
+            // set Main Page & Edit Content Information
+            EditEmployeeDepartment = new ComboBoxPairs("Key", "Value");
+            EditEmployeeNameTextBox = Hospital.Employees[id].Name;
+            EditEmployeeAddressTextBox = EmployeeAddress = Hospital.Employees[id].Address;
             EmployeeBirthDate = Hospital.Employees[id].BirthDate.ToShortDateString();
             EmployeeEmploymentDate = Hospital.Employees[id].EmploymentDate.ToShortDateString();
-            EmployeeRole = (Hospital.Employees[id].GetType() == typeof(Doctor)) ? "Doctor" : "Nurse";
-            
+            EditEmployeeRole = EmployeeRole = (Hospital.Employees[id].GetType() == typeof(Doctor)) ? "Doctor" : "Nurse";
+            EditEmployeeSalaryTextBox = Hospital.Employees[id].Salary.ToString();
+            SetEditDepartmentComboBox = Hospital.Employees[id].Department.Name;
+            EditEmployeeDatePicker = Hospital.Employees[id].BirthDate;
+
+            // Edit 
+            editEmployee = new RelayCommand(EditEmployee);
+            deleteEmployee = new RelayCommand(DeleteEmployee);
             // Lists
             PatientsList = new ObservableCollection<ComboBoxPairs>();
             RoomsList = new ObservableCollection<ComboBoxPairs>();
@@ -108,6 +129,10 @@ namespace HospitalManagementSystem.ViewModels
             PatientsComboBox = new ObservableCollection<ComboBoxPairs>();
             RoomsComboBox = new ObservableCollection<ComboBoxPairs>();
             EditDepartmentComboBox = new ObservableCollection<ComboBoxPairs>();
+            assignPatient = new RelayCommand(AssignPatient);
+            assignRoom = new RelayCommand(AssignRoom);
+            PatientComboBox = new ComboBoxPairs("Key", "Value");
+            RoomComboBox = new ComboBoxPairs("key", "value");
             foreach (Patient patient in Hospital.Patients.Values)
             {
                 PatientsComboBox.Add(new ComboBoxPairs(patient.ID, patient.Name));
@@ -122,9 +147,27 @@ namespace HospitalManagementSystem.ViewModels
             {
                 EditDepartmentComboBox.Add(new ComboBoxPairs(department.ID, department.Name));
             }
+
+
         }
         public void EditEmployee()
         {
+                EmployeeName = EditEmployeeNameTextBox;
+                Hospital.Employees[EmployeeID].Name = EditEmployeeNameTextBox;
+                EmployeeAddress = EditEmployeeAddressTextBox;
+                Hospital.Employees[EmployeeID].Address = EditEmployeeAddressTextBox;
+                EmployeeBirthDate = EditEmployeeDatePicker.ToShortDateString();
+                Hospital.Employees[EmployeeID].BirthDate = EditEmployeeDatePicker;
+                EmployeeSalary = EditEmployeeSalaryTextBox;
+                Hospital.Employees[EmployeeID].Salary = double.Parse(EditEmployeeSalaryTextBox);
+                EmployeeRole = EditEmployeeRole;
+                //Hospital.Employees[EmployeeID].GetType() = EmployeeRole; 
+                EmployeeDepartment = EditEmployeeDepartment.Value;
+            if (Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
+                HospitalDB.UpdateDoctor((Doctor)Hospital.Employees[EmployeeID]);
+            else
+                HospitalDB.UpdateNurse((Nurse)Hospital.Employees[EmployeeID]);
+            Home.ViewModel.CloseRootDialog();
 
         }
         public void DeleteEmployee()
@@ -132,5 +175,43 @@ namespace HospitalManagementSystem.ViewModels
 
         }
 
+        public void AssignPatient()
+        {
+            PatientsList.Add(new ComboBoxPairs(PatientComboBox.Key, PatientComboBox.Value));
+            
+            foreach (Patient patient in Hospital.Patients.Values)
+            {
+                if (patient.ID == PatientComboBox.Key)
+                {
+                    if (EmployeeRole == "Doctor")
+                    {
+                        ((Doctor)Hospital.Employees[EmployeeID]).Patients.Add(patient.ID, patient);
+                        PatientsNumber = "Patients: " + ((Doctor)Hospital.Employees[EmployeeID]).Patients.Count.ToString();
+                    }
+                    else
+                    {
+                        ((Nurse)Hospital.Employees[EmployeeID]).Patients.Add(patient.ID, patient);
+                        PatientsNumber = "Patients: " + ((Nurse)Hospital.Employees[EmployeeID]).Patients.Count.ToString();
+                    }
+                    break;
+                }
+            }
+            Home.ViewModel.CloseRootDialog();
+        }
+
+        public void AssignRoom()
+        {
+            RoomsList.Add(new ComboBoxPairs(RoomComboBox.Key, RoomComboBox.Value));
+            foreach(Room room in Hospital.Rooms.Values)
+            {
+                if(room.ID == RoomComboBox.Key)
+                {
+                    ((Nurse)Hospital.Employees[EmployeeID]).Rooms.Add(room.ID, room);
+                    RoomsNumber = "Rooms: " + ((Nurse)Hospital.Employees[EmployeeID]).Rooms.Count().ToString();
+                }
+                break;
+            }
+            Home.ViewModel.CloseRootDialog();
+        }
     }
 }
