@@ -17,11 +17,14 @@
             Height="90" Width="400" Padding="5"
             Foreground="{StaticResource DarkText}"
             materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <!--#region AddingCommandToCard-->
             <materialDesign:Card.InputBindings>
                 <MouseBinding 
               Command="{Binding NavigateToDetailsAction}"
               MouseAction="LeftClick"/>
             </materialDesign:Card.InputBindings>
+            <!--#endregion-->
+            <!--#region MainViewProperties-->
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="{Binding Name}" FontSize="24" FontWeight="Bold"/>
                 <Grid Margin="0 5">
@@ -42,6 +45,7 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
+            <!--#endregion-->
         </materialDesign:Card>
 
     </Grid>
