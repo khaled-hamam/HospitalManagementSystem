@@ -22,6 +22,8 @@ namespace HospitalManagementSystem.ViewModels
         public String DoctorsCount { get; set; }
         public String NursesCount { get; set;}
         public String PatientsCount { get; set; }
+
+        //Edit Department Data
         public String EditDepartmentName { get; set; }
 
         /// <summary>
@@ -41,6 +43,7 @@ namespace HospitalManagementSystem.ViewModels
 
             //Initializing Displayed Data Properties
             DepartmentName = Hospital.Departments[id].Name;
+            EditDepartmentName = Hospital.Departments[id].Name;
 
             if (String.IsNullOrEmpty(Hospital.Departments[id].HeadID)) HeadName = "N/A";
             else HeadName = Hospital.Employees[Hospital.Departments[id].HeadID].Name;
@@ -63,6 +66,8 @@ namespace HospitalManagementSystem.ViewModels
 
         public void EditDepartments()
         {
+            if (String.IsNullOrEmpty(EditDepartmentName))
+                EditDepartmentName = DepartmentName;
             DepartmentName = EditDepartmentName;
             Hospital.Departments[DepartmetnId].Name = EditDepartmentName;
             HospitalDB.UpdateDepartment(Hospital.Departments[DepartmetnId]);
