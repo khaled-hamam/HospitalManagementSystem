@@ -105,6 +105,7 @@ namespace HospitalManagementSystem.ViewModels
                 };
                 Patients.Add(new PatientCardViewModel
                 {
+                    ID = newPatient.ID,
                     Name = PatientNameTextBox,
                     Type = PatientTypeComboBox,
                     ShortDiagnosis = "Not Implemented yet"
@@ -112,6 +113,7 @@ namespace HospitalManagementSystem.ViewModels
 
                 FilteredPatients.Add(new PatientCardViewModel
                 {
+                    ID = newPatient.ID,
                     Name = PatientNameTextBox,
                     Type = PatientTypeComboBox,
                     ShortDiagnosis = "Not Implemented yet"
@@ -127,6 +129,7 @@ namespace HospitalManagementSystem.ViewModels
                 };
 
                 Patients.Add(new PatientCardViewModel {
+                    ID = newPatient.ID,
                     Name = PatientNameTextBox,
                     Type = PatientTypeComboBox,
                     ShortDiagnosis = "Not Implemented yet"
@@ -134,6 +137,7 @@ namespace HospitalManagementSystem.ViewModels
 
                 FilteredPatients.Add(new PatientCardViewModel
                 {
+                    ID = newPatient.ID,
                     Name = PatientNameTextBox,
                     Type = PatientTypeComboBox,
                     ShortDiagnosis = "Not Implemented yet"

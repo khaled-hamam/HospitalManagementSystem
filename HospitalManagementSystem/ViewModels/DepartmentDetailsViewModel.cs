@@ -38,9 +38,9 @@ namespace HospitalManagementSystem.ViewModels
             DepartmentId = id;
             EditDepartment = new RelayCommand(EditDepartments);
             DeleteDepartment = new RelayCommand(DeleteDepartments);
-            DoctorsList = new ObservableCollection<string>();
-            NursesList = new ObservableCollection<string>();
-            PatientsList = new ObservableCollection<string>();
+            DoctorsList = new ObservableCollection<String>();
+            NursesList = new ObservableCollection<String>();
+            PatientsList = new ObservableCollection<String>();
 
             //Initializing Displayed Data Properties
             DepartmentName = Hospital.Departments[id].Name;
@@ -78,7 +78,6 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Departments[DepartmentId].Name = EditDepartmentName;
             HospitalDB.UpdateDepartment(Hospital.Departments[DepartmentId]);
             Home.ViewModel.CloseRootDialog();
-
         }
 
         public void DeleteDepartments()

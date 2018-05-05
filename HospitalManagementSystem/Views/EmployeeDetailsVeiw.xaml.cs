@@ -26,16 +26,5 @@ namespace HospitalManagementSystem.Views
         {
             InitializeComponent();
         }
-
-        private void DeleteEmployee(object sender, MouseButtonEventArgs e)
-        {
-            ViewModel.DeleteEmployee();
-        }
-
-        private void EditEmployee(object sender, RoutedEventArgs e)
-        {
-            ViewModel.EditEmployee();
-            Home.ViewModel.CloseRootDialog();
-        }
     }
 }
