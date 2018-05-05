@@ -54,7 +54,7 @@ namespace HospitalManagementSystem.ViewModels
 
         public void InitializeHospital()
         {
-            // Hospital.InitializeData();
+           Hospital.InitializeData();
         }
 
         public void GoBack()

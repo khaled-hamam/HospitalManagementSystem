@@ -89,8 +89,14 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <ListBox ItemsSource="{Binding DoctorsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="DoctorsList"></ListBox>
-                <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                    <ListBox 
+                    ItemsSource="{Binding DoctorsList}" 
+                    Background="White" 
+                    Foreground="{StaticResource PrimaryColor}" 
+                    x:Name="DoctorsList"
+                    DisplayMemberPath="Value"
+                    SelectedValuePath="Key" />
+                    <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                     <TextBlock Text="{Binding DoctorsNumber}" Foreground="White" Margin="16"/>
                 </materialDesign:ColorZone>
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
@@ -103,7 +109,18 @@
                         Background="{StaticResource PrimaryColor}">
                             <Button.CommandParameter>
                                 <StackPanel Margin="16">
-                                    <ComboBox  SelectedItem="{Binding DoctorComboBox}" Text="{Binding DoctorsComboBox}" IsEditable="True" materialDesign:HintAssist.Hint="Add Doctor"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="DoctorsComboBox"/>
+                                    <ComboBox 
+                                        DisplayMemberPath="Value"
+                                        SelectedValuePath="Key"
+                                        SelectedItem="{Binding DoctorComboBox}"
+                                        ItemsSource="{Binding DoctorsComboBox}" 
+                                        IsEditable="True"
+                                        materialDesign:HintAssist.Hint="Add Doctor"
+                                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                        Margin="0 8 0 0" 
+                                        HorizontalAlignment="Left"
+                                        Width="200"
+                                        x:Name="DoctorsComboBox"/>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsDefault="True"
@@ -145,8 +162,14 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox ItemsSource="{Binding AppointmentsList}" Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="AppointmentsList"></ListBox>
-                        <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                            <ListBox 
+                            DisplayMemberPath="Value"
+                            SelectedValuePath="Key"
+                            ItemsSource="{Binding AppointmentsList}" 
+                            Background="White" 
+                            Foreground="{StaticResource PrimaryColor}" 
+                            x:Name="AppointmentsList"/>
+                            <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                             <TextBlock Text="{Binding AppointmentsNumber}" Foreground="White" Margin="16"/>
                         </materialDesign:ColorZone>
                     </Grid>

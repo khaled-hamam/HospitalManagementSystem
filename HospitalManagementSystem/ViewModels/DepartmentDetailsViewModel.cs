@@ -14,16 +14,22 @@ namespace HospitalManagementSystem.ViewModels
         /// Displayed Data Properites
         /// </summary>
         public String DepartmetnId { get; set; }
+        public String DepartmentName { set; get; }
+        public String HeadName { set; get; }
         public ObservableCollection<String> DoctorsList { get; set; }
         public ObservableCollection<String> NursesList { get; set; }
         public ObservableCollection<String> PatientsList { get; set; }
-        public String DepartmentName { set; get; }
-        public String HeadName { set; get; }
+        public String DoctorsCount { get; set; }
+        public String NursesCount { get; set;}
+        public String PatientsCount { get; set; }
         public String EditDepartmentName { get; set; }
 
-
+        /// <summary>
+        /// Commands Properties
+        /// </summary>
         public ICommand EditDepartment { get; set; }
         public ICommand DeleteDepartment { get; set; }
+
         public DepartmentDetailsViewModel(String id)
         {
             DepartmetnId = id;
@@ -33,22 +39,25 @@ namespace HospitalManagementSystem.ViewModels
             NursesList = new ObservableCollection<string>();
             PatientsList = new ObservableCollection<string>();
 
-          foreach (Doctor doctor in Hospital.Departments[id].Doctors.Values)
-            {
-                if (doctor.IsHead)
-                    HeadName = doctor.Name;
-            }
+            //Initializing Displayed Data Properties
+            DepartmentName = Hospital.Departments[id].Name;
 
-          foreach(Doctor doctor in Hospital.Departments[id].Doctors.Values)
+            if (String.IsNullOrEmpty(Hospital.Departments[id].HeadID)) HeadName = "N/A";
+            else HeadName = Hospital.Employees[Hospital.Departments[id].HeadID].Name;
+
+            DoctorsCount = "Doctors: " + Hospital.Departments[id].Doctors.Count.ToString();
+            NursesCount = "Nurses: " + Hospital.Departments[id].Nurse.Count.ToString();
+
+            foreach(Doctor doctor in Hospital.Departments[id].Doctors.Values)
             {
                 DoctorsList.Add(doctor.Name);
-                Console.WriteLine(doctor.Name);
             }
           
-          foreach(Nurse nurse in Hospital.Departments[id].Nurse.Values)
+            foreach(Nurse nurse in Hospital.Departments[id].Nurse.Values)
             {
                 NursesList.Add(nurse.Name);
             }
+
           //TODO Patients List
         }
 

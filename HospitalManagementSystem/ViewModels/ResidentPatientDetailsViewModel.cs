@@ -11,6 +11,7 @@ namespace HospitalManagementSystem.ViewModels
 {
     public class ResidentPatientDetailsViewModel : BaseViewModel
     {
+        // Main page Data
         public String PatientName { get; set; }
         public String PatientType { get; set; }
         public String PatientAddress { get; set; }
@@ -18,22 +19,22 @@ namespace HospitalManagementSystem.ViewModels
         public String PatientDiagnosis { get; set; }
         public String PatientRoomNumber { get; set; }
         public String PatientBill { get; set; }
-        public ObservableCollection<String> DoctorsNumber { get; set; }
-        public ObservableCollection<String> NursesNumber { get; set; }
-        public ObservableCollection<String> DoctorsList { get; set; }
-        public ObservableCollection<String> NursessList { get; set; }
-        public ObservableCollection<String> MedicalHistoryList { get; set; }
+        // Edit Content
         public String EditPatientNameTextBox { get; set; }
         public String EditPatientAddressTextBox { get; set; }
         public DateTime EditPatientBirthDatePicker { get; set; }
         public ComboBoxPairs EditRoomNumberComboBox { get; set; }
-        public List<ComboBoxPairs> RoomNumberComboBoxItems;
-        public ComboBoxPairs DoctorComboBoxPair { get; set; }
-        public String DoctorComboBox { get; set; }
-        public List<ComboBoxPairs> DoctorsComboBoxItems;
-        public ComboBoxPairs NurseComboBoxPair { get; set; }
-        public String NurseComboBox { get; set; }
-        public List<ComboBoxPairs> NursesComboBoxItems;
+        public ObservableCollection<ComboBoxPairs> PatientRoomNumberComboBox { get; set; }
+        // Main Page Lists
+        public String DoctorsNumber { get; set; }
+        public String NursesNumber { get; set; }
+        public ObservableCollection<ComboBoxPairs> DoctorsList { get; set; }
+        public ObservableCollection<ComboBoxPairs> NursesList { get; set; }
+        public ObservableCollection<ComboBoxPairs> MedicalHistoryList { get; set; }
+        // Items In Contents
+        public ObservableCollection<ComboBoxPairs> DoctorsComboBox { get; set; }
+        public ObservableCollection<ComboBoxPairs> NursesComboBox { get; set; }
+        public String MedicalHistoryTextBox { get; set; }
 
         public Visibility IsResident { get; set; }
 
@@ -54,17 +55,55 @@ namespace HospitalManagementSystem.ViewModels
         }
         public ResidentPatientDetailsViewModel()
         {
+           
+
+        }
+
+        public ResidentPatientDetailsViewModel(String id)
+        {
+
+            DoctorsList = new ObservableCollection<ComboBoxPairs>();
+            NursesList = new ObservableCollection<ComboBoxPairs>();
+            MedicalHistoryList = new ObservableCollection<ComboBoxPairs>();
+            PatientRoomNumberComboBox = new ObservableCollection<ComboBoxPairs>();
+
             IsResident = Visibility.Collapsed;
             EditPatientBirthDatePicker = DateTime.Today;
-            RoomNumberComboBoxItems = new List<ComboBoxPairs>();
+
             foreach (Room room in Hospital.Rooms.Values)
             {
-                RoomNumberComboBoxItems.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
+                PatientRoomNumberComboBox.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
             }
+
+            foreach (Doctor doctor in Hospital.Patients[id].Doctors.Values)
+            {
+                DoctorsList.Add(new ComboBoxPairs(doctor.ID, doctor.Name));
+            }
+            DoctorsNumber = "Doctors: " + Hospital.Patients[id].Doctors.Count().ToString();
+
+            foreach (Nurse nurse in ((ResidentPatient)Hospital.Patients[id]).Room.Nurses.Values)
+            {
+                NursesList.Add(new ComboBoxPairs(nurse.ID, nurse.Name));
+            }
+            NursesNumber = "Nurses:" + ((ResidentPatient)Hospital.Patients[id]).Room.Nurses.Count().ToString();
+
+            foreach (Medicine medicine in ((ResidentPatient)Hospital.Patients[id]).History.Values)
+            {
+                MedicalHistoryList.Add(new ComboBoxPairs(medicine.ID, medicine.Name + " - Starting Date: " + medicine.StartingDate.ToShortDateString() + " | " + medicine.EndingDate.ToShortDateString()));
+            }
+
             //TODO : DoctorsComboBoxItems 
+            DoctorsComboBox = new ObservableCollection<ComboBoxPairs>();
+            NursesComboBox = new ObservableCollection<ComboBoxPairs>();
+            foreach (Employee employee in Hospital.Employees.Values)
+            {
+                if(employee.GetType() == typeof(Doctor))
+                DoctorsComboBox.Add(new ComboBoxPairs(employee.ID, employee.Name));
+                else
+                   NursesComboBox.Add(new ComboBoxPairs(employee.ID, employee.Name));
+            }
 
             // TODO : NursesComboBoxItems
-
         }
 
         public void EditResidentPatient()

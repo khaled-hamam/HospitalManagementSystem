@@ -70,6 +70,7 @@ namespace HospitalManagementSystem.ViewModels
                 Employees.Add(
                     new EmployeeCardViewModel
                     {
+                        ID = employee.ID,
                         Name = employee.Name,
                         Role = (employee.GetType() == typeof(Doctor))? "Doctor" : "Nurse",
                         Department = employee.Department.Name,
@@ -112,6 +113,7 @@ namespace HospitalManagementSystem.ViewModels
                 }
                 Doctor newDoctor = new Doctor
                 {
+                    
                     Name = EmployeeNameTextBox,
                     Salary = Double.Parse(EmployeeSalaryTextBox),
                     Department = Hospital.Departments[EmployeeDepartment.Key],
@@ -122,7 +124,8 @@ namespace HospitalManagementSystem.ViewModels
 
                 Employees.Add(
                     new EmployeeCardViewModel
-                    {
+                    { 
+                        
                         Name = newDoctor.Name,
                         Salary = $"{newDoctor.Salary}$",
                         Department = newDoctor.Department.Name,
