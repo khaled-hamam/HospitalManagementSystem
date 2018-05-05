@@ -4,6 +4,7 @@ using HospitalManagementSystem.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HospitalManagementSystem.ViewModels
@@ -67,7 +68,9 @@ namespace HospitalManagementSystem.ViewModels
         public void EditDepartments()
         {
             if (String.IsNullOrEmpty(EditDepartmentName))
-                EditDepartmentName = DepartmentName;
+            {
+                MessageBox.Show("Department Name can't be Empty");
+            }
             DepartmentName = EditDepartmentName;
             Hospital.Departments[DepartmetnId].Name = EditDepartmentName;
             HospitalDB.UpdateDepartment(Hospital.Departments[DepartmetnId]);
