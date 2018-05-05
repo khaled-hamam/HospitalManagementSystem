@@ -73,10 +73,11 @@ namespace HospitalManagementSystem.ViewModels
                         ID = employee.ID,
                         Name = employee.Name,
                         Role = (employee.GetType() == typeof(Doctor))? "Doctor" : "Nurse",
-                        Department = employee.Department.Name,
+                        Department = (employee.Department!=null) ? employee.Department.Name : "N/A",
                         Salary = employee.Salary.ToString() + '$'
                     }
                 );
+                
             }
             FilteredEmployees = new ObservableCollection<EmployeeCardViewModel>(Employees);
         }

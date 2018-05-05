@@ -19,7 +19,7 @@ namespace HospitalManagementSystem.Models
         {
             this.Salary = 0.0;
             this.EmploymentDate = new DateTime();
-            this.Department = new Department();
+          //  this.Department = new Department();
         }
 
         public Employee(double salary, Department department)
