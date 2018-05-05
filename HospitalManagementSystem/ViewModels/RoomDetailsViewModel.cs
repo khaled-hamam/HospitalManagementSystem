@@ -109,8 +109,8 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Rooms.Remove(RoomID);
             Home.ViewModel.CloseRootDialog();
             Home.ViewModel.Content = new RoomsViewModel();
-            //TODO Delete from database
-        }
+            HospitalDB.DeleteRoom(RoomID);
+        }   
        
         public void AssignNurse()
         {
@@ -123,8 +123,8 @@ namespace HospitalManagementSystem.ViewModels
            
             NursesComboBoxItems.Remove(NurseSelectedItem);
             NursesNumber = $"Nurses : {NursesList.Count}";
-            
-            //TODO UPDATE RELATION IN DB
+
+            HospitalDB.InsertNurseRoom(NurseSelectedItem.Key, RoomID);
         }
     }
 }
