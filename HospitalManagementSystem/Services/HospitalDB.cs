@@ -982,6 +982,48 @@ namespace HospitalManagementSystem.Services
             }
         }
 
+        public async static void DeleteNurseRoom(String NurseID, String RoomID)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM nurse_room WHERE nurse_id = '{NurseID}' AND room_id = '{RoomID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Nurse Room.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void DeleteDoctorPatient(String DoctorID, String PatientID)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM doctor_patient WHERE doctor_id = '{DoctorID}' AND patient_id = '{PatientID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Doctor Patient.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
     }
 }
