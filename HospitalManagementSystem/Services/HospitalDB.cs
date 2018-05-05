@@ -660,14 +660,14 @@ namespace HospitalManagementSystem.Services
             }
         }
 
-        public async static void InsertNurseRoom(String NurseID, String PatientID)
+        public async static void InsertNurseRoom(String NurseID, String RoomID)
         {
             MySqlConnection con = InitConnection();
 
             try
             {
                 con.Open();
-                String query = $"INSERT INTO nurse_room VALUES('{NurseID}', '{PatientID}')";
+                String query = $"INSERT INTO nurse_room VALUES('{NurseID}', '{RoomID}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
             }
