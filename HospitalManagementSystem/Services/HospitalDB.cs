@@ -577,7 +577,13 @@ namespace HospitalManagementSystem.Services
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
 
-                // TODO: inserting Special data if (Resident / Appointment)
+                if (patient.GetType() == typeof(ResidentPatient))
+                {
+                    query = $"INSERT INTO resident_patient VALUES('{patient.ID}', '{((ResidentPatient)patient).Room.ID}'), " +
+                        $"'{((ResidentPatient)patient).Department.ID}', 0)";
+                    command = new MySqlCommand(query, con);
+                    await command.ExecuteNonQueryAsync();
+                }
             }
             catch
             {
@@ -653,6 +659,49 @@ namespace HospitalManagementSystem.Services
                 con.Close();
             }
         }
+
+        public async static void InsertNurseRoom(String NurseID, String RoomID)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO nurse_room VALUES('{NurseID}', '{RoomID}')";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Nurse Room.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void InsertDoctorPatient(String DoctorID, String PatientID)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO doctor_patient VALUES('{DoctorID}', '{PatientID}')";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Doctor Patient.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
 
         #region Updating Operations
@@ -686,7 +735,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"UPDATE doctor SET name = '{doctor.Name}', birth_date = '{doctor.BirthDate.ToString("yyyy-mm-dd")}', " +
-                    $"address = '{doctor.Address}', employement_date = '{doctor.EmploymentDate.ToString("yyyy-mm-dd")}', " +
+                    $"address = '{doctor.Address}', employment_date = '{doctor.EmploymentDate.ToString("yyyy-mm-dd")}', " +
                     $"department_id = '{doctor.Department.ID}', salary = {doctor.Salary}, is_head = {doctor.IsHead} " +
                     $"WHERE doctor_id = '{doctor.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
@@ -710,7 +759,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"UPDATE nurse SET name = '{nurse.Name}', birth_date = '{nurse.BirthDate.ToString("yyyy-mm-dd")}', " +
-                    $"address = '{nurse.Address}', employement_date = '{nurse.EmploymentDate.ToString("yyyy-mm-dd")}', " +
+                    $"address = '{nurse.Address}', employment_date = '{nurse.EmploymentDate.ToString("yyyy-mm-dd")}', " +
                     $"department_id = '{nurse.Department.ID}', salary = {nurse.Salary} " +
                     $"WHERE nurse_id = '{nurse.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
@@ -757,10 +806,19 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"UPDATE patient SET name = '{patient.Name}', birth_date = '{patient.BirthDate.ToString("yyyy-mm-dd")}', " +
-                    $"address = '{patient.Address}', diagnosis = '{patient.Diagnosis}', " +
+                    $"address = '{patient.Address}', diagnosis = '{patient.Diagnosis}' " +
                     $"WHERE patient_id = '{patient.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
+
+                if (patient.GetType() == typeof(ResidentPatient))
+                {
+                    query = $"UPDATE resident_patient SET room_id = '{((ResidentPatient)patient).Room.ID}', " +
+                        $"department_id = '{((ResidentPatient)patient).Department.ID}' " +
+                        $"WHERE patient_id = '{patient.ID}'";
+                    command = new MySqlCommand(query, con);
+                    await command.ExecuteNonQueryAsync();
+                }
             }
             catch
             {
@@ -779,7 +837,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"UPDATE room SET room_number = '{room.RoomNumber}', type = '{room.GetType()}', " +
+                String query = $"UPDATE room SET room_number = {room.RoomNumber}, type = '{room.GetType()}' " +
                     $"WHERE room_id = '{room.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -917,6 +975,48 @@ namespace HospitalManagementSystem.Services
             catch
             {
                 Console.WriteLine("Error Deleting Room.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void DeleteNurseRoom(String NurseID, String RoomID)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM nurse_room WHERE nurse_id = '{NurseID}' AND room_id = '{RoomID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Nurse Room.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void DeleteDoctorPatient(String DoctorID, String PatientID)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM doctor_patient WHERE doctor_id = '{DoctorID}' AND patient_id = '{PatientID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Doctor Patient.");
             }
             finally
             {

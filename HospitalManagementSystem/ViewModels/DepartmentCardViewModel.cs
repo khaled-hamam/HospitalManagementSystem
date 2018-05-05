@@ -7,6 +7,9 @@ namespace HospitalManagementSystem.ViewModels
 {
     public class DepartmentCardViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Displayed Data Properties
+        /// </summary>
         public String ID { get; set; }
         public String Name { get; set; }
         public int EmployeesNumber { get; set; }
@@ -21,16 +24,8 @@ namespace HospitalManagementSystem.ViewModels
 
         public void navigateToDetails()
         {
-            String headname;
-            if (String.IsNullOrEmpty(Hospital.Departments[ID].HeadID)) headname = "N/A";
-            else headname = Hospital.Employees[Hospital.Departments[ID].HeadID].Name;
-
-            Home.ViewModel.Content = new DepartmentDetailsViewModel(ID)
-            {
-                DepartmentName = Hospital.Departments[ID].Name,
-                DepartmetnId = Hospital.Departments[ID].ID,
-                HeadName = headname
-            };
+            //Open Deprtment Details Page
+            Home.ViewModel.Content = new DepartmentDetailsViewModel(ID);
         }
     }
 }
