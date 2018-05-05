@@ -14,7 +14,7 @@ namespace HospitalManagementSystem.ViewModels
         /// <summary>
         /// Displayed Data Properites
         /// </summary>
-        public String DepartmetnId { get; set; }
+        public String DepartmentId { get; set; }
         public String DepartmentName { set; get; }
         public String HeadName { set; get; }
         public ObservableCollection<String> DoctorsList { get; set; }
@@ -35,7 +35,7 @@ namespace HospitalManagementSystem.ViewModels
 
         public DepartmentDetailsViewModel(String id)
         {
-            DepartmetnId = id;
+            DepartmentId = id;
             EditDepartment = new RelayCommand(EditDepartments);
             DeleteDepartment = new RelayCommand(DeleteDepartments);
             DoctorsList = new ObservableCollection<string>();
@@ -75,16 +75,16 @@ namespace HospitalManagementSystem.ViewModels
                 MessageBox.Show("Department Name can't be Empty");
             }
             DepartmentName = EditDepartmentName;
-            Hospital.Departments[DepartmetnId].Name = EditDepartmentName;
-            HospitalDB.UpdateDepartment(Hospital.Departments[DepartmetnId]);
+            Hospital.Departments[DepartmentId].Name = EditDepartmentName;
+            HospitalDB.UpdateDepartment(Hospital.Departments[DepartmentId]);
             Home.ViewModel.CloseRootDialog();
 
         }
 
         public void DeleteDepartments()
         {
-            Hospital.Departments.Remove(DepartmetnId);
-            HospitalDB.DeleteDepartment(DepartmetnId);
+            Hospital.DeleteDepartment(DepartmentId);
+            HospitalDB.DeleteDepartment(DepartmentId);
             Home.ViewModel.CloseRootDialog();
             Home.ViewModel.Content = new DepartmentsViewModel();
         }
