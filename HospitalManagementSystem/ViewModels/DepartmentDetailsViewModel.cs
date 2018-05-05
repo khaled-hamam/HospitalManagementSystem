@@ -51,7 +51,7 @@ namespace HospitalManagementSystem.ViewModels
 
             DoctorsCount = "Doctors: " + Hospital.Departments[id].Doctors.Count.ToString();
             NursesCount = "Nurses: " + Hospital.Departments[id].Nurse.Count.ToString();
-
+            PatientsCount = "Patients: " + Hospital.Departments[id].Patients.Count.ToString();
             foreach(Doctor doctor in Hospital.Departments[id].Doctors.Values)
             {
                 DoctorsList.Add(doctor.Name);
@@ -62,7 +62,10 @@ namespace HospitalManagementSystem.ViewModels
                 NursesList.Add(nurse.Name);
             }
 
-          //TODO Patients List
+           foreach(Patient patient in Hospital.Departments[id].Patients.Values)
+            {
+                PatientsList.Add(patient.Name);
+            }
         }
 
         public void EditDepartments()
@@ -81,9 +84,9 @@ namespace HospitalManagementSystem.ViewModels
         public void DeleteDepartments()
         {
             Hospital.Departments.Remove(DepartmetnId);
+            HospitalDB.DeleteDepartment(DepartmetnId);
             Home.ViewModel.CloseRootDialog();
             Home.ViewModel.Content = new DepartmentsViewModel();
-            //TODO delete from DB
         }
     }
 }
