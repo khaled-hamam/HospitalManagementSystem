@@ -686,7 +686,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"UPDATE doctor SET name = '{doctor.Name}', birth_date = '{doctor.BirthDate.ToString("yyyy-mm-dd")}', " +
-                    $"address = '{doctor.Address}', employement_date = '{doctor.EmploymentDate.ToString("yyyy-mm-dd")}', " +
+                    $"address = '{doctor.Address}', employment_date = '{doctor.EmploymentDate.ToString("yyyy-mm-dd")}', " +
                     $"department_id = '{doctor.Department.ID}', salary = {doctor.Salary}, is_head = {doctor.IsHead} " +
                     $"WHERE doctor_id = '{doctor.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
@@ -710,7 +710,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"UPDATE nurse SET name = '{nurse.Name}', birth_date = '{nurse.BirthDate.ToString("yyyy-mm-dd")}', " +
-                    $"address = '{nurse.Address}', employement_date = '{nurse.EmploymentDate.ToString("yyyy-mm-dd")}', " +
+                    $"address = '{nurse.Address}', employment_date = '{nurse.EmploymentDate.ToString("yyyy-mm-dd")}', " +
                     $"department_id = '{nurse.Department.ID}', salary = {nurse.Salary} " +
                     $"WHERE nurse_id = '{nurse.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
@@ -757,7 +757,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"UPDATE patient SET name = '{patient.Name}', birth_date = '{patient.BirthDate.ToString("yyyy-mm-dd")}', " +
-                    $"address = '{patient.Address}', diagnosis = '{patient.Diagnosis}', " +
+                    $"address = '{patient.Address}', diagnosis = '{patient.Diagnosis}' " +
                     $"WHERE patient_id = '{patient.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -779,7 +779,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"UPDATE room SET room_number = '{room.RoomNumber}', type = '{room.GetType()}', " +
+                String query = $"UPDATE room SET room_number = {room.RoomNumber}, type = '{room.GetType()}' " +
                     $"WHERE room_id = '{room.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
