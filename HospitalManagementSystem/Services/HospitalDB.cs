@@ -577,7 +577,13 @@ namespace HospitalManagementSystem.Services
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
 
-                // TODO: inserting Special data if (Resident / Appointment)
+                if (patient.GetType() == typeof(ResidentPatient))
+                {
+                    query = $"INSERT INTO resident_patient VALUES('{patient.ID}', '{((ResidentPatient)patient).Room.ID}'), " +
+                        $"'{((ResidentPatient)patient).Department.ID}', 0)";
+                    command = new MySqlCommand(query, con);
+                    await command.ExecuteNonQueryAsync();
+                }
             }
             catch
             {
@@ -653,6 +659,49 @@ namespace HospitalManagementSystem.Services
                 con.Close();
             }
         }
+
+        public async static void InsertNurseRoom(String NurseID, String PatientID)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO nurse_room VALUES('{NurseID}', '{PatientID}')";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Nurse Room.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public async static void InsertDoctorPatient(String DoctorID, String PatientID)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"INSERT INTO doctor_patient VALUES('{DoctorID}', '{PatientID}')";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Inserting Doctor Patient.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
 
         #region Updating Operations
