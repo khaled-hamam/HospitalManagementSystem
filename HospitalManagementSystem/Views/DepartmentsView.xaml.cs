@@ -29,9 +29,6 @@ namespace HospitalManagementSystem.Views
             ViewModel = new DepartmentsViewModel();
             DataContext = ViewModel;
             InitializeComponent();
-            DepartmentHeadComboBox.DisplayMemberPath = "Value";
-            DepartmentHeadComboBox.SelectedValuePath = "Key";
-            DepartmentHeadComboBox.ItemsSource = ViewModel.ComboBoxItems;
         }
 
         public void addDepartment(object sender, RoutedEventArgs e)
@@ -42,8 +39,7 @@ namespace HospitalManagementSystem.Views
             if (ViewModel.ValidateDepartment())
             {
                 ViewModel.addDepartment();
-                DepartmentNameTextBox.Clear();
-                DepartmentHeadComboBox.SelectedItem = null;
+                DepartmentNameTextBox.Clear(); 
 
             }
             // Closing the Dialog
