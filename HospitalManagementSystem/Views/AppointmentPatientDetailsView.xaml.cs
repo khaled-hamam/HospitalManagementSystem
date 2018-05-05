@@ -26,16 +26,5 @@ namespace HospitalManagementSystem.Views
         {
             InitializeComponent();
         }
-
-        private void DeleteAppointmentPatient(object sender, MouseButtonEventArgs e)
-        {
-            ViewModel.DeleteAppointmentPatient();
-
-        }
-
-        private void EditAppointmentPatient(object sender, RoutedEventArgs e)
-        {
-            Home.ViewModel.CloseRootDialog();
-        }
     }
 }

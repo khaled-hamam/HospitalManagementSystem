@@ -35,12 +35,8 @@
                                     <StackPanel Margin="16">
                                         <TextBox Text="{Binding EditPatientNameTextBox}" materialDesign:HintAssist.Hint="Patient Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientNameTextBox"  />
                                         <TextBox Text="{Binding EditPatientAddressTextBox}" materialDesign:HintAssist.Hint="Patient Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientAddressTextBox" />
-                                        <DatePicker Text="{Binding EditPatientBirthDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
-                                        <ComboBox Text="{Binding EditPatientTypeComboBox }" materialDesign:HintAssist.Hint="Patient Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientTypeComboBox" >
-                                            <ComboBoxItem>Resident Patient</ComboBoxItem>
-                                            <ComboBoxItem>Appointment Patient</ComboBoxItem>
-                                        </ComboBox>
-                                        <ComboBox  SelectedItem="{Binding EditRoomNumberComboBox}"
+                                    <DatePicker Text="{Binding EditPatientBirthDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
+                                    <ComboBox  SelectedItem="{Binding EditRoomNumberComboBox}"
                                                    Visibility="{Binding IsResident}" 
                                                    IsEditable="True"
                                                    materialDesign:HintAssist.Hint="Patient Room Number"  
@@ -58,7 +54,8 @@
                                                 HorizontalAlignment="left"
                                                 IsDefault="True"
                                                 Margin="0 8 0 0"
-                                                Click="EditResidentPatient">
+                                                Command="{Binding editResidentPatient}"
+                                               >
                                                    <Button.CommandParameter>
                                                     <system:Boolean>True</system:Boolean>
                                                 </Button.CommandParameter>
@@ -79,7 +76,7 @@
                                 </StackPanel>
                             </Button.CommandParameter>
                  </Button>
-                <Button  Style="{StaticResource DetailsButton}"  Margin="15 0 50 0" MouseUp="DeleteResidentPatient">DELETE</Button>
+                    <Button Command="{Binding deleteReidentPatient}" Style="{StaticResource DetailsButton}"  Margin="15 0 50 0" MouseUp="DeleteResidentPatient">DELETE</Button>
             </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="0">
                     <TextBlock Text="Address" Style="{StaticResource DetailsInfoTitle}" />
@@ -145,7 +142,7 @@
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
-                                                        Command="materialDesign:DialogHost.CloseDialogCommand"        
+                                                        Command="{Binding assignDoctor}"        
                                                         Margin="0 8 8 0">
                                                     <Button.CommandParameter>
                                                             <system:Boolean>True</system:Boolean>
@@ -201,11 +198,13 @@
                                         Background="{StaticResource PrimaryColor}">
                                         <Button.CommandParameter>
                                             <StackPanel Margin="16">
-                                            <TextBox Text="{Binding MedicalHistoryTextBox}" materialDesign:HintAssist.Hint="Add medicine"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="MedicalHistoryTextBox"  />
+                                            <TextBox Text="{Binding MedicineName}" materialDesign:HintAssist.Hint="Medicine Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="medicineName"  />
+                                            <DatePicker Text="{Binding MedicineStartDate }" materialDesign:HintAssist.Hint="Medicine StartDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="StartDate"  />
+                                            <DatePicker Text="{Binding MedicineEndDate}" materialDesign:HintAssist.Hint="Medicine EndDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="EndDate"  />
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
-                                                        Command="materialDesign:DialogHost.CloseDialogCommand"    
+                                                        Command="{Binding addMedicine}"    
                                                         Margin="0 8 8 0">
                                                     <Button.CommandParameter>
                                                             <system:Boolean>True</system:Boolean>
@@ -278,7 +277,7 @@
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
-                                                        Command="materialDesign:DialogHost.CloseDialogCommand"
+                                                        Command="{Binding assignNurse}"
                                                         Margin="0 8 8 0">
                                                     <Button.CommandParameter>
                                                             <system:Boolean>True</system:Boolean>
