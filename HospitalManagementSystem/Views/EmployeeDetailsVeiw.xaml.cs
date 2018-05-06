@@ -1,4 +1,4 @@
-﻿using HospitalManagementSystem.ViewModels;
+using HospitalManagementSystem.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +25,14 @@ namespace HospitalManagementSystem.Views
         public EmployeeDetailsVeiw()
         {
             InitializeComponent();
+        }
+        private void RemovePatientFromDoctor(object sender, MouseButtonEventArgs e)
+        {
+            ((EmployeeDetailsVeiwModel)DataContext).RemovePatient();
+        }
+        private void RemoveRoomFromNurse(object sender, MouseButtonEventArgs e)
+        {
+            ((EmployeeDetailsVeiwModel)DataContext).RemoveRoom();
         }
     }
 }

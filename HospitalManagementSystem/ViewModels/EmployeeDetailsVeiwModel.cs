@@ -1,4 +1,4 @@
-﻿using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
 using HospitalManagementSystem.Views;
 using System;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace HospitalManagementSystem.ViewModels
@@ -19,14 +20,14 @@ namespace HospitalManagementSystem.ViewModels
         /// </summary>
 
         public String EmployeeID;
-            // Main Page
+        // Main Page
         public String EmployeeName { get; set; }
         public String EmployeeAddress { get; set; }
         public String EmployeeBirthDate { get; set; }
         public String EmployeeDepartment { get; set; }
         public String EmployeeEmploymentDate { get; set; }
         public String EmployeeSalary { get; set; }
-            // Main Lists
+        // Main Lists
         public ObservableCollection<ComboBoxPairs> PatientsList { get; set; }
         public ObservableCollection<ComboBoxPairs> AppointmentsList { get; set; }
         public ObservableCollection<ComboBoxPairs> RoomsList { get; set; }
@@ -38,8 +39,10 @@ namespace HospitalManagementSystem.ViewModels
 
         // List Content
         public ICommand assignPatient { get; set; }
+        public ComboBoxPairs ListSelectedPatient {get; set;}
         public ComboBoxPairs PatientComboBox { get; set; }
         public ICommand assignRoom { get; set; }
+        public ComboBoxPairs ListSelectedRoom { get; set; }
         public ComboBoxPairs RoomComboBox { get; set; }
         // Edit Content
         public ICommand editEmployee { get; set; }
@@ -206,32 +209,74 @@ namespace HospitalManagementSystem.ViewModels
                 Home.ViewModel.Content = new EmployeesViewModel();
             }
         }
-
-        public void AssignPatient()
+        public void RemovePatient()
         {
-            
-            PatientsList.Add(new ComboBoxPairs(PatientComboBox.Key, PatientComboBox.Value));
-            
-            foreach (Patient patient in Hospital.Patients.Values)
+            if(Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
             {
-                if (patient.ID == PatientComboBox.Key)
+                String text = "Do You Want To Remove " + ListSelectedPatient.Value + " ?";
+                DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
                 {
-                    if (EmployeeRole == "Doctor")
-                    {
-                        ((Doctor)Hospital.Employees[EmployeeID]).Patients.Add(patient.ID, patient);
-                        HospitalDB.InsertDoctorPatient(EmployeeID, patient.ID);
-                        PatientsNumber = "Patients: " + ((Doctor)Hospital.Employees[EmployeeID]).Patients.Count.ToString();
-                    }
-                    else
-                    {
-                        ((Nurse)Hospital.Employees[EmployeeID]).Patients.Add(patient.ID, patient);
-                        PatientsNumber = "Patients: " + ((Nurse)Hospital.Employees[EmployeeID]).Patients.Count.ToString();
-                    }
-                    break;
+
+                    PatientsComboBox.Add(new ComboBoxPairs(ListSelectedPatient.Key, ListSelectedPatient.Value));
+                    ((Doctor)Hospital.Employees[EmployeeID]).Patients.Remove(ListSelectedPatient.Key);
+                    HospitalDB.DeleteDoctorPatient(EmployeeID, ListSelectedPatient.Key);
+                    PatientsList.Remove(ListSelectedPatient);
+                    PatientsNumber = $"Patients : {PatientsList.Count}";
+                   
                 }
             }
-            PatientsComboBox.Remove(PatientComboBox);
-            Home.ViewModel.CloseRootDialog();
+        }
+        public void RemoveRoom()
+        {
+            if (Hospital.Employees[EmployeeID].GetType() == typeof(Nurse))
+            {
+                String text = "Do You Want To Remove " + ListSelectedRoom.Value + " ?";
+                DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+
+                    RoomsComboBox.Add(new ComboBoxPairs(ListSelectedRoom.Key, ListSelectedRoom.Value));
+                    ((Nurse)Hospital.Employees[EmployeeID]).Rooms.Remove(ListSelectedRoom.Key);
+                    HospitalDB.DeleteNurseRoom(ListSelectedRoom.Key, ListSelectedRoom.Value);
+                    RoomsList.Remove(ListSelectedRoom);
+                    PatientsList.Remove(ListSelectedPatient);
+                    RoomsNumber = $"Rooms : {RoomsList.Count}";
+
+                }
+            }
+        }
+        public void AssignPatient()
+        {
+            if (PatientComboBox.Key == "Key" && PatientComboBox.Value == "Value")
+            {
+                System.Windows.MessageBox.Show("Invalid Input");
+            }
+            else
+            {
+                PatientsList.Add(new ComboBoxPairs(PatientComboBox.Key, PatientComboBox.Value));
+
+                foreach (Patient patient in Hospital.Patients.Values)
+                {
+                    if (patient.ID == PatientComboBox.Key)
+                    {
+                        if (EmployeeRole == "Doctor")
+                        {
+                            ((Doctor)Hospital.Employees[EmployeeID]).Patients.Add(patient.ID, patient);
+                            HospitalDB.InsertDoctorPatient(EmployeeID, patient.ID);
+                            PatientsNumber = "Patients: " + ((Doctor)Hospital.Employees[EmployeeID]).Patients.Count.ToString();
+                        }
+                        else
+                        {
+                            ((Nurse)Hospital.Employees[EmployeeID]).Patients.Add(patient.ID, patient);
+                            PatientsNumber = "Patients: " + ((Nurse)Hospital.Employees[EmployeeID]).Patients.Count.ToString();
+                        }
+                        break;
+                    }
+                }
+                PatientsComboBox.Remove(PatientComboBox);
+                Home.ViewModel.CloseRootDialog();
+            }
         }
 
         public void AssignRoom()
