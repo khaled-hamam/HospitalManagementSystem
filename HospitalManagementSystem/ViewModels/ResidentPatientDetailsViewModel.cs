@@ -22,14 +22,17 @@ namespace HospitalManagementSystem.ViewModels
         public String PatientDiagnosis { get; set; }
         public String PatientRoomNumber { get; set; }
         public String PatientBill { get; set; }
+        public String PatientDepartment { get; set; }
         // Edit Content
         public ICommand editResidentPatient { get; set; }
         public ICommand deleteResidentPatient { get; set; }
         public String EditPatientNameTextBox { get; set; }
+        public ComboBoxPairs EditPatientDepartment { get; set; }
         public String EditPatientAddressTextBox { get; set; }
         public DateTime EditPatientBirthDatePicker { get; set; }
         public ComboBoxPairs EditRoomNumberComboBox { get; set; }
         public ObservableCollection<ComboBoxPairs> PatientRoomNumberComboBox { get; set; }
+        public ObservableCollection<ComboBoxPairs> EditDepartmentComboBox { get; set; }
         // Main Page Lists
         public String DoctorsNumber { get; set; }
         public String NursesNumber { get; set; }
@@ -81,6 +84,7 @@ namespace HospitalManagementSystem.ViewModels
             PatientRoomNumberComboBox = new ObservableCollection<ComboBoxPairs>();
             IsResident = Visibility.Collapsed;
 
+            EditDepartmentComboBox = new ObservableCollection<ComboBoxPairs>();
             EditPatientBirthDatePicker = DateTime.Today;
             EditPatientAddressTextBox = Hospital.Patients[id].Address;
             EditPatientBirthDatePicker = Hospital.Patients[id].BirthDate;
@@ -106,6 +110,11 @@ namespace HospitalManagementSystem.ViewModels
             foreach (Medicine medicine in ((ResidentPatient)Hospital.Patients[id]).History.Values)
             {
                 MedicalHistoryList.Add(new ComboBoxPairs(medicine.ID, medicine.Name + " - Starting Date: " + medicine.StartingDate.ToShortDateString() + " | " + medicine.EndingDate.ToShortDateString()));
+            }
+
+            foreach (Department department in Hospital.Departments.Values)
+            {
+                EditDepartmentComboBox.Add(new ComboBoxPairs(department.ID, department.Name));
             }
 
             //TODO : DoctorsComboBoxItems 
@@ -157,6 +166,9 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Patients[PatientID].Address = PatientAddress = EditPatientAddressTextBox;
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
             Hospital.Patients[PatientID].BirthDate = EditPatientBirthDatePicker;
+            PatientDepartment= ((ResidentPatient)Hospital.Patients[PatientID]).Department.Name;
+            ((ResidentPatient)Hospital.Patients[PatientID]).Department = Hospital.Departments[EditPatientDepartment.Key];
+            PatientDepartment = EditPatientDepartment.Value;
             HospitalDB.UpdatePatient(Hospital.Patients[PatientID]);
             Home.ViewModel.CloseRootDialog();
         }
