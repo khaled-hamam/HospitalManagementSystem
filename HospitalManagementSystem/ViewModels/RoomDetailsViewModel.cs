@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace HospitalManagementSystem.ViewModels
@@ -30,6 +31,7 @@ namespace HospitalManagementSystem.ViewModels
         public ICommand assignNurse { get; set; }
 
         public ComboBoxPairs NurseSelectedItem { get; set; }
+        public ComboBoxPairs ListSelectedNurse { get; set; }
 
 
         public RoomDetailsViewModel(String ID)
@@ -41,6 +43,7 @@ namespace HospitalManagementSystem.ViewModels
             NursesList = new ObservableCollection<ComboBoxPairs>();
             PatientsList = new ObservableCollection<ComboBoxPairs>();
             NurseSelectedItem = new ComboBoxPairs("Key", "Value");
+            ListSelectedNurse = new ComboBoxPairs("Key", "Value");
             RoomNumber = Hospital.Rooms[ID].RoomNumber.ToString();
             editedRoomNumber = RoomNumber;
 
@@ -80,7 +83,7 @@ namespace HospitalManagementSystem.ViewModels
         {
             if (String.IsNullOrEmpty(editedRoomNumber))
             {
-                MessageBox.Show("Room Number can't be Empty");
+                System.Windows.Forms.MessageBox.Show("Room Number can't be Empty");
                 return;
             }
             bool ValideRoom = true;
@@ -94,7 +97,7 @@ namespace HospitalManagementSystem.ViewModels
             }
             if(!ValideRoom && editedRoomNumber != RoomNumber)
             {
-                MessageBox.Show("ROOM NUMBER IS ALREADY EXIST");
+                System.Windows.Forms.MessageBox.Show("ROOM NUMBER IS ALREADY EXIST");
             }
             else
             {    
@@ -111,12 +114,27 @@ namespace HospitalManagementSystem.ViewModels
             Home.ViewModel.Content = new RoomsViewModel();
             HospitalDB.DeleteRoom(RoomID);
         }   
-       
+        public void RemoveNurse()
+        {
+            String text = "Do You Want To Remove " + ListSelectedNurse.Value + " ?";
+            DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(answer== DialogResult.Yes)
+            {
+
+                Hospital.Rooms[RoomID].removeNurse(ListSelectedNurse.Key);
+                HospitalDB.DeleteNurseRoom(ListSelectedNurse.Key, RoomID);
+                NursesList.Remove(ListSelectedNurse);
+                NursesNumber = $"Nurses : {NursesList.Count}";
+
+            }
+        }
         public void AssignNurse()
         {
             Home.ViewModel.CloseRootDialog();
 
             NursesList.Add(new ComboBoxPairs(NurseSelectedItem.Key, NurseSelectedItem.Value));
+
+            HospitalDB.InsertNurseRoom(NurseSelectedItem.Key, RoomID);
 
             Hospital.Rooms[RoomID].addNurse((Nurse)(Hospital.Employees[NurseSelectedItem.Key]));
             ((Nurse)Hospital.Employees[NurseSelectedItem.Key]).addRoom(Hospital.Rooms[RoomID]);
@@ -124,7 +142,6 @@ namespace HospitalManagementSystem.ViewModels
             NursesComboBoxItems.Remove(NurseSelectedItem);
             NursesNumber = $"Nurses : {NursesList.Count}";
 
-            HospitalDB.InsertNurseRoom(NurseSelectedItem.Key, RoomID);
         }
     }
 }

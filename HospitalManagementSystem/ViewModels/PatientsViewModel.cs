@@ -18,8 +18,12 @@ namespace HospitalManagementSystem.ViewModels
         /// </summary>
         public String PatientNameTextBox { get; set; }
         public String PatientAddressTextBox { get; set; }
-        public ComboBoxPairs RoomNumberComboBox { get; set; }
-        public List<ComboBoxPairs> ComboBoxItems;
+        public ComboBoxPairs RoomNumber { get; set; }
+        public ComboBoxPairs PatientDepartment { get; set; }
+        public ObservableCollection<ComboBoxPairs> ComboBoxItems { get; set; }
+        public ObservableCollection<ComboBoxPairs> PatientDepartmentItems { get; set; }
+
+        public ICommand addNewPatient { get; set; }
 
         private String patientTypeComboBox;
         public String PatientTypeComboBox
@@ -37,7 +41,6 @@ namespace HospitalManagementSystem.ViewModels
         }
 
         public DateTime PatientBirthDatePicker { get; set; }
-        public String PatientRoomNumber { get; set; }
         public Visibility IsResident { get; set; }
 
         public ICommand SearchAction { get; set; }
@@ -53,14 +56,22 @@ namespace HospitalManagementSystem.ViewModels
 
         public PatientsViewModel()
         {
+            addNewPatient = new RelayCommand(addPatient);
             IsResident = Visibility.Collapsed;
             SearchAction = new RelayCommand(Search);
             Patients = new ObservableCollection<PatientCardViewModel>();
             PatientBirthDatePicker = DateTime.Today;
-            ComboBoxItems = new List<ComboBoxPairs>();
+            ComboBoxItems = new ObservableCollection<ComboBoxPairs>();
+            PatientDepartmentItems = new ObservableCollection<ComboBoxPairs>();
+
             foreach (Room room in Hospital.Rooms.Values) {
                 ComboBoxItems.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
              }
+
+            foreach (Department department in Hospital.Departments.Values)
+            {
+                PatientDepartmentItems.Add(new ComboBoxPairs(department.ID, department.Name));
+            }
 
             foreach (Patient patient in Hospital.Patients.Values)
             {
@@ -101,7 +112,8 @@ namespace HospitalManagementSystem.ViewModels
                     Name = PatientNameTextBox,
                     Address = PatientAddressTextBox,
                     BirthDate = PatientBirthDatePicker,
-                    Room = Hospital.Rooms[RoomNumberComboBox.Key]
+                    Room = Hospital.Rooms[RoomNumber.Key],
+                    Department = Hospital.Departments[PatientDepartment.Key]
                 };
                 Patients.Add(new PatientCardViewModel
                 {
@@ -118,8 +130,11 @@ namespace HospitalManagementSystem.ViewModels
                     Type = PatientTypeComboBox,
                     ShortDiagnosis = "Not Implemented yet"
                 });
+                Hospital.Departments[PatientDepartment.Key].Patients.Add(newPatient.ID, newPatient);
                 Hospital.Patients.Add(newPatient.ID, newPatient);
+                Hospital.Rooms[RoomNumber.Key].Patients.Add(newPatient.ID, newPatient);
                 HospitalDB.InsertPatient(newPatient);
+                 
             } else {
                 AppointmentPatient newPatient = new AppointmentPatient
                 {

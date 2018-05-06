@@ -122,7 +122,9 @@
                             </Grid.RowDefinitions>
                             <ListBox ItemsSource="{Binding NursesList}"
                                      DisplayMemberPath="Value"
+                                     SelectedItem="{Binding ListSelectedNurse}"
                                      SelectedValuePath="Key"
+                                     MouseDoubleClick="RemoveNurseFromRoom"
                                      Background="White" Foreground="{StaticResource PrimaryColor}" x:Name="NursesList"></ListBox>
                             <materialDesign:ColorZone Background="#0e263e" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
                                 <TextBlock Text="{Binding NursesNumber}" Foreground="White" Margin="16"/>

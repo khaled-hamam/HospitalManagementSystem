@@ -87,7 +87,25 @@
                             <ComboBoxItem>Resident Patient</ComboBoxItem>
                             <ComboBoxItem>Appointment Patient</ComboBoxItem>
                         </ComboBox>
-                        <ComboBox  SelectedItem="{Binding RoomNumberComboBox}" Visibility="{Binding IsResident}" Text="{Binding PatientRoomNumber}" IsEditable="True" materialDesign:HintAssist.Hint="Patient Room Number"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientRoomNumberComboBox"/>
+                        <ComboBox  
+                            SelectedItem="{Binding RoomNumber}"
+                            Visibility="{Binding IsResident}" 
+                            IsEditable="True"
+                            materialDesign:HintAssist.Hint="Patient Room Number" 
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" 
+                            ItemsSource="{Binding ComboBoxItems}"
+                            DisplayMemberPath="Value" 
+                            SelectedValuePath="Key" />
+                        <ComboBox 
+                            SelectedItem="{Binding PatientDepartment}" 
+                            Visibility="{Binding IsResident}" 
+                            IsEditable="True" 
+                            materialDesign:HintAssist.Hint="Patient Department" 
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                            Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200"                         
+                            ItemsSource="{Binding PatientDepartmentItems}"
+                            DisplayMemberPath = "Value" 
+                            SelectedValuePath = "Key" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -95,7 +113,7 @@
                                     HorizontalAlignment="left"
                                     IsDefault="True"
                                     Margin="0 8 0 0"
-                                    Click="addPatient">
+                                    Command="{Binding addNewPatient}">
                             <Button.CommandParameter>
                                 <system:Boolean>True</system:Boolean>
                             </Button.CommandParameter>
