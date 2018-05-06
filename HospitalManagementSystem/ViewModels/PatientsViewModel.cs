@@ -1,5 +1,6 @@
 ﻿using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
+using HospitalManagementSystem.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -139,7 +140,7 @@ namespace HospitalManagementSystem.ViewModels
                 Hospital.Patients.Add(newPatient.ID, newPatient);
                 Hospital.Rooms[RoomNumber.Key].Patients.Add(newPatient.ID, newPatient);
                 HospitalDB.InsertPatient(newPatient);
-                 
+
             } else {
                 AppointmentPatient newPatient = new AppointmentPatient
                 {
@@ -166,6 +167,7 @@ namespace HospitalManagementSystem.ViewModels
                 Hospital.Patients.Add(newPatient.ID, newPatient);
                 HospitalDB.InsertPatient(newPatient);
             }
+                Home.ViewModel.CloseRootDialog();
         }
  
     }
