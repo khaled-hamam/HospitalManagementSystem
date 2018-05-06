@@ -115,6 +115,7 @@
                                 Grid.Row="0" Margin="0 0 28 -20"
                                 BorderThickness="0"
                                 BorderBrush="Transparent"
+                                Visibility="{Binding IsDoctor}"                               
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="{StaticResource PrimaryColor}">
                                     <Button.CommandParameter>

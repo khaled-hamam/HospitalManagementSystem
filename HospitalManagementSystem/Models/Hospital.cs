@@ -245,7 +245,8 @@ namespace HospitalManagementSystem.Models
             }
             if(Patients[PatientId].GetType()==typeof(AppointmentPatient))
             {
-               foreach(Appointment appointment in ((AppointmentPatient)Patients[PatientId]).Appointments.Values)
+                List<Appointment> appointments = new List<Appointment>(((AppointmentPatient)Patients[PatientId]).Appointments.Values);
+                foreach(Appointment appointment in appointments)
                 {
                     appointment.cancel();
                 }
