@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalManagementSystem.Models;
+using System;
 using System.Windows.Input;
 
 namespace HospitalManagementSystem.ViewModels
@@ -8,13 +9,13 @@ namespace HospitalManagementSystem.ViewModels
         /// <summary>
         /// Properties
         /// </summary>
-        public String StandardPrice { get; set; }
-        public String SemiPrice { get; set; }
-        public String PrivatePrice { get; set; }
-        public String AppointmentPrice { get; set; }
-        public String StandardCapacity { get; set; }
-        public String SemiCapacity { get; set; }
-        public String PrivateCapacity { get; set; }
+        public double StandardPrice { get; set; }
+        public double SemiPrice { get; set; }
+        public double PrivatePrice { get; set; }
+        public double AppointmentPrice { get; set; }
+        public double StandardCapacity { get; set; }
+        public double SemiCapacity { get; set; }
+        public double PrivateCapacity { get; set; }
 
         /// <summary>
         /// Command Property
@@ -24,6 +25,14 @@ namespace HospitalManagementSystem.ViewModels
         public SettingsViewModel()
         {
             SaveSettingsAction = new RelayCommand(saveSettings);
+
+            StandardPrice = Hospital.Config.StandardWardPrice;
+            StandardCapacity = Hospital.Config.StandardWardCapacity;
+            SemiPrice = Hospital.Config.SemiPrivateRoomPrice;
+            SemiCapacity = Hospital.Config.SemiPrivateRoomCapacity;
+            PrivatePrice = Hospital.Config.PrivateRoomPrice;
+            PrivateCapacity = Hospital.Config.PrivateRoomCapacity;
+            AppointmentPrice = Hospital.Config.AppointmentHourPrice;
         }
 
         public void saveSettings()

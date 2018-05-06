@@ -22,18 +22,40 @@ namespace HospitalManagementSystem.Services
         public static Config FetchConfig()
         {
             MySqlConnection con = InitConnection();
-            Config Config = new Config();
+            Config Config = new Config
+            {
+                StandardWardCapacity = 4,
+                StandardWardPrice = 50,
+                SemiPrivateRoomCapacity = 2,
+                SemiPrivateRoomPrice = 90,
+                PrivateRoomCapacity = 1,
+                PrivateRoomPrice = 150,
+                AppointmentHourPrice = 40
+            };
+
             try
             {
                 con.Open();
                 String query = "SELECT * FROM config";
                 MySqlCommand command = new MySqlCommand(query, con);
                 MySqlDataReader reader = command.ExecuteReader();
-                ;
+                while(reader.Read())
+                {
+                    Config = new Config
+                    {
+                        StandardWardPrice = reader.GetFloat("standard_price"),
+                        SemiPrivateRoomPrice = reader.GetFloat("semi_price"),
+                        PrivateRoomPrice = reader.GetFloat("private_price"),
+                        AppointmentHourPrice = reader.GetFloat("appointment_price"),
+                        StandardWardCapacity = reader.GetInt32("standard_capacity"),
+                        SemiPrivateRoomCapacity = reader.GetInt32("semi_capacity"),
+                        PrivateRoomCapacity = reader.GetInt32("private_capacity")
+                    };
+                }
             }
             catch
             {
-                Console.WriteLine("Error Occured Fetching Departments.");
+                Console.WriteLine("Error Occured Fetching Config.");
             }
             finally
             {

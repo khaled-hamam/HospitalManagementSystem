@@ -43,6 +43,7 @@ namespace HospitalManagementSystem.Models
             Home.ViewModel.IsLoading = true;
             await Task.Run(() =>
             {
+                Config = HospitalDB.FetchConfig();
                 InitializeDepartments();
                 InitializeRooms();
                 InitializeEmployees();
@@ -298,6 +299,11 @@ namespace HospitalManagementSystem.Models
         public int SemiPrivateRoomCapacity { get; set; }
         public int PrivateRoomCapacity { get; set; }
 
-        public int AppointmentHourPrice { get; set; }
+        public double AppointmentHourPrice { get; set; }
+
+        public Config()
+        {
+
+        }
     }
 }
