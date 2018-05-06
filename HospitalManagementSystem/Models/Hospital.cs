@@ -17,6 +17,8 @@ namespace HospitalManagementSystem.Models
         public static Dictionary<String, Department> Departments { get; private set; }
         public static Dictionary<String, Room> Rooms { get; private set; }
 
+        public static Config Config { get; set; }
+
         public Hospital()
         {
             Employees = new Dictionary<String, Employee>();
@@ -24,6 +26,16 @@ namespace HospitalManagementSystem.Models
             Appointments = new Dictionary<String, Appointment>();
             Departments = new Dictionary<String, Department>();
             Rooms = new Dictionary<String, Room>();
+            Config = new Config
+            {
+                StandardWardCapacity = 4,
+                StandardWardPrice = 50,
+                SemiPrivateRoomCapacity = 2,
+                SemiPrivateRoomPrice = 90,
+                PrivateRoomCapacity = 1,
+                PrivateRoomPrice = 150,
+                AppointmentHourPrice = 40
+            };
         }
 
         public static async void InitializeData()
@@ -65,7 +77,7 @@ namespace HospitalManagementSystem.Models
             foreach (Doctor doctor in doctorList)
             {
                 // Fetching Doctor's Department
-                String departmentID = HospitalDB.FetchPersoneDepartment(doctor.ID);
+                String departmentID = HospitalDB.FetchPersonDepartment(doctor.ID);
 
                 // Assigning Doctor to his Department
                 if (Departments.ContainsKey(departmentID))
@@ -86,7 +98,7 @@ namespace HospitalManagementSystem.Models
             foreach (Nurse nurse in nurseList)
             {
                 // Fetching Nurse's Department
-                String departmentID = HospitalDB.FetchPersoneDepartment(nurse.ID);
+                String departmentID = HospitalDB.FetchPersonDepartment(nurse.ID);
 
                 // Assigning Nurse to her Department
                 if (Departments.ContainsKey(departmentID))
@@ -124,6 +136,14 @@ namespace HospitalManagementSystem.Models
 
                 if (patient.GetType() == typeof(ResidentPatient))
                 {
+                    // Fetching Patient's Department
+                    String departmentID = HospitalDB.FetchPersonDepartment(patient.ID);
+                    if (Departments.ContainsKey(departmentID))
+                    {
+                        ((ResidentPatient)patient).Department = Departments[departmentID];
+                        Departments[departmentID].Patients.Add(patient.ID, patient);
+                    }
+
                     // Fetching Patient's Room from Database
                     String roomID = HospitalDB.FetchPatientRoom(patient.ID);
 
@@ -267,5 +287,18 @@ namespace HospitalManagementSystem.Models
             Appointments[AppointmentId].cancel();
             Appointments.Remove(AppointmentId);
        }
+    }
+
+    class Config
+    {
+        public double StandardWardPrice { get; set; }
+        public double SemiPrivateRoomPrice { get; set; }
+        public double PrivateRoomPrice { get; set; }
+
+        public int StandardWardCapacity { get; set; }
+        public int SemiPrivateRoomCapacity { get; set; }
+        public int PrivateRoomCapacity { get; set; }
+
+        public int AppointmentHourPrice { get; set; }
     }
 }

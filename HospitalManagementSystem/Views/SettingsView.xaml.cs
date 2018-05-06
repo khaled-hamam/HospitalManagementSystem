@@ -1,6 +1,4 @@
-﻿using HospitalManagementSystem.ViewModels;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,17 +16,13 @@ using System.Windows.Shapes;
 namespace HospitalManagementSystem.Views
 {
     /// <summary>
-    /// Interaction logic for PatientsView.xaml
+    /// Interaction logic for SettingsView.xaml
     /// </summary>
-    public partial class PatientsView : UserControl
+    public partial class SettingsView : UserControl
     {
-        public PatientsViewModel ViewModel { get; set; }
-
-        public PatientsView()
+        public SettingsView()
         {
             InitializeComponent();
         }
-       
-  
     }
 }
