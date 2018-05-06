@@ -35,7 +35,7 @@
                                     <StackPanel Margin="16">
                                         <TextBox Text="{Binding EditPatientNameTextBox}" materialDesign:HintAssist.Hint="Patient Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientNameTextBox"  />
                                         <TextBox Text="{Binding EditPatientAddressTextBox}" materialDesign:HintAssist.Hint="Patient Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientAddressTextBox" />
-                                    <DatePicker Text="{Binding EditPatientBirthDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
+                                    <DatePicker Text="{Binding EditPatientBirthDatePicker}" materialDesign:HintAssist.Hint="Patient BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
                                     <ComboBox  SelectedItem="{Binding EditRoomNumberComboBox}"
                                                    Visibility="{Binding IsResident}" 
                                                    IsEditable="True"
@@ -49,7 +49,7 @@
                                                    ItemsSource="{Binding PatientRoomNumberComboBox}"
                                                    x:Name="PatientRoomNumberComboBox"/>
                                     <ComboBox 
-                                    materialDesign:HintAssist.Hint="Employee Department"  
+                                    materialDesign:HintAssist.Hint="Patient Department"  
                                     ItemsSource="{Binding EditDepartmentComboBox}"
                                     Text="{Binding SetEditDepartmentComboBox}"
                                     DisplayMemberPath="Value"

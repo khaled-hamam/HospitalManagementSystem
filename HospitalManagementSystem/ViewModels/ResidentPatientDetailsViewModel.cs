@@ -77,6 +77,7 @@ namespace HospitalManagementSystem.ViewModels
         public ResidentPatientDetailsViewModel(String id)
         {
             PatientID = id;
+            PatientDepartment = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
 
             DoctorsList = new ObservableCollection<ComboBoxPairs>();
             NursesList = new ObservableCollection<ComboBoxPairs>();
