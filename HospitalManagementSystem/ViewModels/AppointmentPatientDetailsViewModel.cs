@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace HospitalManagementSystem.ViewModels
@@ -38,7 +39,7 @@ namespace HospitalManagementSystem.ViewModels
         public String AppointmentsNumber { get; set; }
         public ICommand assignDoctor { get; set; }
         public ComboBoxPairs DoctorComboBox { get; set; }
-
+        public ComboBoxPairs ListSelectedDoctor { get; set; }
 
         public AppointmentPatientDetailsViewModel(String id)
         {
@@ -74,6 +75,7 @@ namespace HospitalManagementSystem.ViewModels
             // list Content
             assignDoctor = new RelayCommand(AssignDoctor);
             DoctorComboBox = new ComboBoxPairs("Key", "Value");
+            ListSelectedDoctor = new ComboBoxPairs("Key", "Value");
             // Edit Content
             editAppointmentPatient = new RelayCommand(EditAppointmentPatient);
             EditPatientNameTextBox = Hospital.Patients[id].Name;
@@ -116,6 +118,23 @@ namespace HospitalManagementSystem.ViewModels
             }
             DoctorsComboBox.Remove(DoctorComboBox);
             Home.ViewModel.CloseRootDialog();
+        }
+
+        public void RemoveDr()
+        {
+            String text = "Do You Want To Remove " + ListSelectedDoctor.Value + " ?";
+            DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+
+                DoctorsComboBox.Add(new ComboBoxPairs(ListSelectedDoctor.Key, ListSelectedDoctor.Value));
+                Hospital.Patients[PatientID].removeDoctor(ListSelectedDoctor.Key);
+                ((Doctor)Hospital.Employees[ListSelectedDoctor.Key]).Patients.Remove(PatientID);
+                HospitalDB.DeleteDoctorPatient(ListSelectedDoctor.Key, PatientID);
+                DoctorsList.Remove(ListSelectedDoctor);
+                DoctorsNumber = "Doctors: " + Hospital.Patients[PatientID].Doctors.Count().ToString();
+
+            }
         }
     }
 }
