@@ -754,6 +754,31 @@ namespace HospitalManagementSystem.Services
 
         #region Updating Operations
 
+        public async static void UpdateConfig(Config config)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"UPDATE config SET standard_price = {config.StandardWardPrice}, semi_price = {config.SemiPrivateRoomPrice}, " +
+                    $"private_price = {config.PrivateRoomPrice}, appointment_price = {config.AppointmentHourPrice}, " +
+                    $"standard_capacity = {config.StandardWardCapacity}, semi_capacity = {config.SemiPrivateRoomCapacity}, " +
+                    $"private_capacity = {config.PrivateRoomCapacity} " +
+                    $"WHERE id = 1";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Updating Config.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public async static void UpdateDepartment(Department department)
         {
             MySqlConnection con = InitConnection();
