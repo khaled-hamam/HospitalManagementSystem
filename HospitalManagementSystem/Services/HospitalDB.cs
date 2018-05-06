@@ -500,13 +500,13 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"SELECT patient_id from appointment WHERE appointment_id = {appointmentID}";
+                String query = $"SELECT patient_id from appointment WHERE appointment_id = '{appointmentID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 patientID = (String)command.ExecuteScalar();
             }
             catch
             {
-                Console.WriteLine("Error Occured Fetching Appointment Doctor.");
+                Console.WriteLine("Error Occured Fetching Appointment Patient.");
             }
             finally
             {
