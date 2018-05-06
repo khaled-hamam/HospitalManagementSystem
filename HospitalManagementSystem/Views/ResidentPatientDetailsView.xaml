@@ -35,7 +35,7 @@
                                     <StackPanel Margin="16">
                                         <TextBox Text="{Binding EditPatientNameTextBox}" materialDesign:HintAssist.Hint="Patient Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientNameTextBox"  />
                                         <TextBox Text="{Binding EditPatientAddressTextBox}" materialDesign:HintAssist.Hint="Patient Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientAddressTextBox" />
-                                    <DatePicker Text="{Binding EditPatientBirthDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
+                                    <DatePicker Text="{Binding EditPatientBirthDatePicker}" materialDesign:HintAssist.Hint="Patient BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
                                     <ComboBox  SelectedItem="{Binding EditRoomNumberComboBox}"
                                                    Visibility="{Binding IsResident}" 
                                                    IsEditable="True"
@@ -48,7 +48,18 @@
                                                    Width="200" 
                                                    ItemsSource="{Binding PatientRoomNumberComboBox}"
                                                    x:Name="PatientRoomNumberComboBox"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                                    <ComboBox 
+                                    materialDesign:HintAssist.Hint="Patient Department"  
+                                    ItemsSource="{Binding EditDepartmentComboBox}"
+                                    Text="{Binding SetEditDepartmentComboBox}"
+                                    DisplayMemberPath="Value"
+                                    SelectedValuePath="Key"
+                                    SelectedItem="{Binding EditPatientDepartment}"
+                                    IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
+                                    Margin="0 8 0 0" 
+                                    HorizontalAlignment="Left"  
+                                    Width="200" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 VerticalAlignment="Bottom"
                                                 HorizontalAlignment="left"
@@ -130,7 +141,11 @@
                     <TextBlock  Text="Bill" Style="{StaticResource DetailsInfoTitle}" />
                     <TextBlock Text="{Binding PatientBill}" Style="{StaticResource DetailsInfoValue}" />
                 </StackPanel>
-                    <!--Doctor List Dialogbox-->
+                <StackPanel Grid.Column="1" Grid.Row="3">
+                    <TextBlock  Text="Department" Style="{StaticResource DetailsInfoTitle}" />
+                    <TextBlock Text="{Binding PatientDepartment}" Style="{StaticResource DetailsInfoValue}" />
+                </StackPanel>
+                <!--Doctor List Dialogbox-->
                 <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="4">
                         <materialDesign:DialogHost  HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Center">
                             <Border  Style="{StaticResource DetailsDialogHostBorder}">

@@ -86,7 +86,10 @@ namespace HospitalManagementSystem.ViewModels
             EmployeeBirthDate = Hospital.Employees[id].BirthDate.ToShortDateString();
             EmployeeEmploymentDate = Hospital.Employees[id].EmploymentDate.ToShortDateString();
             EditEmployeeSalaryTextBox = Hospital.Employees[id].Salary.ToString();
-            SetEditDepartmentComboBox = Hospital.Employees[id].Department.Name;
+            if (!(Hospital.Employees[id].Department == null))
+                SetEditDepartmentComboBox = Hospital.Employees[id].Department.Name;
+            else
+                SetEditDepartmentComboBox = "N/A";
             EditEmployeeDatePicker = Hospital.Employees[id].BirthDate;
 
             // Edit 
