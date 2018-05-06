@@ -21,6 +21,7 @@ namespace HospitalManagementSystem.ViewModels
         public String AppointmentTimePicker { get; set; }
         public String datePickerString { get; set; }
         public String timePickerString { get; set; }
+        public String textValidation { get; set; }
 
         public List<ComboBoxPairs> patientsComboBoxItems;
         public List<ComboBoxPairs> doctorsComboBoxItems;
@@ -36,24 +37,32 @@ namespace HospitalManagementSystem.ViewModels
 
             if (AppointmentDuration == "")
             {
+                textValidation = "Can't Have empty Values";
                 return false;
             }
             if (AppointmentTimePicker == "")
             {
+                textValidation = "Can't Have empty Values";
+
                 return false;
             }
             if (PatientNameComboBox == null)
             {
+                textValidation = "Can't Have empty Values";
+
                 return false;
             }
             if (DoctorNameComboBox == null)
             {
+                textValidation = "Can't Have empty Values";
+
                 return false;
             }
             for (int i = 0; i < AppointmentDuration.Length; i++)
             {
                 if (AppointmentDuration[i] >= 'a' && AppointmentDuration[i] <= 'z')
                 {
+                    textValidation = "Can't Have empty Values";
                     return false;
                 }
             }
