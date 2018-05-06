@@ -163,8 +163,20 @@ namespace HospitalManagementSystem.ViewModels
                     AppointmentDate = newAppointment.Date.ToString()
 
                 });
+            FilteredAppointments.Add(
+                new AppointmentCardViewModel
+                {
+                    PatientName = newAppointment.Patient.Name,
+                    DoctorName = newAppointment.Doctor.Name,
+                    Duration = newAppointment.Duration.ToString(),
+                    AppointmentDate = newAppointment.Date.ToString()
+
+                });
             Hospital.Appointments.Add(newAppointment.ID, newAppointment);
+            Hospital.Appointments[newAppointment.ID].Patient.addAppointment(newAppointment);
+            Hospital.Appointments[newAppointment.ID].Doctor.addAppointment(newAppointment);
             HospitalDB.InsertAppointment(newAppointment);
+            
         }
     }
 }

@@ -134,6 +134,8 @@
                         </Grid.RowDefinitions>
                             <ListBox ItemsSource="{Binding PatientsList}" 
                                  Background="White" 
+                                 SelectedItem="{Binding ListSelectedPatient}"
+                                 MouseDoubleClick="RemovePatientFromDoctor"
                                  Foreground="{StaticResource PrimaryColor}" 
                                  x:Name="PatientsList"
                                  DisplayMemberPath="Value"
@@ -228,7 +230,9 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                             <ListBox ItemsSource="{Binding RoomsList}" 
+                                     SelectedItem="{Binding ListSelectedRoom}"
                                  Background="White" 
+                                 MouseDoubleClick="RemoveRoomFromNurse"
                                  Foreground="{StaticResource PrimaryColor}" 
                                  x:Name="RoomsList"
                                   DisplayMemberPath="Value"
