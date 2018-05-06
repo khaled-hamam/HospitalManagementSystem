@@ -26,28 +26,9 @@ namespace HospitalManagementSystem.Views
 
         public PatientsView()
         {
-            ViewModel = new PatientsViewModel();
-            DataContext = ViewModel;
             InitializeComponent();
-            PatientRoomNumberComboBox.DisplayMemberPath = "Value";
-            PatientRoomNumberComboBox.SelectedValuePath = "Key";
-            PatientRoomNumberComboBox.ItemsSource = ViewModel.ComboBoxItems;
         }
-        public void addPatient(object sender, RoutedEventArgs e)
-        {
-            if (!ViewModel.ValidateInput())
-            { MessageBox.Show("Invalid Entry"); return;}
-            ViewModel.addPatient();
-            Home.ViewModel.CloseRootDialog();
-
-            // Closing the Dialog
-            // DialogHost.CloseDialogCommand.Execute(addPatientDialaog, null);
-
-            PatientNameTextBox.Clear();
-            PatientAddressTextBox.Clear();
-            PatientBirthDatetDatePicker.SelectedDate = DateTime.Today;
-            PatientTypeComboBox.SelectedIndex = -1;
-        } 
+       
   
     }
 }
