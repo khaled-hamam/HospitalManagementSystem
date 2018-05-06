@@ -1,5 +1,6 @@
 ﻿using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
+using HospitalManagementSystem.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +23,7 @@ namespace HospitalManagementSystem.ViewModels
         public ComboBoxPairs PatientDepartment { get; set; }
         public ObservableCollection<ComboBoxPairs> ComboBoxItems { get; set; }
         public ObservableCollection<ComboBoxPairs> PatientDepartmentItems { get; set; }
-
+        public String textValidation { get; set; }
         public ICommand addNewPatient { get; set; }
 
         private String patientTypeComboBox;
@@ -63,9 +64,9 @@ namespace HospitalManagementSystem.ViewModels
             PatientBirthDatePicker = DateTime.Today;
             ComboBoxItems = new ObservableCollection<ComboBoxPairs>();
             PatientDepartmentItems = new ObservableCollection<ComboBoxPairs>();
-
             foreach (Room room in Hospital.Rooms.Values) {
-                ComboBoxItems.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
+                if(room.hasAvailableBed())
+                     ComboBoxItems.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
              }
 
             foreach (Department department in Hospital.Departments.Values)
@@ -105,6 +106,11 @@ namespace HospitalManagementSystem.ViewModels
         }
         public void addPatient()
         {
+            if (!ValidateInput())
+            {
+                textValidation = " Cannot have empty values";
+                return;
+            }
             if (PatientTypeComboBox == "Resident Patient")
             {
                 ResidentPatient newPatient = new ResidentPatient
@@ -134,7 +140,7 @@ namespace HospitalManagementSystem.ViewModels
                 Hospital.Patients.Add(newPatient.ID, newPatient);
                 Hospital.Rooms[RoomNumber.Key].Patients.Add(newPatient.ID, newPatient);
                 HospitalDB.InsertPatient(newPatient);
-                 
+
             } else {
                 AppointmentPatient newPatient = new AppointmentPatient
                 {
@@ -161,6 +167,7 @@ namespace HospitalManagementSystem.ViewModels
                 Hospital.Patients.Add(newPatient.ID, newPatient);
                 HospitalDB.InsertPatient(newPatient);
             }
+                Home.ViewModel.CloseRootDialog();
         }
  
     }

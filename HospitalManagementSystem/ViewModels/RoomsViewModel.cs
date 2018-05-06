@@ -25,6 +25,7 @@ namespace HospitalManagementSystem.ViewModels
         /// </summary>
         public String RoomNumber { get; set; }
         public String RoomType { get; set; }
+        public String textValidation { get; set; }
 
         public ICommand SearchAction { get; set; }
 
@@ -165,9 +166,17 @@ namespace HospitalManagementSystem.ViewModels
         {
 
             RoomNumber = (RoomNumber != null) ? RoomNumber.Trim() : "";
-            if (RoomType == "") return false;
+            if (RoomType == null)
+            {
+                textValidation = "Room type is empty";
+                return false;
+            }
 
-            if (RoomNumber == "") return false;
+            if (RoomNumber == "")
+            {
+                textValidation = "Room number is empty";
+                return false;
+            }
             foreach (Room room in Hospital.Rooms.Values)
             {
                 if (int.Parse(RoomNumber) == room.RoomNumber)

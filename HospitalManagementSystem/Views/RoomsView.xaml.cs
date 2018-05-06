@@ -32,11 +32,6 @@ namespace HospitalManagementSystem.Views
                 RoomtTypeComboBox.SelectedItem = null;
                 Home.ViewModel.CloseRootDialog();
             }
-            else
-            {
-                MessageBox.Show("INVALID ENTRY");
-            }
-        
         }
 
     }

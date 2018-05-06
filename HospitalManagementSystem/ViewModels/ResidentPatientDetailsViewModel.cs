@@ -22,14 +22,18 @@ namespace HospitalManagementSystem.ViewModels
         public String PatientDiagnosis { get; set; }
         public String PatientRoomNumber { get; set; }
         public String PatientBill { get; set; }
+        public String PatientDepartment { get; set; }
+        public String textValidation { get; set; }
         // Edit Content
         public ICommand editResidentPatient { get; set; }
         public ICommand deleteResidentPatient { get; set; }
         public String EditPatientNameTextBox { get; set; }
+        public ComboBoxPairs EditPatientDepartment { get; set; }
         public String EditPatientAddressTextBox { get; set; }
         public DateTime EditPatientBirthDatePicker { get; set; }
         public ComboBoxPairs EditRoomNumberComboBox { get; set; }
         public ObservableCollection<ComboBoxPairs> PatientRoomNumberComboBox { get; set; }
+        public ObservableCollection<ComboBoxPairs> EditDepartmentComboBox { get; set; }
         // Main Page Lists
         public String DoctorsNumber { get; set; }
         public String NursesNumber { get; set; }
@@ -48,47 +52,28 @@ namespace HospitalManagementSystem.ViewModels
         public ICommand addMedicine { get; set; }
         public ICommand assignNurse { get; set; }
 
-        public Visibility IsResident { get; set; }
         public String PatientID;
 
-        private String editPatientTypeComboBox;
-        public String EditPatientTypeComboBox
-        {
-            get => editPatientTypeComboBox;
-            set
-            {
-                if (value == "Resident Patient")
-                    IsResident = Visibility.Visible;
-                else
-                    IsResident = Visibility.Collapsed;
-
-                editPatientTypeComboBox = value;
-            }
-        }
-        public ResidentPatientDetailsViewModel()
-        {
-           
-
-        }
-
+     
         public ResidentPatientDetailsViewModel(String id)
         {
             PatientID = id;
-
+            PatientDepartment = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
             DoctorsList = new ObservableCollection<ComboBoxPairs>();
             NursesList = new ObservableCollection<ComboBoxPairs>();
             MedicalHistoryList = new ObservableCollection<ComboBoxPairs>();
             PatientRoomNumberComboBox = new ObservableCollection<ComboBoxPairs>();
-            IsResident = Visibility.Collapsed;
-
+            EditDepartmentComboBox = new ObservableCollection<ComboBoxPairs>();
             EditPatientBirthDatePicker = DateTime.Today;
             EditPatientAddressTextBox = Hospital.Patients[id].Address;
             EditPatientBirthDatePicker = Hospital.Patients[id].BirthDate;
             EditPatientNameTextBox = Hospital.Patients[id].Name;
-            editPatientTypeComboBox = "Resident Patient";
+           // EditPatientDepartment.Value = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
+            //EditRoomNumberComboBox.Value = ((ResidentPatient)Hospital.Patients[id]).Room.RoomNumber.ToString();
             foreach (Room room in Hospital.Rooms.Values)
-            {
-                PatientRoomNumberComboBox.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
+            {   
+                    if(room.hasAvailableBed())
+                         PatientRoomNumberComboBox.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
             }
              // Lists
             foreach (Doctor doctor in Hospital.Patients[id].Doctors.Values)
@@ -106,6 +91,11 @@ namespace HospitalManagementSystem.ViewModels
             foreach (Medicine medicine in ((ResidentPatient)Hospital.Patients[id]).History.Values)
             {
                 MedicalHistoryList.Add(new ComboBoxPairs(medicine.ID, medicine.Name + " - Starting Date: " + medicine.StartingDate.ToShortDateString() + " | " + medicine.EndingDate.ToShortDateString()));
+            }
+
+            foreach (Department department in Hospital.Departments.Values)
+            {
+                EditDepartmentComboBox.Add(new ComboBoxPairs(department.ID, department.Name));
             }
 
             //TODO : DoctorsComboBoxItems 
@@ -157,6 +147,17 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Patients[PatientID].Address = PatientAddress = EditPatientAddressTextBox;
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
             Hospital.Patients[PatientID].BirthDate = EditPatientBirthDatePicker;
+
+            ((ResidentPatient)Hospital.Patients[PatientID]).Department.Patients.Remove(PatientID);              
+            ((ResidentPatient)Hospital.Patients[PatientID]).Department = Hospital.Departments[EditPatientDepartment.Key];
+            ((ResidentPatient)Hospital.Patients[PatientID]).Department.Patients.Add(PatientID, Hospital.Patients[PatientID]);
+
+            ((ResidentPatient)Hospital.Patients[PatientID]).Room.Patients.Remove(PatientID);
+            ((ResidentPatient)Hospital.Patients[PatientID]).Room = Hospital.Rooms[EditRoomNumberComboBox.Key];
+            Hospital.Rooms[EditRoomNumberComboBox.Key].addPatient(Hospital.Patients[PatientID]);
+
+            PatientRoomNumber = EditRoomNumberComboBox.Value;
+            PatientDepartment = EditPatientDepartment.Value;
             HospitalDB.UpdatePatient(Hospital.Patients[PatientID]);
             Home.ViewModel.CloseRootDialog();
         }
@@ -181,7 +182,9 @@ namespace HospitalManagementSystem.ViewModels
                     break;
                 }
             }
+            ((Doctor)Hospital.Employees[DoctorComboBox.Key]).Patients.Add(PatientID,Hospital.Patients[PatientID]);
             DoctorsComboBox.Remove(DoctorComboBox);
+
             Home.ViewModel.CloseRootDialog();
         }
 
@@ -197,6 +200,7 @@ namespace HospitalManagementSystem.ViewModels
                     break;
                 }
             }
+            ((Nurse)Hospital.Employees[NurseComboBox.Key]).Patients.Add(PatientID, Hospital.Patients[PatientID]);
             NursesComboBox.Remove(NurseComboBox);
             Home.ViewModel.CloseRootDialog();
         }
