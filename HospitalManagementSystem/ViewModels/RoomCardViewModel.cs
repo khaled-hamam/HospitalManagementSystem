@@ -22,19 +22,32 @@ namespace HospitalManagementSystem.ViewModels
         public void navigateToDetails()
         {
             String type;
+            String Capacity;
+            String Price;
             if (Hospital.Rooms[ID].GetType() == typeof(PrivateRoom))
+            {
                 type = "Private Room";
+                Capacity = Hospital.Config.PrivateRoomCapacity.ToString();
+                Price = Hospital.Config.PrivateRoomPrice.ToString();
+            }
             else if (Hospital.Rooms[ID].GetType() == typeof(SemiPrivateRoom))
+            {
                 type = "Semi Private Room";
+                Capacity = Hospital.Config.SemiPrivateRoomCapacity.ToString();
+                Price = Hospital.Config.SemiPrivateRoomPrice.ToString();
+            }
             else
+            {
                 type = "StandardWard Room";
-
+                Capacity = Hospital.Config.StandardWardCapacity.ToString();
+                Price = Hospital.Config.StandardWardPrice.ToString();
+            }
             Home.ViewModel.Content = new RoomDetailsViewModel(ID)
             {
                 RoomID = Hospital.Rooms[ID].ID,
                 RoomType = type,
-                roomCapacity = $"{Hospital.Rooms[ID].Patients.Count} / {Hospital.Rooms[ID].Capacity}",
-                roomPrice = $"{Hospital.Rooms[ID].Price}$",
+                roomCapacity = $"{Hospital.Rooms[ID].Patients.Count} / {Capacity}",
+                roomPrice = $"{Price}$",
             };
         }
     }
