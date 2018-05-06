@@ -1,6 +1,8 @@
 using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
 using HospitalManagementSystem.Views;
+using HospitalManagementSystem.Views.Components;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -209,34 +211,34 @@ namespace HospitalManagementSystem.ViewModels
                 Home.ViewModel.Content = new EmployeesViewModel();
             }
         }
-        public void RemovePatient()
+        public async Task RemovePatientAsync()
         {
-            if(Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
+            if (Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
             {
-                String text = "Do You Want To Remove " + ListSelectedPatient.Value + " ?";
-                DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (answer == DialogResult.Yes)
+                object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
+                if (result.Equals(true))
                 {
 
                     PatientsComboBox.Add(new ComboBoxPairs(ListSelectedPatient.Key, ListSelectedPatient.Value));
+                    Hospital.Patients[ListSelectedPatient.Key].removeDoctor(EmployeeID);
                     ((Doctor)Hospital.Employees[EmployeeID]).Patients.Remove(ListSelectedPatient.Key);
                     HospitalDB.DeleteDoctorPatient(EmployeeID, ListSelectedPatient.Key);
                     PatientsList.Remove(ListSelectedPatient);
                     PatientsNumber = $"Patients : {PatientsList.Count}";
-                   
+
                 }
             }
         }
-        public void RemoveRoom()
+        public async Task RemoveRoomAsync()
         {
             if (Hospital.Employees[EmployeeID].GetType() == typeof(Nurse))
             {
-                String text = "Do You Want To Remove " + ListSelectedRoom.Value + " ?";
-                DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (answer == DialogResult.Yes)
+                object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
+                if (result.Equals(true))
                 {
 
                     RoomsComboBox.Add(new ComboBoxPairs(ListSelectedRoom.Key, ListSelectedRoom.Value));
+                    Hospital.Rooms[ListSelectedRoom.Key].removeNurse(EmployeeID);
                     ((Nurse)Hospital.Employees[EmployeeID]).Rooms.Remove(ListSelectedRoom.Key);
                     HospitalDB.DeleteNurseRoom(ListSelectedRoom.Key, ListSelectedRoom.Value);
                     RoomsList.Remove(ListSelectedRoom);
@@ -263,6 +265,7 @@ namespace HospitalManagementSystem.ViewModels
                         if (EmployeeRole == "Doctor")
                         {
                             ((Doctor)Hospital.Employees[EmployeeID]).Patients.Add(patient.ID, patient);
+                            Hospital.Patients[patient.ID].assignDoctor(((Doctor)Hospital.Employees[EmployeeID]));
                             HospitalDB.InsertDoctorPatient(EmployeeID, patient.ID);
                             PatientsNumber = "Patients: " + ((Doctor)Hospital.Employees[EmployeeID]).Patients.Count.ToString();
                         }
@@ -273,7 +276,8 @@ namespace HospitalManagementSystem.ViewModels
                         }
                         break;
                     }
-                }
+                }   
+
                 PatientsComboBox.Remove(PatientComboBox);
                 Home.ViewModel.CloseRootDialog();
             }
@@ -287,11 +291,13 @@ namespace HospitalManagementSystem.ViewModels
             {
                 if(room.ID == RoomComboBox.Key)
                 {
+                    Hospital.Rooms[RoomComboBox.Key].addNurse(((Nurse)Hospital.Employees[EmployeeID]));
                     ((Nurse)Hospital.Employees[EmployeeID]).Rooms.Add(room.ID, room);
                     HospitalDB.InsertNurseRoom(EmployeeID, room.ID);
                     RoomsNumber = "Rooms: " + ((Nurse)Hospital.Employees[EmployeeID]).Rooms.Count().ToString();
+                    break;
+
                 }
-                break;
             }
             RoomsComboBox.Remove(RoomComboBox);
             Home.ViewModel.CloseRootDialog();

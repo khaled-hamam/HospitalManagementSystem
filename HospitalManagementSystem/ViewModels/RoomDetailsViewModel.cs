@@ -1,6 +1,8 @@
-﻿using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
 using HospitalManagementSystem.Views;
+using HospitalManagementSystem.Views.Components;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -113,12 +115,11 @@ namespace HospitalManagementSystem.ViewModels
             Home.ViewModel.CloseRootDialog();
             Home.ViewModel.Content = new RoomsViewModel();
             HospitalDB.DeleteRoom(RoomID);
-        }   
-        public void RemoveNurse()
+        }
+        public async System.Threading.Tasks.Task RemoveNurseAsync()
         {
-            String text = "Do You Want To Remove " + ListSelectedNurse.Value + " ?";
-            DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(answer== DialogResult.Yes)
+            object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
+            if (result.Equals(true))
             {
 
                 NursesComboBoxItems.Add(new ComboBoxPairs(ListSelectedNurse.Key, ListSelectedNurse.Value));
