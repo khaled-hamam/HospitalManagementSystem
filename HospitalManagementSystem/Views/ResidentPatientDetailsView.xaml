@@ -157,6 +157,8 @@
                                     ItemsSource="{Binding DoctorsList}"
                                     Background="White"
                                     Foreground="{StaticResource PrimaryColor}"
+                                    MouseDoubleClick="RemoveDoctorFromPatient"
+                                    SelectedItem="{Binding ListSelectedDoctor}"
                                     x:Name="DoctorsList"
                                     DisplayMemberPath="Value"
                                     SelectedValuePath="Key"/>
@@ -228,6 +230,8 @@
                                     ItemsSource="{Binding MedicalHistoryList}"
                                     Background="White"
                                     Foreground="{StaticResource PrimaryColor}"
+                                    MouseDoubleClick="RemoveMedicineFromPatient"
+                                    SelectedItem="{Binding ListSelectedMedicine}"
                                     x:Name="MedicalHistoryList"
                                     DisplayMemberPath="Value"
                                     SelectedValuePath="Key"/>

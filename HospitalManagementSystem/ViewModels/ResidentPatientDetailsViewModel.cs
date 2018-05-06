@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace HospitalManagementSystem.ViewModels
@@ -40,6 +41,9 @@ namespace HospitalManagementSystem.ViewModels
         public ObservableCollection<ComboBoxPairs> DoctorsList { get; set; }
         public ObservableCollection<ComboBoxPairs> NursesList { get; set; }
         public ObservableCollection<ComboBoxPairs> MedicalHistoryList { get; set; }
+        public ComboBoxPairs ListSelectedDoctor { get; set; }
+        public ComboBoxPairs ListSelectedMedicine { get; set; }
+        public ComboBoxPairs ListSelectedNurse { get; set; }
         // Items In Contents
         public ObservableCollection<ComboBoxPairs> DoctorsComboBox { get; set; }
         public ObservableCollection<ComboBoxPairs> NursesComboBox { get; set; }
@@ -137,6 +141,9 @@ namespace HospitalManagementSystem.ViewModels
             assignDoctor = new RelayCommand(AssignDoctor);
             assignNurse = new RelayCommand(AssignNurse);
             addMedicine = new RelayCommand(AddMedicine);
+            ListSelectedDoctor = new ComboBoxPairs("Key", "Value");
+            ListSelectedMedicine = new ComboBoxPairs("Key", "Value");
+            ListSelectedNurse = new ComboBoxPairs("Key", "Value");
             MedicineStartDate = DateTime.Today;
             MedicineEndDate = DateTime.Today;
         }
@@ -212,6 +219,37 @@ namespace HospitalManagementSystem.ViewModels
             medicine.StartingDate = MedicineStartDate;
             medicine.EndingDate = MedicineEndDate;
             ((ResidentPatient)Hospital.Patients[PatientID]).History.Add(medicine.ID, medicine);
+            Medicine tempMedicine = ((ResidentPatient)Hospital.Patients[PatientID]).History[medicine.ID];
+            MedicalHistoryList.Add(new ComboBoxPairs(medicine.ID, medicine.Name + " - Starting Date: " + medicine.StartingDate.ToShortDateString() + " | " + medicine.EndingDate.ToShortDateString()));
+            HospitalDB.InsertMedicine(medicine, Hospital.Patients[PatientID]);
+            Home.ViewModel.CloseRootDialog();
+
+        }
+
+        public void RemoveDr()
+        {
+            String text = "Do You Want To Remove " + ListSelectedDoctor.Value + " ?";
+            DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                DoctorsComboBox.Add(new ComboBoxPairs(ListSelectedDoctor.Key, ListSelectedDoctor.Value));
+                Hospital.Patients[PatientID].removeDoctor(ListSelectedDoctor.Key);
+                ((Doctor)Hospital.Employees[ListSelectedDoctor.Key]).Patients.Remove(PatientID);
+                HospitalDB.DeleteDoctorPatient(ListSelectedDoctor.Key, PatientID);
+                DoctorsList.Remove(ListSelectedDoctor);
+                DoctorsNumber = "Doctors: " + Hospital.Patients[PatientID].Doctors.Count().ToString();
+            }
+        }
+        public void RemoveMedicine()
+        {
+            String text = "Do You Want To Remove " + ListSelectedDoctor.Value + " ?";
+            DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                ((ResidentPatient)Hospital.Patients[PatientID]).History.Remove(ListSelectedMedicine.Key);
+                HospitalDB.DeleteMedicine(ListSelectedMedicine.Key);
+                MedicalHistoryList.Remove(ListSelectedMedicine);
+            }
         }
     }
 }
