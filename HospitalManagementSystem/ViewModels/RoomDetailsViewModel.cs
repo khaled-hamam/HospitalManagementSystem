@@ -121,7 +121,9 @@ namespace HospitalManagementSystem.ViewModels
             if(answer== DialogResult.Yes)
             {
 
+                NursesComboBoxItems.Add(new ComboBoxPairs(ListSelectedNurse.Key, ListSelectedNurse.Value));
                 Hospital.Rooms[RoomID].removeNurse(ListSelectedNurse.Key);
+                ((Nurse)Hospital.Employees[ListSelectedNurse.Key]).removeRoom(RoomID);
                 HospitalDB.DeleteNurseRoom(ListSelectedNurse.Key, RoomID);
                 NursesList.Remove(ListSelectedNurse);
                 NursesNumber = $"Nurses : {NursesList.Count}";
