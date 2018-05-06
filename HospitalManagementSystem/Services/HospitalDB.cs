@@ -579,7 +579,7 @@ namespace HospitalManagementSystem.Services
 
                 if (patient.GetType() == typeof(ResidentPatient))
                 {
-                    query = $"INSERT INTO resident_patient VALUES('{patient.ID}', '{((ResidentPatient)patient).Room.ID}'), " +
+                    query = $"INSERT INTO resident_patient VALUES('{patient.ID}', '{((ResidentPatient)patient).Room.ID}', " +
                         $"'{((ResidentPatient)patient).Department.ID}', 0)";
                     command = new MySqlCommand(query, con);
                     await command.ExecuteNonQueryAsync();
