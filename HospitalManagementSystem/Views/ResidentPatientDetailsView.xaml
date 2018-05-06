@@ -76,7 +76,7 @@
                                 </StackPanel>
                             </Button.CommandParameter>
                  </Button>
-                    <Button Command="{Binding deleteReidentPatient}" Style="{StaticResource DetailsButton}"  Margin="15 0 50 0" MouseUp="DeleteResidentPatient">DELETE</Button>
+                    <Button Command="{Binding deleteResidentPatient}" Style="{StaticResource DetailsButton}"  Margin="15 0 50 0" MouseUp="DeleteResidentPatient">DELETE</Button>
             </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="0">
                     <TextBlock Text="Address" Style="{StaticResource DetailsInfoTitle}" />

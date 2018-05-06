@@ -100,6 +100,7 @@
     <Compile Include="ViewModels\RoomCardViewModel.cs" />
     <Compile Include="ViewModels\RoomDetailsViewModel.cs" />
     <Compile Include="ViewModels\RoomsViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\AppointmentPatientDetailsView.xaml.cs">
       <DependentUpon>AppointmentPatientDetailsView.xaml</DependentUpon>
     </Compile>
@@ -144,6 +145,9 @@
     </Compile>
     <Compile Include="Views\PatientsView.xaml.cs">
       <DependentUpon>PatientsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AppointmentPatientDetailsView.xaml">
       <SubType>Designer</SubType>
@@ -236,6 +240,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\PatientsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

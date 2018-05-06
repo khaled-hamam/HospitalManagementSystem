@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="HospitalManagementSystem.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HospitalManagementSystem.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="540" d:DesignWidth="640">
+    <Grid Background="{StaticResource GreyBG}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Style="{StaticResource DetailsInfoValue}" FontSize="24">Settings</TextBlock>
+        <StackPanel Grid.Row="1" Margin="20">
+            <TextBlock Margin="10 0" Style="{StaticResource DetailsInfoTitle}">Prices</TextBlock>
+            <TextBox
+                Text="{Binding StandardPrice}"
+                Margin="10"
+                materialDesign:HintAssist.Hint="Standard Room Price"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox
+                Text="{Binding SemiPrice}"
+                Margin="10"
+                materialDesign:HintAssist.Hint="Semi Private Room Price"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox
+                Text="{Binding PrivatePrice}"
+                Margin="10"
+                materialDesign:HintAssist.Hint="Private Room Price"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox
+                Text="{Binding AppointmentPrice}"
+                Margin="10"
+                materialDesign:HintAssist.Hint="Appointment Hour Price"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="20">
+            <TextBlock Margin="10 0" Style="{StaticResource DetailsInfoTitle}">Capacity</TextBlock>
+            <TextBox
+                Text="{Binding StandardCapacity}"
+                Margin="10"
+                materialDesign:HintAssist.Hint="Standard Room Capacity"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox
+                Text="{Binding SemiCapacity}"
+                Margin="10"
+                materialDesign:HintAssist.Hint="Semi Private Room Capacity"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox
+                Text="{Binding PrivateCapacity}"
+                Margin="10"
+                materialDesign:HintAssist.Hint="Private Room Capacity"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        </StackPanel>
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="30 20"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Width="100"
+            Command="{Binding SaveSettingsAction}">
+            SUBMIT
+        </Button>
+    </Grid>
+</UserControl>
