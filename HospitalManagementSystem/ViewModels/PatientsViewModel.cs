@@ -22,7 +22,7 @@ namespace HospitalManagementSystem.ViewModels
         public ComboBoxPairs PatientDepartment { get; set; }
         public ObservableCollection<ComboBoxPairs> ComboBoxItems { get; set; }
         public ObservableCollection<ComboBoxPairs> PatientDepartmentItems { get; set; }
-
+        public String textValidation { get; set; }
         public ICommand addNewPatient { get; set; }
 
         private String patientTypeComboBox;
@@ -105,6 +105,11 @@ namespace HospitalManagementSystem.ViewModels
         }
         public void addPatient()
         {
+            if (!ValidateInput())
+            {
+                textValidation = " Cannot have empty values";
+                return;
+            }
             if (PatientTypeComboBox == "Resident Patient")
             {
                 ResidentPatient newPatient = new ResidentPatient
