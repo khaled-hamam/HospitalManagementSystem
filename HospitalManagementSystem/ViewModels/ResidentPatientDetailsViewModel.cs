@@ -23,6 +23,7 @@ namespace HospitalManagementSystem.ViewModels
         public String PatientRoomNumber { get; set; }
         public String PatientBill { get; set; }
         public String PatientDepartment { get; set; }
+        public String textValidation { get; set; }
         // Edit Content
         public ICommand editResidentPatient { get; set; }
         public ICommand deleteResidentPatient { get; set; }
@@ -70,8 +71,9 @@ namespace HospitalManagementSystem.ViewModels
            // EditPatientDepartment.Value = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
             //EditRoomNumberComboBox.Value = ((ResidentPatient)Hospital.Patients[id]).Room.RoomNumber.ToString();
             foreach (Room room in Hospital.Rooms.Values)
-            {
-                PatientRoomNumberComboBox.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
+            {   
+                    if(room.hasAvailableBed())
+                         PatientRoomNumberComboBox.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
             }
              // Lists
             foreach (Doctor doctor in Hospital.Patients[id].Doctors.Values)
@@ -141,7 +143,6 @@ namespace HospitalManagementSystem.ViewModels
 
         public void EditResidentPatient()
         {
-       
             Hospital.Patients[PatientID].Name = PatientName = EditPatientNameTextBox;
             Hospital.Patients[PatientID].Address = PatientAddress = EditPatientAddressTextBox;
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
