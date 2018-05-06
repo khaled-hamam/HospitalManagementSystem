@@ -335,7 +335,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = "SELECT * FROM patient join appointment USING(patient_id)";
+                String query = "SELECT patient.* FROM patient join appointment USING(patient_id) GROUP BY patient_id";
                 MySqlCommand command = new MySqlCommand(query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
