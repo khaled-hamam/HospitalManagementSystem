@@ -64,9 +64,9 @@ namespace HospitalManagementSystem.ViewModels
             PatientBirthDatePicker = DateTime.Today;
             ComboBoxItems = new ObservableCollection<ComboBoxPairs>();
             PatientDepartmentItems = new ObservableCollection<ComboBoxPairs>();
-
             foreach (Room room in Hospital.Rooms.Values) {
-                ComboBoxItems.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
+                if(room.hasAvailableBed())
+                     ComboBoxItems.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
              }
 
             foreach (Department department in Hospital.Departments.Values)
