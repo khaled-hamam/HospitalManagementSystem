@@ -27,15 +27,5 @@ namespace HospitalManagementSystem.Views
             InitializeComponent();
            
         }
-        private void DeleteResidentPatient(object sender, MouseButtonEventArgs e)
-        {
-            ViewModel.DeleteResidentPatient();
-        }
-
-        private void EditResidentPatient(object sender, RoutedEventArgs e)
-        {
-            ViewModel.EditResidentPatient();
-            Home.ViewModel.CloseRootDialog();
-        }
     }
 }

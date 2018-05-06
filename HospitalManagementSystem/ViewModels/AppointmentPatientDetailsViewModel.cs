@@ -23,6 +23,7 @@ namespace HospitalManagementSystem.ViewModels
 
         // Edit
         public ICommand editAppointmentPatient { get; set; }
+        public ICommand deleteAppointmentPatient { get; set; }
         public String EditPatientNameTextBox { get; set; }
         public String EditPatientAddressTextBox { get; set; }
         public DateTime EditPatientBirthDatePicker { get; set; }
@@ -46,7 +47,7 @@ namespace HospitalManagementSystem.ViewModels
             AppointmentsList = new ObservableCollection<ComboBoxPairs>();
             DoctorsComboBox = new ObservableCollection<ComboBoxPairs>();
             foreach (Doctor doctor in Hospital.Patients[id].Doctors.Values)
-            {
+            {  
                 DoctorsList.Add( new ComboBoxPairs(doctor.ID, doctor.Name));
             }
             DoctorsNumber = "Doctors: " + Hospital.Patients[id].Doctors.Count.ToString();
@@ -59,7 +60,15 @@ namespace HospitalManagementSystem.ViewModels
 
             foreach (Employee employee in Hospital.Employees.Values)
             {
-                if (employee.GetType() == typeof(Doctor))
+                Boolean valid = true;
+                foreach (Doctor invalidDoctor in Hospital.Patients[id].Doctors.Values)
+                {
+                    if (employee.ID == invalidDoctor.ID)
+                    {
+                        valid = false;
+                    }
+                }
+                    if (employee.GetType() == typeof(Doctor) && valid)
                     DoctorsComboBox.Add(new ComboBoxPairs(employee.ID, employee.Name));
             }
             // list Content
@@ -72,10 +81,11 @@ namespace HospitalManagementSystem.ViewModels
             EditPatientBirthDatePicker = Hospital.Patients[id].BirthDate;
             EditPatientDiagnosisTextBox = Hospital.Patients[id].Diagnosis;
             EditPatientTypeComboBox = Hospital.Patients[id].GetType() == typeof(Patient) ? "Resident Patient" : "Appointment Patient";
+            deleteAppointmentPatient = new RelayCommand(DeleteAppointmentPatient);
         }
         public void EditAppointmentPatient()
         {
-           Hospital.Patients[PatientID].Name = PatientName = EditPatientNameTextBox;
+            Hospital.Patients[PatientID].Name = PatientName = EditPatientNameTextBox;
             Hospital.Patients[PatientID].Address = PatientAddress = EditPatientAddressTextBox;
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
             Hospital.Patients[PatientID].BirthDate = EditPatientBirthDatePicker;
@@ -85,7 +95,10 @@ namespace HospitalManagementSystem.ViewModels
 
         public void DeleteAppointmentPatient()
         {
-
+            HospitalDB.DeletePatient(PatientID);
+            Hospital.DeletePatient(PatientID);
+            Home.ViewModel.CloseRootDialog();
+            Home.ViewModel.Content = new PatientsViewModel();
         }
 
         public void AssignDoctor()
@@ -96,10 +109,12 @@ namespace HospitalManagementSystem.ViewModels
                 if (doctor.ID == DoctorComboBox.Key)
                 {
                     Hospital.Patients[PatientID].Doctors.Add(doctor.ID, doctor);
+                    HospitalDB.InsertDoctorPatient(doctor.ID, PatientID);
                     DoctorsNumber = "Doctors: " + Hospital.Patients[PatientID].Doctors.Count().ToString();
                     break;
                 }
             }
+            DoctorsComboBox.Remove(DoctorComboBox);
             Home.ViewModel.CloseRootDialog();
         }
     }

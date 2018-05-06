@@ -113,10 +113,32 @@ namespace HospitalManagementSystem.ViewModels
             NursesComboBox = new ObservableCollection<ComboBoxPairs>();
             foreach (Employee employee in Hospital.Employees.Values)
             {
-                if(employee.GetType() == typeof(Doctor))
+                Boolean valid = true;
+
+                if (employee.GetType() == typeof(Doctor) && valid)
+                {
+                    foreach (Employee invalidEmployee in Hospital.Patients[id].Doctors.Values)
+                    {
+                        if (employee.ID == invalidEmployee.ID)
+                        {
+                            valid = false;
+                        }
+                    }
+                    if(valid)
                     DoctorsComboBox.Add(new ComboBoxPairs(employee.ID, employee.Name));
+                }
                 else
-                   NursesComboBox.Add(new ComboBoxPairs(employee.ID, employee.Name));
+                {
+                    foreach (Employee invalidEmployee in ((ResidentPatient)Hospital.Patients[id]).Room.Nurses.Values)
+                    {
+                        if (employee.ID == invalidEmployee.ID)
+                        {
+                            valid = false;
+                        }
+                    }
+                    if(valid)
+                    NursesComboBox.Add(new ComboBoxPairs(employee.ID, employee.Name));
+                }
             }
             editResidentPatient = new RelayCommand(EditResidentPatient);
             deleteResidentPatient = new RelayCommand(DeleteResidentPatient);
@@ -143,6 +165,7 @@ namespace HospitalManagementSystem.ViewModels
         {
             Hospital.DeletePatient(PatientID);
             HospitalDB.DeletePatient(PatientID);
+            Home.ViewModel.CloseRootDialog();
             Home.ViewModel.Content = new PatientsViewModel();
         }
         public void AssignDoctor()
@@ -153,10 +176,12 @@ namespace HospitalManagementSystem.ViewModels
                 if(doctor.ID == DoctorComboBox.Key)
                 {
                     Hospital.Patients[PatientID].Doctors.Add(doctor.ID, doctor);
+                    HospitalDB.InsertDoctorPatient(doctor.ID, PatientID);
                     DoctorsNumber = "Doctors: " + Hospital.Patients[PatientID].Doctors.Count().ToString();
                     break;
                 }
             }
+            DoctorsComboBox.Remove(DoctorComboBox);
             Home.ViewModel.CloseRootDialog();
         }
 
@@ -172,6 +197,7 @@ namespace HospitalManagementSystem.ViewModels
                     break;
                 }
             }
+            NursesComboBox.Remove(NurseComboBox);
             Home.ViewModel.CloseRootDialog();
         }
 

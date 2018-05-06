@@ -133,12 +133,32 @@ namespace HospitalManagementSystem.ViewModels
             RoomComboBox = new ComboBoxPairs("key", "value");
             foreach (Patient patient in Hospital.Patients.Values)
             {
-                PatientsComboBox.Add(new ComboBoxPairs(patient.ID, patient.Name));
+                Boolean valid = true;
+                if (Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
+                    foreach (Patient invalidPatient in ((Doctor)Hospital.Employees[id]).Patients.Values)
+                    {
+                        if (patient.ID == invalidPatient.ID)
+                        {
+                            valid = false;
+                        }
+                    }
+                if (valid)
+                   PatientsComboBox.Add(new ComboBoxPairs(patient.ID, patient.Name));
             }
 
             foreach(Room room in Hospital.Rooms.Values)
             {
-                RoomsComboBox.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
+                Boolean valid = true;
+                if (Hospital.Employees[EmployeeID].GetType() == typeof(Nurse))
+                    foreach (Room invalidRoom in ((Nurse)Hospital.Employees[id]).Rooms.Values)
+                    {
+                        if (room.ID == invalidRoom.ID)
+                        {
+                            valid = false;
+                        }
+                    }
+                    if(valid)
+                     RoomsComboBox.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
             }
 
             foreach (Department department in Hospital.Departments.Values)
@@ -173,6 +193,7 @@ namespace HospitalManagementSystem.ViewModels
 
         public void AssignPatient()
         {
+            
             PatientsList.Add(new ComboBoxPairs(PatientComboBox.Key, PatientComboBox.Value));
             
             foreach (Patient patient in Hospital.Patients.Values)
@@ -182,6 +203,7 @@ namespace HospitalManagementSystem.ViewModels
                     if (EmployeeRole == "Doctor")
                     {
                         ((Doctor)Hospital.Employees[EmployeeID]).Patients.Add(patient.ID, patient);
+                        HospitalDB.InsertDoctorPatient(EmployeeID, patient.ID);
                         PatientsNumber = "Patients: " + ((Doctor)Hospital.Employees[EmployeeID]).Patients.Count.ToString();
                     }
                     else
@@ -192,21 +214,25 @@ namespace HospitalManagementSystem.ViewModels
                     break;
                 }
             }
+            PatientsComboBox.Remove(PatientComboBox);
             Home.ViewModel.CloseRootDialog();
         }
 
         public void AssignRoom()
         {
+            
             RoomsList.Add(new ComboBoxPairs(RoomComboBox.Key, RoomComboBox.Value));
             foreach(Room room in Hospital.Rooms.Values)
             {
                 if(room.ID == RoomComboBox.Key)
                 {
                     ((Nurse)Hospital.Employees[EmployeeID]).Rooms.Add(room.ID, room);
+                    HospitalDB.InsertNurseRoom(EmployeeID, room.ID);
                     RoomsNumber = "Rooms: " + ((Nurse)Hospital.Employees[EmployeeID]).Rooms.Count().ToString();
                 }
                 break;
             }
+            RoomsComboBox.Remove(RoomComboBox);
             Home.ViewModel.CloseRootDialog();
         }
     }
