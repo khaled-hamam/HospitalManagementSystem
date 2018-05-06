@@ -118,7 +118,9 @@
                 </Grid.RowDefinitions>
                     <ListBox 
                     ItemsSource="{Binding DoctorsList}" 
-                    Background="White" 
+                    Background="White"
+                    MouseDoubleClick="RemoveDoctorFromPatient"
+                    SelectedItem="{Binding ListSelectedDoctor}"
                     Foreground="{StaticResource PrimaryColor}" 
                     x:Name="DoctorsList"
                     DisplayMemberPath="Value"
