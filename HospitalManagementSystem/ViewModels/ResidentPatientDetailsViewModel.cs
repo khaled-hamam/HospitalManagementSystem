@@ -24,7 +24,7 @@ namespace HospitalManagementSystem.ViewModels
         public String PatientBill { get; set; }
         // Edit Content
         public ICommand editResidentPatient { get; set; }
-        public ICommand deleteReidentPatient { get; set; }
+        public ICommand deleteResidentPatient { get; set; }
         public String EditPatientNameTextBox { get; set; }
         public String EditPatientAddressTextBox { get; set; }
         public DateTime EditPatientBirthDatePicker { get; set; }
@@ -119,7 +119,7 @@ namespace HospitalManagementSystem.ViewModels
                    NursesComboBox.Add(new ComboBoxPairs(employee.ID, employee.Name));
             }
             editResidentPatient = new RelayCommand(EditResidentPatient);
-            deleteReidentPatient = new RelayCommand(DeleteResidentPatient);
+            deleteResidentPatient = new RelayCommand(DeleteResidentPatient);
             DoctorComboBox = new ComboBoxPairs("Key", "Value");
             NurseComboBox = new ComboBoxPairs("Key", "Value");
             assignDoctor = new RelayCommand(AssignDoctor);
@@ -141,8 +141,9 @@ namespace HospitalManagementSystem.ViewModels
 
         public void DeleteResidentPatient()
         {
-            Hospital.Patients.Remove(PatientID);
-            Home.ViewModel.Content = new ResidentPatientDetailsViewModel();
+            Hospital.DeletePatient(PatientID);
+            HospitalDB.DeletePatient(PatientID);
+            Home.ViewModel.Content = new PatientsViewModel();
         }
         public void AssignDoctor()
         {
