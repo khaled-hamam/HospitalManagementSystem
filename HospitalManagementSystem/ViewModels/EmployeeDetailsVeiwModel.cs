@@ -188,7 +188,20 @@ namespace HospitalManagementSystem.ViewModels
         }
         public void DeleteEmployee()
         {
-
+            if(Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
+            {
+                HospitalDB.DeleteDoctor(EmployeeID);
+                Hospital.DeleteDoctor(EmployeeID);
+                Home.ViewModel.CloseRootDialog();
+                Home.ViewModel.Content = new EmployeesViewModel();
+            }
+            else
+            {
+                HospitalDB.DeleteNurse(EmployeeID);
+                Hospital.DeleteNurse(EmployeeID);
+                Home.ViewModel.CloseRootDialog();
+                Home.ViewModel.Content = new EmployeesViewModel();
+            }
         }
 
         public void AssignPatient()
