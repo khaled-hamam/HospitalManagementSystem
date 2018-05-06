@@ -477,7 +477,7 @@ namespace HospitalManagementSystem.Services
             try
             {
                 con.Open();
-                String query = $"SELECT doctor_id from appointment WHERE appointment_id = {appointmentID}";
+                String query = $"SELECT doctor_id from appointment WHERE appointment_id = '{appointmentID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 doctorID = (String)command.ExecuteScalar();
             }
