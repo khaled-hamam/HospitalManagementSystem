@@ -1,5 +1,6 @@
 ﻿using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
+using HospitalManagementSystem.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -93,6 +94,8 @@ namespace HospitalManagementSystem.ViewModels
                    EmployeesNumber = newDepartment.Nurse.Count + newDepartment.Doctors.Count
                }
                );
+            Home.ViewModel.CloseRootDialog();
+
         }
 
         public bool ValidateDepartment()
