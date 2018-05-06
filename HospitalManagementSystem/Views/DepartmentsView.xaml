@@ -84,15 +84,8 @@
                             <!--#region Add Department Dialog-->
                             <StackPanel>
                                 <StackPanel Margin="16">
-                                    <TextBox  Text="{Binding DepartmentName}" materialDesign:HintAssist.Hint="Department Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="DepartmentNameTextBox" />
-                                    <ComboBox materialDesign:HintAssist.Hint="Department Head "  
-                                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
-                                     Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" 
-                                     x:Name="DepartmentHeadComboBox" 
-                                     IsEditable="True"
-                                    SelectedItem="{Binding EmployeeHead}"
-                                     />
-                                </StackPanel>
+                                      <TextBox  Text="{Binding DepartmentName}" materialDesign:HintAssist.Hint="Department Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="DepartmentNameTextBox" />
+                             </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"

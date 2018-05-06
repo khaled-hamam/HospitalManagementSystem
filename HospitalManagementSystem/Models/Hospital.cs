@@ -41,7 +41,8 @@ namespace HospitalManagementSystem.Models
         public static async void InitializeData()
         {
             Home.ViewModel.IsLoading = true;
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 InitializeDepartments();
                 InitializeRooms();
                 InitializeEmployees();
@@ -56,7 +57,8 @@ namespace HospitalManagementSystem.Models
             List<Department> departmentList = HospitalDB.FetchDepartments();
             foreach (Department department in departmentList)
             {
-                Departments.Add(department.ID, department);
+                if (department != null)
+                    Departments.Add(department.ID, department);
             }
         }
 
@@ -141,7 +143,7 @@ namespace HospitalManagementSystem.Models
                     {
                         Rooms[roomID].addPatient(patient);
                         ((ResidentPatient)patient).Room = Rooms[roomID];
-                    
+
                         // Assigning Patients to Nurses in the Same Room
                         foreach (Nurse nurse in Rooms[roomID].Nurses.Values)
                         {
@@ -186,6 +188,96 @@ namespace HospitalManagementSystem.Models
                 Appointments.Add(appointment.ID, appointment);
             }
         }
+
+        public static void DeleteDoctor(String DoctorId)
+        {
+            foreach (Appointment appointment in ((Doctor)Employees[DoctorId]).Appointments.Values)
+            {
+                appointment.cancel();
+            }
+            foreach (Patient patient in ((Doctor)Employees[DoctorId]).Patients.Values)
+            {
+                patient.removeDoctor(DoctorId);
+            }
+            Employees.Remove(DoctorId);
+
+        }
+
+        public static void DeleteNurse(String NurseId)
+        {
+            foreach (Room room in ((Nurse)Employees[NurseId]).Rooms.Values)
+            {
+                room.removeNurse(NurseId);
+            }
+            Employees.Remove(NurseId);
+        }
+
+        public static void DeleteRoom(String RoomId)
+        {
+            foreach(Nurse nurse in Rooms[RoomId].Nurses.Values)
+            {
+                nurse.removeRoom(RoomId);
+            }
+            foreach (Patient patient in Rooms[RoomId].Patients.Values)
+            {
+                if (patient.GetType() == typeof(ResidentPatient))
+                {
+                    ((ResidentPatient)patient).Room = null;
+                }
+            }
+
+            Rooms.Remove(RoomId);
+        }
+
+        public static void DeletePatient(String PatientId)
+        {
+            foreach(Doctor doctor in Patients[PatientId].Doctors.Values)
+            {
+                doctor.removePatient(PatientId);
+            }
+            if(Patients[PatientId].GetType()==typeof(AppointmentPatient))
+            {
+               foreach(Appointment appointment in ((AppointmentPatient)Patients[PatientId]).Appointments.Values)
+                {
+                    appointment.cancel();
+                }
+            }
+            else
+            {
+                ((ResidentPatient)Patients[PatientId]).Room.Patients.Remove(PatientId);                
+            }
+
+            Patients.Remove(PatientId);
+        }
+
+        public static void DeleteDepartment(String DepartmentId)
+        {
+            foreach (Patient patient in Departments[DepartmentId].Patients.Values)
+            {
+                if (patient.GetType() == typeof(ResidentPatient))
+                {
+                    ((ResidentPatient)patient).Department = null;
+                }
+            }
+
+            foreach(Doctor doctor in Departments[DepartmentId].Doctors.Values)
+            {
+                doctor.Department = null;
+            }
+
+            foreach(Nurse nurse in Departments[DepartmentId].Nurse.Values)
+            {
+                nurse.Department = null;
+            }
+
+            Departments.Remove(DepartmentId);
+        }
+
+       public static void DeleteAppointment(String AppointmentId)
+       {
+            Appointments[AppointmentId].cancel();
+            Appointments.Remove(AppointmentId);
+       }
     }
 
     class Config

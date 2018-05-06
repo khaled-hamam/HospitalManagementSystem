@@ -27,23 +27,11 @@ namespace HospitalManagementSystem.ViewModels
         /// Add Dialog Properites
         /// </summary>
         public String DepartmentName { get; set; }
-        public ComboBoxPairs EmployeeHead { get; set; }
-        public List<ComboBoxPairs> ComboBoxItems;
 
         public DepartmentsViewModel()
         {
-            ComboBoxItems = new List<ComboBoxPairs>();
             Departments = new ObservableCollection<DepartmentCardViewModel>();
             SearchAction = new RelayCommand(Search);
-
-            //Adding available employees in employees ComboBox
-            foreach (Employee employee in Hospital.Employees.Values)
-            {
-                if (employee.GetType() == typeof(Doctor))
-                {
-                    ComboBoxItems.Add(new ComboBoxPairs(employee.ID, employee.Name));
-                }
-            }
 
             //Adding All Departments Cards
             foreach (Department department in Hospital.Departments.Values)
@@ -81,7 +69,6 @@ namespace HospitalManagementSystem.ViewModels
             Department newDepartment = new Department
             {
                 Name = DepartmentName,
-                HeadID = EmployeeHead.Key
             };
 
             Hospital.Departments.Add(newDepartment.ID, newDepartment);
