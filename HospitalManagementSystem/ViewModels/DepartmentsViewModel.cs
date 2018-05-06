@@ -28,12 +28,13 @@ namespace HospitalManagementSystem.ViewModels
         /// Add Dialog Properites
         /// </summary>
         public String DepartmentName { get; set; }
-
+        public String textValidation { get; set; }
+        public ICommand addNewDepartment { get; set; }
         public DepartmentsViewModel()
         {
             Departments = new ObservableCollection<DepartmentCardViewModel>();
             SearchAction = new RelayCommand(Search);
-
+            addNewDepartment = new RelayCommand(addDepartment);
             //Adding All Departments Cards
             foreach (Department department in Hospital.Departments.Values)
             {
@@ -66,42 +67,53 @@ namespace HospitalManagementSystem.ViewModels
 
         public void addDepartment()
         {
-            //Add the new Department to the hospital & DB
-            Department newDepartment = new Department
+
+            if (ValidateDepartment())
             {
-                Name = DepartmentName,
-            };
 
-            Hospital.Departments.Add(newDepartment.ID, newDepartment);
-            HospitalDB.InsertDepartment(newDepartment);
-
-            //Add card to the new department
-            Departments.Add(
-                new DepartmentCardViewModel
+                //Add the new Department to the hospital & DB
+                Department newDepartment = new Department
                 {
-                    ID = newDepartment.ID,
-                    Name = newDepartment.Name,
-                    PatientsNumber = newDepartment.Patients.Count,
-                    EmployeesNumber = newDepartment.Nurse.Count + newDepartment.Doctors.Count
-                }
-                );
-            FilteredDepartments.Add(
-               new DepartmentCardViewModel
-               {
-                   ID = newDepartment.ID,
-                   Name = newDepartment.Name,
-                   PatientsNumber = newDepartment.Patients.Count,
-                   EmployeesNumber = newDepartment.Nurse.Count + newDepartment.Doctors.Count
-               }
-               );
-            Home.ViewModel.CloseRootDialog();
+                    Name = DepartmentName,
+                };
 
+                Hospital.Departments.Add(newDepartment.ID, newDepartment);
+                HospitalDB.InsertDepartment(newDepartment);
+
+                //Add card to the new department
+                Departments.Add(
+                    new DepartmentCardViewModel
+                    {
+                        ID = newDepartment.ID,
+                        Name = newDepartment.Name,
+                        PatientsNumber = newDepartment.Patients.Count,
+                        EmployeesNumber = newDepartment.Nurse.Count + newDepartment.Doctors.Count
+                    }
+                    );
+                FilteredDepartments.Add(
+                   new DepartmentCardViewModel
+                   {
+                       ID = newDepartment.ID,
+                       Name = newDepartment.Name,
+                       PatientsNumber = newDepartment.Patients.Count,
+                       EmployeesNumber = newDepartment.Nurse.Count + newDepartment.Doctors.Count
+                   }
+                   );
+                Home.ViewModel.CloseRootDialog();
+            }
+            else
+                return;
         }
 
         public bool ValidateDepartment()
         {
             DepartmentName = (DepartmentName != null) ? DepartmentName.Trim() : "";
-            if (DepartmentName == "") return false;
+            if (DepartmentName == "")
+            {
+                textValidation = "Department Name is empty";
+                return false;
+
+            }
             return true;
         }
     }

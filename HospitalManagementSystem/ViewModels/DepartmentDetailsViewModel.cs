@@ -28,7 +28,7 @@ namespace HospitalManagementSystem.ViewModels
 
         //Edit Department Data
         public String EditDepartmentName { get; set; }
-
+        public String textValidation { get; set; }
         /// <summary>
         /// Commands Properties
         /// </summary>
@@ -74,7 +74,8 @@ namespace HospitalManagementSystem.ViewModels
         {
             if (String.IsNullOrEmpty(EditDepartmentName))
             {
-                MessageBox.Show("Department Name can't be Empty");
+                textValidation = "Department Name is empty";
+                return;
             }
             DepartmentName = EditDepartmentName;
             Hospital.Departments[DepartmentId].Name = EditDepartmentName;
@@ -82,7 +83,7 @@ namespace HospitalManagementSystem.ViewModels
             Home.ViewModel.CloseRootDialog();
         }
 
-       public async void DeleteDepartments()
+        public async void DeleteDepartments()
         {
             object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
             if (result.Equals(true))

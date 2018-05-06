@@ -37,6 +37,7 @@
                                 <StackPanel>
                                     <StackPanel Margin="16">
                                     <TextBox  Text="{Binding EditDepartmentName}" materialDesign:HintAssist.Hint="Department Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="DepartmentNameTextBox" />
+                                    <TextBlock  Text="{Binding textValidation}" Style="{StaticResource ErrorMsg}" x:Name="validation"/>
                                 </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -57,7 +58,7 @@
                                             </Button.CommandParameter>
                                             CANCEL
                                         </Button>
-                                    </StackPanel>
+                                </StackPanel>
                                 </StackPanel>
                             </Button.CommandParameter>
                         </Button>
