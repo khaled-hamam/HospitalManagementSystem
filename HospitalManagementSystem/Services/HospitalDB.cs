@@ -1097,6 +1097,27 @@ namespace HospitalManagementSystem.Services
             }
         }
 
+        public async static void DeleteMedicine(String MedicineID)
+        {
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = $"DELETE FROM medicine WHERE medicine_id = '{MedicineID}'";
+                MySqlCommand command = new MySqlCommand(query, con);
+                await command.ExecuteNonQueryAsync();
+            }
+            catch
+            {
+                Console.WriteLine("Error Deleting Medicine.");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
     }
 }
