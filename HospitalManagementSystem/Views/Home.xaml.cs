@@ -56,5 +56,10 @@ namespace HospitalManagementSystem.Views
             ViewModel.Content = new RoomsViewModel();
         }
 
+        private void navigateToSettings(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Content = new SettingsViewModel();
+        }
+
     }
 }

@@ -17,6 +17,8 @@ namespace HospitalManagementSystem.Models
         public static Dictionary<String, Department> Departments { get; private set; }
         public static Dictionary<String, Room> Rooms { get; private set; }
 
+        public static Config Config { get; set; }
+
         public Hospital()
         {
             Employees = new Dictionary<String, Employee>();
@@ -24,6 +26,16 @@ namespace HospitalManagementSystem.Models
             Appointments = new Dictionary<String, Appointment>();
             Departments = new Dictionary<String, Department>();
             Rooms = new Dictionary<String, Room>();
+            Config = new Config
+            {
+                StandardWardCapacity = 4,
+                StandardWardPrice = 50,
+                SemiPrivateRoomCapacity = 2,
+                SemiPrivateRoomPrice = 90,
+                PrivateRoomCapacity = 1,
+                PrivateRoomPrice = 150,
+                AppointmentHourPrice = 40
+            };
         }
 
         public static async void InitializeData()
@@ -174,5 +186,18 @@ namespace HospitalManagementSystem.Models
                 Appointments.Add(appointment.ID, appointment);
             }
         }
+    }
+
+    class Config
+    {
+        public double StandardWardPrice { get; set; }
+        public double SemiPrivateRoomPrice { get; set; }
+        public double PrivateRoomPrice { get; set; }
+
+        public int StandardWardCapacity { get; set; }
+        public int SemiPrivateRoomCapacity { get; set; }
+        public int PrivateRoomCapacity { get; set; }
+
+        public int AppointmentHourPrice { get; set; }
     }
 }

@@ -42,6 +42,9 @@
         <DataTemplate x:Name="DepartmentDetailsView" DataType="{x:Type viewmodels:DepartmentDetailsViewModel}">
             <views:DepartmentDetailsView />
         </DataTemplate>
+        <DataTemplate x:Name="SettingsView" DataType="{x:Type viewmodels:SettingsViewModel}">
+            <views:SettingsView />
+        </DataTemplate>
 
     </Window.Resources>
    <materialDesign:DialogHost Identifier="{Binding RootDialog }" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -76,7 +79,7 @@
                     </ListViewItem>
                 </ListView>
 
-                <Button DockPanel.Dock="Bottom" Style="{StaticResource SettingsButton}">
+                <Button DockPanel.Dock="Bottom" Click="navigateToSettings" Style="{StaticResource SettingsButton}">
                     <materialDesign:PackIcon Kind="Settings" Height="25" Width="25" />
                 </Button>
             </DockPanel>
