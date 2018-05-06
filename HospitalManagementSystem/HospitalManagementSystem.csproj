@@ -110,6 +110,9 @@
     <Compile Include="Views\Components\AppointmentCard.xaml.cs">
       <DependentUpon>AppointmentCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Components\DeleteMessageBox.xaml.cs">
+      <DependentUpon>DeleteMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\DepartmentCard.xaml.cs">
       <DependentUpon>DepartmentCard.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\AppointmentCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\DeleteMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

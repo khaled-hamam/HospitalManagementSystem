@@ -6,7 +6,6 @@ namespace HospitalManagementSystem.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        public DialogHost RootDialog { set; get; }
         private BaseViewModel previousContent;
         private BaseViewModel content;
         public BaseViewModel Content
@@ -64,7 +63,7 @@ namespace HospitalManagementSystem.ViewModels
 
         public void CloseRootDialog()
         {
-            DialogHost.CloseDialogCommand.Execute(RootDialog, null);
+            DialogHost.CloseDialogCommand.Execute("RootDialog", null);
 
         }
     }
