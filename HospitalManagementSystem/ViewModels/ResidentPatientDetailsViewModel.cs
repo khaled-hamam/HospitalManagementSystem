@@ -23,7 +23,23 @@ namespace HospitalManagementSystem.ViewModels
         public String PatientAddress { get; set; }
         public String PatientBirthDate { get; set; }
         public String PatientDiagnosis { get; set; }
-        public String PatientRoomNumber { get; set; }
+        private String patientRoomNumber;
+        public String PatientRoomNumber
+        {
+            get
+            {
+                String type = "";
+                if (((ResidentPatient)Hospital.Patients[PatientID]).Room.GetType() == typeof(PrivateRoom))
+                    type = "Private Room";
+                else if (((ResidentPatient)Hospital.Patients[PatientID]).Room.GetType() == typeof(SemiPrivateRoom))
+                    type = "Semi Private Room";
+                else
+                    type = "Standard Ward Room";
+
+                return $"{patientRoomNumber} {type}";
+            }
+            set { patientRoomNumber = value; }
+        }
         public String PatientBill { get; set; }
         public String PatientDepartment { get; set; }
         public String textValidation { get; set; }
@@ -66,7 +82,11 @@ namespace HospitalManagementSystem.ViewModels
         {
             PatientBill = ((ResidentPatient)Hospital.Patients[id]).getBill().ToString("0.00") + '$';
             PatientID = id;
-            PatientDepartment = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
+            if (((ResidentPatient)Hospital.Patients[id]).Department != null)
+                PatientDepartment = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
+            else
+                PatientDepartment = "N/A";
+        
             DoctorsList = new ObservableCollection<ComboBoxPairs>();
             NursesList = new ObservableCollection<ComboBoxPairs>();
             MedicalHistoryList = new ObservableCollection<ComboBoxPairs>();
@@ -172,7 +192,8 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Rooms[EditRoomNumberComboBox.Key].addPatient(Hospital.Patients[PatientID]);
 
             PatientRoomNumber = EditRoomNumberComboBox.Value;
-            PatientDepartment = EditPatientDepartment.Value;
+         
+           // PatientDepartment = EditPatientDepartment.Value;
             HospitalDB.UpdatePatient(Hospital.Patients[PatientID]);
             Home.ViewModel.CloseRootDialog();
         }

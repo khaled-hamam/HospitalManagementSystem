@@ -8,24 +8,25 @@ namespace HospitalManagementSystem.Models
         // member variables
         private Room room;
         private Dictionary<String, Medicine> history;
-        private int duration;
+        private DateTime entryDate;
         private Department department;
 
         public Room Room { get { return this.room;} set { this.room = value;} }
         public Dictionary<String, Medicine> History { get { return this.history; } set { this.history = value;} }
-        public int Duration { get { return this.duration;} set { this.duration = value;} }
+        public DateTime EntryDate { get { return this.entryDate; } set { this.entryDate = value;} }
         public Department Department { get { return this.department; } set { this.department = value; } }
 
         public ResidentPatient() : base()
         {
             //this.Room = new Room();
+            this.entryDate = DateTime.Now;
             this.History = new Dictionary<String, Medicine>();
         }
-        public ResidentPatient(String name, DateTime birthDate, String address, String diagnosis, Room room, int duration, Department department) : base(name, birthDate, address, diagnosis)
+        public ResidentPatient(String name, DateTime birthDate, String address, String diagnosis, Room room,  Department department) : base(name, birthDate, address, diagnosis)
         {
 
             this.Room = room;
-            this.Duration = duration;
+            this.EntryDate = DateTime.Now;
             this.History = new Dictionary<String, Medicine>();
             this.Department = department;
         }
@@ -37,7 +38,7 @@ namespace HospitalManagementSystem.Models
         }
         public override double getBill()
         {
-            double bill = this.duration + (this.duration * Room.Price);
+            double bill = (DateTime.Now - EntryDate).Days + ((DateTime.Now - EntryDate).Days * Room.Price);
             return bill;
         }
     }
