@@ -313,7 +313,10 @@ namespace HospitalManagementSystem.Services
                 con.Open();
                 String query = $"SELECT room_id from resident_patient WHERE patient_id = '{patientID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
-                roomID = (String)command.ExecuteScalar();
+
+                object result = command.ExecuteScalar();
+                if (result is String)
+                    roomID = (String)result;
             }
             catch
             {
