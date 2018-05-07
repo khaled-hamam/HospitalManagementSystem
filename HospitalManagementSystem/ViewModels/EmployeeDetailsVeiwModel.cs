@@ -56,7 +56,9 @@ namespace HospitalManagementSystem.ViewModels
         public ComboBoxPairs EditEmployeeDepartment { get; set; }
         public DateTime EditEmployeeDatePicker { get; set; }
         public ObservableCollection<ComboBoxPairs> EditDepartmentComboBox { get; set; }
-            // Haget el condition
+        public String textValidation { get; set; }
+        public bool isHeadCheck { get; set; }
+        // Haget el condition
         private String employeeRole { get; set; }
         public Visibility IsDoctor { get; set; }
         public Visibility IsNurse { get; set; }
@@ -91,6 +93,7 @@ namespace HospitalManagementSystem.ViewModels
             EmployeeID = id;
             if(Hospital.Employees[id].GetType() == typeof(Doctor) && tempDep != null)
             {
+                isHeadCheck = ((Doctor)Hospital.Employees[id]).IsHead;
                 if(((Doctor)Hospital.Employees[id]).IsHead == true)
                 {
                     
@@ -98,7 +101,8 @@ namespace HospitalManagementSystem.ViewModels
                 }
             }
             // set Main Page & Edit Content Information
-            EditEmployeeDepartment = new ComboBoxPairs("Key", "Value");
+            if(Hospital.Employees[EmployeeID].Department != null)
+            EditEmployeeDepartment = new ComboBoxPairs(Hospital.Employees[EmployeeID].Department.ID, Hospital.Employees[EmployeeID].Department.Name);
             EditEmployeeNameTextBox = Hospital.Employees[id].Name;
             EditEmployeeAddressTextBox = EmployeeAddress = Hospital.Employees[id].Address;
             EmployeeBirthDate = Hospital.Employees[id].BirthDate.ToShortDateString();
@@ -107,7 +111,7 @@ namespace HospitalManagementSystem.ViewModels
             if (!(Hospital.Employees[id].Department == null))
                 SetEditDepartmentComboBox = Hospital.Employees[id].Department.Name;
             else
-                SetEditDepartmentComboBox = "N/A";
+                EditEmployeeDepartment = null;
             EditEmployeeDatePicker = Hospital.Employees[id].BirthDate;
 
             // Edit 
@@ -192,6 +196,11 @@ namespace HospitalManagementSystem.ViewModels
         }
         public void EditEmployee()
         {
+            if (EditEmployeeDepartment == null)
+            {
+                textValidation = "Department is not Assigned";
+                return;
+            }
                 EmployeeName = EditEmployeeNameTextBox;
                 Hospital.Employees[EmployeeID].Name = EditEmployeeNameTextBox;
                 EmployeeAddress = EditEmployeeAddressTextBox;
@@ -201,8 +210,23 @@ namespace HospitalManagementSystem.ViewModels
                 EmployeeSalary = EditEmployeeSalaryTextBox;
                 Hospital.Employees[EmployeeID].Salary = double.Parse(EditEmployeeSalaryTextBox);
                 EmployeeDepartment = EditEmployeeDepartment.Value;
+            if (!isHeadCheck && Hospital.Departments[EditEmployeeDepartment.Key].HeadID == EmployeeID)
+            {
+                ((Doctor)Hospital.Employees[EmployeeID]).IsHead = false;
+                Hospital.Departments[EditEmployeeDepartment.Key].HeadID = null;
+
+            }
             if (Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
+            {
                 HospitalDB.UpdateDoctor((Doctor)Hospital.Employees[EmployeeID]);
+                Hospital.Employees[EmployeeID].Department = Hospital.Departments[EditEmployeeDepartment.Key];
+                if (isHeadCheck)
+                {
+                    EmployeeDepartment += " (Head)";
+                    Hospital.Departments[EditEmployeeDepartment.Key].HeadID = EmployeeID;
+                    ((Doctor)Hospital.Employees[EmployeeID]).IsHead = true;
+                }
+            }
             else
                 HospitalDB.UpdateNurse((Nurse)Hospital.Employees[EmployeeID]);
             Home.ViewModel.CloseRootDialog();
