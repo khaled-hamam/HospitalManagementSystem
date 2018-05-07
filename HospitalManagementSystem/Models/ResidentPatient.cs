@@ -32,6 +32,7 @@ namespace HospitalManagementSystem.Models
         // member methods
         public void addMedicine(Medicine medicine)
         {
+            if(!History.ContainsKey(medicine.ID))
             this.history.Add(medicine.ID,medicine);
         }
         public override double getBill()

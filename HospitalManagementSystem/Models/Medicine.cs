@@ -22,8 +22,8 @@ namespace HospitalManagementSystem.Models
         {
             this.ID = Guid.NewGuid().ToString();
             this.Name = "";
-            this.StartingDate = new DateTime();
-            this.StartingDate = new DateTime();
+            this.StartingDate = DateTime.Today;
+            this.StartingDate = DateTime.Today;
         }
 
         public Medicine(String name, DateTime startingDate, DateTime endingDate)

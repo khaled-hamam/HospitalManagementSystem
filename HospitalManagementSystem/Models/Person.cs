@@ -31,6 +31,7 @@ namespace HospitalManagementSystem.Models
             this.ID = Guid.NewGuid().ToString();
             this.Name = "";
             this.Address = "";
+            this.BirthDate = DateTime.Today;
         }
         public Person(String name, DateTime birthDate, String Address)
         {

@@ -21,6 +21,7 @@ namespace HospitalManagementSystem.Models
 
         public void addRoom(Room room)
         {
+            if(!Rooms.ContainsKey(room.ID))
             this.Rooms.Add(room.ID, room);
         }
 
@@ -31,6 +32,7 @@ namespace HospitalManagementSystem.Models
 
         public void addPatient(Patient patient)
         {
+            if(!Patients.ContainsKey(patient.ID))
             this.Patients.Add(patient.ID, patient);
         }
 

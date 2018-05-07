@@ -40,6 +40,7 @@ namespace HospitalManagementSystem.Models
 
         public void addPatient(Patient patient)
         {
+            if(!Patients.ContainsKey(patient.ID))
             this.Patients.Add(patient.ID, patient);
         }
         public void removePatient(String patientID)
@@ -48,6 +49,7 @@ namespace HospitalManagementSystem.Models
         }
         public void addNurse(Nurse nurse)
         {
+            if(!Nurses.ContainsKey(nurse.ID))
             this.Nurses.Add(nurse.ID, nurse);
         }
         public void removeNurse(String nurseID)
