@@ -19,7 +19,7 @@ namespace HospitalManagementSystem.ViewModels
         public ComboBoxPairs DoctorNameComboBox { get; set; }
         public String AppointmentDuration { get; set; }
         public DateTime AppointmentDatePicker { get; set; }
-        public String AppointmentTimePicker { get; set; }
+        public DateTime AppointmentTimePicker { get; set; }
         public String datePickerString { get; set; }
         public String timePickerString { get; set; }
         public String textValidation { get; set; }
@@ -33,17 +33,10 @@ namespace HospitalManagementSystem.ViewModels
         {
 
             AppointmentDuration = (AppointmentDuration != null) ? AppointmentDuration.Trim() : "";
-            AppointmentTimePicker = (AppointmentTimePicker != null) ? AppointmentTimePicker.Trim() : "";
 
             if (AppointmentDuration == "")
             {
                 textValidation = "Can't Have empty Values";
-                return false;
-            }
-            if (AppointmentTimePicker == "")
-            {
-                textValidation = "Can't Have empty Values";
-
                 return false;
             }
             if (PatientNameComboBox == null)
@@ -146,7 +139,7 @@ namespace HospitalManagementSystem.ViewModels
         {
             datePickerString = AppointmentDatePicker.ToShortDateString();
             datePickerString += " ";
-            datePickerString += AppointmentTimePicker;
+            datePickerString += AppointmentTimePicker.ToShortTimeString();
             Appointment newAppointment = new Appointment
             {
                 Patient = (AppointmentPatient)Hospital.Patients[PatientNameComboBox.Key],

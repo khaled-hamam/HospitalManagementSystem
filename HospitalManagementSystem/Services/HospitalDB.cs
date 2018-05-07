@@ -711,7 +711,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"INSERT INTO appointment VALUES('{appointment.ID}', '{appointment.Patient.ID}', " +
-                    $"'{appointment.Doctor.ID}', '{appointment.Date.ToString("yyyy-MM-dd")}', {appointment.Duration})";
+                    $"'{appointment.Doctor.ID}', '{appointment.Date.ToString("yyyy-MM-dd hh:mm:ss")}', {appointment.Duration})";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
             }
@@ -895,7 +895,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"UPDATE appointment SET patient_id = '{appointment.Patient.ID}', doctor_id = '{appointment.Doctor.ID}', " +
-                    $"date = '{appointment.Date.ToString("yyyy-MM-dd")}', duration = {appointment.Duration}, " +
+                    $"date = '{appointment.Date.ToString("yyyy-MM-dd hh:mm:ss")}', duration = {appointment.Duration}, " +
                     $"WHERE appointment_id = '{appointment.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
