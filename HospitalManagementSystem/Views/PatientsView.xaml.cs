@@ -35,6 +35,7 @@ namespace HospitalManagementSystem.Views
             PatientTypeComboBox.SelectedIndex = -1;
             PatientDepartmentCombobox.SelectedIndex = -1;
             RoomNumberComboBox.SelectedIndex = -1;
+            PatientBirthDatetDatePicker.SelectedDate = DateTime.Today;
         }
 
     }
