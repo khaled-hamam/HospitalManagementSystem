@@ -83,7 +83,15 @@ namespace HospitalManagementSystem.ViewModels
         public EmployeeDetailsVeiwModel(String id)
         {
             EditEmployeeDatePicker = DateTime.Today;
+            EmployeeDepartment = Hospital.Employees[id].Department.Name;
             EmployeeID = id;
+            if(Hospital.Employees[id].GetType() == typeof(Doctor))
+            {
+                if(((Doctor)Hospital.Employees[id]).IsHead == true)
+                {
+                    EmployeeDepartment += " (Head)";
+                }
+            }
             // set Main Page & Edit Content Information
             EditEmployeeDepartment = new ComboBoxPairs("Key", "Value");
             EditEmployeeNameTextBox = Hospital.Employees[id].Name;
