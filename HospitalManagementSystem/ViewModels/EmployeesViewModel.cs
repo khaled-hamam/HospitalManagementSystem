@@ -144,7 +144,6 @@ namespace HospitalManagementSystem.ViewModels
                 Hospital.Departments[newDoctor.Department.ID].HeadID = newDoctor.ID;
                 Hospital.Employees.Add(newDoctor.ID, newDoctor);
                 HospitalDB.InsertDoctor(newDoctor);
-                //TODO UPDATE DOCTOR IN DB
                 }
             
             else if(EmployeeRole=="Nurse")

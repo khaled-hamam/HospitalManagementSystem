@@ -33,6 +33,7 @@ namespace HospitalManagementSystem.ViewModels
         {
             Rooms = new ObservableCollection<RoomCardViewModel>();
             SearchAction = new RelayCommand(Search);
+
             foreach (Room room in Hospital.Rooms.Values)
             {
                 String type;
@@ -177,6 +178,8 @@ namespace HospitalManagementSystem.ViewModels
                 textValidation = "Room number is empty";
                 return false;
             }
+
+            //check room number duplication
             foreach (Room room in Hospital.Rooms.Values)
             {
                 if (int.Parse(RoomNumber) == room.RoomNumber)

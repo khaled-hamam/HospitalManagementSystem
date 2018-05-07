@@ -7,6 +7,9 @@ namespace HospitalManagementSystem.ViewModels
 {
     public class RoomCardViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Displayed Data Properites
+        /// </summary>
         public String ID { get; set; }
         public int RoomNumber { get; set; }
         public String Type { get; set; }
@@ -21,6 +24,7 @@ namespace HospitalManagementSystem.ViewModels
 
         public void navigateToDetails()
         {
+            //Initializing Room Details properties
             String type;
             String Capacity;
             String Price;

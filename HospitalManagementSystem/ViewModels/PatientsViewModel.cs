@@ -123,7 +123,6 @@ namespace HospitalManagementSystem.ViewModels
                     BirthDate = PatientBirthDatePicker,
                     Room = Hospital.Rooms[RoomNumber.Key],
                     Department = Hospital.Departments[PatientDepartment.Key],
-                    //TODO ADD ENTRY DATE
                 };
                 Patients.Add(new PatientCardViewModel
                 {

@@ -30,9 +30,6 @@ namespace HospitalManagementSystem.Views
 
         public void addSubmit(object sender, RoutedEventArgs e)
         {
-            // TODO: Openning a Message Box with Add
-            // TODO: Add to Hospital Class
-            // TODO: Update DB
             if (ViewModel.Validate())
             {
                 ViewModel.addAppointment();

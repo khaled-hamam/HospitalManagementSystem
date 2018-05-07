@@ -58,7 +58,7 @@ namespace HospitalManagementSystem.ViewModels
         public ObservableCollection<ComboBoxPairs> EditDepartmentComboBox { get; set; }
         public String textValidation { get; set; }
         public bool isHeadCheck { get; set; }
-        // Haget el condition
+        //Visibility conditions
         private String employeeRole { get; set; }
         public Visibility IsDoctor { get; set; }
         public Visibility IsNurse { get; set; }
