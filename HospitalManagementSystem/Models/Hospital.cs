@@ -215,6 +215,7 @@ namespace HospitalManagementSystem.Models
             {
                 patient.removeDoctor(DoctorId);
             }
+            Hospital.Employees[DoctorId].Department.removeDoctor(DoctorId);
             Employees.Remove(DoctorId);
         }
 
