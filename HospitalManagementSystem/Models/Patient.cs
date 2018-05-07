@@ -27,6 +27,7 @@ namespace HospitalManagementSystem.Models
         // member methods
         public void assignDoctor(Doctor doctor)
         {
+            if(!Doctors.ContainsKey(doctor.ID))
             this.Doctors.Add(doctor.ID,doctor);
         }
         public void removeDoctor(String id)

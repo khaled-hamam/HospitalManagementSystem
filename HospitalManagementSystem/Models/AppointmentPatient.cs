@@ -23,7 +23,9 @@ namespace HospitalManagementSystem.Models
         // member methods
         public void addAppointment( Appointment appointment)
         {
-            this.Appointments.Add(appointment.ID, appointment);
+            if (!Appointments.ContainsKey(appointment.ID)){
+                this.Appointments.Add(appointment.ID, appointment);
+            }
         }
         public void removeAppointment(String id)
         {

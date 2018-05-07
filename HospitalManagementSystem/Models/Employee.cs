@@ -18,7 +18,7 @@ namespace HospitalManagementSystem.Models
         public Employee()
         {
             this.Salary = 0.0;
-            this.EmploymentDate = new DateTime();
+            this.EmploymentDate = DateTime.Today;
           //  this.Department = new Department();
         }
 
