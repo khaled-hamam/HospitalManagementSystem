@@ -93,6 +93,7 @@ namespace HospitalManagementSystem.ViewModels
             {
                 if(((Doctor)Hospital.Employees[id]).IsHead == true)
                 {
+                    
                     EmployeeDepartment += " (Head)";
                 }
             }
@@ -183,6 +184,7 @@ namespace HospitalManagementSystem.ViewModels
 
             foreach (Department department in Hospital.Departments.Values)
             {
+                if(department != null)
                 EditDepartmentComboBox.Add(new ComboBoxPairs(department.ID, department.Name));
             }
 
@@ -215,7 +217,7 @@ namespace HospitalManagementSystem.ViewModels
                 {
                     if(((Doctor)Hospital.Employees[EmployeeID]).IsHead == true)
                     {
-                        Hospital.Departments[EmployeeDepartment] = null;
+                        ((Doctor)Hospital.Employees[EmployeeID]).IsHead = false;
                     }
                     HospitalDB.DeleteDoctor(EmployeeID);
                     Hospital.DeleteDoctor(EmployeeID);

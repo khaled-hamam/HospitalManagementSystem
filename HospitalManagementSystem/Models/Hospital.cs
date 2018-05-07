@@ -216,7 +216,6 @@ namespace HospitalManagementSystem.Models
                 patient.removeDoctor(DoctorId);
             }
             Employees.Remove(DoctorId);
-
         }
 
         public static void DeleteNurse(String NurseId)

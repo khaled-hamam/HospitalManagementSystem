@@ -62,6 +62,8 @@ namespace HospitalManagementSystem.ViewModels
            
             foreach (Department department in Hospital.Departments.Values)
             {
+               
+                if(department != null)
                 ComboBoxItems.Add(new ComboBoxPairs(department.ID, department.Name));
             }
 
