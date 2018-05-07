@@ -44,7 +44,7 @@ namespace HospitalManagementSystem.Views
 
             }
         }
-        private void ClearAddDepartment(object sender, DialogClosingEventArgs eventArgs)
+        private void ClearAddAppointment(object sender, DialogClosingEventArgs eventArgs)
         {
             AppointmentTimePicker.SelectedTime = null;
             PatientNameComboBox.SelectedItem = null;
