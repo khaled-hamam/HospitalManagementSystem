@@ -35,7 +35,7 @@
                                     <StackPanel Margin="16">
                                         <TextBox Text="{Binding EditPatientNameTextBox}" materialDesign:HintAssist.Hint="Patient Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientNameTextBox"  />
                                         <TextBox Text="{Binding EditPatientAddressTextBox}" materialDesign:HintAssist.Hint="Patient Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientAddressTextBox" />
-                                    <DatePicker Text="{Binding EditPatientBirthDatePicker}" materialDesign:HintAssist.Hint="Patient BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
+                                    <DatePicker SelectedDate="{Binding EditPatientBirthDatePicker}" materialDesign:HintAssist.Hint="Patient BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
                                     <ComboBox  SelectedItem="{Binding EditRoomNumberComboBox}"
                                                    IsEditable="True"
                                                    materialDesign:HintAssist.Hint="Patient Room Number"  

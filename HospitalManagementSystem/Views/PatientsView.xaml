@@ -66,6 +66,7 @@
             </Grid>
         </ScrollViewer>
         <Button 
+            materialDesign:DialogHost.DialogClosingAttached="Sample2_DialogHost_OnDialogClosing"
             Margin="0 0 35 20"
             Grid.Row="2"
             Background="{StaticResource PrimaryColor}"
@@ -82,7 +83,7 @@
                     <StackPanel Margin="16">
                         <TextBox Text="{Binding PatientNameTextBox}" materialDesign:HintAssist.Hint="Patient Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientNameTextBox"  />
                         <TextBox Text="{Binding PatientAddressTextBox}" materialDesign:HintAssist.Hint="Patient Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientAddressTextBox" />
-                        <DatePicker Text="{Binding PatientBirthDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
+                        <DatePicker SelectedDate="{Binding PatientBirthDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
                         <ComboBox Text="{Binding PatientTypeComboBox }" materialDesign:HintAssist.Hint="Patient Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientTypeComboBox" >
                             <ComboBoxItem>Resident Patient</ComboBoxItem>
                             <ComboBoxItem>Appointment Patient</ComboBoxItem>
@@ -90,6 +91,7 @@
                         <ComboBox  
                             SelectedItem="{Binding RoomNumber}"
                             Visibility="{Binding IsResident}" 
+                            Name="RoomNumberComboBox"
                             IsEditable="True"
                             materialDesign:HintAssist.Hint="Patient Room Number" 
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" 
@@ -99,6 +101,7 @@
                         <ComboBox 
                             SelectedItem="{Binding PatientDepartment}" 
                             Visibility="{Binding IsResident}" 
+                            Name="PatientDepartmentCombobox"
                             IsEditable="True" 
                             materialDesign:HintAssist.Hint="Patient Department" 
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
