@@ -30,9 +30,14 @@
                          materialDesign:HintAssist.HintOpacity="0.4"
                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
                          BorderThickness="0"
+                         Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                          MinWidth="200" VerticalAlignment="Center"
-                         Foreground="{StaticResource DarkText}"/>
-                <Button Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="1">
+                         Foreground="{StaticResource DarkText}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding SearchAction}" Key="Return"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Button Command="{Binding SearchAction}" Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="1">
                     <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                 </Button>
             </Grid>
@@ -45,7 +50,7 @@
         </Grid>
         <ScrollViewer Grid.Row="1">
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding Rooms}">
+                    <ItemsControl ItemsSource="{Binding FilteredRooms}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Components:RoomCard />
