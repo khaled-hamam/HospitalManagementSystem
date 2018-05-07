@@ -28,5 +28,12 @@ namespace HospitalManagementSystem.Views
         {
             InitializeComponent();
         }
+
+        private void ClearAddDepartment(object sender, DialogClosingEventArgs eventArgs)
+        {
+            DepartmentNameTextBox.Clear();
+            validation.Text = "";
+        }
+
     }
 }
