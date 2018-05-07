@@ -51,6 +51,7 @@ namespace HospitalManagementSystem.Views
             DoctorNameComboBox.SelectedItem = null;
             AppointmentDuration.Clear();
             AppointmentDatePicker.SelectedDate = DateTime.Today;
+            validation.Text = "";
         }
     }
 }
