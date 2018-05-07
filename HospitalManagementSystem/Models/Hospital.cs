@@ -40,6 +40,22 @@ namespace HospitalManagementSystem.Models
 
         public static async void InitializeData()
         {
+            Employees = new Dictionary<String, Employee>();
+            Patients = new Dictionary<String, Patient>();
+            Appointments = new Dictionary<String, Appointment>();
+            Departments = new Dictionary<String, Department>();
+            Rooms = new Dictionary<String, Room>();
+            Config = new Config
+            {
+                StandardWardCapacity = 4,
+                StandardWardPrice = 50,
+                SemiPrivateRoomCapacity = 2,
+                SemiPrivateRoomPrice = 90,
+                PrivateRoomCapacity = 1,
+                PrivateRoomPrice = 150,
+                AppointmentHourPrice = 40
+            };
+
             Home.ViewModel.IsLoading = true;
             await Task.Run(() =>
             {
