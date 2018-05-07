@@ -9,7 +9,7 @@ namespace HospitalManagementSystem.Models
     class PrivateRoom : Room
     {
        
-        public PrivateRoom() : base(1, 100)
+        public PrivateRoom() : base(Hospital.Config.PrivateRoomCapacity, Hospital.Config.PrivateRoomPrice)
         {
         }
     }

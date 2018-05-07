@@ -9,7 +9,7 @@ namespace HospitalManagementSystem.Models
     class StandardWard : Room
     {
        
-        public StandardWard() : base(4, 25)
+        public StandardWard() : base(Hospital.Config.StandardWardCapacity, Hospital.Config.StandardWardPrice)
         {
         }
     }

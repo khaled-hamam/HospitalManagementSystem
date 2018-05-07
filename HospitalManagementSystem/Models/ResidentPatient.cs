@@ -38,7 +38,7 @@ namespace HospitalManagementSystem.Models
         }
         public override double getBill()
         {
-            double bill = (DateTime.Now - EntryDate).Days + ((DateTime.Now - EntryDate).Days * Room.Price);
+            double bill =  ((DateTime.Now - EntryDate).Days * Room.Price);
             return bill;
         }
     }

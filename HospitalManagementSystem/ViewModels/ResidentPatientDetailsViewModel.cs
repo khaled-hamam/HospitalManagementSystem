@@ -29,14 +29,18 @@ namespace HospitalManagementSystem.ViewModels
             get
             {
                 String type = "";
-                if (((ResidentPatient)Hospital.Patients[PatientID]).Room.GetType() == typeof(PrivateRoom))
-                    type = "Private Room";
-                else if (((ResidentPatient)Hospital.Patients[PatientID]).Room.GetType() == typeof(SemiPrivateRoom))
-                    type = "Semi Private Room";
-                else
-                    type = "Standard Ward Room";
 
-                return $"{patientRoomNumber} {type}";
+                if (((ResidentPatient)Hospital.Patients[PatientID]).Room != null)
+                {
+                    if (((ResidentPatient)Hospital.Patients[PatientID]).Room.GetType() == typeof(PrivateRoom))
+                        type = "Private Room";
+                    else if (((ResidentPatient)Hospital.Patients[PatientID]).Room.GetType() == typeof(SemiPrivateRoom))
+                        type = "Semi-Private Room";
+                    else
+                        type = "Standard Ward";
+                }
+
+                return $"{patientRoomNumber} ({type})";
             }
             set { patientRoomNumber = value; }
         }
