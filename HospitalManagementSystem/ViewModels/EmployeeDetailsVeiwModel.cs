@@ -210,22 +210,35 @@ namespace HospitalManagementSystem.ViewModels
                 EmployeeSalary = EditEmployeeSalaryTextBox;
                 Hospital.Employees[EmployeeID].Salary = double.Parse(EditEmployeeSalaryTextBox);
                 EmployeeDepartment = EditEmployeeDepartment.Value;
-            if (!isHeadCheck && Hospital.Departments[EditEmployeeDepartment.Key].HeadID == EmployeeID)
-            {
-                ((Doctor)Hospital.Employees[EmployeeID]).IsHead = false;
-                Hospital.Departments[EditEmployeeDepartment.Key].HeadID = null;
-
-            }
             if (Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
             {
-                HospitalDB.UpdateDoctor((Doctor)Hospital.Employees[EmployeeID]);
+                
+               //remove old data
+                ((Doctor)Hospital.Employees[EmployeeID]).IsHead = false;
+                Hospital.Employees[EmployeeID].Department.HeadID = null;               
+                Hospital.Employees[EmployeeID].Department.Doctors.Remove(EmployeeID);
+
+                //assign new department to the employee
                 Hospital.Employees[EmployeeID].Department = Hospital.Departments[EditEmployeeDepartment.Key];
-                if (isHeadCheck)
+                // add the employee to the selected department
+                Hospital.Departments[EditEmployeeDepartment.Key].Doctors.Add(EmployeeID, (Doctor)Hospital.Employees[EmployeeID]);
+                
+                //add head to doctor and department
+                ((Doctor)Hospital.Employees[EmployeeID]).IsHead = isHeadCheck;
+                if(isHeadCheck==false)
+                {
+                    Hospital.Departments[EditEmployeeDepartment.Key].HeadID = null;
+        
+                }
+                else
                 {
                     EmployeeDepartment += " (Head)";
                     Hospital.Departments[EditEmployeeDepartment.Key].HeadID = EmployeeID;
-                    ((Doctor)Hospital.Employees[EmployeeID]).IsHead = true;
+
                 }
+                
+               
+                HospitalDB.UpdateDoctor((Doctor)Hospital.Employees[EmployeeID]);
             }
             else
                 HospitalDB.UpdateNurse((Nurse)Hospital.Employees[EmployeeID]);
