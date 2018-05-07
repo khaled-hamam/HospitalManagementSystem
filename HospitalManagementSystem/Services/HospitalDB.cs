@@ -362,11 +362,47 @@ namespace HospitalManagementSystem.Services
             return patients;
         }
 
+        public static List<AppointmentPatient> FetchUncategorizedPatients()
+        {
+            List<AppointmentPatient> patients = new List<AppointmentPatient>();
+            MySqlConnection con = InitConnection();
+
+            try
+            {
+                con.Open();
+                String query = "SELECT * FROM uncategorized_patient";
+                MySqlCommand command = new MySqlCommand(query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    patients.Add(new AppointmentPatient
+                    {
+                        ID = reader.GetString("patient_id"),
+                        Name = reader.GetString("name"),
+                        BirthDate = reader.GetDateTime("birth_date"),
+                        Address = reader.GetString("address"),
+                        Diagnosis = reader.GetString("diagnosis"),
+                    });
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error Occured Fetching Uncategorized Patients.");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return patients;
+        }
+
         public static List<Patient> FetchPatients()
         {
             List<Patient> patients = new List<Patient>();
             patients.AddRange(FetchResidentPatients());
             patients.AddRange(FetchAppointmentPatients());
+            patients.AddRange(FetchUncategorizedPatients());
 
             return patients;
         }
