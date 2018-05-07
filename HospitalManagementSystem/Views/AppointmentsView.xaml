@@ -95,13 +95,13 @@
                                         HorizontalAlignment="Left"  
                                         Width="200" 
                                         x:Name="DoctorNameComboBox" />
-                                    <DatePicker Text="{Binding AppointmentDatePicker}"
+                                    <DatePicker SelectedDate="{Binding AppointmentDatePicker}"
                                 materialDesign:HintAssist.Hint="Appointment Date"  
                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
                                 Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" 
                                 x:Name="AppointmentDatePicker" />
                                     <materialDesign:TimePicker 
-                                Text="{Binding AppointmentTimePicker}"
+                                SelectedTime="{Binding AppointmentTimePicker}"
                                 materialDesign:HintAssist.Hint="Appointment Time"  
                                 Style="{StaticResource MaterialDesignFloatingHintTimePicker}" 
                                 Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200"
