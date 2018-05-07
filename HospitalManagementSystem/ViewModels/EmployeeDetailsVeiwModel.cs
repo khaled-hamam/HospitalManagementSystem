@@ -202,21 +202,29 @@ namespace HospitalManagementSystem.ViewModels
             Home.ViewModel.CloseRootDialog();
 
         }
-        public void DeleteEmployee()
+        public async void DeleteEmployee()
         {
-            if(Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
+            object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
+            if (result.Equals(true))
             {
-                HospitalDB.DeleteDoctor(EmployeeID);
-                Hospital.DeleteDoctor(EmployeeID);
-                Home.ViewModel.CloseRootDialog();
-                Home.ViewModel.Content = new EmployeesViewModel();
-            }
-            else
-            {
-                HospitalDB.DeleteNurse(EmployeeID);
-                Hospital.DeleteNurse(EmployeeID);
-                Home.ViewModel.CloseRootDialog();
-                Home.ViewModel.Content = new EmployeesViewModel();
+                if (Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
+                {
+                    if(((Doctor)Hospital.Employees[EmployeeID]).IsHead == true)
+                    {
+                        Hospital.Departments[EmployeeDepartment] = null;
+                    }
+                    HospitalDB.DeleteDoctor(EmployeeID);
+                    Hospital.DeleteDoctor(EmployeeID);
+                    Home.ViewModel.CloseRootDialog();
+                    Home.ViewModel.Content = new EmployeesViewModel();
+                }
+                else
+                {
+                    HospitalDB.DeleteNurse(EmployeeID);
+                    Hospital.DeleteNurse(EmployeeID);
+                    Home.ViewModel.CloseRootDialog();
+                    Home.ViewModel.Content = new EmployeesViewModel();
+                }
             }
         }
         
