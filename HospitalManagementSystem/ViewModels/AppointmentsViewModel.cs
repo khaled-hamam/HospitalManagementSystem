@@ -145,7 +145,6 @@ namespace HospitalManagementSystem.ViewModels
             datePickerString = AppointmentDatePicker.ToShortDateString();
             datePickerString += " ";
             datePickerString += AppointmentTimePicker;
-
             Appointment newAppointment = new Appointment
             {
                 Patient = (AppointmentPatient)Hospital.Patients[PatientNameComboBox.Key],
@@ -153,6 +152,11 @@ namespace HospitalManagementSystem.ViewModels
                 Duration = Int32.Parse(AppointmentDuration),
                 Date = DateTime.Parse(datePickerString),
             };
+            if (!(((Doctor)Hospital.Employees[DoctorNameComboBox.Key]).isAvailable(newAppointment)))
+            {
+                textValidation = "Doctor is not available at this time";
+                return;
+            }
             Appointments.Add(
                 new AppointmentCardViewModel
                 {
@@ -175,6 +179,9 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Appointments[newAppointment.ID].Patient.addAppointment(newAppointment);
             Hospital.Appointments[newAppointment.ID].Doctor.addAppointment(newAppointment);
             HospitalDB.InsertAppointment(newAppointment);
+            
+            
+      
             
         }
     }
