@@ -9,7 +9,7 @@ namespace HospitalManagementSystem.Models
     class SemiPrivateRoom : Room
     {
         
-        public SemiPrivateRoom() : base(2, 50)
+        public SemiPrivateRoom() : base(Hospital.Config.SemiPrivateRoomCapacity, Hospital.Config.SemiPrivateRoomPrice)
         {
         }
     }
