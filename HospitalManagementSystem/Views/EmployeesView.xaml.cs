@@ -1,4 +1,4 @@
-﻿using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Models;
 using HospitalManagementSystem.ViewModels;
 using HospitalManagementSystem.Views.Components;
 using MaterialDesignThemes.Wpf;
@@ -43,8 +43,6 @@ namespace HospitalManagementSystem.Views
             // TODO: Openning a Message Box with Add
             // TODO: Add to Hospital Class
             // TODO: Update DB
-
-            Console.WriteLine(EmployeeDepartmentComboBox.SelectedValue);
            
             if (ViewModel.ValidateName() )
             {
@@ -60,10 +58,7 @@ namespace HospitalManagementSystem.Views
                // DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
 
             }
-            else
-            {
-                MessageBox.Show("INVALID ENTRY");
-            }
+         
         }
     }
 }
