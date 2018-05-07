@@ -98,6 +98,11 @@ namespace HospitalManagementSystem.ViewModels
 
         public void addEmployee()
         {
+            if (isHeadCheck)
+            {
+                string HeadID= Hospital.Departments[EmployeeDepartment.Key].HeadID;
+                ((Doctor)Hospital.Employees[HeadID]).IsHead = false;
+            }
             if (EmployeeRole == "Doctor") {
                 if(isHeadCheck)
                 {
@@ -126,8 +131,8 @@ namespace HospitalManagementSystem.ViewModels
 
                 Employees.Add(
                     new EmployeeCardViewModel
-                    { 
-                        
+                    {
+                        ID = newDoctor.ID,
                         Name = newDoctor.Name,
                         Salary = $"{newDoctor.Salary}$",
                         Department = newDoctor.Department.Name,
@@ -138,6 +143,7 @@ namespace HospitalManagementSystem.ViewModels
                 FilteredEmployees.Add(
                    new EmployeeCardViewModel
                    {
+                       ID = newDoctor.ID,
                        Name = newDoctor.Name,
                        Salary = $"{newDoctor.Salary}$",
                        Department = newDoctor.Department.Name,
@@ -163,6 +169,7 @@ namespace HospitalManagementSystem.ViewModels
                 Employees.Add(
                     new EmployeeCardViewModel
                     {
+                        ID = newNurse.ID,
                         Name = newNurse.Name,
                         Salary = $"{newNurse.Salary}$",
                         Department = newNurse.Department.Name,
@@ -172,6 +179,7 @@ namespace HospitalManagementSystem.ViewModels
                FilteredEmployees.Add(
                   new EmployeeCardViewModel
                   {
+                      ID = newNurse.ID,
                       Name = newNurse.Name,
                       Salary = $"{newNurse.Salary}$",
                       Department = newNurse.Department.Name,

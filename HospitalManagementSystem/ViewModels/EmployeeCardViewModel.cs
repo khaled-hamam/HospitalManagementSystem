@@ -1,4 +1,5 @@
-﻿using HospitalManagementSystem.Views;
+﻿using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Views;
 using System;
 using System.Windows.Input;
 
@@ -25,7 +26,6 @@ namespace HospitalManagementSystem.ViewModels
                 EmployeeName = Name,
                 EmployeeRole = Role,
                 EmployeeSalary = Salary,
-                EmployeeDepartment = Department,
             };
         }
     }
