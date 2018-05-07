@@ -22,9 +22,7 @@ namespace HospitalManagementSystem.Views
 
         public void addRoom(object sender, RoutedEventArgs e)
         {
-            // TODO: Openning a Message Box with Add
-            // TODO: Add to Hospital Class
-            // TODO: Update DB
+
            if(ViewModel.ValidateRoom())
             {
                 ViewModel.addRoom();

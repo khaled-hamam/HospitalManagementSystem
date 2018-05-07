@@ -101,12 +101,13 @@ namespace HospitalManagementSystem.ViewModels
             EditPatientBirthDatePicker = Hospital.Patients[id].BirthDate;
             EditPatientNameTextBox = Hospital.Patients[id].Name;
             RoomNumberInEdit = ((ResidentPatient)Hospital.Patients[id]).Room.RoomNumber.ToString();
-            //SetEditDepartmentComboBox = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
+
             foreach (Room room in Hospital.Rooms.Values)
             {   
                     if(room.hasAvailableBed())
                          PatientRoomNumberComboBox.Add(new ComboBoxPairs(room.ID, room.RoomNumber.ToString()));
             }
+
              // Lists
             foreach (Doctor doctor in Hospital.Patients[id].Doctors.Values)
             {
@@ -130,7 +131,6 @@ namespace HospitalManagementSystem.ViewModels
                 EditDepartmentComboBox.Add(new ComboBoxPairs(department.ID, department.Name));
             }
 
-            //TODO : DoctorsComboBoxItems 
             DoctorsComboBox = new ObservableCollection<ComboBoxPairs>();
             NursesComboBox = new ObservableCollection<ComboBoxPairs>();
             foreach (Employee employee in Hospital.Employees.Values)
@@ -162,6 +162,7 @@ namespace HospitalManagementSystem.ViewModels
                     NursesComboBox.Add(new ComboBoxPairs(employee.ID, employee.Name));
                 }
             }
+
             editResidentPatient = new RelayCommand(EditResidentPatient);
             deleteResidentPatient = new RelayCommand(DeleteResidentPatient);
             DoctorComboBox = new ComboBoxPairs("Key", "Value");
@@ -197,7 +198,6 @@ namespace HospitalManagementSystem.ViewModels
 
             PatientRoomNumber = EditRoomNumberComboBox.Value;
          
-           // PatientDepartment = EditPatientDepartment.Value;
             HospitalDB.UpdatePatient(Hospital.Patients[PatientID]);
             Home.ViewModel.CloseRootDialog();
         }

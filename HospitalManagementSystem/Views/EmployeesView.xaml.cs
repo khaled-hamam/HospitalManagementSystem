@@ -40,10 +40,6 @@ namespace HospitalManagementSystem.Views
 
         public void addEmployee(object sender, RoutedEventArgs e)
         {
-            // TODO: Openning a Message Box with Add
-            // TODO: Add to Hospital Class
-            // TODO: Update DB
-           
             if (ViewModel.ValidateName() )
             {
                 ViewModel.addEmployee();
@@ -54,9 +50,6 @@ namespace HospitalManagementSystem.Views
                 EmployeeDepartmentComboBox.SelectedItem = null;
                 EmpoloyeeRoleComboBox.SelectedItem = null;
                 Home.ViewModel.CloseRootDialog();
-            // Closing the Dialog
-               // DialogHost.CloseDialogCommand.Execute(addEmployeeDialaog, null);
-
             }
          
         }

@@ -88,10 +88,9 @@ namespace HospitalManagementSystem.ViewModels
             object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
             if (result.Equals(true))
             {
-                // Delete Logic Here
-            Hospital.DeleteDepartment(DepartmentId);
-            HospitalDB.DeleteDepartment(DepartmentId);
-            Home.ViewModel.Content = new DepartmentsViewModel();
+                Hospital.DeleteDepartment(DepartmentId);
+                HospitalDB.DeleteDepartment(DepartmentId);
+                Home.ViewModel.Content = new DepartmentsViewModel();
             }
 
         }

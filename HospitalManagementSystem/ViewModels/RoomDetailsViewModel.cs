@@ -14,26 +14,30 @@ namespace HospitalManagementSystem.ViewModels
 {
     public class RoomDetailsViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Displayed Data Properites
+        /// </summary>
         public String RoomID { get; set; }
         public String RoomNumber { get; set; }
         public String RoomType { get; set; }
         public String roomPrice { get; set; }
         public String roomCapacity { get; set; }
-        public String editedRoomNumber { get; set; }
         public String PatientsNumber { get; set; }
         public String NursesNumber { get; set; }
-        public String textValidation { get; set; }
         public ObservableCollection<ComboBoxPairs> PatientsList { get; set; }
         public ObservableCollection<ComboBoxPairs> NursesList { get; set; }
-
         public ObservableCollection<ComboBoxPairs> NursesComboBoxItems { get; set; }
 
+        public String textValidation { get; set; }
+        public String editedRoomNumber { get; set; }
+        public ComboBoxPairs NurseSelectedItem { get; set; }
+        public ComboBoxPairs ListSelectedNurse { get; set; }
+
+        //Functions Commands
         public ICommand EditRoom { get; set; }
         public ICommand DeleteRoom { get; set; }
         public ICommand assignNurse { get; set; }
 
-        public ComboBoxPairs NurseSelectedItem { get; set; }
-        public ComboBoxPairs ListSelectedNurse { get; set; }
 
 
         public RoomDetailsViewModel(String ID)
@@ -49,7 +53,7 @@ namespace HospitalManagementSystem.ViewModels
             RoomNumber = Hospital.Rooms[ID].RoomNumber.ToString();
             editedRoomNumber = RoomNumber;
 
-
+            //Initializing Displayed Data Properties
             foreach (Patient patient in Hospital.Rooms[ID].Patients.Values)
             {
                 PatientsList.Add(new ComboBoxPairs(patient.ID, patient.Name));
@@ -109,9 +113,9 @@ namespace HospitalManagementSystem.ViewModels
                 Home.ViewModel.CloseRootDialog();
             }
         }
+
         public async void DeleteRooms()
         {
-
             object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
             if (result.Equals(true))
             {
@@ -126,16 +130,15 @@ namespace HospitalManagementSystem.ViewModels
             object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
             if (result.Equals(true))
             {
-
                 NursesComboBoxItems.Add(new ComboBoxPairs(ListSelectedNurse.Key, ListSelectedNurse.Value));
                 Hospital.Rooms[RoomID].removeNurse(ListSelectedNurse.Key);
                 ((Nurse)Hospital.Employees[ListSelectedNurse.Key]).removeRoom(RoomID);
                 HospitalDB.DeleteNurseRoom(ListSelectedNurse.Key, RoomID);
                 NursesList.Remove(ListSelectedNurse);
                 NursesNumber = $"Nurses : {NursesList.Count}";
-
             }
         }
+
         public void AssignNurse()
         {
             Home.ViewModel.CloseRootDialog();
@@ -149,7 +152,6 @@ namespace HospitalManagementSystem.ViewModels
            
             NursesComboBoxItems.Remove(NurseSelectedItem);
             NursesNumber = $"Nurses : {NursesList.Count}";
-
         }
     }
 }
