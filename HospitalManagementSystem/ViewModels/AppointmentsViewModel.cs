@@ -22,7 +22,6 @@ namespace HospitalManagementSystem.ViewModels
         public String datePickerString { get; set; }
         public String timePickerString { get; set; }
         public String textValidation { get; set; }
-
         public List<ComboBoxPairs> patientsComboBoxItems;
         public List<ComboBoxPairs> doctorsComboBoxItems;
 

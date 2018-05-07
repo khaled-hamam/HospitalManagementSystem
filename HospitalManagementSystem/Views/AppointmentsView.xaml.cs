@@ -44,12 +44,6 @@ namespace HospitalManagementSystem.Views
                 AppointmentDatePicker.SelectedDate = DateTime.Today;
 
             }
-            else
-            {
-                MessageBox.Show("Invalid Input!");
-
-            }
-
         }
     }
 }
