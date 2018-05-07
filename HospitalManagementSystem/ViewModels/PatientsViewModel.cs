@@ -19,6 +19,7 @@ namespace HospitalManagementSystem.ViewModels
         /// </summary>
         public String PatientNameTextBox { get; set; }
         public String PatientAddressTextBox { get; set; }
+        public String PatientDiagnosisTextBox { get; set; }
         public ComboBoxPairs RoomNumber { get; set; }
         public ComboBoxPairs PatientDepartment { get; set; }
         public ObservableCollection<ComboBoxPairs> ComboBoxItems { get; set; }
@@ -101,8 +102,9 @@ namespace HospitalManagementSystem.ViewModels
         {
             PatientNameTextBox = (PatientNameTextBox != null) ? PatientNameTextBox.Trim() : "";
             PatientAddressTextBox = (PatientAddressTextBox != null) ? PatientAddressTextBox.Trim() : "";
+            PatientDiagnosisTextBox = (PatientDiagnosisTextBox != null) ? PatientDiagnosisTextBox.Trim() : "";
             PatientTypeComboBox = (PatientTypeComboBox != null) ? PatientTypeComboBox.Trim() : "";
-            return !(PatientNameTextBox == "" || PatientAddressTextBox == ""  || PatientTypeComboBox == "");
+            return !(PatientNameTextBox == "" || PatientAddressTextBox == ""  || PatientTypeComboBox == "" || PatientDiagnosisTextBox == "");
         }
         public void addPatient()
         {
@@ -117,6 +119,7 @@ namespace HospitalManagementSystem.ViewModels
                 {
                     Name = PatientNameTextBox,
                     Address = PatientAddressTextBox,
+                    Diagnosis = PatientDiagnosisTextBox,
                     BirthDate = PatientBirthDatePicker,
                     Room = Hospital.Rooms[RoomNumber.Key],
                     Department = Hospital.Departments[PatientDepartment.Key],
@@ -147,6 +150,7 @@ namespace HospitalManagementSystem.ViewModels
                 {
                     Name = PatientNameTextBox,
                     Address = PatientAddressTextBox,
+                    Diagnosis = PatientDiagnosisTextBox,
                     BirthDate = PatientBirthDatePicker,
                 };
 
@@ -154,7 +158,7 @@ namespace HospitalManagementSystem.ViewModels
                     ID = newPatient.ID,
                     Name = PatientNameTextBox,
                     Type = PatientTypeComboBox,
-                    ShortDiagnosis = "Not Implemented yet"
+                    ShortDiagnosis = PatientDiagnosisTextBox
                 });
 
                 FilteredPatients.Add(new PatientCardViewModel
@@ -162,7 +166,7 @@ namespace HospitalManagementSystem.ViewModels
                     ID = newPatient.ID,
                     Name = PatientNameTextBox,
                     Type = PatientTypeComboBox,
-                    ShortDiagnosis = "Not Implemented yet"
+                    ShortDiagnosis = PatientDiagnosisTextBox
                 });
 
                 Hospital.Patients.Add(newPatient.ID, newPatient);

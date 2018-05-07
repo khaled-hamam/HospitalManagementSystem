@@ -100,27 +100,14 @@ namespace HospitalManagementSystem.ViewModels
 
         public void addEmployee()
         {
+            if (EmployeeRole == "Doctor") {
+
             if (isHeadCheck)
             {
                 string HeadID= Hospital.Departments[EmployeeDepartment.Key].HeadID;
                 if(HeadID != "")
                 ((Doctor)Hospital.Employees[HeadID]).IsHead = false;
             }
-            if (EmployeeRole == "Doctor") {
-                if(isHeadCheck)
-                {
-                    foreach(Employee employee in Hospital.Employees.Values)
-                    {
-                        if (employee.GetType() == typeof(Doctor))
-                        {
-                            if (Hospital.Departments[Hospital.Employees[employee.ID].Department.ID].Doctors[employee.ID].IsHead)
-                            {
-                                Hospital.Departments[Hospital.Employees[employee.ID].Department.ID].Doctors[employee.ID].IsHead = false;
-                                break;
-                            }
-                        }
-                    }
-                }
                 Doctor newDoctor = new Doctor
                 {
                     
@@ -131,7 +118,6 @@ namespace HospitalManagementSystem.ViewModels
                     IsHead = isHeadCheck
          
                 };
-
                 Employees.Add(
                     new EmployeeCardViewModel
                     {
@@ -154,10 +140,12 @@ namespace HospitalManagementSystem.ViewModels
                    }
                   );
                 Hospital.Departments[newDoctor.Department.ID].addDoctor(newDoctor);
+                Hospital.Departments[newDoctor.Department.ID].HeadID = newDoctor.ID;
                 Hospital.Employees.Add(newDoctor.ID, newDoctor);
                 HospitalDB.InsertDoctor(newDoctor);
                 //TODO UPDATE DOCTOR IN DB
-            }
+                }
+            
             else if(EmployeeRole=="Nurse")
             {
                 Nurse newNurse = new Nurse

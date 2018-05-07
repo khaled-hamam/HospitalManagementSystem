@@ -84,6 +84,7 @@
                         <TextBox Text="{Binding PatientNameTextBox}" materialDesign:HintAssist.Hint="Patient Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientNameTextBox"  />
                         <TextBox Text="{Binding PatientAddressTextBox}" materialDesign:HintAssist.Hint="Patient Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientAddressTextBox" />
                         <DatePicker SelectedDate="{Binding PatientBirthDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientBirthDatetDatePicker" />
+                        <TextBox Text="{Binding PatientDiagnosisTextBox}" materialDesign:HintAssist.Hint="Patient Diagnosis"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="PatientDiagnosis" />
                         <ComboBox Text="{Binding PatientTypeComboBox }" materialDesign:HintAssist.Hint="Patient Type"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="PatientTypeComboBox" >
                             <ComboBoxItem>Resident Patient</ComboBoxItem>
                             <ComboBoxItem>Appointment Patient</ComboBoxItem>
