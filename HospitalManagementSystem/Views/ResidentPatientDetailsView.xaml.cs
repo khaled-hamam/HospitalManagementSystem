@@ -27,5 +27,15 @@ namespace HospitalManagementSystem.Views
             InitializeComponent();
            
         }
+        private void RemoveDoctorFromPatient(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ((ResidentPatientDetailsViewModel)DataContext).RemoveDr();
+
+        }
+        private void RemoveMedicineFromPatient(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ((ResidentPatientDetailsViewModel)DataContext).RemoveMedicine();
+
+        }
     }
 }

@@ -58,6 +58,8 @@
                                     Margin="0 8 0 0" 
                                     HorizontalAlignment="Left"  
                                     Width="200" />
+                                    <TextBlock  Text="{Binding textValidation}" Style="{StaticResource ErrorMsg}" x:Name="validation"/>
+
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 VerticalAlignment="Bottom"
@@ -157,6 +159,8 @@
                                     ItemsSource="{Binding DoctorsList}"
                                     Background="White"
                                     Foreground="{StaticResource PrimaryColor}"
+                                    MouseDoubleClick="RemoveDoctorFromPatient"
+                                    SelectedItem="{Binding ListSelectedDoctor}"
                                     x:Name="DoctorsList"
                                     DisplayMemberPath="Value"
                                     SelectedValuePath="Key"/>
@@ -228,6 +232,8 @@
                                     ItemsSource="{Binding MedicalHistoryList}"
                                     Background="White"
                                     Foreground="{StaticResource PrimaryColor}"
+                                    MouseDoubleClick="RemoveMedicineFromPatient"
+                                    SelectedItem="{Binding ListSelectedMedicine}"
                                     x:Name="MedicalHistoryList"
                                     DisplayMemberPath="Value"
                                     SelectedValuePath="Key"/>

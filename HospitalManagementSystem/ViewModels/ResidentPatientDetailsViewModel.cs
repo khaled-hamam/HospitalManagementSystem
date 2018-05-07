@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace HospitalManagementSystem.ViewModels
@@ -32,6 +33,7 @@ namespace HospitalManagementSystem.ViewModels
         public String EditPatientAddressTextBox { get; set; }
         public DateTime EditPatientBirthDatePicker { get; set; }
         public ComboBoxPairs EditRoomNumberComboBox { get; set; }
+        public String RoomNumberInEdit { get; set; }
         public ObservableCollection<ComboBoxPairs> PatientRoomNumberComboBox { get; set; }
         public ObservableCollection<ComboBoxPairs> EditDepartmentComboBox { get; set; }
         // Main Page Lists
@@ -40,6 +42,9 @@ namespace HospitalManagementSystem.ViewModels
         public ObservableCollection<ComboBoxPairs> DoctorsList { get; set; }
         public ObservableCollection<ComboBoxPairs> NursesList { get; set; }
         public ObservableCollection<ComboBoxPairs> MedicalHistoryList { get; set; }
+        public ComboBoxPairs ListSelectedDoctor { get; set; }
+        public ComboBoxPairs ListSelectedMedicine { get; set; }
+        public ComboBoxPairs ListSelectedNurse { get; set; }
         // Items In Contents
         public ObservableCollection<ComboBoxPairs> DoctorsComboBox { get; set; }
         public ObservableCollection<ComboBoxPairs> NursesComboBox { get; set; }
@@ -68,8 +73,8 @@ namespace HospitalManagementSystem.ViewModels
             EditPatientAddressTextBox = Hospital.Patients[id].Address;
             EditPatientBirthDatePicker = Hospital.Patients[id].BirthDate;
             EditPatientNameTextBox = Hospital.Patients[id].Name;
-           // EditPatientDepartment.Value = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
-            //EditRoomNumberComboBox.Value = ((ResidentPatient)Hospital.Patients[id]).Room.RoomNumber.ToString();
+            RoomNumberInEdit = ((ResidentPatient)Hospital.Patients[id]).Room.RoomNumber.ToString();
+            //SetEditDepartmentComboBox = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
             foreach (Room room in Hospital.Rooms.Values)
             {   
                     if(room.hasAvailableBed())
@@ -137,12 +142,20 @@ namespace HospitalManagementSystem.ViewModels
             assignDoctor = new RelayCommand(AssignDoctor);
             assignNurse = new RelayCommand(AssignNurse);
             addMedicine = new RelayCommand(AddMedicine);
+            ListSelectedDoctor = new ComboBoxPairs("Key", "Value");
+            ListSelectedMedicine = new ComboBoxPairs("Key", "Value");
+            ListSelectedNurse = new ComboBoxPairs("Key", "Value");
             MedicineStartDate = DateTime.Today;
             MedicineEndDate = DateTime.Today;
         }
 
         public void EditResidentPatient()
         {
+            if(EditRoomNumberComboBox == null || EditPatientDepartment == null)
+            {
+                textValidation = "Cannot Have Empty Values";
+                return;
+            }
             Hospital.Patients[PatientID].Name = PatientName = EditPatientNameTextBox;
             Hospital.Patients[PatientID].Address = PatientAddress = EditPatientAddressTextBox;
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
@@ -151,7 +164,6 @@ namespace HospitalManagementSystem.ViewModels
             ((ResidentPatient)Hospital.Patients[PatientID]).Department.Patients.Remove(PatientID);              
             ((ResidentPatient)Hospital.Patients[PatientID]).Department = Hospital.Departments[EditPatientDepartment.Key];
             ((ResidentPatient)Hospital.Patients[PatientID]).Department.Patients.Add(PatientID, Hospital.Patients[PatientID]);
-
             ((ResidentPatient)Hospital.Patients[PatientID]).Room.Patients.Remove(PatientID);
             ((ResidentPatient)Hospital.Patients[PatientID]).Room = Hospital.Rooms[EditRoomNumberComboBox.Key];
             Hospital.Rooms[EditRoomNumberComboBox.Key].addPatient(Hospital.Patients[PatientID]);
@@ -212,6 +224,37 @@ namespace HospitalManagementSystem.ViewModels
             medicine.StartingDate = MedicineStartDate;
             medicine.EndingDate = MedicineEndDate;
             ((ResidentPatient)Hospital.Patients[PatientID]).History.Add(medicine.ID, medicine);
+            Medicine tempMedicine = ((ResidentPatient)Hospital.Patients[PatientID]).History[medicine.ID];
+            MedicalHistoryList.Add(new ComboBoxPairs(medicine.ID, medicine.Name + " - Starting Date: " + medicine.StartingDate.ToShortDateString() + " | " + medicine.EndingDate.ToShortDateString()));
+            HospitalDB.InsertMedicine(medicine, Hospital.Patients[PatientID]);
+            Home.ViewModel.CloseRootDialog();
+
+        }
+
+        public void RemoveDr()
+        {
+            String text = "Do You Want To Remove " + ListSelectedDoctor.Value + " ?";
+            DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                DoctorsComboBox.Add(new ComboBoxPairs(ListSelectedDoctor.Key, ListSelectedDoctor.Value));
+                Hospital.Patients[PatientID].removeDoctor(ListSelectedDoctor.Key);
+                ((Doctor)Hospital.Employees[ListSelectedDoctor.Key]).Patients.Remove(PatientID);
+                HospitalDB.DeleteDoctorPatient(ListSelectedDoctor.Key, PatientID);
+                DoctorsList.Remove(ListSelectedDoctor);
+                DoctorsNumber = "Doctors: " + Hospital.Patients[PatientID].Doctors.Count().ToString();
+            }
+        }
+        public void RemoveMedicine()
+        {
+            String text = "Do You Want To Remove " + ListSelectedDoctor.Value + " ?";
+            DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                ((ResidentPatient)Hospital.Patients[PatientID]).History.Remove(ListSelectedMedicine.Key);
+                HospitalDB.DeleteMedicine(ListSelectedMedicine.Key);
+                MedicalHistoryList.Remove(ListSelectedMedicine);
+            }
         }
     }
 }

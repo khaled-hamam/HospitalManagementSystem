@@ -34,19 +34,14 @@ namespace HospitalManagementSystem.ViewModels
         // lists
         public String DoctorsNumber { get; set; }
         public ObservableCollection<ComboBoxPairs> DoctorsList { get; set; }
-        public ObservableCollection<ComboBoxPairs> DoctorsComboBox { get; set; }
         public ObservableCollection<ComboBoxPairs> AppointmentsList { get; set; }
         public String AppointmentsNumber { get; set; }
-        public ICommand assignDoctor { get; set; }
-        public ComboBoxPairs DoctorComboBox { get; set; }
-        public ComboBoxPairs ListSelectedDoctor { get; set; }
 
         public AppointmentPatientDetailsViewModel(String id)
         {
             PatientID = id;
             DoctorsList = new ObservableCollection<ComboBoxPairs>();
             AppointmentsList = new ObservableCollection<ComboBoxPairs>();
-            DoctorsComboBox = new ObservableCollection<ComboBoxPairs>();
             foreach (Doctor doctor in Hospital.Patients[id].Doctors.Values)
             {  
                 DoctorsList.Add( new ComboBoxPairs(doctor.ID, doctor.Name));
@@ -58,24 +53,7 @@ namespace HospitalManagementSystem.ViewModels
                 AppointmentsList.Add(new ComboBoxPairs(appointment.ID, ("Date: " + appointment.Date.ToString() + " | " +appointment.Doctor.Name)));
             }
             AppointmentsNumber = "Appointments: " + ((AppointmentPatient)Hospital.Patients[id]).Appointments.Count().ToString();
-
-            foreach (Employee employee in Hospital.Employees.Values)
-            {
-                Boolean valid = true;
-                foreach (Doctor invalidDoctor in Hospital.Patients[id].Doctors.Values)
-                {
-                    if (employee.ID == invalidDoctor.ID)
-                    {
-                        valid = false;
-                    }
-                }
-                    if (employee.GetType() == typeof(Doctor) && valid)
-                    DoctorsComboBox.Add(new ComboBoxPairs(employee.ID, employee.Name));
-            }
-            // list Content
-            assignDoctor = new RelayCommand(AssignDoctor);
-            DoctorComboBox = new ComboBoxPairs("Key", "Value");
-            ListSelectedDoctor = new ComboBoxPairs("Key", "Value");
+          
             // Edit Content
             editAppointmentPatient = new RelayCommand(EditAppointmentPatient);
             EditPatientNameTextBox = Hospital.Patients[id].Name;
@@ -101,40 +79,6 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.DeletePatient(PatientID);
             Home.ViewModel.CloseRootDialog();
             Home.ViewModel.Content = new PatientsViewModel();
-        }
-
-        public void AssignDoctor()
-        {
-            DoctorsList.Add(new ComboBoxPairs(DoctorComboBox.Key, DoctorComboBox.Value));
-            foreach (Doctor doctor in Hospital.Employees.Values)
-            {
-                if (doctor.ID == DoctorComboBox.Key)
-                {
-                    Hospital.Patients[PatientID].Doctors.Add(doctor.ID, doctor);
-                    HospitalDB.InsertDoctorPatient(doctor.ID, PatientID);
-                    DoctorsNumber = "Doctors: " + Hospital.Patients[PatientID].Doctors.Count().ToString();
-                    break;
-                }
-            }
-            DoctorsComboBox.Remove(DoctorComboBox);
-            Home.ViewModel.CloseRootDialog();
-        }
-
-        public void RemoveDr()
-        {
-            String text = "Do You Want To Remove " + ListSelectedDoctor.Value + " ?";
-            DialogResult answer = System.Windows.Forms.MessageBox.Show(text, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (answer == DialogResult.Yes)
-            {
-
-                DoctorsComboBox.Add(new ComboBoxPairs(ListSelectedDoctor.Key, ListSelectedDoctor.Value));
-                Hospital.Patients[PatientID].removeDoctor(ListSelectedDoctor.Key);
-                ((Doctor)Hospital.Employees[ListSelectedDoctor.Key]).Patients.Remove(PatientID);
-                HospitalDB.DeleteDoctorPatient(ListSelectedDoctor.Key, PatientID);
-                DoctorsList.Remove(ListSelectedDoctor);
-                DoctorsNumber = "Doctors: " + Hospital.Patients[PatientID].Doctors.Count().ToString();
-
-            }
         }
     }
 }
