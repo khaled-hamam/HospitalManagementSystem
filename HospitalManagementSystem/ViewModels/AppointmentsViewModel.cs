@@ -1,4 +1,4 @@
-﻿using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Models;
 using System.Collections.ObjectModel;
 using System;
 using HospitalManagementSystem.Services;
@@ -112,6 +112,7 @@ namespace HospitalManagementSystem.ViewModels
                 Appointments.Add(
                     new AppointmentCardViewModel
                     {
+                        ID = appointment.ID,
                         PatientName = appointment.Patient.Name,
                         DoctorName = appointment.Doctor.Name,
                         Duration = appointment.Duration.ToString() + " mins",
@@ -142,6 +143,7 @@ namespace HospitalManagementSystem.ViewModels
             datePickerString += AppointmentTimePicker.ToShortTimeString();
             Appointment newAppointment = new Appointment
             {
+            
                 Patient = (AppointmentPatient)Hospital.Patients[PatientNameComboBox.Key],
                 Doctor = (Doctor)Hospital.Employees[DoctorNameComboBox.Key],
                 Duration = Int32.Parse(AppointmentDuration),
@@ -156,6 +158,7 @@ namespace HospitalManagementSystem.ViewModels
             Appointments.Add(
                 new AppointmentCardViewModel
                 {
+                    ID = newAppointment.ID,
                     PatientName = newAppointment.Patient.Name,
                     DoctorName = newAppointment.Doctor.Name,
                     Duration = newAppointment.Duration.ToString(),
@@ -165,6 +168,7 @@ namespace HospitalManagementSystem.ViewModels
             FilteredAppointments.Add(
                 new AppointmentCardViewModel
                 {
+                    ID = newAppointment.ID,
                     PatientName = newAppointment.Patient.Name,
                     DoctorName = newAppointment.Doctor.Name,
                     Duration = newAppointment.Duration.ToString(),
