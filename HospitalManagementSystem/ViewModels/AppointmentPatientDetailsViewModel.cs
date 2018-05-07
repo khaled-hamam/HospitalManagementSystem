@@ -71,6 +71,8 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Patients[PatientID].BirthDate = EditPatientBirthDatePicker;
             Hospital.Patients[PatientID].Diagnosis = PatientDiagnosis = EditPatientDiagnosisTextBox;
             HospitalDB.UpdatePatient(Hospital.Patients[PatientID]);
+            Home.ViewModel.CloseRootDialog();
+
         }
 
         public void DeleteAppointmentPatient()

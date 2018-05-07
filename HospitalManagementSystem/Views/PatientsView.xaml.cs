@@ -28,7 +28,14 @@ namespace HospitalManagementSystem.Views
         {
             InitializeComponent();
         }
-       
-  
+        private void Sample2_DialogHost_OnDialogClosing(object sender, DialogClosingEventArgs eventArgs)
+        {
+            PatientAddressTextBox.Clear();
+            PatientNameTextBox.Clear();
+            PatientTypeComboBox.SelectedIndex = -1;
+            PatientDepartmentCombobox.SelectedIndex = -1;
+            RoomNumberComboBox.SelectedIndex = -1;
+        }
+
     }
 }
