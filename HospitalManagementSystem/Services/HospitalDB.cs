@@ -288,7 +288,7 @@ namespace HospitalManagementSystem.Services
                         BirthDate = reader.GetDateTime("birth_date"),
                         Address = reader.GetString("address"),
                         Diagnosis = reader.GetString("diagnosis"),
-                        Duration = reader.GetInt32("duration")
+                        EntryDate = reader.GetDateTime("entry_date")
                     });
                 }
             }
@@ -664,7 +664,7 @@ namespace HospitalManagementSystem.Services
                 if (patient.GetType() == typeof(ResidentPatient))
                 {
                     query = $"INSERT INTO resident_patient VALUES('{patient.ID}', '{((ResidentPatient)patient).Room.ID}', " +
-                        $"'{((ResidentPatient)patient).Department.ID}', 0)";
+                        $"'{((ResidentPatient)patient).Department.ID}', '{patient.EntryDate.ToString("yyy-MM-dd")}')";
                     command = new MySqlCommand(query, con);
                     await command.ExecuteNonQueryAsync();
                 }
@@ -923,7 +923,8 @@ namespace HospitalManagementSystem.Services
                 if (patient.GetType() == typeof(ResidentPatient))
                 {
                     query = $"UPDATE resident_patient SET room_id = '{((ResidentPatient)patient).Room.ID}', " +
-                        $"department_id = '{((ResidentPatient)patient).Department.ID}' " +
+                        $"department_id = '{((ResidentPatient)patient).Department.ID}', " +
+                        $"entry_date = '{((ResidentPatient)patient).EntryDate.ToString("yyy-MM-dd")}' " +
                         $"WHERE patient_id = '{patient.ID}'";
                     command = new MySqlCommand(query, con);
                     await command.ExecuteNonQueryAsync();
