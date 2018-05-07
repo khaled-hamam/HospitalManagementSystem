@@ -83,7 +83,7 @@
                                         materialDesign:HintAssist.Hint="Patient Name"  
                                         SelectedItem="{Binding PatientNameComboBox}"
                                         IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
-                                        Margin="0 8 0 0" 
+                                        Margin="0 8 8 0" 
                                         HorizontalAlignment="Left"  
                                         Width="200" 
                                         x:Name="PatientNameComboBox" />
@@ -113,7 +113,7 @@
                                 Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" 
                                 x:Name="AppointmentDuration" />
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 8 8 0"

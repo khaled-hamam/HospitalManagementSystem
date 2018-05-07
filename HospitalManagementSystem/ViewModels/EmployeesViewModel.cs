@@ -1,4 +1,4 @@
-﻿using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Models;
 using System.Collections.ObjectModel;
 using System;
 using System.Windows.Input;
@@ -32,6 +32,7 @@ namespace HospitalManagementSystem.ViewModels
         public DateTime EmployeeDatePicker { get; set; }
         public String EmpoloyeeRoleComboBox { get; set; }
         public String doc;
+        public String textValidation { get; set; }
         public bool isHeadCheck { get; set; }
         public  String EmployeeRole
         {
@@ -191,11 +192,31 @@ namespace HospitalManagementSystem.ViewModels
             EmployeeAddressTextBox = (EmployeeAddressTextBox != null) ? EmployeeAddressTextBox.Trim() : "";
             EmployeeSalaryTextBox = (EmployeeSalaryTextBox != null) ? EmployeeSalaryTextBox.Trim() : "";
             EmployeeRole = (EmployeeRole != null) ? EmployeeRole.Trim() : "";
-            if (EmployeeNameTextBox == "") return false;
-            if (EmployeeAddressTextBox == "") return false;
-            if (EmployeeSalaryTextBox == "") return false;
-            if (EmployeeDepartment == null) return false;
-            if (EmployeeRole == "") return false;
+            if (EmployeeNameTextBox == "")
+            {
+                textValidation = "Employee Name is Empty";
+                return false;
+            }
+            if (EmployeeAddressTextBox == "")
+            {
+                textValidation = "Employee Address is Empty";
+                return false;
+            }
+            if (EmployeeSalaryTextBox == "")
+            {
+                textValidation = "Employee Salary is Empty";
+                return false;
+            }
+            if (EmployeeDepartment == null)
+            {
+                textValidation = "Employee Depratment is Empty";
+                return false;
+            }
+            if (EmployeeRole == "")
+            {
+                textValidation = "Employee Role is Empty";
+                return false;
+            }
             return true;
         }
     }
