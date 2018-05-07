@@ -70,6 +70,7 @@
         <!--#endregion-->
         <!--Add new Department Button-->
                     <Button 
+                        materialDesign:DialogHost.DialogClosingAttached="ClearAddDepartment"
                         Margin="0 0 35 20"
                         Background="{StaticResource PrimaryColor}"
                         BorderThickness="0"
