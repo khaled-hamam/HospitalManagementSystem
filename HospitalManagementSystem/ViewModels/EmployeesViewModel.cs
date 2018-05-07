@@ -101,6 +101,7 @@ namespace HospitalManagementSystem.ViewModels
             if (isHeadCheck)
             {
                 string HeadID= Hospital.Departments[EmployeeDepartment.Key].HeadID;
+                if(HeadID != "")
                 ((Doctor)Hospital.Employees[HeadID]).IsHead = false;
             }
             if (EmployeeRole == "Doctor") {

@@ -1,6 +1,8 @@
 ﻿using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Services;
 using HospitalManagementSystem.Views;
+using HospitalManagementSystem.Views.Components;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -174,12 +176,16 @@ namespace HospitalManagementSystem.ViewModels
             Home.ViewModel.CloseRootDialog();
         }
 
-        public void DeleteResidentPatient()
+        public async void DeleteResidentPatient()
         {
-            Hospital.DeletePatient(PatientID);
-            HospitalDB.DeletePatient(PatientID);
-            Home.ViewModel.CloseRootDialog();
-            Home.ViewModel.Content = new PatientsViewModel();
+            object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
+            if (result.Equals(true))
+            {
+                Hospital.DeletePatient(PatientID);
+                HospitalDB.DeletePatient(PatientID);
+                Home.ViewModel.CloseRootDialog();
+                Home.ViewModel.Content = new PatientsViewModel();
+            }
         }
         public void AssignDoctor()
         {
