@@ -5,6 +5,7 @@ using HospitalManagementSystem.Services;
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Linq;
+using HospitalManagementSystem.Views;
 
 namespace HospitalManagementSystem.ViewModels
 {
@@ -179,10 +180,10 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Appointments[newAppointment.ID].Patient.addAppointment(newAppointment);
             Hospital.Appointments[newAppointment.ID].Doctor.addAppointment(newAppointment);
             HospitalDB.InsertAppointment(newAppointment);
-            
-            
-      
-            
+            Home.ViewModel.CloseRootDialog();
+
+
+
         }
     }
 }

@@ -66,6 +66,7 @@
                 </Grid>
         </ScrollViewer>
                     <Button 
+                        materialDesign:DialogHost.DialogClosingAttached="ClearAddAppointment"
                         Margin="0 0 35 20"
                         Background="{StaticResource PrimaryColor}"
                         BorderThickness="0"

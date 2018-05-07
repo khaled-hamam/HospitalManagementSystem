@@ -44,5 +44,13 @@ namespace HospitalManagementSystem.Views
 
             }
         }
+        private void ClearAddAppointment(object sender, DialogClosingEventArgs eventArgs)
+        {
+            AppointmentTimePicker.SelectedTime = null;
+            PatientNameComboBox.SelectedItem = null;
+            DoctorNameComboBox.SelectedItem = null;
+            AppointmentDuration.Clear();
+            AppointmentDatePicker.SelectedDate = DateTime.Today;
+        }
     }
 }
