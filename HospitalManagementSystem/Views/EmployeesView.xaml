@@ -81,7 +81,7 @@
                                 <StackPanel Margin="16">
                                     <TextBox Text="{Binding EmployeeNameTextBox}"  materialDesign:HintAssist.Hint="Employee Name"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="EmployeeNameTextBox" />
                                     <TextBox Text="{Binding EmployeeAddressTextBox}" materialDesign:HintAssist.Hint="Employee Address"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeAddressTextBox" />
-                                    <DatePicker Text="{Binding EmployeeDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeBirthDatePicker" />
+                                    <DatePicker SelectedDate="{Binding EmployeeDatePicker}" materialDesign:HintAssist.Hint="Employee BirthDate"  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0 15 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeBirthDatePicker" />
                                     <TextBox Text="{Binding EmployeeSalaryTextBox}" materialDesign:HintAssist.Hint="Employee salary"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0 8 0 0" HorizontalAlignment="Left"  Width="200" x:Name="EmployeeSalaryTextBox" />
                                     <ComboBox 
                                         materialDesign:HintAssist.Hint="Employee Department"  

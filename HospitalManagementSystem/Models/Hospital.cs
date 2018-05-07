@@ -223,11 +223,13 @@ namespace HospitalManagementSystem.Models
 
         public static void DeleteDoctor(String DoctorId)
         {
-            foreach (Appointment appointment in ((Doctor)Employees[DoctorId]).Appointments.Values)
+            List<Appointment> apps = new List<Appointment>(((Doctor)Employees[DoctorId]).Appointments.Values);
+            foreach (Appointment appointment in apps)
             {
                 appointment.cancel();
             }
-            foreach (Patient patient in ((Doctor)Employees[DoctorId]).Patients.Values)
+            List<Patient> pats = new List<Patient>(((Doctor)Employees[DoctorId]).Patients.Values);
+            foreach (Patient patient in pats)
             {
                 patient.removeDoctor(DoctorId);
             }
@@ -237,7 +239,8 @@ namespace HospitalManagementSystem.Models
 
         public static void DeleteNurse(String NurseId)
         {
-            foreach (Room room in ((Nurse)Employees[NurseId]).Rooms.Values)
+            List<Room> nurses = new List<Room>(((Nurse)Employees[NurseId]).Rooms.Values);
+            foreach (Room room in nurses)
             {
                 room.removeNurse(NurseId);
             }
@@ -246,11 +249,13 @@ namespace HospitalManagementSystem.Models
 
         public static void DeleteRoom(String RoomId)
         {
-            foreach(Nurse nurse in Rooms[RoomId].Nurses.Values)
+            List<Nurse> nurses = new List<Nurse>(Rooms[RoomId].Nurses.Values);
+            foreach(Nurse nurse in nurses )
             {
                 nurse.removeRoom(RoomId);
             }
-            foreach (Patient patient in Rooms[RoomId].Patients.Values)
+            List<Patient> pats = new List<Patient>(Rooms[RoomId].Patients.Values);
+            foreach (Patient patient in pats )
             {
                 if (patient.GetType() == typeof(ResidentPatient))
                 {
@@ -263,7 +268,8 @@ namespace HospitalManagementSystem.Models
 
         public static void DeletePatient(String PatientId)
         {
-            foreach(Doctor doctor in Patients[PatientId].Doctors.Values)
+            List<Doctor> drs = new List<Doctor>(Patients[PatientId].Doctors.Values);
+            foreach(Doctor doctor in drs)
             {
                 doctor.removePatient(PatientId);
             }
@@ -285,20 +291,21 @@ namespace HospitalManagementSystem.Models
 
         public static void DeleteDepartment(String DepartmentId)
         {
-            foreach (Patient patient in Departments[DepartmentId].Patients.Values)
+            List<Patient> pats = new List<Patient>(Departments[DepartmentId].Patients.Values);
+            foreach (Patient patient in pats )
             {
                 if (patient.GetType() == typeof(ResidentPatient))
                 {
                     ((ResidentPatient)patient).Department = null;
                 }
             }
-
-            foreach(Doctor doctor in Departments[DepartmentId].Doctors.Values)
+            List<Doctor> drs = new List<Doctor>(Departments[DepartmentId].Doctors.Values);
+            foreach(Doctor doctor in drs )
             {
                 doctor.Department = null;
             }
-
-            foreach(Nurse nurse in Departments[DepartmentId].Nurse.Values)
+            List<Nurse> nurses = new List<Nurse>(Departments[DepartmentId].Nurse.Values);
+            foreach(Nurse nurse in nurses)
             {
                 nurse.Department = null;
             }

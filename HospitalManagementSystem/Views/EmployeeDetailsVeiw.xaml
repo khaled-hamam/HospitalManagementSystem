@@ -46,6 +46,9 @@
                                 HorizontalAlignment="Left"  
                                 Width="200" 
                                 x:Name="EditEmployeeDepartmentComboBox" />
+                            <CheckBox Margin="0 8 0 0"   Name="isHeadCheckBox" Visibility="{Binding  IsDoctor}" IsChecked="{Binding isHeadCheck}">Department Head</CheckBox>
+                            <TextBlock Margin="0 0 0 0" Text="{Binding textValidation}" Style="{StaticResource ErrorMsg}" x:Name="validation"/>
+
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
