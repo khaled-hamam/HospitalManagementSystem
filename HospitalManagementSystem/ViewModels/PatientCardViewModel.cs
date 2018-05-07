@@ -43,7 +43,6 @@ namespace HospitalManagementSystem.ViewModels
                     PatientName = Hospital.Patients[ID].Name,
                     PatientAddress = Hospital.Patients[ID].Address,
                     PatientBirthDate = Hospital.Patients[ID].BirthDate.ToShortDateString(),
-                    PatientBill = Hospital.Patients[ID].getBill().ToString(),
                     PatientDiagnosis = Hospital.Patients[ID].Diagnosis,
                     PatientType = "Appointment Patient",
                 };

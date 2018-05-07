@@ -21,9 +21,10 @@
                 <TextBlock Text="{Binding AppointmentDate}" Style="{StaticResource InfoValue}" FontSize="20" FontWeight="Bold"></TextBlock>
                 <Grid Margin="0 5">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="130"/>
                         <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="45"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -39,6 +40,10 @@
                     <StackPanel Grid.Column="2">
                         <TextBlock Style="{StaticResource InfoTitle}">Duration</TextBlock>
                         <TextBlock Text="{Binding Duration}" Style="{StaticResource InfoValue}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3">
+                        <TextBlock Style="{StaticResource InfoTitle}">Bill</TextBlock>
+                        <TextBlock Text="{Binding appointmentBill}" Style="{StaticResource InfoValue}"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>

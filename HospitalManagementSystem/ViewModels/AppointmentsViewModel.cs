@@ -122,7 +122,8 @@ namespace HospitalManagementSystem.ViewModels
                         PatientName = appointment.Patient.Name,
                         DoctorName = appointment.Doctor.Name,
                         Duration = appointment.Duration.ToString() + " mins",
-                        AppointmentDate = appointment.Date.ToString()
+                        AppointmentDate = appointment.Date.ToString(),
+                        appointmentBill = appointment.Bill.ToString("#0.00") + '$'
                     }
                 );
             }
@@ -152,6 +153,7 @@ namespace HospitalManagementSystem.ViewModels
                 Doctor = (Doctor)Hospital.Employees[DoctorNameComboBox.Key],
                 Duration = Int32.Parse(AppointmentDuration),
                 Date = DateTime.Parse(datePickerString),
+                Bill =((double.Parse(AppointmentDuration) / 60.0)) * Hospital.Config.AppointmentHourPrice
             };
             if (!(((Doctor)Hospital.Employees[DoctorNameComboBox.Key]).isAvailable(newAppointment)))
             {
@@ -164,8 +166,8 @@ namespace HospitalManagementSystem.ViewModels
                     PatientName = newAppointment.Patient.Name,
                     DoctorName = newAppointment.Doctor.Name,
                     Duration = newAppointment.Duration.ToString(),
-                    AppointmentDate = newAppointment.Date.ToString()
-
+                    AppointmentDate = newAppointment.Date.ToString(),
+                    appointmentBill = newAppointment.Bill.ToString("0.00") + '$'
                 });
             FilteredAppointments.Add(
                 new AppointmentCardViewModel
@@ -173,8 +175,8 @@ namespace HospitalManagementSystem.ViewModels
                     PatientName = newAppointment.Patient.Name,
                     DoctorName = newAppointment.Doctor.Name,
                     Duration = newAppointment.Duration.ToString(),
-                    AppointmentDate = newAppointment.Date.ToString()
-
+                    AppointmentDate = newAppointment.Date.ToString(),
+                    appointmentBill = newAppointment.Bill.ToString("0.00") + '$'
                 });
             Hospital.Appointments.Add(newAppointment.ID, newAppointment);
             Hospital.Appointments[newAppointment.ID].Patient.addAppointment(newAppointment);

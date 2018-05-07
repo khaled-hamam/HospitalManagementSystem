@@ -1,5 +1,6 @@
 ﻿
 using HospitalManagementSystem.ViewModels;
+using MaterialDesignThemes.Wpf;
 using System.Windows.Controls;
 using System.Windows.Forms;
 
@@ -22,6 +23,11 @@ namespace HospitalManagementSystem.Views
         {
             ((RoomDetailsViewModel)DataContext).RemoveNurse();
            
+        }
+        private void ClearEditRoom(object sender, DialogClosingEventArgs eventArgs)
+        {
+            validation.Text = "";
+           // RoomNumberTextBox.Text = "";
         }
     }
 }

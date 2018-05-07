@@ -22,7 +22,7 @@ namespace HospitalManagementSystem.ViewModels
         public String editedRoomNumber { get; set; }
         public String PatientsNumber { get; set; }
         public String NursesNumber { get; set; }
-
+        public String textValidation { get; set; }
         public ObservableCollection<ComboBoxPairs> PatientsList { get; set; }
         public ObservableCollection<ComboBoxPairs> NursesList { get; set; }
 
@@ -85,7 +85,7 @@ namespace HospitalManagementSystem.ViewModels
         {
             if (String.IsNullOrEmpty(editedRoomNumber))
             {
-                System.Windows.Forms.MessageBox.Show("Room Number can't be Empty");
+                textValidation =  ("Room Number can't be Empty");
                 return;
             }
             bool ValideRoom = true;
@@ -99,7 +99,7 @@ namespace HospitalManagementSystem.ViewModels
             }
             if(!ValideRoom && editedRoomNumber != RoomNumber)
             {
-                System.Windows.Forms.MessageBox.Show("ROOM NUMBER IS ALREADY EXIST");
+                textValidation = ("ROOM NUMBER IS ALREADY EXIST");
             }
             else
             {    

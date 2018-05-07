@@ -1,4 +1,5 @@
 ﻿using HospitalManagementSystem.ViewModels;
+using MaterialDesignThemes.Wpf;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,6 +16,10 @@ namespace HospitalManagementSystem.Views
             InitializeComponent();
         }
 
-
+        private void ClearEditDepartment(object sender, DialogClosingEventArgs eventArgs)
+        {
+            validation.Text = "";
+            DepartmentNameTextBox = null;
+        }
     }
 }
