@@ -27,7 +27,7 @@ namespace HospitalManagementSystem.Views
         private void ClearEditRoom(object sender, DialogClosingEventArgs eventArgs)
         {
             validation.Text = "";
-           // RoomNumberTextBox.Text = "";
+            RoomNumberTextBox.Text = "";
         }
     }
 }
