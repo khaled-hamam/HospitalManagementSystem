@@ -174,6 +174,7 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Appointments.Add(newAppointment.ID, newAppointment);
             Hospital.Appointments[newAppointment.ID].Patient.addAppointment(newAppointment);
             Hospital.Appointments[newAppointment.ID].Doctor.addAppointment(newAppointment);
+            Hospital.Appointments[newAppointment.ID].Doctor.addPatient(newAppointment.Patient);
             HospitalDB.InsertAppointment(newAppointment);
             Home.ViewModel.CloseRootDialog();
 
