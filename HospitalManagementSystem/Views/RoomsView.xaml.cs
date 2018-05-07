@@ -33,6 +33,12 @@ namespace HospitalManagementSystem.Views
                 Home.ViewModel.CloseRootDialog();
             }
         }
+        private void ClearAddRoom(object sender, DialogClosingEventArgs eventArgs)
+        {
+            RoomNumberTextBox.Clear();
+            RoomtTypeComboBox.SelectedItem = null;
+            validation.Text = "";
+        }
 
     }
 }
