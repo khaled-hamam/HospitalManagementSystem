@@ -109,12 +109,16 @@ namespace HospitalManagementSystem.ViewModels
                 Home.ViewModel.CloseRootDialog();
             }
         }
-        public void DeleteRooms()
+        public async void DeleteRooms()
         {
-            Hospital.Rooms.Remove(RoomID);
-            Home.ViewModel.CloseRootDialog();
-            Home.ViewModel.Content = new RoomsViewModel();
-            HospitalDB.DeleteRoom(RoomID);
+
+            object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
+            if (result.Equals(true))
+            {
+                Hospital.Rooms.Remove(RoomID);
+                Home.ViewModel.Content = new RoomsViewModel();
+                HospitalDB.DeleteRoom(RoomID);
+            }
         }
 
         public async void RemoveNurse()
