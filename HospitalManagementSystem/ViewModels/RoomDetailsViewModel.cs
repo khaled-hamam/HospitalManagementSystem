@@ -116,7 +116,8 @@ namespace HospitalManagementSystem.ViewModels
             Home.ViewModel.Content = new RoomsViewModel();
             HospitalDB.DeleteRoom(RoomID);
         }
-        public async System.Threading.Tasks.Task RemoveNurseAsync()
+        
+        public async void RemoveNurse()
         {
             object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
             if (result.Equals(true))
