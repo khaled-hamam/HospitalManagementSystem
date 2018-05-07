@@ -33,13 +33,12 @@ namespace HospitalManagementSystem.Models
         }
         public override double getBill()
         {
-            int duration = 0;
-            foreach(Appointment appointment in Hospital.Appointments.Values)
+            Double Bill = 0.0;
+            foreach(Appointment appointment in Appointments.Values)
             {
-                duration += appointment.Duration;
+                Bill += appointment.Bill;
             }
-            float bill = duration + (float)(duration * 0.5);
-            return bill;
+            return Bill;
         }
     }
 }

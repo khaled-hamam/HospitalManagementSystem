@@ -64,6 +64,7 @@ namespace HospitalManagementSystem.ViewModels
      
         public ResidentPatientDetailsViewModel(String id)
         {
+            PatientBill = ((ResidentPatient)Hospital.Patients[id]).getBill().ToString("0.00") + '$';
             PatientID = id;
             PatientDepartment = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
             DoctorsList = new ObservableCollection<ComboBoxPairs>();

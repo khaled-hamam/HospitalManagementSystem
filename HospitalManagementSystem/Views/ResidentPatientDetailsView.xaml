@@ -29,7 +29,7 @@
             </StackPanel>
                     <!--Main Buttons-->
             <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                 <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{StaticResource DetailsButton}" Margin="15 0 0 0">EDIT
+                    <Button materialDesign:DialogHost.DialogClosingAttached="ClearEditResident" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{StaticResource DetailsButton}" Margin="15,19,0,0" VerticalAlignment="Top">EDIT
                             <Button.CommandParameter>
                                 <StackPanel>
                                     <StackPanel Margin="16">
@@ -57,7 +57,8 @@
                                     IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  
                                     Margin="0 8 0 0" 
                                     HorizontalAlignment="Left"  
-                                    Width="200" />
+                                    Width="200" 
+                                    x:Name="PatientDepartmentComboBox"/>
                                     <TextBlock  Text="{Binding textValidation}" Style="{StaticResource ErrorMsg}" x:Name="validation"/>
 
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >

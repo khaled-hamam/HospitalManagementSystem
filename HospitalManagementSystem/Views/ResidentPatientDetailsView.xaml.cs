@@ -1,4 +1,5 @@
 ﻿using HospitalManagementSystem.ViewModels;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,11 @@ namespace HospitalManagementSystem.Views
         private void RemoveMedicineFromPatient(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ((ResidentPatientDetailsViewModel)DataContext).RemoveMedicine();
+
+        }
+        private void ClearEditResident(object sender, DialogClosingEventArgs eventArgs)
+        {
+            validation.Text = "";
 
         }
     }

@@ -26,11 +26,12 @@
                 <TextBlock Text="{Binding RoomType}" Style="{StaticResource DetailsInfoTitle}" Margin="15 0 0 0" />
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource DetailsButton}"  Margin="15 0 0 0" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">Edit
+                <Button materialDesign:DialogHost.DialogClosingAttached="ClearEditRoom" Style="{StaticResource DetailsButton}"  Margin="15 0 0 0" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">Edit
                     <Button.CommandParameter>
                         <StackPanel>
                             <StackPanel Margin="16">
                                 <TextBox Text="{Binding editedRoomNumber}"  materialDesign:HintAssist.Hint="Room Number"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8 0 0" HorizontalAlignment="Left" Width="200" x:Name="RoomNumberTextBox" />
+                                <TextBlock  Text="{Binding textValidation}" Style="{StaticResource ErrorMsg}" x:Name="validation"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                 <Button Style="{StaticResource MaterialDesignFlatButton}"

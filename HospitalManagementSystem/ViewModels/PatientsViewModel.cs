@@ -119,7 +119,8 @@ namespace HospitalManagementSystem.ViewModels
                     Address = PatientAddressTextBox,
                     BirthDate = PatientBirthDatePicker,
                     Room = Hospital.Rooms[RoomNumber.Key],
-                    Department = Hospital.Departments[PatientDepartment.Key]
+                    Department = Hospital.Departments[PatientDepartment.Key],
+                    //TODO ADD ENTRY DATE
                 };
                 Patients.Add(new PatientCardViewModel
                 {
