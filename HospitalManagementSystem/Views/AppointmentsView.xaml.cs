@@ -36,7 +36,6 @@ namespace HospitalManagementSystem.Views
             if (ViewModel.Validate())
             {
                 ViewModel.addAppointment();
-                Home.ViewModel.CloseRootDialog();
                 AppointmentDuration.Clear();
                 AppointmentTimePicker.SelectedTime = null;
                 PatientNameComboBox.SelectedItem = null;
