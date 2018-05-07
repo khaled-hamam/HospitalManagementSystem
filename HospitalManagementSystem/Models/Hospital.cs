@@ -194,6 +194,10 @@ namespace HospitalManagementSystem.Models
                 appointment.Doctor = (Doctor)Employees[doctorID];
                 ((Doctor)Employees[doctorID]).addAppointment(appointment);
 
+                // Adding Doctor, Patient Relations
+                ((Doctor)Employees[doctorID]).addPatient(Patients[patientID]);
+                Patients[patientID].assignDoctor((Doctor)Employees[doctorID]);
+
                 Appointments.Add(appointment.ID, appointment);
             }
         }

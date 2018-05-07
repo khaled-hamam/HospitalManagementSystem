@@ -211,7 +211,8 @@ namespace HospitalManagementSystem.ViewModels
                 Home.ViewModel.Content = new EmployeesViewModel();
             }
         }
-        public async Task RemovePatientAsync()
+        
+        public async void RemovePatient()
         {
             if (Hospital.Employees[EmployeeID].GetType() == typeof(Doctor))
             {
@@ -225,11 +226,11 @@ namespace HospitalManagementSystem.ViewModels
                     HospitalDB.DeleteDoctorPatient(EmployeeID, ListSelectedPatient.Key);
                     PatientsList.Remove(ListSelectedPatient);
                     PatientsNumber = $"Patients : {PatientsList.Count}";
-
                 }
             }
         }
-        public async Task RemoveRoomAsync()
+        
+        public async void RemoveRoom()
         {
             if (Hospital.Employees[EmployeeID].GetType() == typeof(Nurse))
             {
@@ -244,10 +245,10 @@ namespace HospitalManagementSystem.ViewModels
                     RoomsList.Remove(ListSelectedRoom);
                     PatientsList.Remove(ListSelectedPatient);
                     RoomsNumber = $"Rooms : {RoomsList.Count}";
-
                 }
             }
         }
+        
         public void AssignPatient()
         {
             if (PatientComboBox.Key == "Key" && PatientComboBox.Value == "Value")
@@ -277,7 +278,6 @@ namespace HospitalManagementSystem.ViewModels
                         break;
                     }
                 }   
-
                 PatientsComboBox.Remove(PatientComboBox);
                 Home.ViewModel.CloseRootDialog();
             }

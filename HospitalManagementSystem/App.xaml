@@ -71,7 +71,7 @@
                 <Setter Property="Foreground" Value="Red"></Setter>
                 <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
                 <Setter Property="TextAlignment" Value="Center"></Setter>
-                <Setter Property="Margin" Value="0 20 0 -5"></Setter>
+                <Setter Property="Margin" Value="0 15 0 -15"></Setter>
                 <Setter Property="Width" Value="200"></Setter>
                 <Setter Property="FontSize" Value="9"></Setter>
             </Style>

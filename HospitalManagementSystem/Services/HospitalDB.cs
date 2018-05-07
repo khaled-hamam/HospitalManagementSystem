@@ -694,7 +694,7 @@ namespace HospitalManagementSystem.Services
             {
                 con.Open();
                 String query = $"INSERT INTO medicine VALUES('{medicine.ID}', '{medicine.Name}', " +
-                    $"'{medicine.StartingDate.ToString("yyyy-MM-dd")}', '{medicine.EndingDate.ToString("yyyy-MM-dd")}', '{patient.ID}'";
+                    $"'{medicine.StartingDate.ToString("yyyy-MM-dd")}', '{medicine.EndingDate.ToString("yyyy-MM-dd")}', '{patient.ID}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
             }

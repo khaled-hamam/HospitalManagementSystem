@@ -26,26 +26,7 @@ namespace HospitalManagementSystem.Views
 
         public DepartmentsView()
         {
-            ViewModel = new DepartmentsViewModel();
-            DataContext = ViewModel;
             InitializeComponent();
-        }
-
-        public void addDepartment(object sender, RoutedEventArgs e)
-        {
-            // TODO: Openning a Message Box with Add
-            // TODO: Add to Hospital Class
-            // TODO: Update DB
-            if (ViewModel.ValidateDepartment())
-            {
-                ViewModel.addDepartment();
-                DepartmentNameTextBox.Clear(); 
-
-            }
-            // Closing the Dialog
-            //DialogHost.CloseDialogCommand.Execute(addDepartmentDialaog, null);
-            Home.ViewModel.CloseRootDialog();
-
         }
     }
 }
