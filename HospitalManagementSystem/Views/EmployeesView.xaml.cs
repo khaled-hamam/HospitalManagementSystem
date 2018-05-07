@@ -60,5 +60,17 @@ namespace HospitalManagementSystem.Views
             }
          
         }
+
+        private void ClearAddEmployee(object sender, DialogClosingEventArgs eventArgs)
+        {
+            EmployeeNameTextBox.Clear();
+            EmployeeAddressTextBox.Clear();
+            EmployeeBirthDatePicker.SelectedDate = DateTime.Today;
+            EmployeeSalaryTextBox.Clear();
+            EmployeeDepartmentComboBox.SelectedItem = null;
+            EmpoloyeeRoleComboBox.SelectedItem = null;
+            validation.Text = "";
+        }
+
     }
 }
