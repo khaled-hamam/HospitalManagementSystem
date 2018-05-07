@@ -78,10 +78,14 @@
                         Appointments
                     </ListViewItem>
                 </ListView>
-
-                <Button DockPanel.Dock="Bottom" Click="navigateToSettings" Style="{StaticResource SettingsButton}">
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{Binding ReloadDataCommand}" Style="{StaticResource SettingsButton}">
+                    <materialDesign:PackIcon Kind="Refresh" Height="25" Width="25" />
+                </Button>
+                <Button Click="navigateToSettings" Style="{StaticResource SettingsButton}">
                     <materialDesign:PackIcon Kind="Settings" Height="25" Width="25" />
                 </Button>
+                </StackPanel>
             </DockPanel>
             <ContentControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="10" Content="{Binding Content}"/>
         </Grid>

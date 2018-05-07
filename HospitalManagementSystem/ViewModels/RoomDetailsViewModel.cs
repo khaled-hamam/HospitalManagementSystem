@@ -85,7 +85,7 @@ namespace HospitalManagementSystem.ViewModels
         {
             if (String.IsNullOrEmpty(editedRoomNumber))
             {
-                textValidation =  ("Room Number can't be Empty");
+                textValidation =  "Room Number can't be Empty";
                 return;
             }
             bool ValideRoom = true;
@@ -115,7 +115,7 @@ namespace HospitalManagementSystem.ViewModels
             object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
             if (result.Equals(true))
             {
-                Hospital.Rooms.Remove(RoomID);
+                Hospital.DeleteRoom(RoomID);
                 Home.ViewModel.Content = new RoomsViewModel();
                 HospitalDB.DeleteRoom(RoomID);
             }
