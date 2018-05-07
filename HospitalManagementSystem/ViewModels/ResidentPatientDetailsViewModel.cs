@@ -33,6 +33,7 @@ namespace HospitalManagementSystem.ViewModels
         public String EditPatientAddressTextBox { get; set; }
         public DateTime EditPatientBirthDatePicker { get; set; }
         public ComboBoxPairs EditRoomNumberComboBox { get; set; }
+        public String RoomNumberInEdit { get; set; }
         public ObservableCollection<ComboBoxPairs> PatientRoomNumberComboBox { get; set; }
         public ObservableCollection<ComboBoxPairs> EditDepartmentComboBox { get; set; }
         // Main Page Lists
@@ -72,8 +73,8 @@ namespace HospitalManagementSystem.ViewModels
             EditPatientAddressTextBox = Hospital.Patients[id].Address;
             EditPatientBirthDatePicker = Hospital.Patients[id].BirthDate;
             EditPatientNameTextBox = Hospital.Patients[id].Name;
-           // EditPatientDepartment.Value = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
-            //EditRoomNumberComboBox.Value = ((ResidentPatient)Hospital.Patients[id]).Room.RoomNumber.ToString();
+            RoomNumberInEdit = ((ResidentPatient)Hospital.Patients[id]).Room.RoomNumber.ToString();
+            //SetEditDepartmentComboBox = ((ResidentPatient)Hospital.Patients[id]).Department.Name;
             foreach (Room room in Hospital.Rooms.Values)
             {   
                     if(room.hasAvailableBed())
@@ -150,6 +151,11 @@ namespace HospitalManagementSystem.ViewModels
 
         public void EditResidentPatient()
         {
+            if(EditRoomNumberComboBox == null || EditPatientDepartment == null)
+            {
+                textValidation = "Cannot Have Empty Values";
+                return;
+            }
             Hospital.Patients[PatientID].Name = PatientName = EditPatientNameTextBox;
             Hospital.Patients[PatientID].Address = PatientAddress = EditPatientAddressTextBox;
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
@@ -158,7 +164,6 @@ namespace HospitalManagementSystem.ViewModels
             ((ResidentPatient)Hospital.Patients[PatientID]).Department.Patients.Remove(PatientID);              
             ((ResidentPatient)Hospital.Patients[PatientID]).Department = Hospital.Departments[EditPatientDepartment.Key];
             ((ResidentPatient)Hospital.Patients[PatientID]).Department.Patients.Add(PatientID, Hospital.Patients[PatientID]);
-
             ((ResidentPatient)Hospital.Patients[PatientID]).Room.Patients.Remove(PatientID);
             ((ResidentPatient)Hospital.Patients[PatientID]).Room = Hospital.Rooms[EditRoomNumberComboBox.Key];
             Hospital.Rooms[EditRoomNumberComboBox.Key].addPatient(Hospital.Patients[PatientID]);

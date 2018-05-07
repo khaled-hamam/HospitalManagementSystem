@@ -34,7 +34,7 @@ namespace HospitalManagementSystem.ViewModels
                     PatientBill = Hospital.Patients[ID].getBill().ToString(),
                     PatientDiagnosis = Hospital.Patients[ID].Diagnosis,
                     PatientRoomNumber = ((ResidentPatient)(Hospital.Patients[ID])).Room.RoomNumber.ToString(),
-                    PatientType = "Resdident Patient",
+                    PatientType = "Resident Patient",
                 };
             else
             {
