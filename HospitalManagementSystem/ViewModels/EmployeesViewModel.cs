@@ -110,13 +110,14 @@ namespace HospitalManagementSystem.ViewModels
             }
                 Doctor newDoctor = new Doctor
                 {
-                    
+
                     Name = EmployeeNameTextBox,
                     Salary = Double.Parse(EmployeeSalaryTextBox),
                     Department = Hospital.Departments[EmployeeDepartment.Key],
                     Address = EmployeeAddressTextBox,
-                    IsHead = isHeadCheck
-         
+                    IsHead = isHeadCheck,
+                    BirthDate = EmployeeDatePicker,
+
                 };
                 Employees.Add(
                     new EmployeeCardViewModel
@@ -154,6 +155,7 @@ namespace HospitalManagementSystem.ViewModels
                     Salary = Double.Parse(EmployeeSalaryTextBox),
                     Department = Hospital.Departments[EmployeeDepartment.Key],
                     Address = EmployeeAddressTextBox,
+                    BirthDate = EmployeeDatePicker,
                 };
 
 

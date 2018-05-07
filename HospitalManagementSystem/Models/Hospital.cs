@@ -233,7 +233,12 @@ namespace HospitalManagementSystem.Models
             {
                 patient.removeDoctor(DoctorId);
             }
-            Hospital.Employees[DoctorId].Department.removeDoctor(DoctorId);
+            if (Hospital.Employees[DoctorId].Department != null)
+            {
+                
+                Hospital.Employees[DoctorId].Department.removeDoctor(DoctorId);
+                Hospital.Employees[DoctorId].Department = null;
+            }
             Employees.Remove(DoctorId);
         }
 
