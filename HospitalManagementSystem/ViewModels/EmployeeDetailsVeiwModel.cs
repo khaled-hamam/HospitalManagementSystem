@@ -83,7 +83,11 @@ namespace HospitalManagementSystem.ViewModels
         public EmployeeDetailsVeiwModel(String id)
         {
             EditEmployeeDatePicker = DateTime.Today;
+            Department tempDep = Hospital.Employees[id].Department;
+            if(tempDep != null)
             EmployeeDepartment = Hospital.Employees[id].Department.Name;
+            else
+                EmployeeDepartment = "N/A";
             EmployeeID = id;
             if(Hospital.Employees[id].GetType() == typeof(Doctor))
             {
