@@ -60,6 +60,7 @@
                 </Grid>
         </ScrollViewer>
                     <Button 
+                        materialDesign:DialogHost.DialogClosingAttached="ClearAddRoom"
                         Margin="0 0 35 20"
                         Background="{StaticResource PrimaryColor}"
                         BorderThickness="0"
