@@ -89,7 +89,7 @@ namespace HospitalManagementSystem.ViewModels
             else
                 EmployeeDepartment = "N/A";
             EmployeeID = id;
-            if(Hospital.Employees[id].GetType() == typeof(Doctor))
+            if(Hospital.Employees[id].GetType() == typeof(Doctor) && tempDep != null)
             {
                 if(((Doctor)Hospital.Employees[id]).IsHead == true)
                 {
