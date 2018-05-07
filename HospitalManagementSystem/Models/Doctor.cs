@@ -49,5 +49,23 @@ namespace HospitalManagementSystem.Models
         {
             this.Appointments.Remove(id);
         }
+
+        public bool isFree(Appointment newAppointment)
+        {
+            List<Appointment> apps = new List<Appointment>(Appointments.Values);
+            apps.Add(newAppointment);
+
+            DateTime curEnd = DateTime.MinValue;
+            foreach (Appointment app in apps.OrderBy(app => app.Date))
+            {
+                if (app.Date < curEnd)
+                    return false;
+
+                curEnd = app.Date;
+                curEnd.AddMinutes(app.Duration);
+            }
+
+            return true;
+        }
     }
 }

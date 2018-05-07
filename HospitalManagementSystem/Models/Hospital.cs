@@ -195,8 +195,11 @@ namespace HospitalManagementSystem.Models
                 ((Doctor)Employees[doctorID]).addAppointment(appointment);
 
                 // Adding Doctor, Patient Relations
-                ((Doctor)Employees[doctorID]).addPatient(Patients[patientID]);
-                Patients[patientID].assignDoctor((Doctor)Employees[doctorID]);
+                if (((Doctor)Employees[doctorID]).Patients.ContainsKey(patientID) == false)
+                    ((Doctor)Employees[doctorID]).addPatient(Patients[patientID]);
+
+                if (((AppointmentPatient)Patients[patientID]).Doctors.ContainsKey(doctorID) == false)
+                    Patients[patientID].assignDoctor((Doctor)Employees[doctorID]);
 
                 Appointments.Add(appointment.ID, appointment);
             }
