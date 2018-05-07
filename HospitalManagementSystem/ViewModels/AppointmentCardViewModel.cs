@@ -24,6 +24,8 @@ namespace HospitalManagementSystem.ViewModels
 
             // Delete from FilteredList
 
+            // call appointments.Cancel
+
             // delete from hospital
 
             // deleter from hospital DB
