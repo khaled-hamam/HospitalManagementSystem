@@ -243,7 +243,15 @@ namespace HospitalManagementSystem.ViewModels
                 HospitalDB.UpdateDoctor((Doctor)Hospital.Employees[EmployeeID]);
             }
             else
+            {
+                if (Hospital.Employees[EmployeeID].Department != null)
+                {
+                    Hospital.Employees[EmployeeID].Department.removeNurse(EmployeeID);
+                }
+                Hospital.Departments[EditEmployeeDepartment.Key].addNurse((Nurse)Hospital.Employees[EmployeeID]);
+                Hospital.Employees[EmployeeID].Department = Hospital.Departments[EditEmployeeDepartment.Key];
                 HospitalDB.UpdateNurse((Nurse)Hospital.Employees[EmployeeID]);
+            }
             Home.ViewModel.CloseRootDialog();
 
         }
