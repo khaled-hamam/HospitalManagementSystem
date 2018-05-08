@@ -54,6 +54,7 @@ namespace HospitalManagementSystem.ViewModels
         public ComboBoxPairs EditPatientDepartment { get; set; }
         public String EditPatientAddressTextBox { get; set; }
         public DateTime EditPatientBirthDatePicker { get; set; }
+        public String EditPatientDiagnosisTextBox { get; set; }
         public ComboBoxPairs EditRoomNumberComboBox { get; set; }
         public String RoomNumberInEdit { get; set; }
         public ObservableCollection<ComboBoxPairs> PatientRoomNumberComboBox { get; set; }
@@ -174,6 +175,8 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Patients[PatientID].Address = PatientAddress = EditPatientAddressTextBox;
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
             Hospital.Patients[PatientID].BirthDate = EditPatientBirthDatePicker;
+            if (!String.IsNullOrEmpty(EditPatientDiagnosisTextBox))
+                ((ResidentPatient)Hospital.Patients[PatientID]).Diagnosis = EditPatientDiagnosisTextBox;
             PatientDepartment = Hospital.Departments[EditPatientDepartment.Key].Name;
             ((ResidentPatient)Hospital.Patients[PatientID]).Department.Patients.Remove(PatientID);              
             ((ResidentPatient)Hospital.Patients[PatientID]).Department = Hospital.Departments[EditPatientDepartment.Key];

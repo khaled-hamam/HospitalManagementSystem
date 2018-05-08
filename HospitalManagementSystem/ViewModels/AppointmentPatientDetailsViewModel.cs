@@ -71,7 +71,8 @@ namespace HospitalManagementSystem.ViewModels
             Hospital.Patients[PatientID].Address = PatientAddress = EditPatientAddressTextBox;
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
             Hospital.Patients[PatientID].BirthDate = EditPatientBirthDatePicker;
-            Hospital.Patients[PatientID].Diagnosis = PatientDiagnosis = EditPatientDiagnosisTextBox;
+            if(String.IsNullOrEmpty(EditPatientDiagnosisTextBox))
+                Hospital.Patients[PatientID].Diagnosis = PatientDiagnosis = EditPatientDiagnosisTextBox;
             HospitalDB.UpdatePatient(Hospital.Patients[PatientID]);
             Home.ViewModel.CloseRootDialog();
 
