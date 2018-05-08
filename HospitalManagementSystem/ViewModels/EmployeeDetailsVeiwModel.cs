@@ -310,11 +310,8 @@ namespace HospitalManagementSystem.ViewModels
                                 PatientsList.Remove(PatientsList[i]);
                             }
                         }
-                       // PatientsList.Remove(new ComboBoxPairs(patient.ID, patient.Name));
                     }
-                   // HospitalDB.UpdateNurse(((Nurse)Hospital.Employees[EmployeeID]));
-                    //HospitalDB.UpdateRoom(Hospital.Rooms[ListSelectedRoom.Key]);
-                    HospitalDB.DeleteNurseRoom(ListSelectedRoom.Key, ListSelectedRoom.Value);
+                    HospitalDB.DeleteNurseRoom(EmployeeID, ListSelectedRoom.Key);
                     RoomsList.Remove(ListSelectedRoom);
                     PatientsList.Remove(ListSelectedPatient);
                     RoomsNumber = $"Rooms : {RoomsList.Count}";
