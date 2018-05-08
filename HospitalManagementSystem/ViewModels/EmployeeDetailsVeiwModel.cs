@@ -300,6 +300,20 @@ namespace HospitalManagementSystem.ViewModels
                     RoomsComboBox.Add(new ComboBoxPairs(ListSelectedRoom.Key, ListSelectedRoom.Value));
                     Hospital.Rooms[ListSelectedRoom.Key].removeNurse(EmployeeID);
                     ((Nurse)Hospital.Employees[EmployeeID]).Rooms.Remove(ListSelectedRoom.Key);
+                    foreach(Patient patient in Hospital.Rooms[ListSelectedRoom.Key].Patients.Values)
+                    {
+                        ((Nurse)Hospital.Employees[EmployeeID]).Patients.Remove(patient.ID);
+                        for(int i=0; i<PatientsList.Count; i++)
+                        {
+                            if(PatientsList[i].Key==patient.ID)
+                            {
+                                PatientsList.Remove(PatientsList[i]);
+                            }
+                        }
+                       // PatientsList.Remove(new ComboBoxPairs(patient.ID, patient.Name));
+                    }
+                   // HospitalDB.UpdateNurse(((Nurse)Hospital.Employees[EmployeeID]));
+                    //HospitalDB.UpdateRoom(Hospital.Rooms[ListSelectedRoom.Key]);
                     HospitalDB.DeleteNurseRoom(ListSelectedRoom.Key, ListSelectedRoom.Value);
                     RoomsList.Remove(ListSelectedRoom);
                     PatientsList.Remove(ListSelectedPatient);
