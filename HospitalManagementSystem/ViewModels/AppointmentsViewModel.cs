@@ -11,7 +11,6 @@ namespace HospitalManagementSystem.ViewModels
 {
     public class AppointmentsViewModel : BaseViewModel
     {
-        public ObservableCollection<AppointmentCardViewModel> FilteredAppointments { get; set; }
 
         public String SearchQuery { get; set; }
 
@@ -28,7 +27,9 @@ namespace HospitalManagementSystem.ViewModels
 
         public ICommand SearchAction { get; set; }
 
-        public ObservableCollection<AppointmentCardViewModel> Appointments { get; set; }
+        public static ObservableCollection<AppointmentCardViewModel> FilteredAppointments { get; set; }
+        public static ObservableCollection<AppointmentCardViewModel> Appointments { get; set; }
+
         public bool Validate()
         {
 
@@ -124,7 +125,32 @@ namespace HospitalManagementSystem.ViewModels
             FilteredAppointments = new ObservableCollection<AppointmentCardViewModel>(Appointments);
 
         }
-        private void Search()
+
+        public void DeleteAppointment(String ID)
+        {
+            Hospital.Appointments[ID].Doctor.removePatient(Hospital.Appointments[ID].Patient.ID);
+            Hospital.DeleteAppointment(ID);
+            for (int i = 0; i < FilteredAppointments.Count; ++i)
+            {
+                if (FilteredAppointments[i].ID == ID)
+                {
+                    FilteredAppointments.RemoveAt(i);
+                    break;
+                }
+            }
+
+            for (int i = 0; i < Appointments.Count; ++i)
+            {
+                if (Appointments[i].ID == ID)
+                {
+                    Appointments.RemoveAt(i);
+                    break;
+                }
+            }
+            HospitalDB.DeleteAppointment(ID);
+        }
+        
+        public void Search()
         {
             if (String.IsNullOrEmpty(SearchQuery))
             {

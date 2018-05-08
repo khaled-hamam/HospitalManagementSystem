@@ -6,6 +6,7 @@ using HospitalManagementSystem.Services;
 using MaterialDesignThemes.Wpf;
 using HospitalManagementSystem.Views.Components;
 using HospitalManagementSystem.Views;
+using System.Windows;
 
 namespace HospitalManagementSystem.ViewModels
 {
@@ -27,18 +28,12 @@ namespace HospitalManagementSystem.ViewModels
 
         public async void DeleteAppointment()
         {
-            
+            // ((AppointmentsViewModel)Home.ViewModel.Content).FilteredAppointments.Clear();
             object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
-                if (result.Equals(true))
-                {
-                    
-                     Hospital.Appointments[ID].Doctor.removePatient(Hospital.Appointments[ID].Patient.ID);
-                     Hospital.DeleteAppointment(ID);
-                     Home.ViewModel.Content = new AppointmentsViewModel();
-                     HospitalDB.DeleteAppointment(ID);
-
+            if (result.Equals(true))
+            {
+                ((AppointmentsViewModel)Home.ViewModel.Content).DeleteAppointment(ID);
             }
         }
-           
-        }
     }
+}
