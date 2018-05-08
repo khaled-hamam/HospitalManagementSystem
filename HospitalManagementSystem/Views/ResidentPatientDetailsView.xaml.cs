@@ -40,7 +40,7 @@ namespace HospitalManagementSystem.Views
         }
         private void ClearEditResident(object sender, DialogClosingEventArgs eventArgs)
         {
-            validation.Text = "";
+            ((ResidentPatientDetailsViewModel)DataContext).textValidation = "";
 
         }
     }

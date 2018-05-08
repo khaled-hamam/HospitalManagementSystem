@@ -18,7 +18,7 @@ namespace HospitalManagementSystem.Views
 
         private void ClearEditDepartment(object sender, DialogClosingEventArgs eventArgs)
         {
-            validation.Text = "";
+            ((DepartmentDetailsViewModel)DataContext).textValidation = "";
             DepartmentNameTextBox = null;
         }
     }
