@@ -176,7 +176,10 @@ namespace HospitalManagementSystem.ViewModels
             PatientBirthDate = EditPatientBirthDatePicker.ToShortDateString();
             Hospital.Patients[PatientID].BirthDate = EditPatientBirthDatePicker;
             if (!String.IsNullOrEmpty(EditPatientDiagnosisTextBox))
+            {
                 ((ResidentPatient)Hospital.Patients[PatientID]).Diagnosis = EditPatientDiagnosisTextBox;
+                PatientDiagnosis = EditPatientDiagnosisTextBox;
+            }
             PatientDepartment = Hospital.Departments[EditPatientDepartment.Key].Name;
             ((ResidentPatient)Hospital.Patients[PatientID]).Department.Patients.Remove(PatientID);              
             ((ResidentPatient)Hospital.Patients[PatientID]).Department = Hospital.Departments[EditPatientDepartment.Key];
