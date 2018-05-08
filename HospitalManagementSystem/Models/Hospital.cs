@@ -1,4 +1,5 @@
 using HospitalManagementSystem.Services;
+using HospitalManagementSystem.ViewModels;
 using HospitalManagementSystem.Views;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,7 @@ namespace HospitalManagementSystem.Models
                 AppointmentHourPrice = 40
             };
 
+            Home.ViewModel.Content = new LoadingViewModel();
             Home.ViewModel.IsLoading = true;
             await Task.Run(() =>
             {
@@ -67,6 +69,7 @@ namespace HospitalManagementSystem.Models
                 InitializeAppointments();
             });
             Home.ViewModel.IsLoading = false;
+            Home.ViewModel.GoBack();
         }
 
         public static void InitializeDepartments()

@@ -62,7 +62,8 @@ namespace HospitalManagementSystem.ViewModels
         {
             if (String.IsNullOrEmpty(SearchQuery))
             {
-                FilteredRooms = new ObservableCollection<RoomCardViewModel>(Rooms); return;
+                FilteredRooms = new ObservableCollection<RoomCardViewModel>(Rooms);
+                return;
             }
 
             FilteredRooms = new ObservableCollection<RoomCardViewModel>(

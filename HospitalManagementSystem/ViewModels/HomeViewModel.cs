@@ -40,30 +40,12 @@ namespace HospitalManagementSystem.ViewModels
             }
         }
 
-        private Boolean isLoading;
-        public Boolean IsLoading
-        {
-            get { return isLoading; }
-            set
-            {
-                isLoading = value;
-
-                if (value == true)
-                {
-                    previousContent = Content;
-                    content = new LoadingViewModel();
-                }
-                else
-                {
-                    Content = previousContent;
-                }
-            }
-        }
+        public Boolean IsLoading { get; set; }
 
         public HomeViewModel()
         {
             content = new EmployeesViewModel();
-            isLoading = false;
+            IsLoading = false;
         }
 
         public void InitializeHospital()
