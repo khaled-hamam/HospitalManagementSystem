@@ -179,7 +179,15 @@ namespace HospitalManagementSystem.ViewModels
             ((ResidentPatient)Hospital.Patients[PatientID]).Department = Hospital.Departments[EditPatientDepartment.Key];
             ((ResidentPatient)Hospital.Patients[PatientID]).Department.Patients.Add(PatientID, Hospital.Patients[PatientID]);
             ((ResidentPatient)Hospital.Patients[PatientID]).Room.Patients.Remove(PatientID);
+            foreach (Nurse nurse in (((ResidentPatient)Hospital.Patients[PatientID])).Room.Nurses.Values)
+            {
+                nurse.removePatient(PatientID);
+            }
             ((ResidentPatient)Hospital.Patients[PatientID]).Room = Hospital.Rooms[EditRoomNumberComboBox.Key];
+            foreach (Nurse nurse in (((ResidentPatient)Hospital.Patients[PatientID])).Room.Nurses.Values)
+            {
+                nurse.addPatient(Hospital.Patients[PatientID]);
+            }
             Hospital.Rooms[EditRoomNumberComboBox.Key].addPatient(Hospital.Patients[PatientID]);
 
             PatientRoomNumber = EditRoomNumberComboBox.Value;
