@@ -215,9 +215,11 @@ namespace HospitalManagementSystem.ViewModels
                 
                //remove old data
                 ((Doctor)Hospital.Employees[EmployeeID]).IsHead = false;
-                Hospital.Employees[EmployeeID].Department.HeadID = null;               
-                Hospital.Employees[EmployeeID].Department.Doctors.Remove(EmployeeID);
-
+                if (Hospital.Employees[EmployeeID].Department != null)
+                {
+                    Hospital.Employees[EmployeeID].Department.HeadID = null;
+                    Hospital.Employees[EmployeeID].Department.Doctors.Remove(EmployeeID);
+                }
                 //assign new department to the employee
                 Hospital.Employees[EmployeeID].Department = Hospital.Departments[EditEmployeeDepartment.Key];
                 // add the employee to the selected department
