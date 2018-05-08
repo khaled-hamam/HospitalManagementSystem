@@ -291,6 +291,7 @@ namespace HospitalManagementSystem.Models
             }
             else
             {
+                ((ResidentPatient)Patients[PatientId]).Room.Nurses.Remove(PatientId);
                 ((ResidentPatient)Patients[PatientId]).Room.Patients.Remove(PatientId);                
             }
 
