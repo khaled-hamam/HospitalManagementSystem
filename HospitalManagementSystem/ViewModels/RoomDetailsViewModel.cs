@@ -132,7 +132,12 @@ namespace HospitalManagementSystem.ViewModels
             {
                 NursesComboBoxItems.Add(new ComboBoxPairs(ListSelectedNurse.Key, ListSelectedNurse.Value));
                 Hospital.Rooms[RoomID].removeNurse(ListSelectedNurse.Key);
+                foreach(Patient patient in Hospital.Rooms[RoomID].Patients.Values)
+                {
+                    ((Nurse)Hospital.Employees[ListSelectedNurse.Key]).Patients.Remove(patient.ID);
+                }
                 ((Nurse)Hospital.Employees[ListSelectedNurse.Key]).removeRoom(RoomID);
+                HospitalDB.UpdateNurse(((Nurse)Hospital.Employees[ListSelectedNurse.Key]));
                 HospitalDB.DeleteNurseRoom(ListSelectedNurse.Key, RoomID);
                 NursesList.Remove(ListSelectedNurse);
                 NursesNumber = $"Nurses : {NursesList.Count}";
@@ -145,10 +150,15 @@ namespace HospitalManagementSystem.ViewModels
 
             NursesList.Add(new ComboBoxPairs(NurseSelectedItem.Key, NurseSelectedItem.Value));
 
-            HospitalDB.InsertNurseRoom(NurseSelectedItem.Key, RoomID);
 
             Hospital.Rooms[RoomID].addNurse((Nurse)(Hospital.Employees[NurseSelectedItem.Key]));
             ((Nurse)Hospital.Employees[NurseSelectedItem.Key]).addRoom(Hospital.Rooms[RoomID]);
+            foreach(Patient patient in Hospital.Rooms[RoomID].Patients.Values)
+            {
+                ((Nurse)Hospital.Employees[NurseSelectedItem.Key]).Patients.Add(patient.ID, patient);
+            }
+            HospitalDB.UpdateNurse(((Nurse)Hospital.Employees[NurseSelectedItem.Key]));
+            HospitalDB.InsertNurseRoom(NurseSelectedItem.Key, RoomID);
            
             NursesComboBoxItems.Remove(NurseSelectedItem);
             NursesNumber = $"Nurses : {NursesList.Count}";
