@@ -1,10 +1,17 @@
-﻿using System;
+using System;
 using System.Windows.Input;
+using HospitalManagementSystem.ViewModels;
+using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Services;
+using MaterialDesignThemes.Wpf;
+using HospitalManagementSystem.Views.Components;
+using HospitalManagementSystem.Views;
 
 namespace HospitalManagementSystem.ViewModels
 {
     public class AppointmentCardViewModel : BaseViewModel
     {
+        public String ID { get; set; }
         public String PatientName { get; set; }
         public String DoctorName { get; set; }
         public String AppointmentDate { get; set; }
@@ -18,17 +25,20 @@ namespace HospitalManagementSystem.ViewModels
             deleteAppointment = new RelayCommand(DeleteAppointment);
         }
 
-        public void DeleteAppointment()
+        public async void DeleteAppointment()
         {
-            // Delete from List ( appointmet Page )
+            
+            object result = await DialogHost.Show(new DeleteMessageBox(), "RootDialog");
+                if (result.Equals(true))
+                {
+                    
+                     Hospital.Appointments[ID].Doctor.removePatient(Hospital.Appointments[ID].Patient.ID);
+                     Hospital.DeleteAppointment(ID);
+                     Home.ViewModel.Content = new AppointmentsViewModel();
+                     HospitalDB.DeleteAppointment(ID);
 
-            // Delete from FilteredList
-
-            // call appointments.Cancel
-
-            // delete from hospital
-
-            // deleter from hospital DB
+            }
+        }
+           
         }
     }
-}

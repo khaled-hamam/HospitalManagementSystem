@@ -1,4 +1,4 @@
-﻿using HospitalManagementSystem.Services;
+using HospitalManagementSystem.Services;
 using HospitalManagementSystem.ViewModels;
 using HospitalManagementSystem.Views;
 using System;
