@@ -591,7 +591,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"INSERT INTO department VALUES('{department.ID}', '{department.Name}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -612,7 +612,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"INSERT INTO doctor VALUES('{doctor.ID}', '{doctor.Name}', " +
                     $"'{doctor.BirthDate.ToString("yyyy-MM-dd")}', '{doctor.Address}', '{doctor.EmploymentDate.ToString("yyyy-MM-dd")}', '{doctor.Department.ID}'," +
                     $"{doctor.Salary}, {doctor.IsHead})";
@@ -635,7 +635,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"INSERT INTO nurse VALUES('{nurse.ID}', '{nurse.Name}', " +
                     $"'{nurse.BirthDate.ToString("yyyy-MM-dd")}', '{nurse.Address}', '{nurse.EmploymentDate.ToString("yyyy-MM-dd")}', '{nurse.Department.ID}'," +
                     $"{nurse.Salary})";
@@ -658,7 +658,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"INSERT INTO patient VALUES('{patient.ID}', '{patient.Name}', " +
                     $"'{patient.BirthDate.ToString("yyyy-MM-dd")}', '{patient.Address}', '{patient.Diagnosis}')";
                 MySqlCommand command = new MySqlCommand(query, con);
@@ -688,7 +688,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"INSERT INTO room VALUES('{room.ID}', {room.RoomNumber}, '{room.GetType()}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -709,7 +709,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"INSERT INTO appointment VALUES('{appointment.ID}', '{appointment.Patient.ID}', " +
                     $"'{appointment.Doctor.ID}', '{appointment.Date.ToString("yyyy-MM-dd hh:mm:ss")}', {appointment.Duration})";
                 MySqlCommand command = new MySqlCommand(query, con);
@@ -731,7 +731,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"INSERT INTO medicine VALUES('{medicine.ID}', '{medicine.Name}', " +
                     $"'{medicine.StartingDate.ToString("yyyy-MM-dd")}', '{medicine.EndingDate.ToString("yyyy-MM-dd")}', '{patient.ID}')";
                 MySqlCommand command = new MySqlCommand(query, con);
@@ -753,7 +753,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"INSERT INTO nurse_room VALUES('{NurseID}', '{RoomID}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -774,7 +774,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"INSERT INTO doctor_patient VALUES('{DoctorID}', '{PatientID}')";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -799,7 +799,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"UPDATE config SET standard_price = {config.StandardWardPrice}, semi_price = {config.SemiPrivateRoomPrice}, " +
                     $"private_price = {config.PrivateRoomPrice}, appointment_price = {config.AppointmentHourPrice}, " +
                     $"standard_capacity = {config.StandardWardCapacity}, semi_capacity = {config.SemiPrivateRoomCapacity}, " +
@@ -824,7 +824,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"UPDATE department SET name = '{department.Name}' WHERE department_id = '{department.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -845,7 +845,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"UPDATE doctor SET name = '{doctor.Name}', birth_date = '{doctor.BirthDate.ToString("yyyy-MM-dd")}', " +
                     $"address = '{doctor.Address}', employment_date = '{doctor.EmploymentDate.ToString("yyyy-MM-dd")}', " +
                     $"department_id = '{doctor.Department.ID}', salary = {doctor.Salary}, is_head = {doctor.IsHead} " +
@@ -869,7 +869,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"UPDATE nurse SET name = '{nurse.Name}', birth_date = '{nurse.BirthDate.ToString("yyyy-MM-dd")}', " +
                     $"address = '{nurse.Address}', employment_date = '{nurse.EmploymentDate.ToString("yyyy-MM-dd")}', " +
                     $"department_id = '{nurse.Department.ID}', salary = {nurse.Salary} " +
@@ -893,7 +893,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"UPDATE appointment SET patient_id = '{appointment.Patient.ID}', doctor_id = '{appointment.Doctor.ID}', " +
                     $"date = '{appointment.Date.ToString("yyyy-MM-dd hh:mm:ss")}', duration = {appointment.Duration}, " +
                     $"WHERE appointment_id = '{appointment.ID}'";
@@ -916,7 +916,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"UPDATE patient SET name = '{patient.Name}', birth_date = '{patient.BirthDate.ToString("yyyy-MM-dd")}', " +
                     $"address = '{patient.Address}', diagnosis = '{patient.Diagnosis}' " +
                     $"WHERE patient_id = '{patient.ID}'";
@@ -949,7 +949,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"UPDATE room SET room_number = {room.RoomNumber}, type = '{room.GetType()}' " +
                     $"WHERE room_id = '{room.ID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
@@ -975,7 +975,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"DELETE FROM department WHERE department_id = '{id}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -996,7 +996,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"DELETE FROM doctor WHERE doctor_id = '{id}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -1017,7 +1017,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"DELETE FROM nurse WHERE nurse_id = '{id}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -1038,7 +1038,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"DELETE FROM patient WHERE patient_id = '{id}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -1059,7 +1059,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"DELETE FROM appointment WHERE appointment_id = '{id}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -1080,7 +1080,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"DELETE FROM room WHERE room_id = '{id}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -1101,7 +1101,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"DELETE FROM nurse_room WHERE nurse_id = '{NurseID}' AND room_id = '{RoomID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -1122,7 +1122,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"DELETE FROM doctor_patient WHERE doctor_id = '{DoctorID}' AND patient_id = '{PatientID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
@@ -1143,7 +1143,7 @@ namespace HospitalManagementSystem.Services
 
             try
             {
-                con.Open();
+                await con.OpenAsync();
                 String query = $"DELETE FROM medicine WHERE medicine_id = '{MedicineID}'";
                 MySqlCommand command = new MySqlCommand(query, con);
                 await command.ExecuteNonQueryAsync();
